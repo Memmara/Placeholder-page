@@ -6,7 +6,7 @@ import pg from 'pg';
 import assets from './runtime-assets.json' assert {type:'json'};
 import {economicCatalogue,presentationCatalogue,presentationById,exclusionFor} from './presentation.mjs';
 
-export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+export const root=import.meta.url?path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'):process.cwd();
 export const catalogue=presentationCatalogue,sets=assets.sets,achievements=assets.achievements,levels=assets.levels,boxes=assets.boxes,config=assets.config;
 export const byId=new Map(catalogue.map(i=>[i.id,i]));
 const applicationDatabaseUrl=process.env.MEMMARA_DATABASE_URL||process.env.DATABASE_URL_UNPOOLED||process.env.DATABASE_URL;
