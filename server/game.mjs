@@ -321,7 +321,7 @@ export async function handleApiRequest(req,res){
  }catch(e){res.statusCode=e.status??500;if(!e.status)console.error('Game API:',e.code??e.name,e.message);res.end(JSON.stringify({error:e.status?e.message:'The game service couldn’t save this change. Please try again.'}));}
 }
 
-if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+if(import.meta.url&&process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  await seed();loadLocalContent();
  const server=http.createServer(handleApiRequest),apiPort=Number(process.env.MEMMARA_API_PORT??5178),apiHost=process.env.MEMMARA_API_HOST??'127.0.0.1';
  server.listen(apiPort,apiHost,()=>console.log(`Memmara account and game API listening on ${apiHost}:${apiPort}`));
