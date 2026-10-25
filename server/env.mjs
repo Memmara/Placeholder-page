@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-const file=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../.env.local');
-if(fs.existsSync(file))process.loadEnvFile(file);
+const moduleUrl=import.meta.url;
+const file=moduleUrl?path.resolve(path.dirname(fileURLToPath(moduleUrl)),'../.env.local'):null;
+if(file&&fs.existsSync(file))process.loadEnvFile(file);
 if(process.env.NODE_ENV==='production'){
  // Keep the API available when optional integrations have not been configured yet.
  // Email routes already fail closed in auth.mjs if Resend credentials are absent.
