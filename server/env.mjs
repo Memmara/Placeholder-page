@@ -4,7 +4,8 @@ import {fileURLToPath} from 'node:url';
 const moduleUrl=import.meta.url;
 const file=moduleUrl?path.resolve(path.dirname(fileURLToPath(moduleUrl)),'../.env.local'):null;
 if(file&&fs.existsSync(file))process.loadEnvFile(file);
-if(process.env.NODE_ENV==='production'){
+const production=process.env.NODE_ENV==='production'||String(process.env.MEMMARA_PUBLIC_URL??'').startsWith('https://');
+if(production){
  // Keep the API available when optional integrations have not been configured yet.
  // Email routes already fail closed in auth.mjs if Resend credentials are absent.
  const required=['MEMMARA_PUBLIC_URL','MEMMARA_DATABASE_URL'];
@@ -12,3 +13,4 @@ if(process.env.NODE_ENV==='production'){
  if(missing.length)throw Error(`Production account configuration missing: ${missing.join(', ')}`);
  if(new URL(process.env.MEMMARA_PUBLIC_URL).protocol!=='https:')throw Error('Production accounts require an HTTPS public URL.');
 }
+

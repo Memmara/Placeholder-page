@@ -12,8 +12,9 @@ const pbkdf2=async(password,salt,iterations=600_000)=>{
 const random=()=>crypto.randomBytes(32).toString('base64url');
 const fail=(message,status=400)=>Object.assign(new Error(message),{status});
 const emailOf=value=>String(value??'').trim().toLowerCase();
-const cookieName=process.env.NODE_ENV==='production'?'__Host-memmara_session':'memmara_session';
-const secure=process.env.NODE_ENV==='production';
+const production=process.env.NODE_ENV==='production'||String(process.env.MEMMARA_PUBLIC_URL??'').startsWith('https://');
+const cookieName=production?'__Host-memmara_session':'memmara_session';
+const secure=production;
 const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const clientAddress=req=>{const peer=req.socket.remoteAddress??'unknown';if(process.env.MEMMARA_TRUSTED_PROXY==='1'&&['127.0.0.1','::1','::ffff:127.0.0.1'].includes(peer)){const first=String(req.headers['x-forwarded-for']??'').split(',')[0].trim();if(net.isIP(first))return first}return peer};
 const hashPassword=async password=>{
@@ -46,7 +47,7 @@ async function issueSession(res,userId,remember,userAgent){const token=random(),
 async function issueToken(userId,purpose){const token=random();await pool.query('INSERT INTO auth_tokens(token_hash,user_id,purpose,expires_at) VALUES($1,$2,$3,now()+($4::int*interval \'1 minute\'))',[digest(token),userId,purpose,purpose==='reset_password'?30:1440]);return token}
 async function deliver(email,kind,token){const base=process.env.MEMMARA_PUBLIC_URL??'http://localhost:5173';const path=kind==='verify_email'?'/verify-email':'/reset-password';const url=new URL(path,base);url.searchParams.set('token',token);const key=process.env.MEMMARA_RESEND_API_KEY,from=process.env.MEMMARA_EMAIL_FROM;
  if(key&&from){const response=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json'},body:JSON.stringify({from,to:[email],subject:kind==='verify_email'?'Verify your Memmara email':'Reset your Memmara password',text:`Open this link to ${kind==='verify_email'?'verify your email':'reset your password'}: ${url.toString()}\nThis link expires soon. If you did not request it, ignore this email.`})});if(!response.ok)throw fail('Email delivery is unavailable. Please try again later.',503)}
- else if(process.env.NODE_ENV!=='production')console.log(`Development ${kind} link for ${email}: ${url}`);
+ else if(!production)console.log(`Development ${kind} link for ${email}: ${url}`);
  else throw fail('Email delivery is not configured.',503);
 }
 async function createUser(db,name,email,passwordHash,emailVerified=false){const id=crypto.randomUUID();await db.query("INSERT INTO users(id,identity_user_id,account_type,age_band,display_name) VALUES($1,$2,'child','unknown',$3)",[id,'auth:'+id,name]);if(passwordHash)await db.query('INSERT INTO auth_credentials(user_id,email,password_hash) VALUES($1,$2,$3)',[id,email,passwordHash]);else if(email)await db.query('INSERT INTO auth_account_emails(user_id,email,verified_at) VALUES($1,$2,$3)',[id,email,emailVerified?new Date():null]);await db.query("INSERT INTO avatars(user_id,body_type,appearance) VALUES($1,'prefer_not_to_say',$2)",[id,{skin:'#c98f70',hair:'#352b43',style:'swept',top:'#a991ee',eyes:'happy',gender:'prefer_not_to_say'}]);await db.query('INSERT INTO progression(user_id) VALUES($1)',[id]);await db.query("INSERT INTO wallet_accounts(user_id,currency) VALUES($1,'coins')",[id]);await db.query('INSERT INTO local_game_clients(user_id) VALUES($1)',[id]);await db.query('INSERT INTO user_monetisation(user_id) VALUES($1)',[id]);return id}
@@ -75,3 +76,4 @@ export async function handleAuth(req,res,url){const route=url.pathname.slice('/a
  throw fail('Not found.',404)
 }
 export async function authenticatedUser(req,res){return (await sessionOf(req,res))?.user_id??null}
+

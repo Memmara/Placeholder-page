@@ -12,6 +12,7 @@ const PRODUCTS={
 };
 const json=(res,status,value)=>{res.statusCode=status;res.end(JSON.stringify(value))};
 const fail=(message,status=400)=>Object.assign(new Error(message),{status});
+const production=process.env.NODE_ENV==='production'||String(process.env.MEMMARA_PUBLIC_URL??'').startsWith('https://');
 async function read(req,limit=1_000_000){let raw='';for await(const part of req){raw+=part;if(Buffer.byteLength(raw)>limit)throw fail('Request too large.',413)}return raw}
 export const commerceConfigured=()=>process.env.MEMMARA_COMMERCE_ENABLED==='1'&&!!process.env.MEMMARA_STRIPE_SECRET_KEY;
 
@@ -24,7 +25,7 @@ async function customerFor(user){
  const row=(await pool.query(`SELECT m.stripe_customer_id,COALESCE(c.email,a.email) email,u.display_name,u.purchases_disabled,u.account_type FROM user_monetisation m JOIN users u ON u.id=m.user_id LEFT JOIN auth_credentials c ON c.user_id=u.id LEFT JOIN auth_account_emails a ON a.user_id=u.id WHERE m.user_id=$1`,[user])).rows[0];
  if(!row)throw fail('Account could not be loaded.',404);
  if(row.account_type==='school_managed')throw fail('Purchases are unavailable on school-managed accounts.',403);
- if(row.purchases_disabled&&process.env.NODE_ENV==='production')throw fail('Purchases are disabled for this account.',403);
+ if(row.purchases_disabled&&production)throw fail('Purchases are disabled for this account.',403);
  if(row.stripe_customer_id)return row.stripe_customer_id;
  const customer=await stripe('POST','customers',{email:row.email,name:row.display_name,'metadata[memmara_user_id]':user});
  await pool.query('UPDATE user_monetisation SET stripe_customer_id=$2 WHERE user_id=$1',[user,customer.id]);return customer.id;
@@ -102,3 +103,4 @@ export async function handleCommerce(req,res,url,user){
   throw fail('Not found.',404);
  }catch(error){json(res,error.status??500,{error:error.status?error.message:'Payment failed, please try again.'})}
 }
+
