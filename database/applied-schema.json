@@ -1,0 +1,12 @@
+{
+  "status": "already_applied",
+  "database": "memmara",
+  "host": "127.0.0.1",
+  "port": 54329,
+  "postgres_version": 160014,
+  "schema": "memmara_game",
+  "table_count": 87,
+  "rls_table_count": 48,
+  "sha256": "4086d0dc759c6ee2fcad599f471cd54b0356ae3092ee83eda3540a51cab7a901",
+  "verified_at": "2026-10-22T10:46:58.256Z"
+}

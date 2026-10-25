@@ -1,0 +1,42 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import pg from 'pg';
+const here=path.dirname(fileURLToPath(import.meta.url));
+const root=path.resolve(here,'..'),envFile=path.join(root,'.env.local');if(fs.existsSync(envFile))process.loadEnvFile(envFile);
+const connectionString=process.env.DATABASE_URL_UNPOOLED??process.env.MEMMARA_DATABASE_URL??process.env.DATABASE_URL;
+const config=connectionString?{connectionString,ssl:{rejectUnauthorized:true},application_name:'memmara_production_verifier'}:JSON.parse(fs.readFileSync(path.join(root,'.local-db/credentials.json'),'utf8'));
+const db=new pg.Client({...config,connectionTimeoutMillis:8000});
+const expectError=async(sql,values,code)=>{await db.query('SAVEPOINT expected_error');let thrown=false;try{await db.query(sql,values)}catch(error){thrown=true;assert.equal(error.code,code)}finally{await db.query('ROLLBACK TO SAVEPOINT expected_error')}assert.ok(thrown,'Expected statement to be rejected')};
+await db.connect();
+try{
+ await db.query('BEGIN');await db.query('SET LOCAL search_path=memmara_game,public');
+ const user1=crypto.randomUUID(),user2=crypto.randomUUID(),wallet1=crypto.randomUUID(),wallet2=crypto.randomUUID();
+ for(const id of [user1,user2])await db.query("INSERT INTO users(id,identity_user_id,account_type,age_band,display_name) VALUES($1,$2,'adult','18_plus','Migration verification')",[id,'verify:'+id]);
+ for(const [u,w] of [[user1,wallet1],[user2,wallet2]])await db.query("INSERT INTO wallet_accounts(id,user_id,currency) VALUES($1,$2,'coins')",[w,u]);
+ await db.query("INSERT INTO currency_ledger(user_id,wallet_id,amount,reason,idempotency_key,source_ref) VALUES($1,$2,100,'verification','credit','verification')",[user1,wallet1]);
+ await db.query("INSERT INTO currency_ledger(user_id,wallet_id,amount,reason,idempotency_key,source_ref) VALUES($1,$2,100,'verification','credit','verification') ON CONFLICT DO NOTHING",[user1,wallet1]);
+ assert.equal(Number((await db.query('SELECT balance_projection FROM wallet_accounts WHERE id=$1',[wallet1])).rows[0].balance_projection),100);
+ await expectError("INSERT INTO currency_ledger(user_id,wallet_id,amount,reason,idempotency_key,source_ref) VALUES($1,$2,-101,'verification','overdraft','verification')",[user1,wallet1],'P0001');
+ await expectError('UPDATE currency_ledger SET amount=101 WHERE wallet_id=$1',[wallet1],'P0001');
+ await expectError('DELETE FROM currency_ledger WHERE wallet_id=$1',[wallet1],'P0001');
+ await db.query("INSERT INTO currency_ledger(user_id,wallet_id,amount,reason,idempotency_key,source_ref) VALUES($1,$2,-40,'verification','spend','verification')",[user1,wallet1]);
+ assert.equal(Number((await db.query('SELECT balance_projection FROM wallet_accounts WHERE id=$1',[wallet1])).rows[0].balance_projection),60);
+ const policies=(await db.query("SELECT tablename,policyname FROM pg_policies WHERE schemaname='memmara_game'")).rows;
+ assert.ok(policies.some(policy=>policy.tablename==='wallet_accounts'));
+ assert.ok(policies.some(policy=>policy.tablename==='currency_ledger'));
+ assert.ok(policies.some(policy=>policy.tablename==='learning_progress'));
+ const tables=(await db.query("SELECT tablename,rowsecurity FROM pg_tables WHERE schemaname='memmara_game'")).rows;
+ const required=['users','subjects','study_sessions','study_events','auth_credentials','auth_sessions','learning_progress','user_monetisation','purchases','stripe_webhook_events','content_questions','content_curriculum','content_definitions'];
+ const names=new Set(tables.map(table=>table.tablename)),missing=required.filter(name=>!names.has(name));assert.deepEqual(missing,[]);
+ assert.ok(Number((await db.query('SELECT count(*) AS n FROM subjects')).rows[0].n)>=8);
+ const fkCount=Number((await db.query("SELECT count(*) AS n FROM pg_constraint WHERE connamespace='memmara_game'::regnamespace AND contype='f'")).rows[0].n);
+ const content={questions:Number((await db.query('SELECT count(*) FROM content_questions WHERE active')).rows[0].count),curriculum:Number((await db.query('SELECT count(*) FROM content_curriculum WHERE active')).rows[0].count),definitions:Number((await db.query('SELECT count(*) FROM content_definitions WHERE active')).rows[0].count)};
+ assert.deepEqual(content,{questions:17988,curriculum:2005,definitions:35});
+ const result={passed:true,target:connectionString?'neon':'local',tables:tables.length,rls_tables:tables.filter(x=>x.rowsecurity).length,rls_policies:policies.length,foreign_keys:fkCount,content,checks:['required production tables present','subject seed present','content totals match validated source','duplicate ledger insert does not change balance','overdraft rejected','ledger updates rejected','ledger deletes rejected','balance projection equals credited-minus-debited','required ownership policies are deployed'],test_fixtures:'rolled back',verified_at:new Date().toISOString()};
+ await db.query('ROLLBACK');
+ fs.writeFileSync(path.join(here,'verification.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
+}catch(error){await db.query('ROLLBACK').catch(()=>{});console.error(error.message);process.exitCode=1;}
+finally{await db.end();}

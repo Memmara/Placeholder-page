@@ -1,0 +1,39 @@
+{
+  "name": "memmara",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server/start-local.mjs",
+    "dev:ui": "vite --host localhost --port 5173 --strictPort",
+    "dev:game": "node server/game.mjs",
+    "build": "node scripts/split-question-bank.mjs && node scripts/validate-bank.ts && tsc --noEmit && vite build",
+    "build:functions": "wrangler pages functions build functions --outdir .wrangler-build --compatibility-date 2026-10-24 --compatibility-flags nodejs_compat",
+    "smoke:production": "node scripts/smoke-production.mjs",
+    "validate:content": "node scripts/split-question-bank.mjs && node scripts/validate-bank.ts",
+    "deploy:neon": "node database/deploy-neon.mjs && node database/import-content.mjs",
+    "pages:dev": "wrangler pages dev dist"
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.3",
+    "@neon/env": "^1.6.4",
+    "@types/three": "0.180.0",
+    "lucide-react": "^0.468.0",
+    "pg": "^8.23.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "neon": "^8.11.1",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.1.0",
+    "wrangler": "^4.152.0"
+  },
+  "packageManager": "pnpm@11.25.0"
+}

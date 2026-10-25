@@ -1,0 +1,8 @@
+allowBuilds:
+  esbuild: true
+  workerd: set this to true or false
+nodeLinker: hoisted
+symlink: false
+enableGlobalVirtualStore: false
+storeDir: .sites-runtime/store
+verifyDepsBeforeRun: false

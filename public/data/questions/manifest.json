@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "subjects": {
+    "GCSE-PHYSICS": {
+      "url": "/data/questions/gcse-physics.json",
+      "count": 1100
+    },
+    "GCSE-BIOLOGY": {
+      "url": "/data/questions/gcse-biology.json",
+      "count": 1000
+    },
+    "GCSE-MATHS": {
+      "url": "/data/questions/gcse-maths.json",
+      "count": 1064
+    },
+    "GCSE-GEOGRAPHY": {
+      "url": "/data/questions/gcse-geography.json",
+      "count": 1049
+    },
+    "GCSE-HISTORY": {
+      "url": "/data/questions/gcse-history.json",
+      "count": 1248
+    },
+    "GCSE-ENGLISH-LANGUAGE": {
+      "url": "/data/questions/gcse-english-language.json",
+      "count": 500
+    },
+    "GCSE-ENGLISH-LITERATURE": {
+      "url": "/data/questions/gcse-english-literature.json",
+      "count": 500
+    },
+    "GCSE-CHEMISTRY": {
+      "url": "/data/questions/gcse-chemistry.json",
+      "count": 1000
+    },
+    "GCSE-RELIGIOUS-STUDIES": {
+      "url": "/data/questions/gcse-religious-studies.json",
+      "count": 519
+    },
+    "GCSE-ART-DESIGN": {
+      "url": "/data/questions/gcse-art-design.json",
+      "count": 514
+    },
+    "GCSE-BUSINESS": {
+      "url": "/data/questions/gcse-business.json",
+      "count": 519
+    },
+    "GCSE-COMPUTER-SCIENCE": {
+      "url": "/data/questions/gcse-computer-science.json",
+      "count": 504
+    },
+    "GCSE-DESIGN-TECHNOLOGY": {
+      "url": "/data/questions/gcse-design-technology.json",
+      "count": 289
+    },
+    "GCSE-PHYSICAL-EDUCATION": {
+      "url": "/data/questions/gcse-physical-education.json",
+      "count": 339
+    },
+    "A-LEVEL-BUSINESS": {
+      "url": "/data/questions/a-level-business.json",
+      "count": 560
+    },
+    "A-LEVEL-ECONOMICS": {
+      "url": "/data/questions/a-level-economics.json",
+      "count": 530
+    },
+    "A-LEVEL-PSYCHOLOGY": {
+      "url": "/data/questions/a-level-psychology.json",
+      "count": 544
+    },
+    "A-LEVEL-FURTHER-MATHS": {
+      "url": "/data/questions/a-level-further-maths.json",
+      "count": 1022
+    },
+    "A-LEVEL-BIOLOGY": {
+      "url": "/data/questions/a-level-biology.json",
+      "count": 504
+    },
+    "A-LEVEL-MATHEMATICS": {
+      "url": "/data/questions/a-level-mathematics.json",
+      "count": 1096
+    },
+    "A-LEVEL-HISTORY": {
+      "url": "/data/questions/a-level-history.json",
+      "count": 512
+    },
+    "A-LEVEL-SOCIOLOGY": {
+      "url": "/data/questions/a-level-sociology.json",
+      "count": 504
+    },
+    "A-LEVEL-ENGLISH-LITERATURE": {
+      "url": "/data/questions/a-level-english-literature.json",
+      "count": 504
+    },
+    "A-LEVEL-GEOGRAPHY": {
+      "url": "/data/questions/a-level-geography.json",
+      "count": 504
+    },
+    "A-LEVEL-POLITICS": {
+      "url": "/data/questions/a-level-politics.json",
+      "count": 504
+    },
+    "A-LEVEL-PHYSICS": {
+      "url": "/data/questions/a-level-physics.json",
+      "count": 1059
+    }
+  }
+}

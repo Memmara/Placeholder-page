@@ -1,0 +1,18 @@
+{
+  "name": "memmara-local-database",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "node database.mjs setup",
+    "start": "node database.mjs start",
+    "serve": "node database.mjs serve",
+    "verify": "node verify.mjs",
+    "stop": "node database.mjs stop",
+    "status": "node database.mjs status",
+    "apply": "node database.mjs apply"
+  },
+  "dependencies": {
+    "@embedded-postgres/windows-x64": "16.14.0-beta.17",
+    "pg": "8.16.3"
+  }
+}

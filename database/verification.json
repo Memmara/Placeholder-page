@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "target": "neon",
+  "tables": 101,
+  "rls_tables": 58,
+  "rls_policies": 51,
+  "foreign_keys": 148,
+  "content": {
+    "questions": 17988,
+    "curriculum": 2005,
+    "definitions": 35
+  },
+  "checks": [
+    "required production tables present",
+    "subject seed present",
+    "content totals match validated source",
+    "duplicate ledger insert does not change balance",
+    "overdraft rejected",
+    "ledger updates rejected",
+    "ledger deletes rejected",
+    "balance projection equals credited-minus-debited",
+    "required ownership policies are deployed"
+  ],
+  "test_fixtures": "rolled back",
+  "verified_at": "2026-10-25T13:08:42.633Z"
+}
