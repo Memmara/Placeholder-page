@@ -3,8 +3,12 @@ import net from 'node:net';
 import {promisify} from 'node:util';
 import {pool} from './catalogue.mjs';
 
-const argon2=promisify(crypto.argon2);
+const argon2=typeof crypto.argon2==='function'?promisify(crypto.argon2):null;
 const digest=value=>crypto.createHash('sha256').update(value).digest('hex');
+const pbkdf2=async(password,salt,iterations=600_000)=>{
+ const material=await crypto.webcrypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+ return Buffer.from(await crypto.webcrypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt,iterations},material,256));
+};
 const random=()=>crypto.randomBytes(32).toString('base64url');
 const fail=(message,status=400)=>Object.assign(new Error(message),{status});
 const emailOf=value=>String(value??'').trim().toLowerCase();
@@ -14,13 +18,21 @@ const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const clientAddress=req=>{const peer=req.socket.remoteAddress??'unknown';if(process.env.MEMMARA_TRUSTED_PROXY==='1'&&['127.0.0.1','::1','::ffff:127.0.0.1'].includes(peer)){const first=String(req.headers['x-forwarded-for']??'').split(',')[0].trim();if(net.isIP(first))return first}return peer};
 const hashPassword=async password=>{
  const salt=crypto.randomBytes(16);
- const hash=await argon2('argon2id',{message:password,nonce:salt,parallelism:4,tagLength:32,memory:65536,passes:3});
- return `argon2id$v=1$m=65536,t=3,p=4$${salt.toString('base64url')}$${hash.toString('base64url')}`;
+ if(argon2){
+  const hash=await argon2('argon2id',{message:password,nonce:salt,parallelism:4,tagLength:32,memory:65536,passes:3});
+  return `argon2id$v=1$m=65536,t=3,p=4$${salt.toString('base64url')}$${hash.toString('base64url')}`;
+ }
+ const iterations=600_000,hash=await pbkdf2(password,salt,iterations);
+ return `pbkdf2-sha256$v=1$i=${iterations}$${salt.toString('base64url')}$${hash.toString('base64url')}`;
 };
 const verifyPassword=async(password,encoded)=>{
- const parts=encoded?.split('$');if(parts?.length!==5||parts[0]!=='argon2id')return false;
- const salt=Buffer.from(parts[3],'base64url'),expected=Buffer.from(parts[4],'base64url');
- const actual=await argon2('argon2id',{message:password,nonce:salt,parallelism:4,tagLength:expected.length,memory:65536,passes:3});
+ const parts=encoded?.split('$');if(parts?.length!==5)return false;
+ const salt=Buffer.from(parts[3],'base64url'),expected=Buffer.from(parts[4],'base64url');let actual;
+ if(parts[0]==='argon2id'&&argon2)actual=await argon2('argon2id',{message:password,nonce:salt,parallelism:4,tagLength:expected.length,memory:65536,passes:3});
+ else if(parts[0]==='pbkdf2-sha256'){
+  const iterations=Number(parts[2]?.replace('i=',''));if(!Number.isSafeInteger(iterations)||iterations<100_000||iterations>1_000_000)return false;
+  actual=await pbkdf2(password,salt,iterations);
+ }else return false;
  return actual.length===expected.length&&crypto.timingSafeEqual(actual,expected);
 };
 const cookie=(value,seconds)=>`${cookieName}=${value}; Path=/; HttpOnly; SameSite=Lax; ${secure?'Secure; ':''}Max-Age=${seconds}`;
