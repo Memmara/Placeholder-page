@@ -1,4 +1,4 @@
-import assets from './runtime-assets.json' with {type:'json'};
+import assets from './runtime-assets.json' assert {type:'json'};
 export const economicCatalogue=assets.economicCatalogue;
 export const categories=assets.categories;
 export const worlds=assets.worlds;
@@ -30,3 +30,4 @@ export async function migrateLoadout(db,user){
  for(const o of outfits){const rows=(await db.query('SELECT e.inventory_id,i.item_id FROM outfit_items e JOIN inventory i ON i.id=e.inventory_id AND i.user_id=e.user_id WHERE e.user_id=$1 AND e.outfit_id=$2 AND i.revoked_at IS NULL ORDER BY i.item_id',[user,o.id])).rows;await copy(rows,'outfit',o.id);}
  await db.query('INSERT INTO cosmetic_loadout_versions(user_id,retained_conflicts) VALUES($1,$2)',[user,JSON.stringify(notes)]);
 }
+
