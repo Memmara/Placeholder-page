@@ -52,12 +52,16 @@ Both new tables use the existing `user_id` ownership model and row-level securit
 Set the three production ad identifiers in `.env`:
 
 ```dotenv
+VITE_MEMMARA_ADSENSE_CLIENT=ca-pub-7297433574610458
+VITE_MEMMARA_ADSENSE_GAME_SLOT=slot-created-after-site-approval
 VITE_MEMMARA_WEB_REWARDED_AD_UNIT=/network-code/memmara_rewarded
 VITE_MEMMARA_ADMOB_IOS_REWARDED_ID=ca-app-pub-xxx/ios-unit
 VITE_MEMMARA_ADMOB_ANDROID_APP_ID=ca-app-pub-7297433574610458~2374774011
 VITE_MEMMARA_ADMOB_ANDROID_BANNER_ID=ca-app-pub-7297433574610458/1061692341
 VITE_MEMMARA_ADMOB_ANDROID_REWARDED_ID=ca-app-pub-7297433574610458/3496283993
 ```
+
+The AdSense publisher/client identifier is public configuration. The individual game banner slot must be created after `memmara.com` is approved. Until both values exist, the web banner component renders nothing and never loads the AdSense script. It appears only on game, practice and minigame routes for free users; it never appears on Home. Development builds never request live AdSense adverts.
 
 Free Android users receive an adaptive banner positioned above the mobile navigation during Daily Mix, Speed Select, Review sessions and Minigames. The banner is hidden on Home and non-game pages. Plus and Pro remove it. Development builds always use Google's demo banner and rewarded units; production builds use the configured Memmara units.
 

@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+ readonly VITE_MEMMARA_ADSENSE_CLIENT?:string;
+ readonly VITE_MEMMARA_ADSENSE_GAME_SLOT?:string;
  readonly VITE_MEMMARA_WEB_REWARDED_AD_UNIT?:string;
  readonly VITE_MEMMARA_ADMOB_IOS_REWARDED_ID?:string;
  readonly VITE_MEMMARA_ADMOB_IOS_BANNER_ID?:string;
