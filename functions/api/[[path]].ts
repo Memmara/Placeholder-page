@@ -8,7 +8,7 @@ function configure(env:Env){
  if(!database)throw new Error('Add a Hyperdrive binding named HYPERDRIVE or provide DATABASE_URL.');
  process.env.MEMMARA_DATABASE_URL=database;
  for(const [key,value] of Object.entries(env))if(key.startsWith('MEMMARA_')&&typeof value==='string')process.env[key]=value;
- process.env.MEMMARA_PUBLIC_URL=process.env.MEMMARA_PUBLIC_URL??'https://memmara.com';
+ process.env.MEMMARA_PUBLIC_URL=process.env.MEMMARA_PUBLIC_URL??'https://www.memmara.com';
  configured=true;
 }
 
@@ -24,3 +24,4 @@ export const onRequest=async(context:any):Promise<Response>=>{
   context.waitUntil?.(Promise.resolve());void handleApiRequest(req,res);return await responsePromise;
  }catch(error){console.error('Memmara Pages API:',error);return Response.json({error:'The account service is temporarily unavailable.'},{status:503,headers:{'Cache-Control':'no-store'}})}
 };
+

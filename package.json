@@ -8,7 +8,7 @@
     "dev:ui": "vite --host localhost --port 5173 --strictPort",
     "dev:game": "node server/game.mjs",
     "build": "node scripts/split-question-bank.mjs && node scripts/validate-bank.ts && tsc --noEmit && vite build",
-    "build:functions": "wrangler pages functions build functions --outdir .wrangler-build --compatibility-date 2026-10-24 --compatibility-flags nodejs_compat",
+    "build:functions": "wrangler pages functions build functions --outdir .wrangler-build --compatibility-date 2026-10-24 --compatibility-flags nodejs_compat --compatibility-flags nodejs_compat_populate_process_env",
     "smoke:production": "node scripts/smoke-production.mjs",
     "validate:content": "node scripts/split-question-bank.mjs && node scripts/validate-bank.ts",
     "deploy:neon": "node database/deploy-neon.mjs && node database/import-content.mjs",
@@ -37,3 +37,4 @@
   },
   "packageManager": "pnpm@11.25.0"
 }
+
