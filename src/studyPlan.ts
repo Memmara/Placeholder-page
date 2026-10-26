@@ -23,16 +23,23 @@ export function automaticCoverageFraction(yearGroup:9|10|11|12|13,now=Date.now()
 export function automaticPointIds(bank:Bank,settings:Settings,now=Date.now()){
  const year=settings.yearGroup??9;
  const fraction=automaticCoverageFraction(year,now);
- const questionRefs=new Set(bank.questions.map(q=>`${subjectForQuestionId(q.question_id)}:${q.specification_point_id}`));
+ const questionRefs={multiple_choice:new Set<string>(),written:new Set<string>()};
+ for(const question of bank.questions)questionRefs[question.question_type==='multiple_choice'?'multiple_choice':'written'].add(`${subjectForQuestionId(question.question_id)}:${question.specification_point_id}`);
  const result=new Set<string>();
  for(const subject of settings.subjects){
-  const points=bank.points.filter(p=>p.subject_id===subject&&(tierFor(settings,subject)==='higher'||p.tier!=='higher')&&pointEligible(p,settings)&&questionRefs.has(`${p.subject_id}:${p.spec_reference}`)).sort((a,b)=>subject==='GCSE-MATHS'?(mathsRank(a.spec_reference)-mathsRank(b.spec_reference)):collator.compare(a.spec_reference,b.spec_reference));
-  if(subject==='GCSE-HISTORY'){
-   for(const topicId of new Set(points.map(point=>point.topic_id))){
-    const optionPoints=points.filter(point=>point.topic_id===topicId);
-    for(const point of optionPoints.slice(0,Math.max(1,Math.ceil(optionPoints.length*fraction))))result.add(point.specification_point_id);
-   }
-  }else for(const point of points.slice(0,Math.max(1,Math.ceil(points.length*fraction))))result.add(point.specification_point_id);
+  const points=bank.points.filter(p=>p.subject_id===subject&&(tierFor(settings,subject)==='higher'||p.tier!=='higher')&&pointEligible(p,settings)).sort((a,b)=>subject==='GCSE-MATHS'?(mathsRank(a.spec_reference)-mathsRank(b.spec_reference)):collator.compare(a.spec_reference,b.spec_reference));
+  // Some imported written and MCQ banks use different identifiers for their
+  // specification points. Pace each question format across the year so one
+  // bank's identifiers cannot hide the other bank's content.
+  for(const refs of Object.values(questionRefs)){
+   const available=points.filter(p=>refs.has(`${p.subject_id}:${p.specification_point_id}`)||refs.has(`${p.subject_id}:${p.spec_reference}`));
+   if(subject==='GCSE-HISTORY'){
+    for(const topicId of new Set(available.map(point=>point.topic_id))){
+     const optionPoints=available.filter(point=>point.topic_id===topicId);
+     for(const point of optionPoints.slice(0,Math.max(1,Math.ceil(optionPoints.length*fraction))))result.add(point.specification_point_id);
+    }
+   }else for(const point of available.slice(0,Math.max(1,Math.ceil(available.length*fraction))))result.add(point.specification_point_id);
+  }
  }
  return result;
 }
