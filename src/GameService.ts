@@ -1,6 +1,6 @@
 import {useCallback,useEffect,useRef,useState} from 'react';
 import type {Appearance,Gear} from './CosmeticStage';
-import type {Progress,Session,Question} from './models';
+import type {MarkingResult,Progress,Session,Question} from './models';
 import {subjectForQuestionId} from './engine';
 
 export interface Item extends Gear {coin_price:number|null;premium_price?:number|null;real_money_product_id?:string|null;purchasable_with_real_money?:boolean;purchasable_with_coins:boolean;subject_tag:string;source:string[];headline:boolean;unlock?:{type:string;level?:number};art_brief:string}
@@ -9,7 +9,7 @@ interface Achievement {id:string;name:string;category:string;description:string;
 export interface MonetisationState {plan:'free'|'plus'|'pro'|'school';tokens:number;organicTokens:number;purchasedTokens:number;organicCapacity:number;adTokenLimit:number;nextTokenAt:string|null;xpBoostPending:boolean;refillHours:number;unlimited:boolean}
 export interface GameState {catalogueVersion?:number;categories?:{id:string;label?:string;name?:string}[];worlds?:{id:string;name:string;fantasy?:string;collection_story?:string;palette?:string;hero_item_ids?:string[]}[];loadoutNotes?:{itemId:string;name:string;outfitId:string|null;reason:string}[];userId:string;profile:{genderIdentity:'male'|'female'|'prefer_not_to_say'|null};avatar:{appearance:Appearance;body_type:'male'|'female'|'prefer_not_to_say';reduced_motion:boolean;version:number};catalogue:Item[];inventory:InventoryItem[];equipped:{slot:string;item_id:string}[];wallets:{currency:string;balance:number;subject_id:string|null}[];wishlist:string[];boxes:{id:string;box_id:string;name:string}[];outfits:{id:string;name:string}[];showcase:{item_id:string;position:number}[];sets:{id:string;name:string;item_ids:string[];pieces:number}[];achievements:Achievement[];earned:{achievement_id:string;progress:string;unlocked_at:string|null}[];ledger:{amount:number;reason:string;created_at:string}[];historyImported:boolean;stats:{sessions:number};daily:{qualified:boolean;coins:number};monetisation:MonetisationState;progression:{level:string;xp_projection:string};levelRewards?:{level:number;coins:number;rank_bonus_coins:number;boxes:string[];unlock_items:string[]}[];boxDefinitions:{id:string;rarity_probabilities_percent:Record<string,number>;coin_range:number[]}[]}
 export interface AdIntent {id:string;rewardKind:'token'|'xp_boost';provider:'web_google'|'admob'|'development';completionToken:string;expiresAt:string}
-export interface ActionResult {state?:GameState;message?:string;correct?:boolean;xp?:number;adIntent?:AdIntent;reveal?:{itemId:string;coins:number;duplicate:boolean;shards:number}}
+export interface ActionResult {state?:GameState;message?:string;correct?:boolean;marked?:MarkingResult;xp?:number;adIntent?:AdIntent;reveal?:{itemId:string;coins:number;duplicate:boolean;shards:number}}
 const localPreview=()=>['localhost','127.0.0.1'].includes(location.hostname)&&(new URLSearchParams(location.search).has('preview')||sessionStorage.getItem('memmara.local-preview')==='1');
 const previewStateKey='memmara.preview-game-state.v3';
 const previewQuestions=new Map<string,Promise<Question[]>>();
