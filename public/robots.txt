@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /data/
+Disallow: /dashboard
+Disallow: /daily-mix
+Disallow: /subjects
+Disallow: /progress
+Disallow: /minigames
+Disallow: /avatar
+Disallow: /inventory
+Disallow: /store
+Disallow: /shop
+Disallow: /achievements
+Disallow: /account/
+Disallow: /login
+Disallow: /create-account
+Disallow: /reset-password
+Disallow: /verify-email
+
+Sitemap: https://www.memmara.com/sitemap.xml

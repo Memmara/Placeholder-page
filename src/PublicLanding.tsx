@@ -1,0 +1,14 @@
+import {ArrowRight,BookOpen,Clock3,Flame,Sparkles} from 'lucide-react';
+import {Brand} from './Brand';
+import './public-landing.css';
+
+export function PublicLanding(){
+ return <div className="public-landing">
+  <header className="public-nav"><a href="/" aria-label="Memmara home"><Brand/></a><nav aria-label="Public navigation"><a href="#how-it-works">How it works</a><a href="/contact">Contact</a><a className="public-signin" href="/login">Sign in <ArrowRight size={16}/></a></nav></header>
+  <main>
+   <section className="public-hero"><div><span className="public-kicker"><Sparkles size={15}/> REVISION THAT FITS YOUR DAY</span><h1>Remember more.<br/><em>One day at a time.</em></h1><p>Memmara makes GCSE and A-Level revision feel manageable with a short Daily Mix, spaced retrieval and a clear picture of what to revisit.</p><div className="public-actions"><a className="public-cta" href="/create-account">Start practising <ArrowRight size={18}/></a><a className="public-link" href="/login">I already have an account</a></div><div className="public-proof"><span><BookOpen size={17}/> Your chosen subjects</span><span><Clock3 size={17}/> A few minutes a day</span></div></div><div className="public-visual" aria-hidden="true"><div className="public-visual-glow"/><div className="public-demo-card"><span className="public-demo-eyebrow">YOUR DAILY MIX</span><div className="public-demo-orbit"><i/><i/><i/><span>✦</span></div><strong>Small session.<br/>Lasting progress.</strong><span className="public-demo-button">Start my mix <ArrowRight size={17}/></span></div></div></section>
+   <section id="how-it-works" className="public-features"><div className="public-section-heading"><span className="public-kicker">A SMARTER DAILY RHYTHM</span><h2>Build a habit that helps it stick.</h2></div><div className="public-feature-grid"><article><span><BookOpen size={23}/></span><h3>Practise the right things</h3><p>Choose your GCSE or A-Level subjects. Daily Mix draws from your study plan and brings back ideas that need another look.</p></article><article><span><Clock3 size={23}/></span><h3>Return at the right time</h3><p>Spaced retrieval helps you revisit ideas after a delay, so your practice goes beyond one successful answer.</p></article><article><span><Flame size={23}/></span><h3>See your effort add up</h3><p>Track your practice days, XP and learning progress without losing sight of the real goal: remembering what you have learned.</p></article></div></section>
+   <section className="public-last-cta"><span className="public-kicker">READY WHEN YOU ARE</span><h2>Start with a little. Keep what you learn.</h2><a className="public-cta" href="/create-account">Create your account <ArrowRight size={18}/></a></section>
+  </main><footer className="public-footer"><Brand/><span>A little practice. A lasting difference.</span><a href="mailto:contact@memmara.com">contact@memmara.com</a></footer>
+ </div>
+}
