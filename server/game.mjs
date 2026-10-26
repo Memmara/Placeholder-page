@@ -34,12 +34,13 @@ const PLAN_TOKENS={free:{capacity:2,hours:5,unlimited:false},plus:{capacity:8,ho
 async function refreshMonetisation(db,user,locked=false){
  await db.query('INSERT INTO user_monetisation(user_id) VALUES($1) ON CONFLICT DO NOTHING',[user]);
  const row=(await db.query(`SELECT * FROM user_monetisation WHERE user_id=$1${locked?' FOR UPDATE':''}`,[user])).rows[0];
- const config=PLAN_TOKENS[row.account_plan]??PLAN_TOKENS.free,interval=config.hours*60*60*1000;let organic=Number(row.practice_tokens),next=row.next_token_at?new Date(row.next_token_at):null;const now=new Date();
+ const effectivePlan=row.account_plan==='free'&&row.referral_plus_until&&new Date(row.referral_plus_until)>new Date()?'plus':row.account_plan;
+ const config=PLAN_TOKENS[effectivePlan]??PLAN_TOKENS.free,interval=config.hours*60*60*1000;let organic=Number(row.practice_tokens),next=row.next_token_at?new Date(row.next_token_at):null;const now=new Date();
  if(config.unlimited||organic>=config.capacity)next=null;
  else if(!next)next=new Date(now.getTime()+interval);
  else if(next<=now){const periods=Math.floor((now.getTime()-next.getTime())/interval)+1;organic=Math.min(config.capacity,organic+periods);next=organic>=config.capacity?null:new Date(next.getTime()+periods*interval);}
  if(organic!==Number(row.practice_tokens)||(next?.getTime()??null)!==(row.next_token_at?new Date(row.next_token_at).getTime():null))await db.query('UPDATE user_monetisation SET practice_tokens=$2,next_token_at=$3,updated_at=now() WHERE user_id=$1',[user,organic,next]);
- return {...row,practice_tokens:organic,purchased_tokens:Number(row.purchased_tokens??0),next_token_at:next,tokenConfig:config};
+ return {...row,account_plan:effectivePlan,practice_tokens:organic,purchased_tokens:Number(row.purchased_tokens??0),next_token_at:next,tokenConfig:config};
 }
 async function beginPaidSession(db,user){
  const row=await refreshMonetisation(db,user,true),available=Number(row.practice_tokens)+Number(row.purchased_tokens);requireThat(row.tokenConfig.unlimited||available>0,'You have no practice tokens. Visit the Shop to continue.',409);

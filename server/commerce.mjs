@@ -33,6 +33,7 @@ async function customerFor(user){
 function product(code){const value=PRODUCTS[code];if(!value)throw fail('Unknown shop item.',404);return value}
 async function createPayment(user,body){
  if(!commerceConfigured())throw fail('Payments are not configured in this preview yet.',503);
+ if(['plan_pro','pet_dougie','pet_dotty'].includes(body.productCode))throw fail('This item is not available for Stripe purchase.',410);
  const item=product(body.productCode),customer=await customerFor(user),publicUrl=process.env.MEMMARA_PUBLIC_URL??'http://localhost:5173';
  if(body.platform==='mobile'){
   if(!process.env.MEMMARA_STRIPE_PUBLISHABLE_KEY)throw fail('Mobile payments are not configured yet.',503);
@@ -103,4 +104,3 @@ export async function handleCommerce(req,res,url,user){
   throw fail('Not found.',404);
  }catch(error){json(res,error.status??500,{error:error.status?error.message:'Payment failed, please try again.'})}
 }
-

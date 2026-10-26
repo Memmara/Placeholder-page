@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import crypto from 'node:crypto';
 import pg from 'pg';
-import assets from './runtime-assets.json' assert {type:'json'};
+import assets from './runtime-assets.json' with {type:'json'};
 import {economicCatalogue,presentationCatalogue,presentationById,exclusionFor} from './presentation.mjs';
 
 export const root=import.meta.url?path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'):process.cwd();
@@ -60,6 +60,10 @@ export async function seed(){
   const contentApplied=(await db.query("SELECT sha256 FROM public.memmara_schema_migrations WHERE id='009_content_catalogue'")).rows[0];
   if(contentApplied&&contentApplied.sha256!==contentHash)throw Error('Content catalogue migration changed after it was applied.');
   if(!contentApplied){await db.query(contentMigration);await db.query("INSERT INTO public.memmara_schema_migrations(id,sha256) VALUES('009_content_catalogue',$1)",[contentHash]);}
+  const referralMigration=fs.readFileSync(path.join(root,'database/migrations/010-referrals-and-pets.sql'),'utf8'),referralHash=crypto.createHash('sha256').update(referralMigration).digest('hex');
+  const referralApplied=(await db.query("SELECT sha256 FROM public.memmara_schema_migrations WHERE id='010_referrals_and_pets'")).rows[0];
+  if(referralApplied&&referralApplied.sha256!==referralHash)throw Error('Referral migration changed after it was applied.');
+  if(!referralApplied){await db.query(referralMigration);await db.query("INSERT INTO public.memmara_schema_migrations(id,sha256) VALUES('010_referrals_and_pets',$1)",[referralHash]);}
   await db.query("UPDATE subjects SET available=true WHERE id IN ('chemistry','maths','geography')");
   for(const subject of ['biology','chemistry','physics','maths'])await db.query('INSERT INTO subjects(id,name,available) VALUES($1,$2,false) ON CONFLICT DO NOTHING',['alevel_'+subject,'A-Level '+subject[0].toUpperCase()+subject.slice(1)]);
   await db.query("INSERT INTO seasonal_events(id,name,starts_at,ends_at,edition,claim_grace_ends_at,config) VALUES('season_01','Founding Scholars', '2026-10-19','2027-01-11',1,'2027-01-18','{}') ON CONFLICT DO NOTHING");

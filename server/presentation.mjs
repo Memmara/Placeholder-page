@@ -1,8 +1,9 @@
-import assets from './runtime-assets.json' assert {type:'json'};
-export const economicCatalogue=assets.economicCatalogue;
+import assets from './runtime-assets.json' with {type:'json'};
+const coinOnlyDog=i=>['itm_301','itm_302'].includes(i.id)?{...i,premium_price:null,real_money_product_id:null,purchasable_with_real_money:false}:i;
+export const economicCatalogue=assets.economicCatalogue.map(coinOnlyDog);
 export const categories=assets.categories;
 export const worlds=assets.worlds;
-export const presentationCatalogue=assets.catalogue;
+export const presentationCatalogue=assets.catalogue.map(coinOnlyDog);
 export const presentationById=new Map(presentationCatalogue.map(i=>[i.id,i]));
 export const EPIC_PET_COHORT=Object.freeze(assets.epicPetCohort);
 export const rearCategories=new Set(['cape','wings','back_item']);
