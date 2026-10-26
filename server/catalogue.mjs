@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import crypto from 'node:crypto';
 import pg from 'pg';
-import assets from './runtime-assets.json' with {type:'json'};
+import assets from './runtime-assets.mjs';
 import {economicCatalogue,presentationCatalogue,presentationById,exclusionFor} from './presentation.mjs';
 
 export const root=import.meta.url?path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'):process.cwd();
@@ -98,4 +98,5 @@ export async function seed(){
   console.log(`Game catalogue ready: ${economicCatalogue.length} items, ${sets.length} sets, ${achievements.length} achievements.`);
  }catch(e){await db.query('ROLLBACK');throw e}finally{db.release()}
 }
+
 

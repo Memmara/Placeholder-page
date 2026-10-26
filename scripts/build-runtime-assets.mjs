@@ -17,5 +17,8 @@ const payload={
  worlds:presentation.worlds,
  epicPetCohort:presentation.EPIC_PET_COHORT,
 };
-fs.writeFileSync(path.join(root,'server/runtime-assets.json'),JSON.stringify(payload));
-console.log(`Runtime assets written (${Buffer.byteLength(JSON.stringify(payload)).toLocaleString()} bytes).`);
+const serialized=JSON.stringify(payload);
+fs.writeFileSync(path.join(root,'server/runtime-assets.json'),serialized);
+fs.writeFileSync(path.join(root,'server/runtime-assets.mjs'),`export default ${serialized};\n`);
+console.log(`Runtime assets written (${Buffer.byteLength(serialized).toLocaleString()} bytes).`);
+
