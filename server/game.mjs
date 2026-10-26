@@ -14,7 +14,6 @@ import {handleAuth,authenticatedUser,rate} from './auth.mjs';
 import {handleOAuth} from './oauth.mjs';
 import {handleCommerce,commerceConfigured} from './commerce.mjs';
 
-const production=process.env.NODE_ENV==='production'||String(process.env.MEMMARA_PUBLIC_URL??'').startsWith('https://');
 let questions=[],qmap=new Map(),definitions=[],definitionMap=new Map(),curriculum=[];
 function loadLocalContent(){
  questions=JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(root,'data/questions-bank.json.gz'))).toString('utf8'));qmap=new Map(questions.map(q=>[q.question_id,q]));
@@ -142,11 +141,13 @@ async function mutate(user,route,b){
  return transaction(async db=>{
   // All mutations for one learner serialize, including purchases and repeat reward requests.
   await db.query('SELECT id FROM users WHERE id=$1 FOR UPDATE',[user]);
-  await migrateLoadout(db,user);
+  // The game state request has already migrated the avatar loadout. Avoid
+  // another database round trip on every answer in a timed game.
+  if(route!=='answer'&&route!=='minigame-answer')await migrateLoadout(db,user);
   if(route==='ad-intent'){
    requireThat(['token','xp_boost'].includes(b.rewardKind),'Choose a valid ad reward.');
    requireThat(['web_google','admob','development'].includes(b.provider),'Unknown ad provider.');
-   requireThat(b.provider!=='development'||!production,'Development ads are disabled.',403);
+   requireThat(b.provider!=='development'||process.env.NODE_ENV!=='production','Development ads are disabled.',403);
    const entitlement=await refreshMonetisation(db,user,true);
    requireThat(!entitlement.tokenConfig.unlimited,'Your plan already includes unlimited tokens and no rewarded ads.',409);
    requireThat(b.rewardKind!=='token'||Number(entitlement.practice_tokens)<entitlement.tokenConfig.capacity+1,'Your token balance is already full.',409);
@@ -297,10 +298,10 @@ async function mutate(user,route,b){
  });
 }
 export async function handleApiRequest(req,res){
- res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Frame-Options','DENY');res.setHeader('Cross-Origin-Resource-Policy','same-origin');if(production)res.setHeader('Strict-Transport-Security','max-age=31536000; includeSubDomains');
+ res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Frame-Options','DENY');res.setHeader('Cross-Origin-Resource-Policy','same-origin');if(process.env.NODE_ENV==='production')res.setHeader('Strict-Transport-Security','max-age=31536000; includeSubDomains');
  try{
   const publicUrl=process.env.MEMMARA_PUBLIC_URL??'http://localhost:5173';
-  const allowed=new Set([new URL(publicUrl).origin,...(production?[]:['http://localhost:5173','http://127.0.0.1:5173','http://127.0.0.1:5174'])]);
+  const allowed=new Set([new URL(publicUrl).origin,...(process.env.NODE_ENV==='production'?[]:['http://localhost:5173','http://127.0.0.1:5173','http://127.0.0.1:5174'])]);
   requireThat([new URL(publicUrl).host,`${process.env.MEMMARA_API_HOST??'127.0.0.1'}:${process.env.MEMMARA_API_PORT??5178}`,'127.0.0.1:5178','localhost:5178'].includes(req.headers.host),'Unknown host.',403);
   const origin=req.headers.origin,appleCallback=req.method==='POST'&&req.url?.startsWith('/api/auth/oauth/apple/callback');requireThat(!origin||allowed.has(origin)||appleCallback&&origin==='https://appleid.apple.com','Unknown origin.',403);
   const url=new URL(req.url,publicUrl);
@@ -318,6 +319,9 @@ export async function handleApiRequest(req,res){
   let raw='';for await(const part of req){raw+=part;requireThat(Buffer.byteLength(raw)<=2_000_000,'Request too large.',413)}
   const body=JSON.parse(raw||'{}');let result=await mutate(user,route,body);
   if(['answer','complete','buy','open-box'].includes(route)){const unlocked=await transaction(async db=>{await db.query('SELECT id FROM users WHERE id=$1 FOR UPDATE',[user]);return updateAchievements(db,user)});if(unlocked.length)result={...result,message:[result.message,'Achievement unlocked: '+unlocked.join(', ')].filter(Boolean).join(' · ')};}
+  // Answer feedback only needs its result and XP. Rebuilding the entire
+  // inventory/account state here makes every question wait on many queries.
+  if(route==='answer'||route==='minigame-answer'){res.end(JSON.stringify(result));return;}
   res.end(JSON.stringify({...result,state:await state(user)}));
  }catch(e){res.statusCode=e.status??500;if(!e.status)console.error('Game API:',e.code??e.name,e.message);res.end(JSON.stringify({error:e.status?e.message:'The game service couldn’t save this change. Please try again.'}));}
 }
@@ -329,4 +333,3 @@ if(import.meta.url&&process.argv[1]&&path.resolve(process.argv[1])===fileURLToPa
  const cleanup=setInterval(async()=>{try{await pool.query("DELETE FROM auth_oauth_flows WHERE expires_at<now()");await pool.query("DELETE FROM auth_tokens WHERE expires_at<now()-interval '7 days' OR used_at<now()-interval '7 days'");await pool.query("DELETE FROM auth_sessions WHERE expires_at<now()-interval '30 days' OR revoked_at<now()-interval '30 days'");await pool.query("DELETE FROM auth_rate_limits WHERE window_start<now()-interval '2 days'")}catch(e){console.error('Account cleanup:',e.message)}},3600000);cleanup.unref();
  process.on('SIGINT',()=>server.close(()=>pool.end().then(()=>process.exit())));
 }
-
