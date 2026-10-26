@@ -1,53 +1,507 @@
-import {useCallback,useEffect,useRef,useState} from 'react';
-import type {Appearance,Gear} from './CosmeticStage';
-import type {MarkingResult,Progress,Session,Question} from './models';
-import {subjectForQuestionId} from './engine';
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { Appearance, Gear } from "./CosmeticStage";
+import type { MarkingResult, Progress, Session, Question } from "./models";
+import { subjectForQuestionId } from "./engine";
 
-export interface Item extends Gear {coin_price:number|null;premium_price?:number|null;real_money_product_id?:string|null;purchasable_with_real_money?:boolean;purchasable_with_coins:boolean;subject_tag:string;source:string[];headline:boolean;unlock?:{type:string;level?:number};art_brief:string}
-interface InventoryItem {id:string;item_id:string;favourite:boolean;acquired_at:string;provenance:string}
-interface Achievement {id:string;name:string;category:string;description:string;subject?:string;reward:{coins:number;items?:string[]};condition:{metric:string;target:number}}
-export interface MonetisationState {plan:'free'|'plus'|'pro'|'school';tokens:number;organicTokens:number;purchasedTokens:number;organicCapacity:number;adTokenLimit:number;nextTokenAt:string|null;xpBoostPending:boolean;refillHours:number;unlimited:boolean}
-export interface GameState {catalogueVersion?:number;categories?:{id:string;label?:string;name?:string}[];worlds?:{id:string;name:string;fantasy?:string;collection_story?:string;palette?:string;hero_item_ids?:string[]}[];loadoutNotes?:{itemId:string;name:string;outfitId:string|null;reason:string}[];userId:string;profile:{genderIdentity:'male'|'female'|'prefer_not_to_say'|null};avatar:{appearance:Appearance;body_type:'male'|'female'|'prefer_not_to_say';reduced_motion:boolean;version:number};catalogue:Item[];inventory:InventoryItem[];equipped:{slot:string;item_id:string}[];wallets:{currency:string;balance:number;subject_id:string|null}[];wishlist:string[];boxes:{id:string;box_id:string;name:string}[];outfits:{id:string;name:string}[];showcase:{item_id:string;position:number}[];sets:{id:string;name:string;item_ids:string[];pieces:number}[];achievements:Achievement[];earned:{achievement_id:string;progress:string;unlocked_at:string|null}[];ledger:{amount:number;reason:string;created_at:string}[];historyImported:boolean;stats:{sessions:number};daily:{qualified:boolean;coins:number};monetisation:MonetisationState;progression:{level:string;xp_projection:string};levelRewards?:{level:number;coins:number;rank_bonus_coins:number;boxes:string[];unlock_items:string[]}[];boxDefinitions:{id:string;rarity_probabilities_percent:Record<string,number>;coin_range:number[]}[]}
-export interface AdIntent {id:string;rewardKind:'token'|'xp_boost';provider:'web_google'|'admob'|'development';completionToken:string;expiresAt:string}
-export interface ActionResult {state?:GameState;message?:string;correct?:boolean;marked?:MarkingResult;xp?:number;adIntent?:AdIntent;reveal?:{itemId:string;coins:number;duplicate:boolean;shards:number}}
-const localPreview=()=>['localhost','127.0.0.1'].includes(location.hostname)&&(new URLSearchParams(location.search).has('preview')||sessionStorage.getItem('memmara.local-preview')==='1');
-const previewStateKey='memmara.preview-game-state.v3';
-const previewQuestions=new Map<string,Promise<Question[]>>();
-async function loadPreviewState():Promise<GameState>{
- const saved=localStorage.getItem(previewStateKey);if(saved)try{return JSON.parse(saved) as GameState}catch{localStorage.removeItem(previewStateKey)}
- const response=await fetch('/data/game-preview.json');if(!response.ok)throw Error('Preview collection could not be loaded.');const state=await response.json() as GameState;localStorage.setItem(previewStateKey,JSON.stringify(state));return state;
+export interface Item extends Gear {
+  coin_price: number | null;
+  premium_price?: number | null;
+  real_money_product_id?: string | null;
+  purchasable_with_real_money?: boolean;
+  purchasable_with_coins: boolean;
+  subject_tag: string;
+  source: string[];
+  headline: boolean;
+  unlock?: { type: string; level?: number };
+  art_brief: string;
 }
-function savePreviewState(state:GameState){localStorage.setItem(previewStateKey,JSON.stringify(state));return state}
-async function previewAction(current:GameState,route:string,body:any):Promise<ActionResult>{
- const state=structuredClone(current) as GameState,success=(message?:string,extra:Partial<ActionResult>={})=>({state:savePreviewState(state),message,...extra});
- if(route==='appearance'){state.avatar.appearance=body.appearance;state.avatar.body_type=body.appearance.gender??'prefer_not_to_say';state.avatar.reduced_motion=!!body.reducedMotion;state.avatar.version++;state.profile.genderIdentity=body.appearance.gender??'prefer_not_to_say';return success('Avatar saved in this preview')}
- if(route==='profile-presentation'){state.profile.genderIdentity=body.gender;state.avatar.body_type=body.gender;state.avatar.appearance={...state.avatar.appearance,gender:body.gender};state.avatar.version++;return success('Profile choice saved in this preview')}
- if(route==='wishlist'){state.wishlist=body.saved?[...new Set([...state.wishlist,body.itemId])]:state.wishlist.filter(id=>id!==body.itemId);return success()}
- if(route==='favourite'){const item=state.inventory.find(entry=>entry.item_id===body.itemId);if(item)item.favourite=!!body.favourite;return success('Saved')}
- if(route==='equip'){const item=state.catalogue.find(entry=>entry.id===body.itemId);if(!item)throw Error('Item not found.');if(body.equipped===false)state.equipped=state.equipped.filter(entry=>entry.item_id!==body.itemId);else state.equipped=[...state.equipped.filter(entry=>entry.slot!==item.slot&&entry.item_id!==body.itemId),{slot:item.slot,item_id:item.id}];return success(body.equipped===false?'Item removed':'Item equipped')}
- if(route==='showcase'){state.showcase=[...state.showcase.filter(entry=>entry.position!==body.position&&entry.item_id!==body.itemId),{item_id:body.itemId,position:body.position}];return success('Saved')}
- if(route==='outfit'){state.outfits=[{id:crypto.randomUUID(),name:String(body.name)},...state.outfits.filter(entry=>entry.name!==body.name)];return success('Outfit saved')}
- if(route==='wear-outfit')return success('Outfit selected in this preview');
- if(route==='dismiss-loadout-notes'){state.loadoutNotes=[];return success('Your collection is ready')}
- if(route==='buy'){const item=state.catalogue.find(entry=>entry.id===body.itemId),wallet=state.wallets.find(entry=>entry.currency==='coins');if(!item||!wallet||!item.coin_price)throw Error('This item is unavailable.');if(wallet.balance<item.coin_price)throw Error('You need more preview coins.');if(!state.inventory.some(entry=>entry.item_id===item.id)){wallet.balance-=item.coin_price;state.inventory.unshift({id:crypto.randomUUID(),item_id:item.id,favourite:false,acquired_at:new Date().toISOString(),provenance:'preview_purchase'})}return success(item.name+' is yours!')}
- if(route==='open-box'){const box=state.boxes.find(entry=>entry.id===body.id),item=state.catalogue.find(entry=>!state.inventory.some(owned=>owned.item_id===entry.id))??state.catalogue[0];if(!box||!item)throw Error('Preview reward unavailable.');state.boxes=state.boxes.filter(entry=>entry.id!==body.id);const duplicate=state.inventory.some(entry=>entry.item_id===item.id);if(!duplicate)state.inventory.unshift({id:crypto.randomUUID(),item_id:item.id,favourite:false,acquired_at:new Date().toISOString(),provenance:'preview_reward'});const wallet=state.wallets.find(entry=>entry.currency==='coins');if(wallet)wallet.balance+=20;return success('Preview reward opened',{reveal:{itemId:item.id,coins:20,duplicate,shards:duplicate?5:0}})}
- if(route==='ad-intent'){const intent:AdIntent={id:crypto.randomUUID(),rewardKind:body.rewardKind,provider:body.provider,completionToken:'preview:'+body.rewardKind+':'+crypto.randomUUID(),expiresAt:new Date(Date.now()+600000).toISOString()};return success(undefined,{adIntent:intent})}
- if(route==='ad-complete'){const kind=String(body.completionToken??'').split(':')[1];if(kind==='token')state.monetisation.tokens=Math.min(state.monetisation.adTokenLimit,state.monetisation.tokens+1);if(kind==='xp_boost')state.monetisation.xpBoostPending=true;return success(kind==='token'?'+1 preview practice token':'2× preview XP is ready')}
- if(route==='start-minigame'){if(!state.monetisation.unlimited){if(state.monetisation.tokens<=0)throw Error('You have no practice tokens. Visit the Shop to continue.');state.monetisation.tokens--;state.monetisation.organicTokens=Math.max(0,(state.monetisation.organicTokens??state.monetisation.tokens+1)-1);}return success('Game started · 1 token used')}
- if(route==='minigame-answer'){const subject=subjectForQuestionId(body.questionId),url=subject?'/data/questions/'+subject.toLowerCase()+'.json':'';if(url&&!previewQuestions.has(url))previewQuestions.set(url,fetch(url).then(response=>response.json()));const question=url?(await previewQuestions.get(url)!).find(entry=>entry.question_id===body.questionId):undefined,correct=question?.answer_key?.correct_option_ids?.includes(body.optionId)??body.definitionId===body.chosenTermId;return success(correct?'+1 Minigame XP':'',{correct,xp:correct?1:0})}
- if(route==='answer')return success(undefined,{xp:body.mode==='review'?1:0});
- if(route==='complete')return success('Practice saved in this preview');
- return success('Saved in this preview');
+interface InventoryItem {
+  id: string;
+  item_id: string;
+  favourite: boolean;
+  acquired_at: string;
+  provenance: string;
 }
-async function api(route:string,body?:unknown):Promise<ActionResult|GameState>{const response=await fetch('/api/game/'+route,{method:body===undefined?'GET':'POST',credentials:'same-origin',headers:body===undefined?{}:{'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});let data;try{data=await response.json()}catch{throw Error('The game service is starting. Try again shortly.')}if(response.status===401){if(localPreview())throw Error('Game rewards are unavailable in local preview.');location.assign('/login?next='+encodeURIComponent(location.pathname+location.search+location.hash));throw Error('Sign in again to continue.')}if(!response.ok)throw Error(data.error??'This change couldn’t be saved.');return data}
-export function useGame(progress:Progress){
- const [data,setData]=useState<GameState|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[message,setMessage]=useState('');const initialized=useRef(false);
- const refresh=useCallback(async()=>{try{setError('');const value=localPreview()?await loadPreviewState():await api('state') as GameState;setData(value)}catch(e){setError(e instanceof Error?e.message:'Game service unavailable.')}},[]);
- useEffect(()=>{if(!initialized.current){initialized.current=true;void refresh()}},[refresh]);
- useEffect(()=>{if(!message)return;const id=setTimeout(()=>setMessage(''),6000);return()=>clearTimeout(id)},[message]);
- const action=useCallback(async(route:string,body:unknown)=>{setBusy(true);setError('');try{const value=localPreview()?await previewAction(data??await loadPreviewState(),route,body):await api(route,body) as ActionResult;if(value.state)setData(value.state);if(value.message)setMessage(value.message);return value}catch(e){const msg=e instanceof Error?e.message:'This change couldn’t be saved.';setError(msg);throw e}finally{setBusy(false)}},[data]);
- const capture=useCallback(async(session:Session,q:Question,response:string,timedOut:boolean)=>action('answer',{sessionRef:session.id,questionIds:session.questionIds,index:session.index,questionId:q.question_id,response,hintUsed:session.hintUsed,retry:session.revisitIds.includes(q.specification_point_id),mode:session.mode??(session.isDaily?'daily':'topic'),timedOut}),[action]);
- return {data,error,busy,message,refresh,action,capture,clearMessage:()=>setMessage('')};
+interface Achievement {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  subject?: string;
+  reward: { coins: number; items?: string[] };
+  condition: { metric: string; target: number };
 }
-export type GameController=ReturnType<typeof useGame>;
-export const coinBalance=(d:GameState|null)=>d?.wallets.find(w=>w.currency==='coins')?.balance??0;
+export interface MonetisationState {
+  plan: "free" | "plus" | "pro" | "school";
+  tokens: number;
+  organicTokens: number;
+  purchasedTokens: number;
+  organicCapacity: number;
+  adTokenLimit: number;
+  nextTokenAt: string | null;
+  xpBoostPending: boolean;
+  refillHours: number;
+  unlimited: boolean;
+}
+export interface GameState {
+  catalogueVersion?: number;
+  categories?: { id: string; label?: string; name?: string }[];
+  worlds?: {
+    id: string;
+    name: string;
+    fantasy?: string;
+    collection_story?: string;
+    palette?: string;
+    hero_item_ids?: string[];
+  }[];
+  loadoutNotes?: {
+    itemId: string;
+    name: string;
+    outfitId: string | null;
+    reason: string;
+  }[];
+  userId: string;
+  profile: { genderIdentity: "male" | "female" | "prefer_not_to_say" | null };
+  avatar: {
+    appearance: Appearance;
+    body_type: "male" | "female" | "prefer_not_to_say";
+    reduced_motion: boolean;
+    version: number;
+  };
+  catalogue: Item[];
+  inventory: InventoryItem[];
+  equipped: { slot: string; item_id: string }[];
+  wallets: { currency: string; balance: number; subject_id: string | null }[];
+  wishlist: string[];
+  boxes: { id: string; box_id: string; name: string }[];
+  outfits: { id: string; name: string }[];
+  showcase: { item_id: string; position: number }[];
+  sets: { id: string; name: string; item_ids: string[]; pieces: number }[];
+  achievements: Achievement[];
+  earned: {
+    achievement_id: string;
+    progress: string;
+    unlocked_at: string | null;
+  }[];
+  ledger: { amount: number; reason: string; created_at: string }[];
+  historyImported: boolean;
+  stats: { sessions: number };
+  daily: { qualified: boolean; coins: number };
+  monetisation: MonetisationState;
+  progression: { level: string; xp_projection: string };
+  levelRewards?: {
+    level: number;
+    coins: number;
+    rank_bonus_coins: number;
+    boxes: string[];
+    unlock_items: string[];
+  }[];
+  boxDefinitions: {
+    id: string;
+    rarity_probabilities_percent: Record<string, number>;
+    coin_range: number[];
+  }[];
+}
+export interface AdIntent {
+  id: string;
+  rewardKind: "token" | "xp_boost";
+  provider: "web_google" | "admob" | "development";
+  completionToken: string;
+  expiresAt: string;
+}
+export interface ActionResult {
+  state?: GameState;
+  message?: string;
+  correct?: boolean;
+  marked?: MarkingResult;
+  xp?: number;
+  adIntent?: AdIntent;
+  reveal?: {
+    itemId: string;
+    coins: number;
+    duplicate: boolean;
+    shards: number;
+  };
+}
+interface QueuedAnswer {
+  sessionRef: string;
+  questionIds: string[];
+  index: number;
+  questionId: string;
+  response: string;
+  hintUsed: boolean;
+  retry: boolean;
+  mode: string;
+  timedOut: boolean;
+}
+const localPreview = () =>
+  ["localhost", "127.0.0.1"].includes(location.hostname) &&
+  (new URLSearchParams(location.search).has("preview") ||
+    sessionStorage.getItem("memmara.local-preview") === "1");
+const previewStateKey = "memmara.preview-game-state.v3";
+const previewQuestions = new Map<string, Promise<Question[]>>();
+async function loadPreviewState(): Promise<GameState> {
+  const saved = localStorage.getItem(previewStateKey);
+  if (saved)
+    try {
+      return JSON.parse(saved) as GameState;
+    } catch {
+      localStorage.removeItem(previewStateKey);
+    }
+  const response = await fetch("/data/game-preview.json");
+  if (!response.ok) throw Error("Preview collection could not be loaded.");
+  const state = (await response.json()) as GameState;
+  localStorage.setItem(previewStateKey, JSON.stringify(state));
+  return state;
+}
+function savePreviewState(state: GameState) {
+  localStorage.setItem(previewStateKey, JSON.stringify(state));
+  return state;
+}
+async function previewAction(
+  current: GameState,
+  route: string,
+  body: any,
+): Promise<ActionResult> {
+  const state = structuredClone(current) as GameState,
+    success = (message?: string, extra: Partial<ActionResult> = {}) => ({
+      state: savePreviewState(state),
+      message,
+      ...extra,
+    });
+  if (route === "appearance") {
+    state.avatar.appearance = body.appearance;
+    state.avatar.body_type = body.appearance.gender ?? "prefer_not_to_say";
+    state.avatar.reduced_motion = !!body.reducedMotion;
+    state.avatar.version++;
+    state.profile.genderIdentity =
+      body.appearance.gender ?? "prefer_not_to_say";
+    return success("Avatar saved in this preview");
+  }
+  if (route === "profile-presentation") {
+    state.profile.genderIdentity = body.gender;
+    state.avatar.body_type = body.gender;
+    state.avatar.appearance = {
+      ...state.avatar.appearance,
+      gender: body.gender,
+    };
+    state.avatar.version++;
+    return success("Profile choice saved in this preview");
+  }
+  if (route === "wishlist") {
+    state.wishlist = body.saved
+      ? [...new Set([...state.wishlist, body.itemId])]
+      : state.wishlist.filter((id) => id !== body.itemId);
+    return success();
+  }
+  if (route === "favourite") {
+    const item = state.inventory.find((entry) => entry.item_id === body.itemId);
+    if (item) item.favourite = !!body.favourite;
+    return success("Saved");
+  }
+  if (route === "equip") {
+    const item = state.catalogue.find((entry) => entry.id === body.itemId);
+    if (!item) throw Error("Item not found.");
+    if (body.equipped === false)
+      state.equipped = state.equipped.filter(
+        (entry) => entry.item_id !== body.itemId,
+      );
+    else
+      state.equipped = [
+        ...state.equipped.filter(
+          (entry) => entry.slot !== item.slot && entry.item_id !== body.itemId,
+        ),
+        { slot: item.slot, item_id: item.id },
+      ];
+    return success(body.equipped === false ? "Item removed" : "Item equipped");
+  }
+  if (route === "showcase") {
+    state.showcase = [
+      ...state.showcase.filter(
+        (entry) =>
+          entry.position !== body.position && entry.item_id !== body.itemId,
+      ),
+      { item_id: body.itemId, position: body.position },
+    ];
+    return success("Saved");
+  }
+  if (route === "outfit") {
+    state.outfits = [
+      { id: crypto.randomUUID(), name: String(body.name) },
+      ...state.outfits.filter((entry) => entry.name !== body.name),
+    ];
+    return success("Outfit saved");
+  }
+  if (route === "wear-outfit")
+    return success("Outfit selected in this preview");
+  if (route === "dismiss-loadout-notes") {
+    state.loadoutNotes = [];
+    return success("Your collection is ready");
+  }
+  if (route === "buy") {
+    const item = state.catalogue.find((entry) => entry.id === body.itemId),
+      wallet = state.wallets.find((entry) => entry.currency === "coins");
+    if (!item || !wallet || !item.coin_price)
+      throw Error("This item is unavailable.");
+    if (wallet.balance < item.coin_price)
+      throw Error("You need more preview coins.");
+    if (!state.inventory.some((entry) => entry.item_id === item.id)) {
+      wallet.balance -= item.coin_price;
+      state.inventory.unshift({
+        id: crypto.randomUUID(),
+        item_id: item.id,
+        favourite: false,
+        acquired_at: new Date().toISOString(),
+        provenance: "preview_purchase",
+      });
+    }
+    return success(item.name + " is yours!");
+  }
+  if (route === "buy-box") {
+    const wallet = state.wallets.find((entry) => entry.currency === "coins");
+    if (!wallet || wallet.balance < 100)
+      throw Error("You need 100 study coins for a Daily Chest.");
+    wallet.balance -= 100;
+    state.boxes.push({
+      id: crypto.randomUUID(),
+      box_id: "daily_free",
+      name: "Daily Chest",
+    });
+    return success("Daily Chest added to your inventory");
+  }
+  if (route === "open-box") {
+    const box = state.boxes.find((entry) => entry.id === body.id),
+      item =
+        state.catalogue.find(
+          (entry) =>
+            !state.inventory.some((owned) => owned.item_id === entry.id),
+        ) ?? state.catalogue[0];
+    if (!box || !item) throw Error("Preview reward unavailable.");
+    state.boxes = state.boxes.filter((entry) => entry.id !== body.id);
+    const duplicate = state.inventory.some(
+      (entry) => entry.item_id === item.id,
+    );
+    if (!duplicate)
+      state.inventory.unshift({
+        id: crypto.randomUUID(),
+        item_id: item.id,
+        favourite: false,
+        acquired_at: new Date().toISOString(),
+        provenance: "preview_reward",
+      });
+    const wallet = state.wallets.find((entry) => entry.currency === "coins");
+    if (wallet) wallet.balance += 20;
+    return success("Preview reward opened", {
+      reveal: {
+        itemId: item.id,
+        coins: 20,
+        duplicate,
+        shards: duplicate ? 5 : 0,
+      },
+    });
+  }
+  if (route === "ad-intent") {
+    const intent: AdIntent = {
+      id: crypto.randomUUID(),
+      rewardKind: body.rewardKind,
+      provider: body.provider,
+      completionToken: "preview:" + body.rewardKind + ":" + crypto.randomUUID(),
+      expiresAt: new Date(Date.now() + 600000).toISOString(),
+    };
+    return success(undefined, { adIntent: intent });
+  }
+  if (route === "ad-complete") {
+    const kind = String(body.completionToken ?? "").split(":")[1];
+    if (kind === "token")
+      state.monetisation.tokens = Math.min(
+        state.monetisation.adTokenLimit,
+        state.monetisation.tokens + 1,
+      );
+    if (kind === "xp_boost") state.monetisation.xpBoostPending = true;
+    return success(
+      kind === "token" ? "+1 preview practice token" : "2× preview XP is ready",
+    );
+  }
+  if (route === "start-minigame") {
+    if (!state.monetisation.unlimited) {
+      if (state.monetisation.tokens <= 0)
+        throw Error("You have no practice tokens. Visit the Shop to continue.");
+      state.monetisation.tokens--;
+      state.monetisation.organicTokens = Math.max(
+        0,
+        (state.monetisation.organicTokens ?? state.monetisation.tokens + 1) - 1,
+      );
+    }
+    return success("Game started · 1 token used");
+  }
+  if (route === "minigame-answer") {
+    const subject = subjectForQuestionId(body.questionId),
+      url = subject ? "/data/questions/" + subject.toLowerCase() + ".json" : "";
+    if (url && !previewQuestions.has(url))
+      previewQuestions.set(
+        url,
+        fetch(url).then((response) => response.json()),
+      );
+    const question = url
+        ? (await previewQuestions.get(url)!).find(
+            (entry) => entry.question_id === body.questionId,
+          )
+        : undefined,
+      correct =
+        question?.answer_key?.correct_option_ids?.includes(body.optionId) ??
+        body.definitionId === body.chosenTermId;
+    return success(correct ? "+1 Minigame XP" : "", {
+      correct,
+      xp: correct ? 1 : 0,
+    });
+  }
+  if (route === "answer")
+    return success(undefined, { xp: body.mode === "review" ? 1 : 0 });
+  if (route === "answer-batch") return success("Answers saved");
+  if (route === "complete") return success("Practice saved in this preview");
+  return success("Saved in this preview");
+}
+async function api(
+  route: string,
+  body?: unknown,
+): Promise<ActionResult | GameState> {
+  const response = await fetch("/api/game/" + route, {
+    method: body === undefined ? "GET" : "POST",
+    credentials: "same-origin",
+    headers: body === undefined ? {} : { "Content-Type": "application/json" },
+    ...(body === undefined ? {} : { body: JSON.stringify(body) }),
+  });
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw Error("The game service is starting. Try again shortly.");
+  }
+  if (response.status === 401) {
+    if (localPreview())
+      throw Error("Game rewards are unavailable in local preview.");
+    location.assign(
+      "/login?next=" +
+        encodeURIComponent(location.pathname + location.search + location.hash),
+    );
+    throw Error("Sign in again to continue.");
+  }
+  if (!response.ok) throw Error(data.error ?? "This change couldn’t be saved.");
+  return data;
+}
+export function useGame(progress: Progress) {
+  const [data, setData] = useState<GameState | null>(null),
+    [error, setError] = useState(""),
+    [busy, setBusy] = useState(false),
+    [message, setMessage] = useState("");
+  const initialized = useRef(false);
+  const pendingAnswers = useRef<QueuedAnswer[]>([]);
+  const refresh = useCallback(async () => {
+    try {
+      setError("");
+      const value = localPreview()
+        ? await loadPreviewState()
+        : ((await api("state")) as GameState);
+      setData(value);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Game service unavailable.");
+    }
+  }, []);
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      void refresh();
+    }
+  }, [refresh]);
+  useEffect(() => {
+    if (!message) return;
+    const id = setTimeout(() => setMessage(""), 6000);
+    return () => clearTimeout(id);
+  }, [message]);
+  const action = useCallback(
+    async (route: string, body: unknown) => {
+      setBusy(true);
+      setError("");
+      try {
+        const value = localPreview()
+          ? await previewAction(data ?? (await loadPreviewState()), route, body)
+          : ((await api(route, body)) as ActionResult);
+        if (value.state) setData(value.state);
+        if (value.message) setMessage(value.message);
+        return value;
+      } catch (e) {
+        const msg =
+          e instanceof Error ? e.message : "This change couldn’t be saved.";
+        setError(msg);
+        throw e;
+      } finally {
+        setBusy(false);
+      }
+    },
+    [data],
+  );
+  const capture = useCallback(
+    (session: Session, q: Question, response: string, timedOut: boolean) => {
+      const answer = {
+        sessionRef: session.id,
+        questionIds: session.questionIds,
+        index: session.index,
+        questionId: q.question_id,
+        response,
+        hintUsed: session.hintUsed,
+        retry: session.revisitIds.includes(q.specification_point_id),
+        mode: session.mode ?? (session.isDaily ? "daily" : "topic"),
+        timedOut,
+      };
+      pendingAnswers.current = [
+        ...pendingAnswers.current.filter(
+          (item) =>
+            !(
+              item.sessionRef === answer.sessionRef &&
+              item.index === answer.index
+            ),
+        ),
+        answer,
+      ];
+    },
+    [],
+  );
+  const flushAnswers = useCallback(
+    async (sessionRef?: string) => {
+      const answers = pendingAnswers.current.filter(
+        (item) => !sessionRef || item.sessionRef === sessionRef,
+      );
+      if (!answers.length) return;
+      await action("answer-batch", { answers });
+      const keys = new Set(
+        answers.map((item) => item.sessionRef + ":" + item.index),
+      );
+      pendingAnswers.current = pendingAnswers.current.filter(
+        (item) => !keys.has(item.sessionRef + ":" + item.index),
+      );
+    },
+    [action],
+  );
+  useEffect(() => {
+    const flush = () => {
+      if (pendingAnswers.current.length) void flushAnswers();
+    };
+    window.addEventListener("pagehide", flush);
+    return () => window.removeEventListener("pagehide", flush);
+  }, [flushAnswers]);
+  return {
+    data,
+    error,
+    busy,
+    message,
+    refresh,
+    action,
+    capture,
+    flushAnswers,
+    pendingAnswerCount: pendingAnswers.current.length,
+    clearMessage: () => setMessage(""),
+  };
+}
+export type GameController = ReturnType<typeof useGame>;
+export const coinBalance = (d: GameState | null) =>
+  d?.wallets.find((w) => w.currency === "coins")?.balance ?? 0;
