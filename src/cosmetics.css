@@ -1,23 +1,780 @@
-.cosmetics-hub{--cosmetic-gold:#d8bd7f;--cosmetic-teal:#9bd9d0;--cosmetic-ink:#203944}
-.cosmetics-intro{align-items:center}.cosmetics-intro h1{font-weight:750;letter-spacing:-.04em}.cosmetics-intro>div>p:last-child{font-size:14px;max-width:650px;line-height:1.55}.cosmetics-intro .coin-account{box-shadow:0 8px 28px #00000012}
-.cosmetic-notes{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;border-radius:15px;border:1px solid #d6bd7b77;background:color-mix(in srgb,#d6bd7b 13%,var(--surface));margin:0 0 22px;font-size:13px}.cosmetic-notes>svg{color:var(--gold);flex-shrink:0}.cosmetic-notes>div{flex:1}.cosmetic-notes strong{font-size:14px}.cosmetic-notes p{color:var(--muted);margin-top:5px;line-height:1.5}.cosmetic-notes button{white-space:nowrap}
-.cosmetic-hero{min-height:380px;display:grid;grid-template-columns:1.12fr .9fr;align-items:stretch;overflow:hidden;border:1px solid #c4b6a244;border-radius:24px;margin:0 0 16px;background:radial-gradient(circle at 82% 25%,#c7aa7b36,transparent 42%),radial-gradient(circle at 12% 80%,#6c9f9d3d,transparent 48%),linear-gradient(125deg,#203842,#25333e 65%,#433f46);color:#f8f0dd;box-shadow:0 22px 55px #0b222b18}.cosmetic-hero-copy{padding:42px 12px 42px 43px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;z-index:1}.cosmetic-overline{display:inline-flex;gap:8px;align-items:center;color:#dec995;font-size:12px;letter-spacing:.19em;font-weight:800}.cosmetic-hero h2{font-size:clamp(30px,3.3vw,49px);line-height:1.07;letter-spacing:-.045em;margin:20px 0 17px}.cosmetic-hero p{font-size:14px;line-height:1.62;max-width:485px;color:#e4e4d9}.cosmetic-hero-switch{display:flex;gap:8px;margin:25px 0 20px}.cosmetic-hero-switch button{min-width:83px;border-radius:999px;border:1px solid #c4d5cf66;color:#ede8d9;padding:9px 16px;background:#ffffff0e;font-size:13px;font-weight:700}.cosmetic-hero-switch button.active{background:#d7c391;color:#263b43;border-color:#d7c391}.cosmetic-hero-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.cosmetic-hero-actions .primary{background:#d7c391;color:#263b43;font-weight:800}.cosmetic-hero-actions>span{display:inline-flex;gap:6px;align-items:center;font-weight:700;font-size:14px;color:#e9cf94}.cosmetic-hero-art{min-height:380px;position:relative;display:grid;place-items:center}.cosmetic-hero-art:before{content:'';position:absolute;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,#d9d3b044,transparent 69%);filter:blur(6px)}.cosmetic-hero-art .item-preview{width:100%;height:100%;min-height:380px}.cosmetic-hero-art .item-preview-canvas{height:100%}.cosmetic-hero-art .item-preview-tip{display:none}.cosmetic-hero-rarity{position:absolute;bottom:23px;right:24px;font-size:11px;letter-spacing:.17em;color:#e9d49c;font-weight:800}
-.cosmetic-shop-summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 35px;padding:12px 16px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.cosmetic-shop-summary>span{font-size:12px;color:var(--muted);padding-right:13px;border-right:1px solid var(--line)}.cosmetic-shop-summary strong{color:var(--text);font-size:15px}.cosmetic-shop-summary .text-button{margin-left:auto;font-size:12px}
-.cosmetic-avatar-layout{grid-template-columns:1.06fr .94fr}.cosmetic-avatar-showcase{background:radial-gradient(circle at 50% 56%,#8cbdaf28,transparent 55%),var(--surface)}.cosmetic-avatar-showcase .avatar-stage{height:455px}.cosmetic-avatar-showcase .avatar-canvas{height:calc(100% - 38px)}.cosmetic-avatar-controls .section-heading h2{font-size:22px}.cosmetic-avatar-controls legend{font-size:13px}.cosmetic-avatar-controls .game-pills button{font-size:12px}.cosmetic-avatar-controls .check-label{font-size:12px}
-.catalogue-heading h2{font-size:26px;letter-spacing:-.035em}.catalogue-heading .eyebrow{margin-bottom:6px}.cosmetic-group-pills{display:flex;gap:7px;flex-wrap:wrap;margin:6px 0 17px}.cosmetic-group-pills button{border-radius:999px;padding:8px 15px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:12px;font-weight:650}.cosmetic-group-pills button.active{color:var(--cosmetic-ink);background:var(--cosmetic-teal);border-color:var(--cosmetic-teal)}.cosmetic-filters>select{max-width:170px;font-size:12px}.cosmetic-filters>.gear-search{min-width:220px}
-.cosmetic-grid{gap:17px}.cosmetic-tile{padding-bottom:0;min-height:285px;border-radius:17px}.cosmetic-tile .gear-art{height:173px;margin-bottom:0;background:radial-gradient(ellipse at 50% 73%,color-mix(in srgb,var(--rarity) 20%,transparent),transparent 68%),linear-gradient(145deg,color-mix(in srgb,var(--rarity) 5%,var(--input)),var(--input))}.cosmetic-tile .item-art{width:100%;height:160px}.cosmetic-tile-copy{width:100%;padding:13px 1px 17px}.cosmetic-tile-copy h3{font-size:14px;line-height:1.3;min-height:unset;margin:7px 0 6px;font-weight:750}.cosmetic-tile-copy p{color:var(--muted);font-size:11px;line-height:1.4;min-height:29px}.cosmetic-tile-status{display:inline-flex;align-items:center;gap:5px;color:var(--gold);font-weight:750;font-size:11px;letter-spacing:.04em;margin-top:13px}.cosmetic-tile-status.owned{color:var(--success)}.cosmetic-tile .rarity-tag{font-size:10px}
-.cosmetic-load-more{display:flex;align-items:center;justify-content:center;gap:12px;width:min(100%,420px);margin:27px auto 10px;font-size:13px}.cosmetic-load-more span{color:var(--muted);font-weight:400}
-.item-art{display:inline-grid;place-items:center;overflow:hidden;position:relative;flex-shrink:0}.item-art>img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 12px #0b182535)}.item-art-loading{display:grid;place-items:center;width:45px;height:45px;border-radius:50%;background:color-mix(in srgb,var(--rarity,#aab6c4) 18%,transparent);color:var(--rarity,#aab6c4);font-size:27px}.item-preview{position:relative;width:100%;height:370px;overflow:hidden}.item-preview-canvas{width:100%;height:100%;cursor:grab;touch-action:pan-y}.item-preview-canvas:active{cursor:grabbing}.item-preview-canvas canvas{display:block}.item-preview>small,.item-preview-tip{position:absolute;right:15px;bottom:12px;font-size:11px;color:var(--muted)}.item-preview-error{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:13px}
-.item-art>img{position:absolute;inset:0;height:100%!important;width:100%!important;max-height:100%;object-fit:contain}
-.item-art-unavailable{font-size:11px;color:var(--muted);text-align:center;padding:8px}
-.cosmetic-world-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}.cosmetic-world{min-height:315px;text-align:left;border-radius:18px;border:1px solid var(--line);padding:0 19px 19px;background:var(--surface);display:flex;flex-direction:column;align-items:flex-start;overflow:hidden;transition:transform .18s,border-color .18s}.cosmetic-world:hover{transform:translateY(-3px);border-color:var(--violet)}.cosmetic-world-portrait{height:150px;width:calc(100% + 38px);margin:0 -19px 17px;display:grid;place-items:center;background:radial-gradient(circle at 60% 65%,#9fc7c733,transparent 65%),var(--input);border-bottom:1px solid var(--line)}.cosmetic-world-portrait .item-art{height:145px;width:100%}.cosmetic-world .eyebrow{font-size:10px;color:var(--violet)}.cosmetic-world h3{font-size:18px;margin:7px 0 8px;line-height:1.2}.cosmetic-world p{color:var(--muted);font-size:12px;line-height:1.45;margin-bottom:13px}.cosmetic-world-link{display:inline-flex;align-items:center;gap:6px;color:var(--violet);font-size:12px;font-weight:750;margin-top:auto}
-.cosmetic-world-portrait{flex:0 0 150px;overflow:hidden}
-.cosmetic-dialog{width:min(990px,calc(100vw - 26px));padding:25px}.cosmetic-dialog>header{border-bottom:1px solid var(--line);padding-bottom:15px}.cosmetic-dialog>header .eyebrow{font-size:10px;color:var(--violet)}.cosmetic-dialog>header h2{margin-top:5px}.cosmetic-detail{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(280px,.9fr);gap:27px}.cosmetic-detail-visual{position:relative;min-height:470px;border-radius:17px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 55%,#a2c6be25,transparent 63%),var(--input);overflow:hidden}.cosmetic-view-switch{display:flex;gap:5px;position:absolute;z-index:2;top:14px;left:14px;padding:4px;border-radius:11px;background:var(--surface);border:1px solid var(--line)}.cosmetic-view-switch button{padding:7px 13px;border-radius:8px;color:var(--muted);font-size:12px;font-weight:700}.cosmetic-view-switch button.active{background:var(--violet);color:#fff}.cosmetic-detail-visual .item-preview{height:440px}.cosmetic-detail-visual .avatar-stage{height:440px;padding-top:20px}.cosmetic-detail-visual .avatar-canvas{height:calc(100% - 38px)}.cosmetic-detail-caption{position:absolute;bottom:11px;left:15px;font-size:10px;color:var(--muted);pointer-events:none}.cosmetic-detail-info{display:flex;flex-direction:column;align-items:flex-start;gap:13px;padding:7px 0}.cosmetic-detail-info h3{font-size:27px;letter-spacing:-.035em;line-height:1.1}.cosmetic-meta{font-size:12px;color:var(--muted)}.cosmetic-story{font-size:14px;line-height:1.6}.cosmetic-motion{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.5;color:var(--muted);padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--input)}.cosmetic-motion svg{color:var(--violet);flex-shrink:0}.cosmetic-set-line{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--violet)}.cosmetic-replace{border-left:3px solid var(--gold);padding:10px 12px;background:color-mix(in srgb,var(--gold) 9%,var(--surface));border-radius:0 8px 8px 0;color:var(--text);font-size:12px;line-height:1.5}.cosmetic-detail-info .primary,.cosmetic-detail-info .secondary{font-size:12px}.cosmetic-detail-info .owned-label{font-size:12px}.cosmetic-detail-info .showcase-select{font-size:12px}.cosmetic-home-card{background:radial-gradient(circle at 20% 60%,#9bbebc23,transparent 47%),var(--surface)}
-@media(max-width:1100px){.cosmetic-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.cosmetic-world-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cosmetic-filters>.gear-search{flex-basis:100%}.cosmetic-filters>select{flex:1;max-width:none}}
-@media(max-width:760px){.cosmetics-intro>div>p:last-child{font-size:12px}.cosmetic-hero{grid-template-columns:1fr;min-height:unset}.cosmetic-hero-copy{padding:27px 22px 10px}.cosmetic-hero h2{font-size:34px}.cosmetic-hero p{font-size:12px}.cosmetic-hero-art{min-height:240px}.cosmetic-hero-art .item-preview{min-height:240px;height:240px}.cosmetic-hero-rarity{bottom:14px}.cosmetic-shop-summary{gap:10px}.cosmetic-shop-summary>span{font-size:11px}.cosmetic-avatar-layout{grid-template-columns:1fr}.cosmetic-avatar-showcase .avatar-stage{height:390px}.cosmetic-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cosmetic-tile{min-height:250px}.cosmetic-tile .gear-art{height:135px}.cosmetic-tile .item-art{height:130px}.cosmetic-tile-copy h3{font-size:12px}.cosmetic-tile-copy p{font-size:10px}.cosmetic-world-grid{grid-template-columns:1fr 1fr;gap:10px}.cosmetic-world{min-height:285px;padding:0 12px 14px}.cosmetic-world-portrait{width:calc(100% + 24px);margin:0 -12px 12px;height:120px}.cosmetic-world-portrait .item-art{height:115px}.cosmetic-world h3{font-size:14px}.cosmetic-world p{font-size:10px}.cosmetic-detail{grid-template-columns:1fr;gap:14px}.cosmetic-detail-visual{min-height:300px}.cosmetic-detail-visual .item-preview,.cosmetic-detail-visual .avatar-stage{height:300px}.cosmetic-dialog{padding:16px}.cosmetic-detail-info h3{font-size:22px}.cosmetic-story{font-size:13px}.cosmetic-filters{gap:7px}.cosmetic-filters>select{min-width:calc(50% - 7px)}.cosmetic-notes{flex-wrap:wrap}.cosmetic-group-pills button{font-size:11px;padding:7px 11px}}
-@media(max-width:760px){.cosmetic-world-portrait{flex-basis:120px}}
-@media(max-width:420px){.cosmetic-world-grid{grid-template-columns:1fr}.cosmetic-hero h2{font-size:30px}.cosmetic-shop-summary .text-button{margin-left:0}.cosmetic-detail-visual .avatar-stage{height:275px}}
-@media(prefers-reduced-motion:reduce){.cosmetic-tile,.cosmetic-world{transition:none}}
-.avatar-height-control{display:grid;grid-template-columns:1fr auto;gap:.65rem;align-items:center;font-weight:700;color:var(--ink)}
-.avatar-height-control span{color:var(--muted);font-variant-numeric:tabular-nums}
-.avatar-height-control input{grid-column:1/-1;width:100%;accent-color:#7160a8}
+.cosmetics-hub {
+  --cosmetic-gold: #d8bd7f;
+  --cosmetic-teal: #9bd9d0;
+  --cosmetic-ink: #203944;
+}
+.cosmetics-intro {
+  align-items: center;
+}
+.cosmetics-intro h1 {
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+.cosmetics-intro > div > p:last-child {
+  font-size: 14px;
+  max-width: 650px;
+  line-height: 1.55;
+}
+.cosmetics-intro .coin-account {
+  box-shadow: 0 8px 28px #00000012;
+}
+.cosmetic-notes {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 15px;
+  border: 1px solid #d6bd7b77;
+  background: color-mix(in srgb, #d6bd7b 13%, var(--surface));
+  margin: 0 0 22px;
+  font-size: 13px;
+}
+.cosmetic-notes > svg {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.cosmetic-notes > div {
+  flex: 1;
+}
+.cosmetic-notes strong {
+  font-size: 14px;
+}
+.cosmetic-notes p {
+  color: var(--muted);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+.cosmetic-notes button {
+  white-space: nowrap;
+}
+.cosmetic-hero {
+  min-height: 380px;
+  display: grid;
+  grid-template-columns: 1.12fr 0.9fr;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #c4b6a244;
+  border-radius: 24px;
+  margin: 0 0 16px;
+  background:
+    radial-gradient(circle at 82% 25%, #c7aa7b36, transparent 42%),
+    radial-gradient(circle at 12% 80%, #6c9f9d3d, transparent 48%),
+    linear-gradient(125deg, #203842, #25333e 65%, #433f46);
+  color: #f8f0dd;
+  box-shadow: 0 22px 55px #0b222b18;
+}
+.cosmetic-hero-copy {
+  padding: 42px 12px 42px 43px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1;
+}
+.cosmetic-overline {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #dec995;
+  font-size: 12px;
+  letter-spacing: 0.19em;
+  font-weight: 800;
+}
+.cosmetic-hero h2 {
+  font-size: clamp(30px, 3.3vw, 49px);
+  line-height: 1.07;
+  letter-spacing: -0.045em;
+  margin: 20px 0 17px;
+}
+.cosmetic-hero p {
+  font-size: 14px;
+  line-height: 1.62;
+  max-width: 485px;
+  color: #e4e4d9;
+}
+.cosmetic-hero-switch {
+  display: flex;
+  gap: 8px;
+  margin: 25px 0 20px;
+}
+.cosmetic-hero-switch button {
+  min-width: 83px;
+  border-radius: 999px;
+  border: 1px solid #c4d5cf66;
+  color: #ede8d9;
+  padding: 9px 16px;
+  background: #ffffff0e;
+  font-size: 13px;
+  font-weight: 700;
+}
+.cosmetic-hero-switch button.active {
+  background: #d7c391;
+  color: #263b43;
+  border-color: #d7c391;
+}
+.cosmetic-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.cosmetic-hero-actions .primary {
+  background: #d7c391;
+  color: #263b43;
+  font-weight: 800;
+}
+.cosmetic-hero-actions > span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #e9cf94;
+}
+.cosmetic-hero-art {
+  min-height: 380px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.cosmetic-hero-art:before {
+  content: "";
+  position: absolute;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #d9d3b044, transparent 69%);
+  filter: blur(6px);
+}
+.cosmetic-hero-art .item-preview {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+}
+.cosmetic-hero-art .item-preview-canvas {
+  height: 100%;
+}
+.cosmetic-hero-art .item-preview-tip {
+  display: none;
+}
+.cosmetic-hero-art .item-preview > small {
+  display: none;
+}
+.cosmetic-hero-art .item-preview > small {
+  display: none;
+}
+.cosmetic-hero-rarity {
+  position: absolute;
+  bottom: 23px;
+  right: 24px;
+  font-size: 11px;
+  letter-spacing: 0.17em;
+  color: #e9d49c;
+  font-weight: 800;
+}
+.cosmetic-shop-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 35px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface);
+}
+.cosmetic-shop-summary > span {
+  font-size: 12px;
+  color: var(--muted);
+  padding-right: 13px;
+  border-right: 1px solid var(--line);
+}
+.cosmetic-shop-summary strong {
+  color: var(--text);
+  font-size: 15px;
+}
+.cosmetic-shop-summary .text-button {
+  margin-left: auto;
+  font-size: 12px;
+}
+.cosmetic-avatar-layout {
+  grid-template-columns: 1.06fr 0.94fr;
+}
+.cosmetic-avatar-showcase {
+  background:
+    radial-gradient(circle at 50% 56%, #8cbdaf28, transparent 55%),
+    var(--surface);
+}
+.cosmetic-avatar-showcase .avatar-stage {
+  height: 455px;
+}
+.cosmetic-avatar-showcase .avatar-canvas {
+  height: calc(100% - 38px);
+}
+.cosmetic-avatar-controls .section-heading h2 {
+  font-size: 22px;
+}
+.cosmetic-avatar-controls legend {
+  font-size: 13px;
+}
+.cosmetic-avatar-controls .game-pills button {
+  font-size: 12px;
+}
+.cosmetic-avatar-controls .check-label {
+  font-size: 12px;
+}
+.catalogue-heading h2 {
+  font-size: 26px;
+  letter-spacing: -0.035em;
+}
+.catalogue-heading .eyebrow {
+  margin-bottom: 6px;
+}
+.cosmetic-group-pills {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 6px 0 17px;
+}
+.cosmetic-group-pills button {
+  border-radius: 999px;
+  padding: 8px 15px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+.cosmetic-group-pills button.active {
+  color: var(--cosmetic-ink);
+  background: var(--cosmetic-teal);
+  border-color: var(--cosmetic-teal);
+}
+.cosmetic-filters > select {
+  max-width: 170px;
+  font-size: 12px;
+}
+.cosmetic-filters > .gear-search {
+  min-width: 220px;
+}
+.cosmetic-grid {
+  gap: 17px;
+}
+.cosmetic-tile {
+  padding-bottom: 0;
+  min-height: 285px;
+  border-radius: 17px;
+}
+.cosmetic-tile .gear-art {
+  height: 173px;
+  margin-bottom: 0;
+  background:
+    radial-gradient(
+      ellipse at 50% 73%,
+      color-mix(in srgb, var(--rarity) 20%, transparent),
+      transparent 68%
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--rarity) 5%, var(--input)),
+      var(--input)
+    );
+}
+.cosmetic-tile .item-art {
+  width: 100%;
+  height: 160px;
+}
+.cosmetic-tile-copy {
+  width: 100%;
+  padding: 13px 1px 17px;
+}
+.cosmetic-tile-copy h3 {
+  font-size: 14px;
+  line-height: 1.3;
+  min-height: unset;
+  margin: 7px 0 6px;
+  font-weight: 750;
+}
+.cosmetic-tile-copy p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  min-height: 29px;
+}
+.cosmetic-tile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gold);
+  font-weight: 750;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  margin-top: 13px;
+}
+.cosmetic-tile-status.owned {
+  color: var(--success);
+}
+.cosmetic-tile .rarity-tag {
+  font-size: 10px;
+}
+.cosmetic-load-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(100%, 420px);
+  margin: 27px auto 10px;
+  font-size: 13px;
+}
+.cosmetic-load-more span {
+  color: var(--muted);
+  font-weight: 400;
+}
+.item-art {
+  display: inline-grid;
+  place-items: center;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.item-art > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px #0b182535);
+}
+.item-art-loading {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--rarity, #aab6c4) 18%, transparent);
+  color: var(--rarity, #aab6c4);
+  font-size: 27px;
+}
+.item-preview {
+  position: relative;
+  width: 100%;
+  height: 370px;
+  overflow: hidden;
+}
+.item-preview-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.item-preview-canvas:active {
+  cursor: grabbing;
+}
+.item-preview-canvas canvas {
+  display: block;
+}
+.item-preview > small,
+.item-preview-tip {
+  position: absolute;
+  right: 15px;
+  bottom: 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.item-preview-error {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+.item-art > img {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+  width: 100% !important;
+  max-height: 100%;
+  object-fit: contain;
+}
+.item-art-unavailable {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  padding: 8px;
+}
+.cosmetic-world-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.cosmetic-world {
+  min-height: 315px;
+  text-align: left;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  padding: 0 19px 19px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  transition:
+    transform 0.18s,
+    border-color 0.18s;
+}
+.cosmetic-world:hover {
+  transform: translateY(-3px);
+  border-color: var(--violet);
+}
+.cosmetic-world-portrait {
+  height: 150px;
+  width: calc(100% + 38px);
+  margin: 0 -19px 17px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 60% 65%, #9fc7c733, transparent 65%), var(--input);
+  border-bottom: 1px solid var(--line);
+}
+.cosmetic-world-portrait .item-art {
+  height: 145px;
+  width: 100%;
+}
+.cosmetic-world .eyebrow {
+  font-size: 10px;
+  color: var(--violet);
+}
+.cosmetic-world h3 {
+  font-size: 18px;
+  margin: 7px 0 8px;
+  line-height: 1.2;
+}
+.cosmetic-world p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-bottom: 13px;
+}
+.cosmetic-world-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--violet);
+  font-size: 12px;
+  font-weight: 750;
+  margin-top: auto;
+}
+.cosmetic-world-portrait {
+  flex: 0 0 150px;
+  overflow: hidden;
+}
+.cosmetic-dialog {
+  width: min(990px, calc(100vw - 26px));
+  padding: 25px;
+}
+.cosmetic-dialog > header {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 15px;
+}
+.cosmetic-dialog > header .eyebrow {
+  font-size: 10px;
+  color: var(--violet);
+}
+.cosmetic-dialog > header h2 {
+  margin-top: 5px;
+}
+.cosmetic-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.9fr);
+  gap: 27px;
+}
+.cosmetic-detail-visual {
+  position: relative;
+  min-height: 470px;
+  border-radius: 17px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 50% 55%, #a2c6be25, transparent 63%),
+    var(--input);
+  overflow: hidden;
+}
+.cosmetic-view-switch {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  left: 14px;
+  padding: 4px;
+  border-radius: 11px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.cosmetic-view-switch button {
+  padding: 7px 13px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.cosmetic-view-switch button.active {
+  background: var(--violet);
+  color: #fff;
+}
+.cosmetic-detail-visual .item-preview {
+  height: 440px;
+}
+.cosmetic-detail-visual .avatar-stage {
+  height: 440px;
+  padding-top: 20px;
+}
+.cosmetic-detail-visual .avatar-canvas {
+  height: calc(100% - 38px);
+}
+.cosmetic-detail-caption {
+  position: absolute;
+  bottom: 11px;
+  left: 15px;
+  font-size: 10px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.cosmetic-detail-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 7px 0;
+}
+.cosmetic-detail-info h3 {
+  font-size: 27px;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+.cosmetic-meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+.cosmetic-story {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.cosmetic-motion {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--input);
+}
+.cosmetic-motion svg {
+  color: var(--violet);
+  flex-shrink: 0;
+}
+.cosmetic-set-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--violet);
+}
+.cosmetic-replace {
+  border-left: 3px solid var(--gold);
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--gold) 9%, var(--surface));
+  border-radius: 0 8px 8px 0;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.cosmetic-detail-info .primary,
+.cosmetic-detail-info .secondary {
+  font-size: 12px;
+}
+.cosmetic-detail-info .owned-label {
+  font-size: 12px;
+}
+.cosmetic-detail-info .showcase-select {
+  font-size: 12px;
+}
+.cosmetic-home-card {
+  background:
+    radial-gradient(circle at 20% 60%, #9bbebc23, transparent 47%),
+    var(--surface);
+}
+@media (max-width: 1100px) {
+  .cosmetic-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .cosmetic-world-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cosmetic-filters > .gear-search {
+    flex-basis: 100%;
+  }
+  .cosmetic-filters > select {
+    flex: 1;
+    max-width: none;
+  }
+}
+@media (max-width: 760px) {
+  .cosmetics-intro > div > p:last-child {
+    font-size: 12px;
+  }
+  .cosmetic-hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .cosmetic-hero-copy {
+    padding: 27px 22px 10px;
+  }
+  .cosmetic-hero h2 {
+    font-size: 34px;
+  }
+  .cosmetic-hero p {
+    font-size: 12px;
+  }
+  .cosmetic-hero-art {
+    min-height: 240px;
+  }
+  .cosmetic-hero-art .item-preview {
+    min-height: 240px;
+    height: 240px;
+  }
+  .cosmetic-hero-rarity {
+    bottom: 14px;
+  }
+  .cosmetic-shop-summary {
+    gap: 10px;
+  }
+  .cosmetic-shop-summary > span {
+    font-size: 11px;
+  }
+  .cosmetic-avatar-layout {
+    grid-template-columns: 1fr;
+  }
+  .cosmetic-avatar-showcase .avatar-stage {
+    height: 390px;
+  }
+  .cosmetic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .cosmetic-tile {
+    min-height: 250px;
+  }
+  .cosmetic-tile .gear-art {
+    height: 135px;
+  }
+  .cosmetic-tile .item-art {
+    height: 130px;
+  }
+  .cosmetic-tile-copy h3 {
+    font-size: 12px;
+  }
+  .cosmetic-tile-copy p {
+    font-size: 10px;
+  }
+  .cosmetic-world-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .cosmetic-world {
+    min-height: 285px;
+    padding: 0 12px 14px;
+  }
+  .cosmetic-world-portrait {
+    width: calc(100% + 24px);
+    margin: 0 -12px 12px;
+    height: 120px;
+  }
+  .cosmetic-world-portrait .item-art {
+    height: 115px;
+  }
+  .cosmetic-world h3 {
+    font-size: 14px;
+  }
+  .cosmetic-world p {
+    font-size: 10px;
+  }
+  .cosmetic-detail {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .cosmetic-detail-visual {
+    min-height: 300px;
+  }
+  .cosmetic-detail-visual .item-preview,
+  .cosmetic-detail-visual .avatar-stage {
+    height: 300px;
+  }
+  .cosmetic-dialog {
+    padding: 16px;
+  }
+  .cosmetic-detail-info h3 {
+    font-size: 22px;
+  }
+  .cosmetic-story {
+    font-size: 13px;
+  }
+  .cosmetic-filters {
+    gap: 7px;
+  }
+  .cosmetic-filters > select {
+    min-width: calc(50% - 7px);
+  }
+  .cosmetic-notes {
+    flex-wrap: wrap;
+  }
+  .cosmetic-group-pills button {
+    font-size: 11px;
+    padding: 7px 11px;
+  }
+}
+@media (max-width: 760px) {
+  .cosmetic-world-portrait {
+    flex-basis: 120px;
+  }
+}
+@media (max-width: 420px) {
+  .cosmetic-world-grid {
+    grid-template-columns: 1fr;
+  }
+  .cosmetic-hero h2 {
+    font-size: 30px;
+  }
+  .cosmetic-shop-summary .text-button {
+    margin-left: 0;
+  }
+  .cosmetic-detail-visual .avatar-stage {
+    height: 275px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cosmetic-tile,
+  .cosmetic-world {
+    transition: none;
+  }
+}
+.avatar-height-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+  font-weight: 700;
+  color: var(--ink);
+}
+.avatar-height-control span {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.avatar-height-control input {
+  grid-column: 1/-1;
+  width: 100%;
+  accent-color: #7160a8;
+}
