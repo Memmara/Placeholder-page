@@ -492,7 +492,11 @@ async function state(user) {
     days,
   ] = result.map((x) => x.rows);
   const today = date(),
-    qualified = days.some((d) => d.study_date === today);
+    qualified = days.some((d) => d.study_date === today),
+    chestPurchased = !!Number((await pool.query(
+      "SELECT count(*) FROM reward_claims WHERE user_id=$1 AND source_kind='box_purchase' AND (created_at AT TIME ZONE 'Europe/London')::date=$2::date",
+      [user, today],
+    )).rows[0].count);
   const pity = Object.fromEntries(
     (
       await pool.query(
@@ -559,6 +563,7 @@ async function state(user) {
       qualified,
       coins: config.economy.base_daily_mix_coins,
       box: "daily_free",
+      chestPurchased,
     },
     monetisation: {
       plan: monetisation.account_plan,
@@ -929,8 +934,46 @@ async function mutate(user, route, b) {
       };
     }
     if (route === "start-minigame") {
-      await beginPaidSession(db, user);
-      return { message: "Game started · 1 token used" };
+      requireThat(
+        typeof b.sessionRef === "string" &&
+          b.sessionRef.length <= 100 &&
+          Array.isArray(b.questionIds) &&
+          b.questionIds.length >= (b.mode === "review" ? 1 : 5) &&
+          b.questionIds.length <= 12 &&
+          new Set(b.questionIds).size === b.questionIds.length &&
+          (await validQuestionIds(db, b.questionIds)),
+        "Invalid learning session.",
+      );
+      const mode =
+        b.mode === "speed"
+          ? "speed_select"
+          : b.mode === "review"
+            ? "review"
+            : b.mode === "topic"
+              ? "topic"
+              : "daily_mix";
+      const existing = (
+        await db.query(
+          "SELECT s.xp_multiplier FROM local_play_sessions p JOIN study_sessions s ON s.id=p.session_id WHERE p.user_id=$1 AND p.client_ref=$2",
+          [user, b.sessionRef],
+        )
+      ).rows[0];
+      if (existing)
+        return {
+          message: "Game already started",
+          xpMultiplier: Number(existing.xp_multiplier),
+        };
+      const sid = crypto.randomUUID(),
+        xpMultiplier = await beginPaidSession(db, user);
+      await db.query(
+        "INSERT INTO study_sessions(id,user_id,learning_session_ref,mode,started_at,study_date,xp_multiplier,token_spent) VALUES($1,$2,$3,$4,now(),$5,$6,true)",
+        [sid, user, user + ":" + b.sessionRef, mode, date(), xpMultiplier],
+      );
+      await db.query(
+        "INSERT INTO local_play_sessions(user_id,client_ref,session_id,question_ids) VALUES($1,$2,$3,$4)",
+        [user, b.sessionRef, sid, JSON.stringify(b.questionIds)],
+      );
+      return { message: "Game started · 1 token used", xpMultiplier };
     }
     if (route === "minigame-answer") {
       const q = b.questionId ? await questionById(db, b.questionId) : null,
@@ -1238,6 +1281,11 @@ async function mutate(user, route, b) {
       ).rows[0];
       if (previous)
         return { message: "Daily Chest is ready in your inventory" };
+      const boughtToday = Number((await db.query(
+        "SELECT count(*) FROM reward_claims WHERE user_id=$1 AND source_kind='box_purchase' AND (created_at AT TIME ZONE 'Europe/London')::date=$2::date",
+        [user, date()],
+      )).rows[0].count);
+      requireThat(!boughtToday, "You have already bought today's Daily Chest.", 409);
       const wallet = (
         await db.query(
           "SELECT balance_projection FROM wallet_accounts WHERE user_id=$1 AND currency='coins' FOR UPDATE",

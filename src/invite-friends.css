@@ -95,3 +95,22 @@
     animation: none;
   }
 }
+
+.invite-offer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 14px 0 8px;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--violet) 55%, var(--line));
+  border-radius: 16px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--violet) 22%, var(--surface)), color-mix(in srgb, var(--cyan) 12%, var(--surface)));
+  box-shadow: 0 12px 34px rgba(45, 34, 96, .22);
+}
+.invite-offer strong { color: var(--text); font-size: 20px; letter-spacing: -.3px; }
+.invite-offer span { color: var(--cyan); font-size: 9px; font-weight: 800; letter-spacing: 1.2px; text-align: right; }
+@media (max-width: 520px) {
+  .invite-offer { align-items: flex-start; flex-direction: column; }
+  .invite-offer span { text-align: left; }
+}

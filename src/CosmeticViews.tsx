@@ -231,7 +231,7 @@ export function GameHub({
       | { itemId: string; coins: number; duplicate: boolean; shards: number }
       | undefined
     >(),
-    [opening, setOpening] = useState(false),
+    [openingBoxId, setOpeningBoxId] = useState<string | null>(null),
     [buyingChest, setBuyingChest] = useState(false);
   const purchaseKey = useRef("");
   const [shown, setShown] = useState(24);
@@ -846,13 +846,14 @@ export function GameHub({
                   <h3>Daily Chest</h3>
                   <small>A surprise cosmetic chance, bonus coins and duplicate protection.</small>
                   <strong className="chest-price"><Coins size={16}/>100 study coins</strong>
-                  <button className="primary" disabled={busy||buyingChest||balance<100} onClick={async()=>{setBuyingChest(true);try{await action("buy-box",{key:crypto.randomUUID()})}catch{}finally{setBuyingChest(false)}}}>{buyingChest?"Preparing chest…":balance<100?`${100-balance} more coins needed`:"Buy Daily Chest"}</button>
+                  <button className="primary" disabled={busy||buyingChest||balance<100||d.daily.chestPurchased} onClick={async()=>{setBuyingChest(true);try{await action("buy-box",{key:crypto.randomUUID()})}catch{}finally{setBuyingChest(false)}}}>{d.daily.chestPurchased?"Daily Chest bought":buyingChest?"Preparing chest…":balance<100?`${100-balance} more coins needed`:"Buy Daily Chest"}</button>
                 </article>
                 {d.boxes.map((b) => {
                   const def = d.boxDefinitions.find((x) => x.id === b.box_id);
+                  const isOpening = openingBoxId === b.id;
                   return (
                     <article className="daily-chest-card" key={b.id}>
-                      <div className={`chest-art ${opening?"is-opening":""}`} aria-hidden="true"><span className="chest-lid"/><span className="chest-body"><Gift size={23}/></span></div>
+                      <div className={`chest-art ${isOpening?"is-opening":""}`} aria-hidden="true"><span className="chest-lid"/><span className="chest-body"><Gift size={23}/></span></div>
                       <h3>{pretty(b.name)}</h3>
                       <small>
                         {def &&
@@ -867,9 +868,9 @@ export function GameHub({
                       </small>
                       <button
                         className="secondary"
-                        disabled={busy || opening}
+                        disabled={busy || !!openingBoxId}
                         onClick={async () => {
-                          setOpening(true);
+                          setOpeningBoxId(b.id);
                           try {
                             const result = await action("open-box", {
                               id: b.id,
@@ -878,18 +879,17 @@ export function GameHub({
                             setReveal(result.reveal);
                           } catch {
                           } finally {
-                            setOpening(false);
+                            setOpeningBoxId(null);
                           }
                         }}
                       >
-                        {opening ? "Opening your chest…" : "Open chest"}
+                        {isOpening ? "Opening your chest…" : "Open chest"}
                         <Sparkles size={15} />
                       </button>
                     </article>
                   );
                 })}
               </div>
-              {opening&&<div className="chest-wait" role="status"><Sparkles size={22}/><strong>Opening your chest…</strong><span>Finding your reward</span><i/><i/><i/></div>}
             </section>
         </>
       )}

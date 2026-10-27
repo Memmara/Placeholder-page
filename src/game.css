@@ -1428,3 +1428,13 @@
     animation: none !important;
   }
 }
+
+.topbar-right { margin-left: auto; }
+.token-hud { border-radius: 14px; }
+.token-hud small { max-width: 145px; color: var(--muted); font-size: 9px; line-height: 1.2; text-align: left; }
+.token-refill-time { display: flex; align-items: center; justify-content: center; gap: 7px; color: var(--cyan); font-size: 12px; }
+@media (max-width: 720px) {
+  .topbar-right { gap: 8px; }
+  .token-hud small { display: none; }
+  .coin-hud { padding-inline: 10px; }
+}

@@ -79,7 +79,7 @@ import "./styles.css";
 import "./app-refresh.css";
 import { Brand } from "./Brand";
 import { PublicLanding } from "./PublicLanding";
-import { useGame, coinBalance, type GameController } from "./GameService";
+import { useGame, coinBalance, useTokenCountdown, type GameController } from "./GameService";
 import { GameHub, GameHomeCard } from "./CosmeticViews";
 import { Avatar3D, ItemArt, defaultAppearance } from "./CosmeticStage";
 import { ProgressAnalytics } from "./ProgressAnalytics";
@@ -474,6 +474,7 @@ function App({
     firstProgress = useRef(true);
   const game = useGame(p);
   const rewardedAds = useRewardedAds(game);
+  const tokenCountdown = useTokenCountdown(game.data?.monetisation.nextTokenAt);
   const [topicId, setTopicId] = useState("AQA8463-T01"),
     [browseSubjectId, setBrowseSubjectId] = useState(
       p.settings?.subjects[0] ?? "GCSE-PHYSICS",
@@ -904,7 +905,7 @@ function App({
     const state = game.data?.monetisation;
     return !!state && !state.unlimited && state.tokens <= 0;
   }
-  function start(topic?: string, speed = false) {
+  async function start(topic?: string, speed = false) {
     if (!bank) return;
     const same =
       active &&
@@ -937,7 +938,19 @@ function App({
       );
       return;
     }
-    if (game.data?.monetisation.xpBoostPending) fresh.xpMultiplier = 2;
+    try {
+      const started = await game.action("start-minigame", {
+        mode: speed ? "speed" : topic ? "topic" : "daily",
+        sessionRef: fresh.id,
+        questionIds: fresh.questionIds,
+      });
+      if (started.xpMultiplier === 2) fresh.xpMultiplier = 2;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "This practice could not start.";
+      if (message.toLowerCase().includes("token")) sendToShop();
+      else setNotice(message);
+      return;
+    }
     setP((prev) => ({
       ...prev,
       pausedSessions:
@@ -956,7 +969,7 @@ function App({
     setPage("session");
     history.replaceState(null, "", "/daily-mix");
   }
-  function startReview() {
+  async function startReview() {
     if (!bank) return;
     if (noTokens()) {
       sendToShop();
@@ -967,7 +980,19 @@ function App({
       setNotice("Your Review Vault will fill as you practise.");
       return;
     }
-    if (game.data?.monetisation.xpBoostPending) fresh.xpMultiplier = 2;
+    try {
+      const started = await game.action("start-minigame", {
+        mode: "review",
+        sessionRef: fresh.id,
+        questionIds: fresh.questionIds,
+      });
+      if (started.xpMultiplier === 2) fresh.xpMultiplier = 2;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "This practice could not start.";
+      if (message.toLowerCase().includes("token")) sendToShop();
+      else setNotice(message);
+      return;
+    }
     setP((prev) => ({
       ...prev,
       pausedSessions:
@@ -1459,6 +1484,7 @@ function App({
             </p>
             <h2 id="token-prompt-title">Insufficient tokens</h2>
             <p>Buy more tokens or watch a rewarded ad to continue.</p>
+            {tokenCountdown && <p className="token-refill-time"><Clock3 size={15}/>{tokenCountdown}</p>}
             {tokenPromptMessage && (
               <p className="banner warning" role="alert">
                 {tokenPromptMessage}
@@ -1601,13 +1627,12 @@ function App({
             </button>
             <button
               className="coin-hud token-hud"
-              aria-label={`Open token shop, ${game.data?.monetisation.unlimited ? "unlimited" : (game.data?.monetisation.tokens ?? 0)} tokens`}
+              aria-label={`Open token shop, ${game.data?.monetisation.unlimited ? "unlimited" : (game.data?.monetisation.tokens ?? 0)} tokens${tokenCountdown ? `. ${tokenCountdown}` : ""}`}
               onClick={() => navigate("shop")}
             >
               <Zap size={16} />
-              {game.data?.monetisation.unlimited
-                ? "∞"
-                : (game.data?.monetisation.tokens ?? 0)}
+              <span>{game.data?.monetisation.unlimited ? "∞" : (game.data?.monetisation.tokens ?? 0)}</span>
+              {!game.data?.monetisation.unlimited && tokenCountdown && <small>{tokenCountdown}</small>}
             </button>
             <div className="notification-anchor">
               <button
@@ -1704,7 +1729,6 @@ function App({
                 </section>
               )}
             </div>
-            <span className="mode-badge">RULE-BASED PROTOTYPE</span>
             <button
               className="icon-button"
               aria-label={

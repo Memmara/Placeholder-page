@@ -1,6 +1,6 @@
 import { Check, Clock3, Crown, Sparkles, Ticket, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { GameController } from "../GameService";
+import { useTokenCountdown, type GameController } from "../GameService";
 import { useRewardedAds } from "../ads/useRewardedAds";
 import { purchase, refreshPurchase, type ProductCode } from "./CommerceService";
 
@@ -43,6 +43,7 @@ export function ShopPage({
   outOfTokens?: boolean;
 }) {
   const state = game.data?.monetisation,
+    countdown = useTokenCountdown(game.data?.monetisation.nextTokenAt),
     ads = useRewardedAds(game),
     [busy, setBusy] = useState<ProductCode | null>(null),
     [message, setMessage] = useState("");
@@ -103,10 +104,10 @@ export function ShopPage({
             {state?.unlimited ? "Unlimited" : (state?.tokens ?? 0)}
             {!state?.unlimited && <> token{state?.tokens === 1 ? "" : "s"}</>}
           </strong>
-          {state?.nextTokenAt && (
+          {countdown && (
             <small>
               <Clock3 size={13} />
-              Tokens regenerate automatically
+              {countdown}
             </small>
           )}
         </div>

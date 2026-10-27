@@ -30,9 +30,7 @@ export function InviteFriends({
       );
   }, [open]);
   if (!open) return null;
-  const url = invite
-    ? new URL("/create-account?ref=" + invite.code, location.origin).toString()
-    : "";
+  const url = invite?.url ?? "";
   async function copy() {
     if (!invite) return;
     try {
@@ -87,6 +85,7 @@ export function InviteFriends({
         </div>
         <p className="eyebrow">LEARN TOGETHER</p>
         <h2 id="invite-title">Invite a friend</h2>
+        <div className="invite-offer"><strong>1 MONTH PLUS FREE</strong><span>LIMITED TIME ONLY</span></div>
         <p>
           Get one month of Memmara Plus when a new friend joins through your
           link and verifies their account.

@@ -86,7 +86,7 @@ export interface GameState {
   ledger: { amount: number; reason: string; created_at: string }[];
   historyImported: boolean;
   stats: { sessions: number };
-  daily: { qualified: boolean; coins: number };
+  daily: { qualified: boolean; coins: number; chestPurchased: boolean };
   monetisation: MonetisationState;
   progression: { level: string; xp_projection: string };
   levelRewards?: {
@@ -115,6 +115,7 @@ export interface ActionResult {
   correct?: boolean;
   marked?: MarkingResult;
   xp?: number;
+  xpMultiplier?: 1 | 2;
   adIntent?: AdIntent;
   reveal?: {
     itemId: string;
@@ -258,6 +259,8 @@ async function previewAction(
     return success(item.name + " is yours!");
   }
   if (route === "buy-box") {
+    if (state.daily.chestPurchased)
+      throw Error("You have already bought today's Daily Chest.");
     const wallet = state.wallets.find((entry) => entry.currency === "coins");
     if (!wallet || wallet.balance < 100)
       throw Error("You need 100 study coins for a Daily Chest.");
@@ -267,6 +270,7 @@ async function previewAction(
       box_id: "daily_free",
       name: "Daily Chest",
     });
+    state.daily.chestPurchased = true;
     return success("Daily Chest added to your inventory");
   }
   if (route === "open-box") {
@@ -505,3 +509,19 @@ export function useGame(progress: Progress) {
 export type GameController = ReturnType<typeof useGame>;
 export const coinBalance = (d: GameState | null) =>
   d?.wallets.find((w) => w.currency === "coins")?.balance ?? 0;
+
+export function useTokenCountdown(at: string | null | undefined) {
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+    if (!at) return;
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, [at]);
+  if (!at) return "";
+  const remaining = Math.max(0, new Date(at).getTime() - now);
+  if (remaining <= 0) return "Free token ready";
+  const hours = Math.floor(remaining / 3_600_000);
+  const minutes = Math.floor((remaining % 3_600_000) / 60_000);
+  const seconds = Math.floor((remaining % 60_000) / 1000);
+  return `Next free token in ${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m ` : ""}${seconds}s`;
+}
