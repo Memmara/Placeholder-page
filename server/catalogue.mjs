@@ -64,6 +64,10 @@ export async function seed(){
   const referralApplied=(await db.query("SELECT sha256 FROM public.memmara_schema_migrations WHERE id='010_referrals_and_pets'")).rows[0];
   if(referralApplied&&referralApplied.sha256!==referralHash)throw Error('Referral migration changed after it was applied.');
   if(!referralApplied){await db.query(referralMigration);await db.query("INSERT INTO public.memmara_schema_migrations(id,sha256) VALUES('010_referrals_and_pets',$1)",[referralHash]);}
+  const consumerPurchasesMigration=fs.readFileSync(path.join(root,'database/migrations/011-consumer-purchases.sql'),'utf8'),consumerPurchasesHash=crypto.createHash('sha256').update(consumerPurchasesMigration).digest('hex');
+  const consumerPurchasesApplied=(await db.query("SELECT sha256 FROM public.memmara_schema_migrations WHERE id='011_consumer_purchases'")).rows[0];
+  if(consumerPurchasesApplied&&consumerPurchasesApplied.sha256!==consumerPurchasesHash)throw Error('Consumer purchases migration changed after it was applied.');
+  if(!consumerPurchasesApplied){await db.query(consumerPurchasesMigration);await db.query("INSERT INTO public.memmara_schema_migrations(id,sha256) VALUES('011_consumer_purchases',$1)",[consumerPurchasesHash]);}
   await db.query("UPDATE subjects SET available=true WHERE id IN ('chemistry','maths','geography')");
   for(const subject of ['biology','chemistry','physics','maths'])await db.query('INSERT INTO subjects(id,name,available) VALUES($1,$2,false) ON CONFLICT DO NOTHING',['alevel_'+subject,'A-Level '+subject[0].toUpperCase()+subject.slice(1)]);
   await db.query("INSERT INTO seasonal_events(id,name,starts_at,ends_at,edition,claim_grace_ends_at,config) VALUES('season_01','Founding Scholars', '2026-10-19','2027-01-11',1,'2027-01-18','{}') ON CONFLICT DO NOTHING");
@@ -98,5 +102,6 @@ export async function seed(){
   console.log(`Game catalogue ready: ${economicCatalogue.length} items, ${sets.length} sets, ${achievements.length} achievements.`);
  }catch(e){await db.query('ROLLBACK');throw e}finally{db.release()}
 }
+
 
 
