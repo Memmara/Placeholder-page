@@ -12,7 +12,7 @@ export const byId=new Map(catalogue.map(i=>[i.id,i]));
 const applicationDatabaseUrl=process.env.MEMMARA_DATABASE_URL||process.env.DATABASE_URL_UNPOOLED||process.env.DATABASE_URL;
 const databaseConfig=applicationDatabaseUrl?{connectionString:applicationDatabaseUrl}:JSON.parse(fs.readFileSync(path.join(root,'.local-db/credentials.json'),'utf8'));
 const cloudflareRuntime=process.env.CF_PAGES==='1';
-const rawPool=new pg.Pool({...databaseConfig,max:cloudflareRuntime?4:16,maxUses:cloudflareRuntime?100:7500,idleTimeoutMillis:cloudflareRuntime?1000:10000,connectionTimeoutMillis:8000,application_name:'memmara_account_game_api'});
+const rawPool=new pg.Pool({...databaseConfig,max:cloudflareRuntime?4:16,maxUses:cloudflareRuntime?1:7500,idleTimeoutMillis:cloudflareRuntime?1000:10000,connectionTimeoutMillis:8000,application_name:'memmara_account_game_api'});
 const configuredClients=new WeakSet();
 async function configuredClient(){
  const client=await rawPool.connect();
