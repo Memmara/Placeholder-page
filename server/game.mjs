@@ -144,6 +144,11 @@ async function transaction(fn) {
     db.release();
   }
 }
+async function serialAll(tasks) {
+  const results = [];
+  for (const task of tasks) results.push(await task());
+  return results;
+}
 const PLAN_TOKENS = {
   free: { capacity: 2, hours: 5, unlimited: false },
   plus: { capacity: 8, hours: 2, unlimited: false },
@@ -426,51 +431,51 @@ async function state(user) {
   const profile = (
     await pool.query("SELECT gender_identity FROM users WHERE id=$1", [user])
   ).rows[0];
-  const result = await Promise.all([
-    pool.query("SELECT * FROM avatars WHERE user_id=$1", [user]),
-    pool.query(
+  const result = await serialAll([
+    () => pool.query("SELECT * FROM avatars WHERE user_id=$1", [user]),
+    () => pool.query(
       "SELECT id,item_id,form,favourite,acquired_at,provenance FROM inventory WHERE user_id=$1 AND revoked_at IS NULL ORDER BY acquired_at DESC",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT e.slot,i.item_id,e.inventory_id FROM cosmetic_equipped_items e JOIN inventory i ON i.id=e.inventory_id AND i.user_id=e.user_id WHERE e.user_id=$1 AND i.revoked_at IS NULL",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT currency,subject_id,balance_projection::int AS balance FROM wallet_accounts WHERE user_id=$1",
       [user],
     ),
-    pool.query("SELECT item_id FROM wishlist WHERE user_id=$1", [user]),
-    pool.query("SELECT * FROM progression WHERE user_id=$1", [user]),
-    pool.query(
+    () => pool.query("SELECT item_id FROM wishlist WHERE user_id=$1", [user]),
+    () => pool.query("SELECT * FROM progression WHERE user_id=$1", [user]),
+    () => pool.query(
       "SELECT b.id,b.box_id,b.earned_at,d.name FROM user_boxes b JOIN drop_boxes d ON d.id=b.box_id WHERE b.user_id=$1 AND opened_at IS NULL ORDER BY earned_at",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT name,id FROM outfits WHERE user_id=$1 ORDER BY created_at DESC",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT amount::int,reason,created_at FROM currency_ledger WHERE user_id=$1 ORDER BY id DESC LIMIT 10",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT achievement_id,progress,unlocked_at FROM user_achievements WHERE user_id=$1",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT count(*)::int AS sessions FROM study_sessions WHERE user_id=$1 AND verified",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT history_version FROM local_game_clients WHERE user_id=$1",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT i.item_id,s.position FROM showcase s JOIN inventory i ON i.id=s.inventory_id WHERE s.user_id=$1 ORDER BY position",
       [user],
     ),
-    pool.query(
+    () => pool.query(
       "SELECT study_date::text FROM streak_days WHERE user_id=$1 ORDER BY study_date",
       [user],
     ),
