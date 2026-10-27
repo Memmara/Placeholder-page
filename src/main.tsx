@@ -79,6 +79,7 @@ import "./styles.css";
 import "./app-refresh.css";
 import { Brand } from "./Brand";
 import { PublicLanding } from "./PublicLanding";
+import { AboutPage, PrivacyPage } from "./PublicInfoPages";
 import { useGame, coinBalance, useTokenCountdown, type GameController } from "./GameService";
 import { GameHub, GameHomeCard } from "./CosmeticViews";
 import { Avatar3D, ItemArt, defaultAppearance } from "./CosmeticStage";
@@ -3968,6 +3969,10 @@ function App({
 function Root() {
   return location.pathname === "/" ? (
     <PublicLanding />
+  ) : location.pathname === "/about" ? (
+    <AboutPage />
+  ) : location.pathname === "/privacy" ? (
+    <PrivacyPage />
   ) : location.pathname === "/contact" ? (
     <ContactPage />
   ) : (
