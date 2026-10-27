@@ -369,7 +369,9 @@ async function api(
   route: string,
   body?: unknown,
 ): Promise<ActionResult | GameState> {
-  const response = await fetch("/api/game/" + route, {
+  const endpoint = "/api/game/" + route + (body === undefined ? "?fresh=" + Date.now() : "");
+  const response = await fetch(endpoint, {
+    cache: "no-store",
     method: body === undefined ? "GET" : "POST",
     credentials: "same-origin",
     headers: body === undefined ? {} : { "Content-Type": "application/json" },
