@@ -1768,8 +1768,24 @@ export async function handleApiRequest(req, res) {
     );
   try {
     const publicUrl = process.env.MEMMARA_PUBLIC_URL ?? "http://localhost:5173";
+    const configuredPublicUrl = new URL(publicUrl);
+    const publicHostnames = new Set([configuredPublicUrl.hostname]);
+    if (production && configuredPublicUrl.hostname.includes(".")) {
+      const apexHostname = configuredPublicUrl.hostname.replace(/^www\./, "");
+      publicHostnames.add(apexHostname);
+      publicHostnames.add(`www.${apexHostname}`);
+    }
+    const publicHosts = new Set(
+      [...publicHostnames].map((hostname) =>
+        configuredPublicUrl.port
+          ? `${hostname}:${configuredPublicUrl.port}`
+          : hostname,
+      ),
+    );
     const allowed = new Set([
-      new URL(publicUrl).origin,
+      ...[...publicHosts].map(
+        (host) => `${configuredPublicUrl.protocol}//${host}`,
+      ),
       ...(production
         ? []
         : [
@@ -1780,7 +1796,7 @@ export async function handleApiRequest(req, res) {
     ]);
     requireThat(
       [
-        new URL(publicUrl).host,
+        ...publicHosts,
         `${process.env.MEMMARA_API_HOST ?? "127.0.0.1"}:${process.env.MEMMARA_API_PORT ?? 5178}`,
         "127.0.0.1:5178",
         "localhost:5178",
