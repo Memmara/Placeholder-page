@@ -1989,8 +1989,6 @@ export async function handleApiRequest(req, res) {
         error: e.status
           ? e.message
           : "The game service couldn’t save this change. Please try again.",
-        diagnostic: e.status ? undefined : (e.code ?? e.name ?? "Error"),
-        diagnosticDetail: e.status ? undefined : String(e.message ?? "Unknown error"),
       }),
     );
   }

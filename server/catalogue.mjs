@@ -12,7 +12,8 @@ export const byId=new Map(catalogue.map(i=>[i.id,i]));
 const applicationDatabaseUrl=process.env.MEMMARA_DATABASE_URL||process.env.DATABASE_URL_UNPOOLED||process.env.DATABASE_URL;
 const databaseConfig=applicationDatabaseUrl?{connectionString:applicationDatabaseUrl}:JSON.parse(fs.readFileSync(path.join(root,'.local-db/credentials.json'),'utf8'));
 const cloudflareRuntime=process.env.CF_PAGES==='1';
-export const pool=new pg.Pool({...databaseConfig,options:'-c search_path=memmara_game,public',max:cloudflareRuntime?4:16,maxUses:cloudflareRuntime?100:7500,idleTimeoutMillis:cloudflareRuntime?1000:10000,connectionTimeoutMillis:8000,application_name:'memmara_account_game_api'});
+export const pool=new pg.Pool({...databaseConfig,max:cloudflareRuntime?4:16,maxUses:cloudflareRuntime?100:7500,idleTimeoutMillis:cloudflareRuntime?1000:10000,connectionTimeoutMillis:8000,application_name:'memmara_account_game_api'});
+pool.on('connect',client=>{void client.query('SET search_path TO memmara_game, public').catch(error=>console.error('Database schema setup:',error.message))});
 export let configId;
 export async function ensureConfigId(){
  if(configId)return configId;
