@@ -443,7 +443,7 @@ async function state(user) {
     pool.query("SELECT item_id FROM wishlist WHERE user_id=$1", [user]),
     pool.query("SELECT * FROM progression WHERE user_id=$1", [user]),
     pool.query(
-      "SELECT b.id,b.box_id,d.name FROM user_boxes b JOIN drop_boxes d ON d.id=b.box_id WHERE b.user_id=$1 AND opened_at IS NULL ORDER BY earned_at",
+      "SELECT b.id,b.box_id,b.earned_at,d.name FROM user_boxes b JOIN drop_boxes d ON d.id=b.box_id WHERE b.user_id=$1 AND opened_at IS NULL ORDER BY earned_at",
       [user],
     ),
     pool.query(
@@ -493,10 +493,13 @@ async function state(user) {
   ] = result.map((x) => x.rows);
   const today = date(),
     qualified = days.some((d) => d.study_date === today),
-    chestPurchased = !!Number((await pool.query(
-      "SELECT count(*) FROM reward_claims WHERE user_id=$1 AND source_kind='box_purchase' AND (created_at AT TIME ZONE 'Europe/London')::date=$2::date",
-      [user, today],
-    )).rows[0].count);
+    chestPurchased = userBoxes.some(
+      (box) =>
+        box.box_id === "daily_free" &&
+        new Date(box.earned_at).toLocaleDateString("en-CA", {
+          timeZone: "Europe/London",
+        }) === today,
+    );
   const pity = Object.fromEntries(
     (
       await pool.query(
