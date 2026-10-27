@@ -12,8 +12,29 @@ export const byId=new Map(catalogue.map(i=>[i.id,i]));
 const applicationDatabaseUrl=process.env.MEMMARA_DATABASE_URL||process.env.DATABASE_URL_UNPOOLED||process.env.DATABASE_URL;
 const databaseConfig=applicationDatabaseUrl?{connectionString:applicationDatabaseUrl}:JSON.parse(fs.readFileSync(path.join(root,'.local-db/credentials.json'),'utf8'));
 const cloudflareRuntime=process.env.CF_PAGES==='1';
-export const pool=new pg.Pool({...databaseConfig,max:cloudflareRuntime?4:16,maxUses:cloudflareRuntime?100:7500,idleTimeoutMillis:cloudflareRuntime?1000:10000,connectionTimeoutMillis:8000,application_name:'memmara_account_game_api'});
-pool.on('connect',client=>{void client.query('SET search_path TO memmara_game, public').catch(error=>console.error('Database schema setup:',error.message))});
+const rawPool=new pg.Pool({...databaseConfig,max:cloudflareRuntime?4:16,maxUses:cloudflareRuntime?100:7500,idleTimeoutMillis:cloudflareRuntime?1000:10000,connectionTimeoutMillis:8000,application_name:'memmara_account_game_api'});
+const configuredClients=new WeakSet();
+async function configuredClient(){
+ const client=await rawPool.connect();
+ try{
+  if(!configuredClients.has(client)){
+   await client.query('SET search_path TO memmara_game, public');
+   configuredClients.add(client);
+  }
+  return client;
+ }catch(error){
+  client.release(true);
+  throw error;
+ }
+}
+// pg's connect event is synchronous, so an async SET there can race the
+// first request on a fresh Cloudflare isolate. Configure each checked-out
+// connection before exposing it to the auth or game services instead.
+export const pool={
+ async query(...args){const client=await configuredClient();try{return await client.query(...args)}finally{client.release()}},
+ connect:configuredClient,
+ end:()=>rawPool.end()
+};
 export let configId;
 export async function ensureConfigId(){
  if(configId)return configId;
