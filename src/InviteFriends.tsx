@@ -14,13 +14,15 @@ export function InviteFriends({
   onClose,
 }: {
   open: boolean;
-  onClose: () => void;
+  onClose: (dontShowAgain?: boolean) => void;
 }) {
   const [invite, setInvite] = useState<Invite | null>(null),
     [error, setError] = useState(""),
-    [copied, setCopied] = useState(false);
+    [copied, setCopied] = useState(false),
+    [dontShowAgain, setDontShowAgain] = useState(false);
   useEffect(() => {
     if (!open) return;
+    setDontShowAgain(false);
     authRequest("referral-link")
       .then(setInvite)
       .catch((e) =>
@@ -64,7 +66,7 @@ export function InviteFriends({
     <div
       className="invite-backdrop"
       onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (e.target === e.currentTarget) onClose(dontShowAgain);
       }}
     >
       <section
@@ -76,7 +78,7 @@ export function InviteFriends({
         <button
           className="icon-button invite-close"
           aria-label="Close invitation"
-          onClick={onClose}
+          onClick={() => onClose(dontShowAgain)}
         >
           <X size={20} />
         </button>
@@ -132,11 +134,17 @@ export function InviteFriends({
         ) : (
           <p>{error || "Preparing your link…"}</p>
         )}
+        <label className="invite-dismiss-choice">
+          <input
+            type="checkbox"
+            checked={dontShowAgain}
+            onChange={(event) => setDontShowAgain(event.target.checked)}
+          />
+          <span>Don’t show this again</span>
+        </label>
         <small>
-          This reminder will return on a future sign-in until one friend
-          successfully joins. The reward is added after they create a new
-          account and verify their email, or join with a verified social
-          account.
+          The reward is added after they create a new account and verify their
+          email, or join with a verified social account.
         </small>
       </section>
     </div>

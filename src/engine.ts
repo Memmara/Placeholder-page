@@ -72,15 +72,24 @@ export function createSession(b:Bank,p:Progress,topic?:string,speed=false):Sessi
  // Include each available subject before filling remaining slots randomly.
  if(!topic&&!speed)for(const subject of shuffled([...new Set(pool.map(q=>pointFor(b,q).subject_id))])){if(picked.length>=count)break;if(picked.some(q=>pointFor(b,q).subject_id===subject))continue;const formatCounts=formatsBySubject.get(subject)??{written:0,multipleChoice:0},preferWritten=formatCounts.written<=formatCounts.multipleChoice;let index=rest.findIndex(q=>pointFor(b,q).subject_id===subject&&(q.question_type!=='multiple_choice')===preferWritten);if(index<0)index=rest.findIndex(q=>pointFor(b,q).subject_id===subject);if(index>=0)picked.push(rest.splice(index,1)[0]);}
  while(picked.length<count&&rest.length){const used=new Set(picked.map(q=>pointFor(b,q).specification_point_id));let index=rest.findIndex(q=>!used.has(pointFor(b,q).specification_point_id));if(index<0)index=0;picked.push(rest.splice(index,1)[0]);}
- // When both answer formats are available, include each in Daily Mix. Keep
- // the two due weak-point questions and the chosen subject coverage intact.
- if(!topic&&!speed)for(const written of [true,false]){
-  const matches=(q:Question)=>(q.question_type!=='multiple_choice')===written;
-  if(!pool.some(matches)||picked.some(matches))continue;
-  const slot=picked.findIndex(chosen=>!weak.includes(pointFor(b,chosen).specification_point_id)&&rest.some(candidate=>matches(candidate)&&pointFor(b,candidate).subject_id===pointFor(b,chosen).subject_id&&!picked.some(existing=>pointFor(b,existing).specification_point_id===pointFor(b,candidate).specification_point_id)));
-  if(slot<0)continue;
-  const replacement=rest.findIndex(candidate=>matches(candidate)&&pointFor(b,candidate).subject_id===pointFor(b,picked[slot]).subject_id&&!picked.some(existing=>pointFor(b,existing).specification_point_id===pointFor(b,candidate).specification_point_id));
-  if(replacement>=0)picked[slot]=rest.splice(replacement,1)[0];
+ // Where a subject supplies both formats, keep Daily Mix close to a 50/50
+ // written/MCQ balance. Replace only within the same subject so coverage and
+ // due weak-point questions remain intact.
+ if(!topic&&!speed){
+  const balance=(written:boolean,target:number)=>{
+   const matches=(q:Question)=>(q.question_type!=='multiple_choice')===written;
+   while(picked.filter(matches).length<target){
+    const slot=picked.findIndex(chosen=>!matches(chosen)&&!weak.includes(pointFor(b,chosen).specification_point_id)&&rest.some(candidate=>matches(candidate)&&pointFor(b,candidate).subject_id===pointFor(b,chosen).subject_id&&!picked.some(existing=>pointFor(b,existing).specification_point_id===pointFor(b,candidate).specification_point_id)));
+    if(slot<0)break;
+    const replacement=rest.findIndex(candidate=>matches(candidate)&&pointFor(b,candidate).subject_id===pointFor(b,picked[slot]).subject_id&&!picked.some(existing=>pointFor(b,existing).specification_point_id===pointFor(b,candidate).specification_point_id));
+    if(replacement<0)break;
+    const [nextQuestion]=rest.splice(replacement,1),previous=picked[slot];
+    picked[slot]=nextQuestion;
+    rest.push(previous);
+   }
+  };
+  balance(true,Math.ceil(picked.length/2));
+  balance(false,Math.floor(picked.length/2));
  }
  if(!picked.length)return null;
  for(const q of picked)reasons[q.question_id]??=speed?`Choose one answer within ${SPEED_SECONDS} seconds.`:topic?'Practice from your chosen topic.':'Random practice from across your subjects.';

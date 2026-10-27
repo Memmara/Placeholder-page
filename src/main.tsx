@@ -494,10 +494,12 @@ function App({
   useEffect(() => {
     const dismissed =
       "memmara.invite.dismissed." + user.id + "." + (user.loginCount ?? 0);
+    const hidden = "memmara.invite.hidden." + user.id;
     if (
       page !== "home" ||
       onboarding ||
       (user.loginCount ?? 0) < 2 ||
+      localStorage.getItem(hidden) ||
       sessionStorage.getItem(dismissed)
     )
       return;
@@ -514,8 +516,10 @@ function App({
       if (timer) window.clearTimeout(timer);
     };
   }, [page, onboarding, user.id, user.loginCount]);
-  function closeInvite() {
+  function closeInvite(dontShowAgain = false) {
     setInviteOpen(false);
+    if (dontShowAgain)
+      localStorage.setItem("memmara.invite.hidden." + user.id, "1");
     sessionStorage.setItem(
       "memmara.invite.dismissed." + user.id + "." + (user.loginCount ?? 0),
       "1",
@@ -1140,15 +1144,17 @@ function App({
       busy.current = true;
       setFinishingMix(true);
       setMarkError("");
+      // Close the question flow immediately. Rewards can finish syncing in
+      // the background without trapping the learner on the final question.
+      setP((prev) => finish(prev));
       try {
         await game.flushAnswers(session.id);
         await game.action("complete", { sessionRef: session.id });
-        setP((prev) => finish(prev));
       } catch (e) {
-        setMarkError(
+        setStorageError(
           e instanceof Error
-            ? "Your answers are safe on this device. " + e.message
-            : "Your answers are safe on this device, but the mix could not sync yet. Please retry.",
+            ? "Your mix is complete on this device. " + e.message
+            : "Your mix is complete on this device, but its rewards could not sync yet.",
         );
       } finally {
         setFinishingMix(false);

@@ -87,6 +87,21 @@
   color: var(--muted);
   line-height: 1.5;
 }
+.invite-dismiss-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 2px auto 12px;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+.invite-dismiss-choice input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  margin: 0;
+}
 @keyframes invite-in {
   from {
     opacity: 0;
@@ -181,6 +196,10 @@
   }
   .invite-dialog small {
     font-size: 10px;
+  }
+  .invite-dismiss-choice {
+    margin-bottom: 10px;
+    font-size: 11px;
   }
 }
 
