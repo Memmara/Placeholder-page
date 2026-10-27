@@ -23,7 +23,7 @@ CREATE TABLE users (
  age_assurance_status text NOT NULL DEFAULT 'unknown', region char(2) NOT NULL DEFAULT 'GB',
  market_override market_mode, timezone text NOT NULL DEFAULT 'Europe/London',
  display_name text NOT NULL, private_profile boolean NOT NULL DEFAULT true,
- purchases_disabled boolean NOT NULL DEFAULT true, deleted_at timestamptz,
+ purchases_disabled boolean NOT NULL DEFAULT false, deleted_at timestamptz,
  created_at timestamptz NOT NULL DEFAULT now(), CHECK (length(display_name) BETWEEN 1 AND 40),
  CHECK(account_type<>'adult' OR age_band='18_plus')
 );
@@ -326,3 +326,4 @@ REVOKE ALL ON ALL TABLES IN SCHEMA memmara_game FROM PUBLIC;
 REVOKE ALL ON ALL SEQUENCES IN SCHEMA memmara_game FROM PUBLIC;
 REVOKE ALL ON ALL FUNCTIONS IN SCHEMA memmara_game FROM PUBLIC;
 COMMIT;
+
