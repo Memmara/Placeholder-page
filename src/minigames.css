@@ -539,6 +539,7 @@
 }
 
 /* Shared arcade presentation, with a distinct accent for each game. */
+.minigame-favourite-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;margin-bottom:5px;border:1px solid #f5ce8259;border-radius:999px;background:linear-gradient(110deg,#f5ce8224,#f5ce820d);color:var(--gold,#f5ce82);font-size:.7rem;font-weight:750;letter-spacing:.02em;line-height:1.4}
 .arcade-home-tile{position:relative;display:flex;align-items:center;gap:24px;overflow:hidden;padding:26px;margin-bottom:24px;border:1px solid #9c9af057;border-radius:24px;background:radial-gradient(ellipse at 5% 40%,#514a804f,transparent 50%),linear-gradient(120deg,#182640,#262342);color:#edf3ff;box-shadow:0 14px 35px #070f2526}
 .content:has(> .compact-streak)>.arcade-home-tile{order:-9;margin-bottom:22px}
 .arcade-home-tile .grow{flex:1}.arcade-home-tile h2{margin:6px 0;font-size:1.4rem;letter-spacing:-.03em}.arcade-home-tile p{margin:0;color:#bdc9df;font-size:.9rem}.arcade-home-tile .eyebrow{color:#b9adff}.arcade-home-tile .primary{flex:none;white-space:nowrap}

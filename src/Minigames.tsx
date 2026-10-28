@@ -12,6 +12,7 @@ import {
   Trophy,
   X,
   Zap,
+  Star,
 } from "lucide-react";
 import type { Bank, Progress, Question, Settings } from "./models";
 import type { GameController } from "./GameService";
@@ -673,6 +674,7 @@ export function Minigames({
               const Icon = item.icon;
               return (
                 <article className="panel minigame-card" data-game={item.id} key={item.id}>
+                  {item.id === "tower" && <span className="minigame-favourite-badge"><Star size={13} fill="currentColor" aria-hidden="true" /> Student favourite</span>}
                   <div className="minigame-card-art" aria-hidden="true"><Icon size={46} /><i /><i /><i /></div>
                   <h2>{item.name}</h2>
                   <p>{item.description}</p>
