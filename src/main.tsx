@@ -490,7 +490,9 @@ function App({
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [inviteOpen, setInviteOpen] = useState(false),
     [tokenPrompt, setTokenPrompt] = useState(false),
-    [tokenPromptMessage, setTokenPromptMessage] = useState("");
+    [tokenPromptMessage, setTokenPromptMessage] = useState(""),
+    [dailyMixPrompt, setDailyMixPrompt] = useState(false),
+    [dailyMixPromptMessage, setDailyMixPromptMessage] = useState("");
   useEffect(() => {
     const dismissed =
       "memmara.invite.dismissed." + user.id + "." + (user.loginCount ?? 0);
@@ -906,9 +908,41 @@ function App({
       setNotice("+1 practice token added.");
     } else setTokenPromptMessage("Ad unavailable, try again later.");
   }
+  async function watchForAnotherMix() {
+    setDailyMixPromptMessage("");
+    const result = await rewardedAds.showDailyMixAd();
+    if (result.status === "rewarded") {
+      await game.refresh();
+      setDailyMixPrompt(false);
+      setNotice("Another Daily Mix is unlocked. It will use 1 token.");
+      await start();
+    } else setDailyMixPromptMessage("Ad unavailable, try again later.");
+  }
   function noTokens() {
     const state = game.data?.monetisation;
     return !!state && !state.unlimited && state.tokens <= 0;
+  }
+  function requestDailyMix() {
+    if (active && session.isDaily) {
+      void start();
+      return;
+    }
+    if (noTokens()) {
+      sendToShop();
+      return;
+    }
+    const daily = game.data?.daily;
+    const alreadyStarted = completed || (daily?.mixesStarted ?? 0) > 0;
+    if (
+      alreadyStarted &&
+      !daily?.unlimitedMixes &&
+      (daily?.extraMixCredits ?? 0) <= 0
+    ) {
+      setDailyMixPromptMessage("");
+      setDailyMixPrompt(true);
+      return;
+    }
+    void start();
   }
   async function start(topic?: string, speed = false) {
     if (!bank) return;
@@ -952,7 +986,9 @@ function App({
       if (started.xpMultiplier === 2) fresh.xpMultiplier = 2;
     } catch (error) {
       const message = error instanceof Error ? error.message : "This practice could not start.";
-      if (message.toLowerCase().includes("token")) sendToShop();
+      if (message.toLowerCase().includes("unlock another daily mix"))
+        setDailyMixPrompt(true);
+      else if (message.toLowerCase().includes("token")) sendToShop();
       else setNotice(message);
       return;
     }
@@ -1514,6 +1550,61 @@ function App({
           </section>
         </div>
       )}
+      {dailyMixPrompt && (
+        <div
+          className="token-prompt-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setDailyMixPrompt(false);
+          }}
+        >
+          <section
+            className="token-prompt"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="daily-mix-prompt-title"
+          >
+            <button
+              className="icon-button token-prompt-close"
+              aria-label="Close"
+              onClick={() => setDailyMixPrompt(false)}
+            >
+              <X size={19} />
+            </button>
+            <span className="token-prompt-icon">
+              <Sparkles size={30} />
+            </span>
+            <p className="eyebrow">EXTRA DAILY MIX</p>
+            <h2 id="daily-mix-prompt-title">Ready for another mix?</h2>
+            <p>
+              Free accounts can watch one rewarded ad to unlock another Daily
+              Mix. Starting it will still use 1 practice token.
+            </p>
+            {dailyMixPromptMessage && (
+              <p className="banner warning" role="alert">
+                {dailyMixPromptMessage}
+              </p>
+            )}
+            <div className="token-prompt-actions">
+              <button
+                className="primary"
+                disabled={!!rewardedAds.busy}
+                onClick={() => void watchForAnotherMix()}
+              >
+                <Sparkles size={17} />
+                {rewardedAds.busy === "daily_mix_unlock"
+                  ? "Opening ad…"
+                  : "Watch ad and unlock"}
+              </button>
+              <button
+                className="secondary"
+                onClick={() => setDailyMixPrompt(false)}
+              >
+                Maybe later
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
       {rewardQueue.length > 0 && (
         <div className="reward-popup" key={rewardQueue[0]} role="status">
           <Trophy size={23} />
@@ -1755,7 +1846,15 @@ function App({
             >
               {s.theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
             </button>
-            <span className="avatar small">A</span>
+            <button
+              className="icon-button"
+              aria-label="Open profile"
+              onClick={() => navigate("profile")}
+            >
+              <span className="avatar small">
+                {user.displayName[0]?.toUpperCase() || "M"}
+              </span>
+            </button>
           </div>
         </div>
         {!online && (
@@ -2135,7 +2234,9 @@ function App({
                           </h2>
                           <p>
                             {completed
-                              ? "Your next review will be here when you’re ready. No more practice needed today."
+                              ? game.data?.daily.unlimitedMixes
+                                ? "Plus includes unlimited Daily Mixes. Each new mix still uses one practice token."
+                                : "You can stop here, or watch a short ad to unlock one more Daily Mix. The new mix still uses one token."
                               : active && session.isDaily
                                 ? "Your mix is saved. Pick up exactly where you left off."
                                 : "Random practice across your chosen subjects, including two previously tricky specification points when available."}
@@ -2180,12 +2281,16 @@ function App({
                         {completed && !active ? (
                           <button
                             className="primary"
-                            onClick={() => navigate("progress")}
+                            onClick={requestDailyMix}
                           >
-                            See your progress <ArrowRight size={18} />
+                            {game.data?.daily.unlimitedMixes ||
+                            (game.data?.daily.extraMixCredits ?? 0) > 0
+                              ? "Start another mix"
+                              : "Unlock another mix"}{" "}
+                            <ArrowRight size={18} />
                           </button>
                         ) : (
-                          <button className="primary" onClick={() => start()}>
+                          <button className="primary" onClick={requestDailyMix}>
                             {active && session.isDaily
                               ? "Continue my mix"
                               : "Start my mix"}

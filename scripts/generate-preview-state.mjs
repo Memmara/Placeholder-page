@@ -13,7 +13,7 @@ const state={
  catalogue:presentationCatalogue,inventory:owned.map((item,index)=>({id:`preview-inventory-${index}`,item_id:item.id,favourite:index<2,acquired_at:now,provenance:'preview'})),
  equipped:[],wallets:[{currency:'coins',balance:1200,subject_id:null}],wishlist:[],boxes:[{id:'preview-box-1',box_id:'level_common',name:'Preview reward'}],outfits:[],showcase:[],
  sets,achievements,earned:achievements.slice(0,2).map((achievement,index)=>({achievement_id:achievement.id,progress:String(index?0.5:1),unlocked_at:index?null:now})),ledger:[{amount:1200,reason:'Preview balance',created_at:now}],
- historyImported:true,stats:{sessions:3},daily:{qualified:false,coins:10},monetisation:{plan:'free',tokens:2,organicCapacity:2,adTokenLimit:3,nextTokenAt:null,xpBoostPending:false,refillHours:5},progression:{level:'1',xp_projection:'5'},levelRewards:levels,
+ historyImported:true,stats:{sessions:3},daily:{qualified:false,coins:10,chestPurchased:false,mixesStarted:0,extraMixCredits:0,unlimitedMixes:false},monetisation:{plan:'free',tokens:1,organicTokens:1,purchasedTokens:0,organicCapacity:1,adTokenLimit:2,nextTokenAt:null,xpBoostPending:false,refillHours:5,unlimited:false},progression:{level:'1',xp_projection:'5'},levelRewards:levels,
  boxDefinitions:boxes.map(({active_pool,...box})=>box),mode:'SCHOOL_MODE',payments:false
 };
 fs.writeFileSync(path.join(root,'public/data/game-preview.json'),JSON.stringify(state));

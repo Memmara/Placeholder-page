@@ -86,7 +86,14 @@ export interface GameState {
   ledger: { amount: number; reason: string; created_at: string }[];
   historyImported: boolean;
   stats: { sessions: number };
-  daily: { qualified: boolean; coins: number; chestPurchased: boolean };
+  daily: {
+    qualified: boolean;
+    coins: number;
+    chestPurchased: boolean;
+    mixesStarted: number;
+    extraMixCredits: number;
+    unlimitedMixes: boolean;
+  };
   monetisation: MonetisationState;
   progression: { level: string; xp_projection: string };
   levelRewards?: {
@@ -104,7 +111,7 @@ export interface GameState {
 }
 export interface AdIntent {
   id: string;
-  rewardKind: "token" | "xp_boost";
+  rewardKind: "token" | "xp_boost" | "daily_mix_unlock";
   provider: "web_google" | "admob" | "development";
   completionToken: string;
   expiresAt: string;
@@ -141,17 +148,40 @@ const localPreview = () =>
     sessionStorage.getItem("memmara.local-preview") === "1");
 const previewStateKey = "memmara.preview-game-state.v3";
 const previewQuestions = new Map<string, Promise<Question[]>>();
+function normalisePreviewState(state: GameState) {
+  state.daily = {
+    ...state.daily,
+    chestPurchased: state.daily?.chestPurchased ?? false,
+    mixesStarted: state.daily?.mixesStarted ?? 0,
+    extraMixCredits: state.daily?.extraMixCredits ?? 0,
+    unlimitedMixes:
+      state.daily?.unlimitedMixes ?? state.monetisation?.plan !== "free",
+  };
+  if (
+    state.monetisation?.plan === "free" &&
+    state.monetisation.organicCapacity !== 1
+  ) {
+    state.monetisation.organicCapacity = 1;
+    state.monetisation.adTokenLimit = 2;
+    state.monetisation.organicTokens = Math.min(
+      1,
+      state.monetisation.organicTokens ?? state.monetisation.tokens,
+    );
+    state.monetisation.tokens = Math.min(1, state.monetisation.tokens);
+  }
+  return state;
+}
 async function loadPreviewState(): Promise<GameState> {
   const saved = localStorage.getItem(previewStateKey);
   if (saved)
     try {
-      return JSON.parse(saved) as GameState;
+      return normalisePreviewState(JSON.parse(saved) as GameState);
     } catch {
       localStorage.removeItem(previewStateKey);
     }
   const response = await fetch("/data/game-preview.json");
   if (!response.ok) throw Error("Preview collection could not be loaded.");
-  const state = (await response.json()) as GameState;
+  const state = normalisePreviewState((await response.json()) as GameState);
   localStorage.setItem(previewStateKey, JSON.stringify(state));
   return state;
 }
@@ -322,11 +352,21 @@ async function previewAction(
         state.monetisation.tokens + 1,
       );
     if (kind === "xp_boost") state.monetisation.xpBoostPending = true;
+    if (kind === "daily_mix_unlock") state.daily.extraMixCredits++;
     return success(
-      kind === "token" ? "+1 preview practice token" : "2× preview XP is ready",
+      kind === "token"
+        ? "+1 preview practice token"
+        : kind === "daily_mix_unlock"
+          ? "Another Daily Mix is unlocked"
+          : "2× preview XP is ready",
     );
   }
   if (route === "start-minigame") {
+    if (body.mode === "daily" && state.daily.mixesStarted > 0 && !state.daily.unlimitedMixes) {
+      if (state.daily.extraMixCredits <= 0)
+        throw Error("Watch an ad to unlock another Daily Mix today.");
+      state.daily.extraMixCredits--;
+    }
     if (!state.monetisation.unlimited) {
       if (state.monetisation.tokens <= 0)
         throw Error("You have no practice tokens. Visit the Shop to continue.");
@@ -336,6 +376,7 @@ async function previewAction(
         (state.monetisation.organicTokens ?? state.monetisation.tokens + 1) - 1,
       );
     }
+    if (body.mode === "daily") state.daily.mixesStarted++;
     return success("Game started · 1 token used");
   }
   if (route === "minigame-answer") {

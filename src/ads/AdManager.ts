@@ -1,6 +1,6 @@
 import type {ActionResult,AdIntent,GameController} from '../GameService';
 
-export type RewardKind='token'|'xp_boost';
+export type RewardKind='token'|'xp_boost'|'daily_mix_unlock';
 export type AdOutcome={status:'rewarded'|'closed'|'unavailable'|'error';provider:'web_google'|'admob'|'development';message:string};
 type CompleteReceipt={earned:boolean;providerTransactionId?:string};
 
@@ -75,9 +75,10 @@ export async function showRewardedAd(game:GameController,rewardKind:RewardKind):
   const receipt=provider==='web_google'?await showWebRewarded(created.adIntent):provider==='admob'?await showAdMobRewarded(created.adIntent):await showDevelopmentRewarded();
   if(!receipt.earned)return {status:'closed',provider,message:'Ad closed before the reward was earned.'};
   await game.action('ad-complete',{intentId:created.adIntent.id,completionToken:created.adIntent.completionToken,providerTransactionId:receipt.providerTransactionId});
-  return {status:'rewarded',provider,message:rewardKind==='token'?'+1 practice token':'2× XP is ready for your next game'};
+  return {status:'rewarded',provider,message:rewardKind==='token'?'+1 practice token':rewardKind==='daily_mix_unlock'?'Another Daily Mix is unlocked':'2× XP is ready for your next game'};
  }catch(error){return {status:'unavailable',provider,message:error instanceof Error?error.message:'Rewarded ads are unavailable right now.'};}
 }
 
 export const showTokenAd=(game:GameController)=>showRewardedAd(game,'token');
 export const showXpBoostAd=(game:GameController)=>showRewardedAd(game,'xp_boost');
+export const showDailyMixAd=(game:GameController)=>showRewardedAd(game,'daily_mix_unlock');
