@@ -159,6 +159,10 @@ const PLAN_TOKENS = {
   pro: { capacity: 8, hours: 0, unlimited: true },
   school: { capacity: 8, hours: 0, unlimited: true },
 };
+// Exact Google identity for the owner's token-unlimited test account. Store
+// only its email hash in the public source repository.
+const UNLIMITED_TEST_GOOGLE_EMAIL_SHA256 =
+  "dd1facf46207e9fac7a061ad6aaee47f2a61dcb0cd5dd8501299c66a4d18ed15";
 async function refreshMonetisation(db, user, locked = false) {
   await db.query(
     "INSERT INTO user_monetisation(user_id) VALUES($1) ON CONFLICT DO NOTHING",
@@ -176,7 +180,19 @@ async function refreshMonetisation(db, user, locked = false) {
     new Date(row.referral_plus_until) > new Date()
       ? "plus"
       : row.account_plan;
-  const config = PLAN_TOKENS[effectivePlan] ?? PLAN_TOKENS.free,
+  const baseConfig = PLAN_TOKENS[effectivePlan] ?? PLAN_TOKENS.free;
+  const googleEmail = !baseConfig.unlimited
+    ? (await db.query(
+        "SELECT email_at_link FROM auth_identities WHERE user_id=$1 AND provider='google'",
+        [user],
+      )).rows[0]?.email_at_link
+    : null;
+  const testUnlimited = !!googleEmail &&
+    crypto.createHash("sha256").update(String(googleEmail).trim().toLowerCase()).digest("hex") ===
+      UNLIMITED_TEST_GOOGLE_EMAIL_SHA256;
+  const config = testUnlimited
+    ? { ...baseConfig, unlimited: true }
+    : baseConfig,
     interval = config.hours * 60 * 60 * 1000;
   let organic = Number(row.practice_tokens),
     next = row.next_token_at ? new Date(row.next_token_at) : null;
@@ -837,8 +853,8 @@ async function mutate(user, route, b) {
       );
       const entitlement = await refreshMonetisation(db, user, true);
       requireThat(
-        !entitlement.tokenConfig.unlimited,
-        "Your plan already includes unlimited tokens and no rewarded ads.",
+        b.rewardKind !== "token" || !entitlement.tokenConfig.unlimited,
+        "Your account already has unlimited tokens.",
         409,
       );
       requireThat(
