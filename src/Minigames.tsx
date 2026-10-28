@@ -9,6 +9,7 @@ import {
   Grid2X2,
   Layers3,
   Trophy,
+  X,
 } from "lucide-react";
 import type { Bank, Progress, Question, Settings } from "./models";
 import type { GameController } from "./GameService";
@@ -198,6 +199,9 @@ export function Minigames({
     [feedback, setFeedback] = useState(""),
     [waiting, setWaiting] = useState(false),
     [marking, setMarking] = useState(false);
+  const [answerState, setAnswerState] = useState<"correct" | "wrong" | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [selectedPair, setSelectedPair] = useState("");
   const startedAt = useRef(Date.now()),
     startedQuestionAt = useRef(Date.now()),
     finishGuard = useRef(false),
@@ -343,6 +347,9 @@ export function Minigames({
     setFeedback("");
     setWaiting(false);
     setMarking(false);
+    setAnswerState(null);
+    setSelectedAnswer("");
+    setSelectedPair("");
     finishGuard.current = false;
     pausedAt.current = null;
     pausedMs.current = 0;
@@ -381,6 +388,8 @@ export function Minigames({
     pauseTimer();
     const localCorrect =
       question.answer_key?.correct_option_ids.includes(optionId) ?? false;
+    setSelectedAnswer(optionId);
+    setAnswerState(localCorrect ? "correct" : "wrong");
     setFeedback(
       localCorrect
         ? "Correct! Saving your score…"
@@ -393,6 +402,7 @@ export function Minigames({
       );
       setMarking(false);
       if (finishGuard.current) return;
+      setAnswerState(correct ? "correct" : "wrong");
       const nextStreak = correct ? streak + 1 : 0;
       setStreak(nextStreak);
       let nextScore = score;
@@ -429,16 +439,20 @@ export function Minigames({
         (mode === "survival" && !correct) ||
         (mode === "attack" && remaining <= 0)
       )
-        complete(nextScore);
+        window.setTimeout(() => complete(nextScore), 1000);
       else
         window.setTimeout(() => {
           setRound((value) => value + 1);
           setFeedback("");
+          setAnswerState(null);
+          setSelectedAnswer("");
           resumeTimer();
           setWaiting(false);
           startedQuestionAt.current = Date.now();
-        }, 700);
+        }, 1100);
     } catch (error) {
+      setAnswerState(null);
+      setSelectedAnswer("");
       setMarking(false);
       resumeTimer();
       setFeedback(
@@ -457,6 +471,7 @@ export function Minigames({
       overlap = right - left;
     setTowerPlacing(false);
     if (overlap <= 2) {
+      setAnswerState("wrong");
       setFeedback("The platform missed the tower.");
       window.setTimeout(() => complete(tower), 350);
       return;
@@ -478,9 +493,12 @@ export function Minigames({
     setTower(nextTower);
     setScore(nextTower);
     setFeedback(perfect ? "Perfect placement!" : "Platform placed.");
+    setAnswerState("correct");
     window.setTimeout(() => {
       setRound((value) => value + 1);
       setFeedback("");
+      setAnswerState(null);
+      setSelectedAnswer("");
       setWaiting(false);
       startedQuestionAt.current = Date.now();
     }, 550);
@@ -488,6 +506,9 @@ export function Minigames({
 
   async function chooseDefinition(chosenId: string, termId = selectedTerm) {
     if (!termId || waiting || finished) return;
+    setSelectedTerm(termId);
+    setSelectedPair(chosenId);
+    setAnswerState(chosenId === termId ? "correct" : "wrong");
     setWaiting(true);
     setMarking(true);
     pauseTimer();
@@ -496,27 +517,37 @@ export function Minigames({
         ? "Matched! Saving…"
         : "That pair does not match. Saving…",
     );
+    let saved = false;
     try {
       const correct = await award(
         { definitionId: chosenId, chosenTermId: termId },
         chosenId,
       );
+      saved = true;
+      setAnswerState(correct ? "correct" : "wrong");
       if (correct) {
         const next = [...matched, chosenId];
         setMatched(next);
         setScore(score + 10);
         setFeedback("Matched!");
-        if (next.length === cards.length) complete(score + 10);
+        if (next.length === cards.length)
+          window.setTimeout(() => complete(score + 10), 900);
       } else setFeedback("That pair does not match. Try another.");
-      setSelectedTerm("");
     } catch (error) {
+      setAnswerState(null);
       setFeedback(
         error instanceof Error ? error.message : "Could not save this match.",
       );
     } finally {
       setMarking(false);
-      resumeTimer();
-      setWaiting(false);
+      window.setTimeout(() => {
+        setSelectedTerm("");
+        setSelectedPair("");
+        setAnswerState(null);
+        if (saved) setFeedback("");
+        resumeTimer();
+        setWaiting(false);
+      }, 900);
     }
   }
 
@@ -526,6 +557,8 @@ export function Minigames({
     setMarking(true);
     pauseTimer();
     const chosen = cards[index];
+    setSelectedAnswer(chosen.id);
+    setAnswerState(chosen.id === memoryTarget ? "correct" : "wrong");
     setFeedback(
       chosen.id === memoryTarget
         ? "Well remembered! Saving…"
@@ -536,6 +569,7 @@ export function Minigames({
         { definitionId: memoryTarget, chosenTermId: chosen.id },
         memoryTarget,
       );
+      setAnswerState(correct ? "correct" : "wrong");
       setMarking(false);
       const nextScore = score + (correct ? 10 : 0);
       setScore(nextScore);
@@ -544,7 +578,7 @@ export function Minigames({
           ? "Well remembered!"
           : `That definition was in square ${cards.findIndex((card) => card.id === memoryTarget) + 1}.`,
       );
-      if (round >= 4) complete(nextScore);
+      if (round >= 4) window.setTimeout(() => complete(nextScore), 1100);
       else
         window.setTimeout(() => {
           const next = shuffled(defPool).slice(
@@ -556,10 +590,14 @@ export function Minigames({
           setRound((value) => value + 1);
           setMemoryShowing(true);
           setFeedback("");
+          setAnswerState(null);
+          setSelectedAnswer("");
           resumeTimer();
           setWaiting(false);
         }, 900);
     } catch (error) {
+      setAnswerState(null);
+      setSelectedAnswer("");
       setMarking(false);
       resumeTimer();
       setFeedback(
@@ -570,8 +608,13 @@ export function Minigames({
   }
 
   const question = queue.length ? queue[round % queue.length] : undefined;
+  function optionClass(id: string) {
+    if (!answerState || !selectedAnswer) return "";
+    if (question?.answer_key?.correct_option_ids.includes(id)) return "is-correct";
+    return id === selectedAnswer ? "is-wrong" : "is-muted";
+  }
   return (
-    <div className="minigames-page">
+    <div className="minigames-page" data-mode={mode ?? "lobby"}>
       <header className="intro">
         <p className="eyebrow">FUN RETRIEVAL PRACTICE</p>
         <h1>Minigames</h1>
@@ -623,8 +666,8 @@ export function Minigames({
             {games.map((item) => {
               const Icon = item.icon;
               return (
-                <article className="panel minigame-card" key={item.id}>
-                  <Icon size={29} />
+                <article className="panel minigame-card" data-game={item.id} key={item.id}>
+                  <div className="minigame-card-art" aria-hidden="true"><Icon size={46} /><i /><i /><i /></div>
                   <h2>{item.name}</h2>
                   <p>{item.description}</p>
                   <small>
@@ -674,15 +717,15 @@ export function Minigames({
           </div>
         </>
       ) : (
-        <section className="panel minigame-play">
+        <section className="panel minigame-play" data-result={answerState ?? "idle"}>
           <div className="minigame-hud">
             <strong>
               {games.find((item) => item.id === mode)?.name}
               {daily ? " · Daily Challenge" : ""}
             </strong>
-            <span>Score {score}</span>
+            <span className="minigame-score" key={"score-" + score}><Trophy size={16} /> Score {score}</span>
             {(mode === "attack" || (mode === "match" && matchTimed)) && (
-              <span>
+              <span className={remaining <= 10 ? "timer-urgent" : ""}>
                 <Clock3 size={16} /> {remaining}s
               </span>
             )}
@@ -693,9 +736,13 @@ export function Minigames({
             )}
             {mode === "tower" && <span>{tower} floors</span>}
           </div>
+          {!finished && mode === "attack" && <div className="minigame-clock-track" role="progressbar" aria-label="Time remaining" aria-valuenow={remaining} aria-valuemin={0} aria-valuemax={60}><span style={{width: remaining / 60 * 100 + "%"}} /></div>}
+          {!finished && mode === "survival" && <div className="survival-stage"><Flame key={streak} size={54} aria-hidden="true" /><div><strong>{streak ? `${streak} in a row` : "Keep the flame alive"}</strong><span>{streak ? "One more. You've got this." : "Every correct answer feeds your streak."}</span></div><div className="streak-sparks" aria-hidden="true">{Array.from({length: Math.min(8, streak)}, (_, i) => <i key={i} />)}</div></div>}
+          {!finished && mode === "match" && <div className="match-progress" aria-label={`${matched.length} of ${cards.length} pairs matched`}>{cards.map(card => <span key={card.id} className={matched.includes(card.id) ? "complete" : ""}><Check size={16} /></span>)}<strong>{matched.length}/{cards.length} pairs</strong></div>}
           {finished ? (
             <div className="minigame-finish">
               <Trophy size={46} />
+              <div className="minigame-finish-score">{score}<small>{mode === "tower" ? "floors built" : mode === "survival" ? "answer streak" : "points"}</small></div>
               <h2>{mode === "tower" ? "Tower run complete" : "Run complete"}</h2>
               <p>
                 You scored {score}. Your best is{" "}
@@ -740,14 +787,15 @@ export function Minigames({
                     {pointFor(bank, question).spec_reference}
                   </p>
                   <h2>{question.question}</h2>
-                  <div className="minigame-options">
+                  <div className="minigame-options" key={question.question_id + ":" + round}>
                     {question.options?.map((option) => (
                       <button
                         key={option.option_id}
+                        className={optionClass(option.option_id)}
                         disabled={waiting}
                         onClick={() => void answerQuestion(option.option_id)}
                       >
-                        <span>{option.option_id}</span>
+                        <span>{optionClass(option.option_id) === "is-correct" ? <Check size={18} /> : optionClass(option.option_id) === "is-wrong" ? <X size={18} /> : option.option_id}</span>
                         {option.text}
                       </button>
                     ))}
@@ -762,14 +810,15 @@ export function Minigames({
                 {pointFor(bank, question).spec_reference}
               </p>
               <h2>{question.question}</h2>
-              <div className="minigame-options">
+              <div className="minigame-options" key={question.question_id + ":" + round}>
                 {question.options?.map((option) => (
                   <button
                     key={option.option_id}
+                    className={optionClass(option.option_id)}
                     disabled={waiting}
                     onClick={() => void answerQuestion(option.option_id)}
                   >
-                    <span>{option.option_id}</span>
+                    <span>{optionClass(option.option_id) === "is-correct" ? <Check size={18} /> : optionClass(option.option_id) === "is-wrong" ? <X size={18} /> : option.option_id}</span>
                     {option.text}
                   </button>
                 ))}
@@ -788,7 +837,7 @@ export function Minigames({
                       onDragStart={() => {
                         draggedTerm.current = card.id;
                       }}
-                      className={selectedTerm === card.id ? "selected" : ""}
+                      className={matched.includes(card.id) ? "is-correct" : selectedPair && selectedTerm === card.id ? (answerState === "correct" ? "is-correct" : "is-wrong") : selectedTerm === card.id ? "selected" : ""}
                       onClick={() => setSelectedTerm(card.id)}
                     >
                       {matched.includes(card.id) ? <Check size={16} /> : null}
@@ -800,6 +849,7 @@ export function Minigames({
                   {shuffledStable(cards).map((card) => (
                     <button
                       key={card.id}
+                      className={matched.includes(card.id) ? "is-correct" : selectedPair === card.id ? (answerState === "correct" ? "is-correct" : "is-wrong") : ""}
                       disabled={matched.includes(card.id) || waiting}
                       onDragOver={(event) => event.preventDefault()}
                       onDrop={(event) => {
@@ -822,15 +872,16 @@ export function Minigames({
                   ? "Study the cards. They will hide in five seconds."
                   : `Which square contained the definition of ${cards.find((card) => card.id === memoryTarget)?.term}?`}
               </p>
-              <div className="memory-grid">
+              <div className="memory-grid" key={round + ":" + memoryShowing}>
                 {cards.map((card, index) => (
                   <button
                     key={card.id}
+                    className={answerState && card.id === memoryTarget ? "is-correct" : answerState && selectedAnswer === card.id ? "is-wrong" : memoryShowing ? "is-revealed" : "is-hidden"}
                     disabled={memoryShowing || waiting}
                     onClick={() => void chooseMemory(index)}
                   >
                     <strong>Square {index + 1}</strong>
-                    <span>{memoryShowing ? card.definition : "?"}</span>
+                    <span>{memoryShowing || answerState ? card.definition : "?"}</span>
                   </button>
                 ))}
               </div>
@@ -844,7 +895,8 @@ export function Minigames({
             />
           )}
           {feedback && (
-            <p className="minigame-feedback" role="status">
+            <p className={"minigame-feedback feedback-" + (answerState ?? "neutral")} role="status">
+              {answerState === "correct" ? <Check size={22} /> : answerState === "wrong" ? <X size={22} /> : null}
               {feedback}
             </p>
           )}
