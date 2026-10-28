@@ -430,6 +430,7 @@ async function api(
 ): Promise<ActionResult | GameState> {
   const endpoint = "/api/game/" + route + (body === undefined ? "?fresh=" + Date.now() : "");
   const response = await fetch(endpoint, {
+    signal: AbortSignal.timeout(25_000),
     cache: "no-store",
     method: body === undefined ? "GET" : "POST",
     credentials: "same-origin",
@@ -460,18 +461,38 @@ export function useGame(progress: Progress) {
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const initialized = useRef(false);
+  const stateRevision = useRef(0);
+  const achievementRefresh = useRef<Promise<void> | null>(null);
+  const syncAchievements = useCallback(() => {
+    if (localPreview() || achievementRefresh.current) return;
+    const revision = stateRevision.current;
+    achievementRefresh.current = api("achievement-progress", {})
+      .then(value => {
+        const result = value as ActionResult;
+        if (revision === stateRevision.current && result.state) setData(result.state);
+        if (result.message) setMessage(result.message);
+      })
+      .catch(() => { /* Collection access is independent of achievement processing. */ })
+      .finally(() => { achievementRefresh.current = null; });
+  }, []);
   const pendingAnswers = useRef<QueuedAnswer[]>([]);
   const refresh = useCallback(async () => {
+    const revision = ++stateRevision.current;
     try {
       setError("");
       const value = localPreview()
         ? await loadPreviewState()
         : ((await api("state")) as GameState);
+      if (revision !== stateRevision.current) return;
       setData(value);
+      syncAchievements();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Game service unavailable.");
+      if (revision === stateRevision.current)
+        setError(e instanceof Error && e.name === "TimeoutError"
+          ? "The collection is taking too long to connect. Please try Reconnect."
+          : e instanceof Error ? e.message : "Game service unavailable.");
     }
-  }, []);
+  }, [syncAchievements]);
   useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
@@ -485,14 +506,16 @@ export function useGame(progress: Progress) {
   }, [message]);
   const action = useCallback(
     async (route: string, body: unknown) => {
+      const revision = ++stateRevision.current;
       setBusy(true);
       setError("");
       try {
         const value = localPreview()
           ? await previewAction(data ?? (await loadPreviewState()), route, body)
           : ((await api(route, body)) as ActionResult);
-        if (value.state) setData(value.state);
+        if (value.state && revision === stateRevision.current) setData(value.state);
         if (value.message) setMessage(value.message);
+        if (value.state) syncAchievements();
         return value;
       } catch (e) {
         const msg =
@@ -503,7 +526,7 @@ export function useGame(progress: Progress) {
         setBusy(false);
       }
     },
-    [data],
+    [data, syncAchievements],
   );
   const capture = useCallback(
     (session: Session, q: Question, response: string, timedOut: boolean) => {

@@ -444,69 +444,68 @@ async function addXp(db, user, amount, kind, ref, session = null) {
       await awardLevel(db, user, l);
   return amount;
 }
-async function state(user, checkAchievements = true) {
-  await transaction(async (db) => {
+async function state(user) {
+  const db = await pool.connect();
+  try {
+    await db.query("BEGIN");
     await db.query("SELECT id FROM users WHERE id=$1 FOR UPDATE", [user]);
     await migrateLoadout(db, user);
     // One visit per London calendar day, including persistent signed-in visits.
-    const firstVisit = await claim(db, user, "achievement_activity", date(), "visit", {});
-    if (checkAchievements || firstVisit) await updateAchievements(db, user);
-  });
-  const monetisation = await transaction((db) =>
-    refreshMonetisation(db, user, true),
-  );
+    await claim(db, user, "achievement_activity", date(), "visit", {});
+    const monetisation = await refreshMonetisation(db, user, true);
+    await db.query("COMMIT");
   const profile = (
-    await pool.query("SELECT gender_identity FROM users WHERE id=$1", [user])
+    await db.query("SELECT gender_identity FROM users WHERE id=$1", [user])
   ).rows[0];
   const result = await serialAll([
-    () => pool.query("SELECT * FROM avatars WHERE user_id=$1", [user]),
-    () => pool.query(
+    () => db.query("SELECT * FROM avatars WHERE user_id=$1", [user]),
+    () => db.query(
       "SELECT id,item_id,form,favourite,acquired_at,provenance FROM inventory WHERE user_id=$1 AND revoked_at IS NULL ORDER BY acquired_at DESC",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT e.slot,i.item_id,e.inventory_id FROM cosmetic_equipped_items e JOIN inventory i ON i.id=e.inventory_id AND i.user_id=e.user_id WHERE e.user_id=$1 AND i.revoked_at IS NULL",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT currency,subject_id,balance_projection::int AS balance FROM wallet_accounts WHERE user_id=$1",
       [user],
     ),
-    () => pool.query("SELECT item_id FROM wishlist WHERE user_id=$1", [user]),
-    () => pool.query("SELECT * FROM progression WHERE user_id=$1", [user]),
-    () => pool.query(
+    () => db.query("SELECT item_id FROM wishlist WHERE user_id=$1", [user]),
+    () => db.query("SELECT * FROM progression WHERE user_id=$1", [user]),
+    () => db.query(
       "SELECT b.id,b.box_id,b.earned_at,d.name FROM user_boxes b JOIN drop_boxes d ON d.id=b.box_id WHERE b.user_id=$1 AND opened_at IS NULL ORDER BY earned_at",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT name,id FROM outfits WHERE user_id=$1 ORDER BY created_at DESC",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT amount::int,reason,created_at FROM currency_ledger WHERE user_id=$1 ORDER BY id DESC LIMIT 10",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT achievement_id,progress,unlocked_at FROM user_achievements WHERE user_id=$1",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT count(*)::int AS sessions FROM study_sessions WHERE user_id=$1 AND verified",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT history_version FROM local_game_clients WHERE user_id=$1",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT i.item_id,s.position FROM showcase s JOIN inventory i ON i.id=s.inventory_id WHERE s.user_id=$1 ORDER BY position",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT study_date::text FROM streak_days WHERE user_id=$1 ORDER BY study_date",
       [user],
     ),
-    () => pool.query(
+    () => db.query(
       "SELECT count(*)::int AS count FROM study_sessions WHERE user_id=$1 AND mode='daily_mix' AND study_date=$2::date",
       [user, date()],
     ),
@@ -539,7 +538,7 @@ async function state(user, checkAchievements = true) {
     );
   const pity = Object.fromEntries(
     (
-      await pool.query(
+      await db.query(
         "SELECT rarity,eligible_openings_without FROM pity_counters WHERE user_id=$1",
         [user],
       )
@@ -578,7 +577,7 @@ async function state(user, checkAchievements = true) {
     worlds,
     loadoutNotes:
       (
-        await pool.query(
+        await db.query(
           "SELECT retained_conflicts FROM cosmetic_loadout_versions WHERE user_id=$1",
           [user],
         )
@@ -635,6 +634,12 @@ async function state(user, checkAchievements = true) {
     mode: "SCHOOL_MODE",
     payments: commerceConfigured(),
   };
+  } catch (error) {
+    await db.query("ROLLBACK").catch(() => {});
+    throw error;
+  } finally {
+    db.release();
+  }
 }
 async function updateAchievements(db, user) {
   const owned = new Set(
@@ -781,6 +786,10 @@ async function mutate(user, route, b) {
     await db.query("SELECT id FROM users WHERE id=$1 FOR UPDATE", [user]);
     // The game state request has already migrated the avatar loadout. Avoid
     // another database round trip on every answer in a timed game.
+    if (route === "achievement-progress") {
+      const unlocked = await updateAchievements(db, user);
+      return { message: unlocked.length ? "Achievement unlocked: " + unlocked.join(", ") : "" };
+    }
     if (route !== "answer" && route !== "minigame-answer")
       await migrateLoadout(db, user);
     if (route === "ad-intent") {
@@ -1998,35 +2007,6 @@ export async function handleApiRequest(req, res) {
     }
     const body = JSON.parse(raw || "{}");
     let result = await mutate(user, route, body);
-    if (
-      [
-        "answer",
-        "answer-batch",
-        "complete",
-        "buy",
-        "buy-box",
-        "open-box",
-        "appearance",
-        "equip",
-        "outfit",
-        "wear-outfit",
-      ].includes(route)
-    ) {
-      const unlocked = await transaction(async (db) => {
-        await db.query("SELECT id FROM users WHERE id=$1 FOR UPDATE", [user]);
-        return updateAchievements(db, user);
-      });
-      if (unlocked.length)
-        result = {
-          ...result,
-          message: [
-            result.message,
-            "Achievement unlocked: " + unlocked.join(", "),
-          ]
-            .filter(Boolean)
-            .join(" · "),
-        };
-    }
     // Answer feedback only needs its result and XP. Rebuilding the entire
     // inventory/account state here makes every question wait on many queries.
     if (
@@ -2038,7 +2018,7 @@ export async function handleApiRequest(req, res) {
       res.end(JSON.stringify(result));
       return;
     }
-    res.end(JSON.stringify({ ...result, state: await state(user, false) }));
+    res.end(JSON.stringify({ ...result, state: await state(user) }));
   } catch (e) {
     res.statusCode = e.status ?? 500;
     if (!e.status) console.error("Game API:", e.code ?? e.name, e.message);
