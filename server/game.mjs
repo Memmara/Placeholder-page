@@ -209,7 +209,7 @@ async function refreshMonetisation(db, user, locked = false) {
     tokenConfig: config,
   };
 }
-async function beginPaidSession(db, user) {
+async function beginPaidSession(db, user, consumeBoost = true) {
   const row = await refreshMonetisation(db, user, true),
     available = Number(row.practice_tokens) + Number(row.purchased_tokens);
   requireThat(
@@ -217,7 +217,7 @@ async function beginPaidSession(db, user) {
     "You have no practice tokens. Visit the Shop to continue.",
     409,
   );
-  const multiplier = row.xp_boost_pending ? 2 : 1;
+  const multiplier = consumeBoost && row.xp_boost_pending ? 2 : 1;
   if (!row.tokenConfig.unlimited) {
     const organic = Number(row.practice_tokens),
       purchased = Number(row.purchased_tokens),
@@ -230,10 +230,10 @@ async function beginPaidSession(db, user) {
           ? new Date(Date.now() + row.tokenConfig.hours * 60 * 60 * 1000)
           : null);
     await db.query(
-      "UPDATE user_monetisation SET practice_tokens=$2,purchased_tokens=$3,next_token_at=$4,xp_boost_pending=false,updated_at=now() WHERE user_id=$1",
-      [user, nextOrganic, nextPurchased, next],
+      "UPDATE user_monetisation SET practice_tokens=$2,purchased_tokens=$3,next_token_at=$4,xp_boost_pending=CASE WHEN $5 THEN false ELSE xp_boost_pending END,updated_at=now() WHERE user_id=$1",
+      [user, nextOrganic, nextPurchased, next, consumeBoost],
     );
-  } else if (row.xp_boost_pending)
+  } else if (consumeBoost && row.xp_boost_pending)
     await db.query(
       "UPDATE user_monetisation SET xp_boost_pending=false,updated_at=now() WHERE user_id=$1",
       [user],
@@ -1051,6 +1051,10 @@ async function mutate(user, route, b) {
       return { message: "Game started · 1 token used", xpMultiplier };
     }
     if (route === "minigame-answer") {
+      requireThat(
+        typeof b.runRef === "string" && /^[0-9a-f-]{36}$/i.test(b.runRef),
+        "Start this minigame before answering.",
+      );
       const q = b.questionId ? await questionById(db, b.questionId) : null,
         definition = b.definitionId
           ? await definitionById(db, b.definitionId)
@@ -1071,6 +1075,25 @@ async function mutate(user, route, b) {
           "Choose an answer from this game.",
           400,
         );
+      // The first playable answer starts the paid run. Repeating it or another
+      // answer from the same run cannot spend a second token.
+      const clientRef = "minigame:" + b.runRef;
+      const existingRun = await db.query(
+        "SELECT 1 FROM local_play_sessions WHERE user_id=$1 AND client_ref=$2",
+        [user, clientRef],
+      );
+      if (!existingRun.rowCount) {
+        const sid = crypto.randomUUID();
+        await beginPaidSession(db, user, false);
+        await db.query(
+          "INSERT INTO study_sessions(id,user_id,learning_session_ref,mode,started_at,study_date,xp_multiplier,token_spent,verified_metrics) VALUES($1,$2,$3,'speed_select',now(),$4,1,true,$5)",
+          [sid, user, user + ":" + clientRef, date(), { minigame: true }],
+        );
+        await db.query(
+          "INSERT INTO local_play_sessions(user_id,client_ref,session_id,question_ids) VALUES($1,$2,$3,'[]'::jsonb)",
+          [user, clientRef, sid],
+        );
+      }
       const correct = q
         ? q.answer_key.correct_option_ids.includes(b.optionId)
         : definition.id === b.chosenTermId;
@@ -2042,7 +2065,8 @@ export async function handleApiRequest(req, res) {
     if (
       route === "answer" ||
       route === "answer-batch" ||
-      route === "minigame-answer"
+      route === "minigame-answer" ||
+      route === "start-minigame"
     ) {
       res.end(JSON.stringify(result));
       return;

@@ -488,6 +488,8 @@ function App({
     [reporting, setReporting] = useState(false),
     [reportText, setReportText] = useState("");
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [sessionStarting, setSessionStarting] = useState(false);
+  const sessionLaunch = useRef(0);
   const [inviteOpen, setInviteOpen] = useState(false),
     [tokenPrompt, setTokenPrompt] = useState(false),
     [tokenPromptMessage, setTokenPromptMessage] = useState(""),
@@ -944,6 +946,57 @@ function App({
     }
     void start();
   }
+  async function activateSession(fresh: Session, progress: Progress) {
+    const launch = ++sessionLaunch.current;
+    setSessionStarting(true);
+    try {
+      // Keep the resumable session on the account before spending its token.
+      const saved = saveChain.current.then(async () => {
+        const result = await authRequest("progress", { progress, version: progressVersion.current }, "PUT");
+        progressVersion.current = result.version;
+      });
+      saveChain.current = saved.catch(() => {});
+      await saved;
+      if (launch !== sessionLaunch.current) return;
+      const started = await game.action("start-minigame", {
+        mode: fresh.mode,
+        sessionRef: fresh.id,
+        questionIds: fresh.questionIds,
+      });
+      setP(prev => prev.session?.id === fresh.id ? {
+        ...prev,
+        session: {
+          ...prev.session,
+          phase: "answering",
+          xpMultiplier: started.xpMultiplier === 2 ? 2 : prev.session.xpMultiplier,
+          deadlineAt: fresh.mode === "speed" ? Date.now() + SPEED_SECONDS * 1000 : undefined,
+        },
+      } : prev);
+      void game.refresh();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "This practice could not start.";
+      if (message.toLowerCase().includes("unlock another daily mix")) setDailyMixPrompt(true);
+      else if (message.toLowerCase().includes("token")) sendToShop();
+      else setNotice(message);
+    } finally {
+      if (launch === sessionLaunch.current) setSessionStarting(false);
+    }
+  }
+  function prepareSession(fresh: Session) {
+    const progress: Progress = {
+      ...p,
+      pausedSessions: p.session && p.session.phase !== "complete"
+        ? [...(p.pausedSessions ?? []).filter(x => x.id !== p.session!.id), p.session]
+        : p.pausedSessions,
+      session: fresh,
+      lastVisit: Date.now(),
+    };
+    setP(progress);
+    setReturnDemo(false);
+    setPage("session");
+    history.replaceState(null, "", "/daily-mix");
+    void activateSession(fresh, progress);
+  }
   async function start(topic?: string, speed = false) {
     if (!bank) return;
     const same =
@@ -977,38 +1030,7 @@ function App({
       );
       return;
     }
-    try {
-      const started = await game.action("start-minigame", {
-        mode: speed ? "speed" : topic ? "topic" : "daily",
-        sessionRef: fresh.id,
-        questionIds: fresh.questionIds,
-      });
-      if (started.xpMultiplier === 2) fresh.xpMultiplier = 2;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "This practice could not start.";
-      if (message.toLowerCase().includes("unlock another daily mix"))
-        setDailyMixPrompt(true);
-      else if (message.toLowerCase().includes("token")) sendToShop();
-      else setNotice(message);
-      return;
-    }
-    setP((prev) => ({
-      ...prev,
-      pausedSessions:
-        prev.session && prev.session.phase !== "complete"
-          ? [
-              ...(prev.pausedSessions ?? []).filter(
-                (x) => x.id !== prev.session!.id,
-              ),
-              prev.session,
-            ]
-          : prev.pausedSessions,
-      session: fresh,
-      lastVisit: Date.now(),
-    }));
-    setReturnDemo(false);
-    setPage("session");
-    history.replaceState(null, "", "/daily-mix");
+    prepareSession(fresh);
   }
   async function startReview() {
     if (!bank) return;
@@ -1021,35 +1043,7 @@ function App({
       setNotice("Your Review Vault will fill as you practise.");
       return;
     }
-    try {
-      const started = await game.action("start-minigame", {
-        mode: "review",
-        sessionRef: fresh.id,
-        questionIds: fresh.questionIds,
-      });
-      if (started.xpMultiplier === 2) fresh.xpMultiplier = 2;
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "This practice could not start.";
-      if (message.toLowerCase().includes("token")) sendToShop();
-      else setNotice(message);
-      return;
-    }
-    setP((prev) => ({
-      ...prev,
-      pausedSessions:
-        prev.session && prev.session.phase !== "complete"
-          ? [
-              ...(prev.pausedSessions ?? []).filter(
-                (x) => x.id !== prev.session!.id,
-              ),
-              prev.session,
-            ]
-          : prev.pausedSessions,
-      session: fresh,
-      lastVisit: Date.now(),
-    }));
-    setPage("session");
-    history.replaceState(null, "", "/daily-mix");
+    prepareSession(fresh);
   }
   function awardMinigameXp(contentId: string, amount: number) {
     const id = "minigame:" + day() + ":" + contentId;
@@ -1083,6 +1077,10 @@ function App({
     }));
   }
   function navigate(next: string) {
+    if (next !== "session") {
+      sessionLaunch.current++;
+      setSessionStarting(false);
+    }
     setNotificationOpen(false);
     if (page === "session" && next !== "session")
       void game
@@ -2900,18 +2898,10 @@ function App({
                       </div>
                       <button
                         className="primary"
-                        onClick={() => {
-                          setClockNow(Date.now());
-                          changeSession({
-                            phase: "answering",
-                            deadlineAt:
-                              session.mode === "speed"
-                                ? Date.now() + SPEED_SECONDS * 1000
-                                : undefined,
-                          });
-                        }}
+                        disabled={sessionStarting}
+                        onClick={() => void activateSession(session, p)}
                       >
-                        Let’s begin <ArrowRight size={19} />
+                        {sessionStarting ? "Preparing your questions…" : "Try starting again"} <ArrowRight size={19} />
                       </button>
                       <small className="muted">
                         Answers are checked by rules. If a result is uncertain,

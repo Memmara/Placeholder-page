@@ -148,6 +148,7 @@ const localPreview = () =>
     sessionStorage.getItem("memmara.local-preview") === "1");
 const previewStateKey = "memmara.preview-game-state.v3";
 const previewQuestions = new Map<string, Promise<Question[]>>();
+const previewMinigameRuns = new Set<string>();
 function normalisePreviewState(state: GameState) {
   state.daily = {
     ...state.daily,
@@ -395,6 +396,15 @@ async function previewAction(
       correct =
         question?.answer_key?.correct_option_ids?.includes(body.optionId) ??
         body.definitionId === body.chosenTermId;
+    if (!previewMinigameRuns.has(body.runRef)) {
+      if (!state.monetisation.unlimited) {
+        if (state.monetisation.tokens <= 0)
+          throw Error("You have no practice tokens. Visit the Shop to continue.");
+        state.monetisation.tokens--;
+        state.monetisation.organicTokens = Math.max(0, state.monetisation.organicTokens - 1);
+      }
+      previewMinigameRuns.add(body.runRef);
+    }
     return success(correct ? "+1 Minigame XP" : "", {
       correct,
       xp: correct ? 1 : 0,

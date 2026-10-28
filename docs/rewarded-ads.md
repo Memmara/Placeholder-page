@@ -25,12 +25,11 @@ An unavailable, failed, timed-out, cancelled, or early-closed ad leaves the rewa
 
 ## Token regeneration
 
-- Free accounts start with two organic practice tokens.
-- One token regenerates every five hours until the organic balance reaches two.
-- A rewarded ad adds one token and may temporarily raise the balance to three.
-- Starting the first answered question of a new server session spends one token atomically.
-- Going from two tokens to one starts the five-hour clock. A balance of two or three has no refill timer.
-- Premium and school plans retain the same database shape but do not spend practice tokens.
+- Free accounts start with one organic practice token, which regenerates five hours after it is spent.
+- A rewarded ad can add one extra token.
+- Practice saves the resumable question session before spending a token and opening the first question.
+- Minigames display the playable game first, then spend one token on the first valid answer. Repeated answers in the same run do not spend another token.
+- Plus has eight regenerating tokens; Pro and school plans have unlimited practice tokens.
 
 ## XP boost
 
