@@ -19,6 +19,7 @@ import type { GameController } from "./GameService";
 import { day, pointFor, shuffled, suitable } from "./engine";
 import { MarkingStatus } from "./MarkingStatus";
 import "./minigames.css";
+import {isGuestSession,requestGuestPlay} from './guestAccess';
 
 type Mode = "survival" | "attack" | "match" | "tower" | "memory";
 type Definition = {
@@ -309,6 +310,7 @@ export function Minigames({
     useDaily = false,
     useTimer = false,
   ) {
+    if(isGuestSession()){requestGuestPlay(games.find(item=>item.id===next)?.name);return;}
     if (!selectedSubjects.length) {
       setFeedback("Choose at least one subject before you play.");
       return;
@@ -716,7 +718,7 @@ export function Minigames({
               <h2>Speed Select</h2>
               <p>Quick thinking. One choice. Up to 10 questions, with 25 seconds to answer each one.</p>
               <small>Your selected subjects · multiple choice</small>
-              <button className="primary" disabled={!selectedSubjects.length} onClick={() => onSpeedSelect(selectedSubjects)}>
+              <button className="primary" disabled={!isGuestSession() && !selectedSubjects.length} onClick={() => onSpeedSelect(selectedSubjects)}>
                 {speedActive ? "Continue Speed Select" : "Play"} <ArrowRight size={17} />
               </button>
             </article>

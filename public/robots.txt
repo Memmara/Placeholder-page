@@ -1,5 +1,14 @@
+# AdSense can inspect public guest content and the assets used by practice.
+# Account APIs remain authenticated independently of crawler rules.
+User-agent: Mediapartners-Google
+Allow: /
+Disallow: /api/
+Disallow: /account/
+Disallow: /shop
+
 User-agent: *
 Allow: /
+Allow: /guest
 Disallow: /api/
 Disallow: /data/
 Disallow: /dashboard

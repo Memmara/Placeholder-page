@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import ts from 'typescript';
+import * as engine from '../src/engine.ts';
+
+const memory=()=>{const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,String(value)),removeItem:key=>values.delete(key),get length(){return values.size;},key:i=>[...values.keys()][i]};};
+const localStorage=memory(),sessionStorage=memory(),location={pathname:'/guest',hostname:'www.memmara.com',search:'',origin:'https://www.memmara.com',assign(path){this.pathname=path;}};
+const network=[];
+const preview=JSON.parse(fs.readFileSync(new URL('../public/data/game-preview.json',import.meta.url),'utf8'));
+const fetch=async path=>{network.push(path);if(path==='/data/game-preview.json')return {ok:true,json:async()=>structuredClone(preview)};
+  if(location.pathname==='/login'&&path.startsWith('/api/auth/me'))return {ok:true,status:200,json:async()=>({user:{id:'real-account'}})};
+  throw Error('Unexpected network request: '+path);
+};
+let guest;
+function load(file,extra='',setting='true'){
+  const raw=fs.readFileSync(new URL('../'+file,import.meta.url),'utf8')+extra;
+  const source=raw.replace('import.meta.env.VITE_MEMMARA_GUEST_ACCESS',JSON.stringify(setting));
+  const compiled=ts.transpileModule(source,{fileName:file,compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+  const exports={};
+  vm.runInNewContext(compiled,{exports,require:name=>name.endsWith('guestAccess')?guest:name.endsWith('engine')?engine:{},location,sessionStorage,localStorage,fetch,URLSearchParams,structuredClone,crypto:globalThis.crypto,AbortSignal,window:{dispatchEvent(){}},CustomEvent:class{constructor(type,init){this.type=type;this.detail=init.detail;}}});
+  return exports;
+}
+guest=load('src/guestAccess.ts');
+guest.startGuest();
+assert.equal(location.pathname,'/dashboard');
+assert.equal(guest.isGuestSession(),true);
+const auth=load('src/auth.tsx');
+assert.equal((await auth.authRequest('me')).user.id,'guest-device');
+const first=await auth.authRequest('progress');
+assert(first.progress.settings.subjects.length===4);
+assert.equal(first.progress.session,null);
+localStorage.setItem('memmara.preview.progress.v1','untouched preview');
+const saved={...first.progress,session:{id:'old-guest-session'}};
+await auth.authRequest('progress',{progress:saved,version:0},'PUT');
+assert.equal((await auth.authRequest('progress')).progress.session,null);
+assert.equal(localStorage.getItem('memmara.preview.progress.v1'),'untouched preview');
+assert.equal(network.length,0);
+await assert.rejects(()=>auth.authRequest('change-password',{}),/Sign in/);
+const game=load('src/GameService.ts','\nexport {loadPreviewState,previewAction};');
+const state=await game.loadPreviewState();
+assert.equal(state.userId,'guest-device');
+assert.equal(state.monetisation.tokens,0);
+assert(localStorage.getItem('memmara.guest.game-state.v1'));
+assert.equal(localStorage.getItem('memmara.preview-game-state.v3'),null);
+for(const route of ['start-minigame','minigame-answer','answer','answer-batch','complete','ad-intent','ad-complete'])
+  await assert.rejects(()=>game.previewAction(state,route,{}),/Sign in/);
+const commerce=load('src/commerce/CommerceService.ts');
+await assert.rejects(()=>commerce.purchase('tokens_5'),/Sign in/);
+assert(network.every(path=>path.startsWith('/data/')));
+location.pathname='/login';
+assert.equal(guest.isGuestSession(),false);
+assert.equal(sessionStorage.getItem('memmara.guest.session.v1'),null);
+assert.equal((await auth.authRequest('me')).user.id,'real-account');
+location.pathname='/dashboard';
+sessionStorage.setItem('memmara.guest.session.v1','1');
+assert.equal(load('src/guestAccess.ts','','false').isGuestSession(),false);
+console.log('PASS: guest entry, isolated storage, no guest API writes, blocked gameplay and ads, old-session rejection, real-login handoff, and disable switch.');

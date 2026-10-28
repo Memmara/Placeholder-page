@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Appearance, Gear } from "./CosmeticStage";
 import type { MarkingResult, Progress, Session, Question } from "./models";
 import { subjectForQuestionId } from "./engine";
+import {isGuestSession} from './guestAccess';
 
 export interface Item extends Gear {
   coin_price: number | null;
@@ -143,13 +144,18 @@ interface QueuedAnswer {
   timedOut: boolean;
 }
 const localPreview = () =>
-  ["localhost", "127.0.0.1"].includes(location.hostname) &&
+  isGuestSession() || (["localhost", "127.0.0.1"].includes(location.hostname) &&
   (new URLSearchParams(location.search).has("preview") ||
-    sessionStorage.getItem("memmara.local-preview") === "1");
-const previewStateKey = "memmara.preview-game-state.v3";
+    sessionStorage.getItem("memmara.local-preview") === "1"));
+const previewStateKey = () => isGuestSession() ? 'memmara.guest.game-state.v1' : "memmara.preview-game-state.v3";
 const previewQuestions = new Map<string, Promise<Question[]>>();
 const previewMinigameRuns = new Set<string>();
 function normalisePreviewState(state: GameState) {
+  if(isGuestSession()){
+    state.userId='guest-device';
+    state.daily={...state.daily,unlimitedMixes:false};
+    state.monetisation={...state.monetisation,tokens:0,organicTokens:0,purchasedTokens:0,unlimited:false,xpBoostPending:false};
+  }
   state.daily = {
     ...state.daily,
     chestPurchased: state.daily?.chestPurchased ?? false,
@@ -173,7 +179,7 @@ function normalisePreviewState(state: GameState) {
   return state;
 }
 async function loadPreviewState(): Promise<GameState> {
-  const saved = localStorage.getItem(previewStateKey);
+  const saved = localStorage.getItem(previewStateKey());
   if (saved)
     try {
       const state = normalisePreviewState(JSON.parse(saved) as GameState);
@@ -186,16 +192,16 @@ async function loadPreviewState(): Promise<GameState> {
       }
       return state;
     } catch {
-      localStorage.removeItem(previewStateKey);
+      localStorage.removeItem(previewStateKey());
     }
   const response = await fetch("/data/game-preview.json");
   if (!response.ok) throw Error("Preview collection could not be loaded.");
   const state = normalisePreviewState((await response.json()) as GameState);
-  localStorage.setItem(previewStateKey, JSON.stringify(state));
+  localStorage.setItem(previewStateKey(), JSON.stringify(state));
   return state;
 }
 function savePreviewState(state: GameState) {
-  localStorage.setItem(previewStateKey, JSON.stringify(state));
+  localStorage.setItem(previewStateKey(), JSON.stringify(state));
   return state;
 }
 async function previewAction(
@@ -203,10 +209,14 @@ async function previewAction(
   route: string,
   body: any,
 ): Promise<ActionResult> {
+  if(isGuestSession() && ['start-minigame','minigame-answer','answer','answer-batch','complete'].includes(route))
+    throw Error('Sign in to play and save your progress.');
+  if(isGuestSession() && ['ad-intent','ad-complete'].includes(route))
+    throw Error('Sign in to use rewarded ads. Guest practice is available without tokens.');
   const state = structuredClone(current) as GameState,
     success = (message?: string, extra: Partial<ActionResult> = {}) => ({
       state: savePreviewState(state),
-      message,
+      message: isGuestSession() ? message?.replaceAll('this preview','guest mode').replaceAll('Preview','Guest').replaceAll('preview','guest') : message,
       ...extra,
     });
   if (route === "appearance") {
@@ -386,7 +396,7 @@ async function previewAction(
       );
     }
     if (body.mode === "daily") state.daily.mixesStarted++;
-    return success("Game started · 1 token used");
+    return success(isGuestSession() ? "Guest practice started" : "Game started · 1 token used");
   }
   if (route === "minigame-answer") {
     const subject = subjectForQuestionId(body.questionId),

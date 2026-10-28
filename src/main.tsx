@@ -80,6 +80,9 @@ import "./styles.css";
 import "./app-refresh.css";
 import { Brand } from "./Brand";
 import { PublicLanding } from "./PublicLanding";
+import { GuestWelcome } from './GuestWelcome';
+import {isGuestSession,leaveGuest,requestGuestPlay} from './guestAccess';
+import {GuestPlayGate} from './GuestPlayGate';
 import { AboutPage, PrivacyPage } from "./PublicInfoPages";
 import { useGame, coinBalance, useTokenCountdown, type GameController } from "./GameService";
 import { GameHub, GameHomeCard } from "./CosmeticViews";
@@ -927,6 +930,7 @@ function App({
     return !!state && !state.unlimited && state.tokens <= 0;
   }
   function requestDailyMix() {
+    if(isGuestSession()){requestGuestPlay('Daily Mix');return;}
     if (active && session.isDaily) {
       void start();
       return;
@@ -949,6 +953,7 @@ function App({
     void start();
   }
   async function activateSession(fresh: Session, progress: Progress) {
+    if(isGuestSession()){requestGuestPlay(fresh.mode==='speed'?'Speed Select':'Daily Mix');return;}
     const launch = ++sessionLaunch.current;
     setSessionStarting(true);
     try {
@@ -1000,6 +1005,7 @@ function App({
     void activateSession(fresh, progress);
   }
   async function start(topic?: string, speed = false, subjects?: string[]) {
+    if(isGuestSession()){requestGuestPlay(speed?'Speed Select':'Daily Mix');return;}
     if (!bank) return;
     const same =
       active &&
@@ -1038,6 +1044,7 @@ function App({
     prepareSession(fresh);
   }
   async function startReview() {
+    if(isGuestSession()){requestGuestPlay('Past Mistakes');return;}
     if (!bank) return;
     if (noTokens()) {
       sendToShop();
@@ -1105,6 +1112,7 @@ function App({
     setReporting(false);
   }
   function submit(unsure = false, choice?: string, timedOut = false) {
+    if(isGuestSession()){requestGuestPlay(session?.mode==='speed'?'Speed Select':'Daily Mix');return;}
     if (!current || !session || !bank || busy.current || attempt) return;
     busy.current = true;
     setMarkError("");
@@ -1485,6 +1493,8 @@ function App({
     );
   return (
     <div className="app-shell">
+      {isGuestSession()&&<GuestPlayGate/>}
+      {isGuestSession()&&<div className="guest-session-banner" role="status"><strong>Guest preview</strong><span>Explore Memmara. Sign in to play and save progress.</span><button onClick={()=>leaveGuest()}>Sign in</button></div>}
       <NativeBannerAd
         game={game}
         active={page === "session" || page === "minigames"}
@@ -2452,7 +2462,7 @@ function App({
                     </div>
                     <PlayerAvatar game={game} className="level-card-avatar" />
                   </div>
-                  <section className="panel invite-home-card">
+                  {!isGuestSession()&&<section className="panel invite-home-card">
                     <Gift size={25} />
                     <div className="grow">
                       <h2>Practice is better together</h2>
@@ -2467,7 +2477,7 @@ function App({
                     >
                       Invite friends <ArrowRight size={16} />
                     </button>
-                  </section>
+                  </section>}
                   <RewardedAdsCard game={game} />
                   <ReviewVault
                     bank={bank!}
@@ -3825,8 +3835,7 @@ function App({
                     eyebrow="YOUR SPACE, YOUR PACE"
                     title="Make it work for you."
                   >
-                    Your learning history and rewards are linked to your
-                    account.
+                    {isGuestSession() ? 'Your guest learning history is saved only in this browser.' : 'Your learning history and rewards are linked to your account.'}
                   </Intro>
                   <div className="panel settings-panel">
                     <h2>Your learning plan</h2>
@@ -4060,6 +4069,8 @@ function App({
 function Root() {
   return location.pathname === "/" ? (
     <PublicLanding />
+  ) : location.pathname === "/guest" ? (
+    <GuestWelcome />
   ) : location.pathname === "/about" ? (
     <AboutPage />
   ) : location.pathname === "/privacy" ? (

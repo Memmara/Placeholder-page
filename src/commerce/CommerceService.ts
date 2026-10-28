@@ -1,10 +1,12 @@
 export type ProductCode='tokens_5'|'tokens_10'|'plan_plus'|'plan_pro'|'pet_dougie'|'pet_dotty';
+import {isGuestSession} from '../guestAccess';
 
 declare global{interface Window{Capacitor?:{isNativePlatform?:()=>boolean;getPlatform?:()=>string;Plugins?:Record<string,any>}}}
 
 const nativePlatform=()=>!!(window.Capacitor?.isNativePlatform?.()||['ios','android'].includes(window.Capacitor?.getPlatform?.()??''));
 
 async function request<T>(path:string,body?:unknown):Promise<T>{
+ if(isGuestSession())throw Error('Sign in to buy tokens or manage a subscription. Guest practice is free to try.');
  const response=await fetch('/api/commerce/'+path,{method:body===undefined?'GET':'POST',credentials:'same-origin',headers:body===undefined?{}:{'Content-Type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})});
  const data=await response.json().catch(()=>({}));
  if(response.status===401){location.assign('/login?next='+encodeURIComponent('/shop'));throw Error('Sign in to continue.');}

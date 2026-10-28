@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTokenCountdown, type GameController } from "../GameService";
 import { useRewardedAds } from "../ads/useRewardedAds";
 import { purchase, refreshPurchase, type ProductCode } from "./CommerceService";
+import {isGuestSession,leaveGuest} from '../guestAccess';
 
 const packs = [
   { code: "tokens_5" as const, tokens: 5, price: "£0.99" },
@@ -83,6 +84,7 @@ export function ShopPage({
         : "Ad unavailable, try again later.",
     );
   }
+  if(isGuestSession())return <section className="panel guest-account-note"><h1>You’re exploring as a guest</h1><p>Sign in to play Daily Mix and minigames, buy tokens or use a subscription on your account.</p><button className="primary" onClick={()=>leaveGuest()}>Sign in</button></section>;
   return (
     <div className="token-shop">
       {outOfTokens && (
