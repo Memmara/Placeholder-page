@@ -11,6 +11,7 @@ import {
   Puzzle,
   Trophy,
   X,
+  Zap,
 } from "lucide-react";
 import type { Bank, Progress, Question, Settings } from "./models";
 import type { GameController } from "./GameService";
@@ -162,6 +163,8 @@ export function Minigames({
   onFinish,
   onPastMistakes,
   onNeedToken,
+  onSpeedSelect,
+  speedActive,
 }: {
   bank: Bank;
   settings: Settings;
@@ -171,6 +174,8 @@ export function Minigames({
   onFinish: (mode: Mode, score: number, daily: boolean) => void;
   onPastMistakes: () => void;
   onNeedToken: () => void;
+  onSpeedSelect: (subjects: string[]) => void;
+  speedActive: boolean;
 }) {
   const [definitions, setDefinitions] = useState<Definition[]>([]),
     [mode, setMode] = useState<Mode | null>(null),
@@ -704,6 +709,15 @@ export function Minigames({
                 </article>
               );
             })}
+            <article className="panel minigame-card" data-game="speed">
+              <div className="minigame-card-art" aria-hidden="true"><Zap size={46} /><i /><i /><i /></div>
+              <h2>Speed Select</h2>
+              <p>Quick thinking. One choice. Up to 10 questions, with 25 seconds to answer each one.</p>
+              <small>Your selected subjects · multiple choice</small>
+              <button className="primary" disabled={!selectedSubjects.length} onClick={() => onSpeedSelect(selectedSubjects)}>
+                {speedActive ? "Continue Speed Select" : "Play"} <ArrowRight size={17} />
+              </button>
+            </article>
             <article className="panel minigame-card">
               <BookOpen size={29} />
               <h2>Past Mistakes</h2>

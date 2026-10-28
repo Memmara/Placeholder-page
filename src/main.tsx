@@ -37,6 +37,7 @@ import {
   Leaf,
   Target,
   Trophy,
+  Layers3,
   WalletCards,
   Gift,
 } from "lucide-react";
@@ -997,7 +998,7 @@ function App({
     history.replaceState(null, "", "/daily-mix");
     void activateSession(fresh, progress);
   }
-  async function start(topic?: string, speed = false) {
+  async function start(topic?: string, speed = false, subjects?: string[]) {
     if (!bank) return;
     const same =
       active &&
@@ -1021,7 +1022,10 @@ function App({
       sendToShop();
       return;
     }
-    const fresh = createSession(bank, p, topic, speed);
+    const sessionProgress = speed && subjects?.length
+      ? { ...p, settings: { ...s, subjects } }
+      : p;
+    const fresh = createSession(bank, sessionProgress, topic, speed);
     if (!fresh) {
       setNotice(
         speed
@@ -2323,25 +2327,23 @@ function App({
                       </div>
                     </aside>
                   </div>
-                  <section className="speed-card">
-                    <div className="speed-symbol">
-                      <Zap size={27} />
+                  <section className="arcade-home-tile">
+                    <div className="arcade-home-art" aria-hidden="true">
+                      <Layers3 size={48} /><Zap size={25} /><Trophy size={25} />
                     </div>
                     <div className="grow">
-                      <span className="eyebrow">SPEED SELECT</span>
-                      <h2>Quick thinking. One choice.</h2>
+                      <span className="eyebrow">THE MINIGAMES ARCADE</span>
+                      <h2>A little play. A lot to remember.</h2>
                       <p>
-                        Up to 10 multiple-choice questions · 25 seconds each ·
-                        your selected subjects
+                        Build a tower, beat the clock or keep your streak alive.
                       </p>
+                      <div className="arcade-game-tags"><span>Knowledge Tower</span><span>Speed Select</span><span>+ more</span></div>
                     </div>
                     <button
                       className="primary"
-                      onClick={() => start(undefined, true)}
+                      onClick={() => navigate("minigames")}
                     >
-                      {active && session.mode === "speed"
-                        ? "Continue Speed Select"
-                        : "Start Speed Select"}
+                      Explore minigames
                       <ArrowRight size={18} />
                     </button>
                   </section>
@@ -2522,22 +2524,6 @@ function App({
                       <ArrowRight size={20} />
                     </button>
                   </div>
-                  <section className="panel minigames-home-tile">
-                    <Zap size={29} />
-                    <div className="grow">
-                      <span className="eyebrow">QUICK CHALLENGES</span>
-                      <h2>Minigames</h2>
-                      <p>
-                        Try Streak Survival, Time Attack, matching and more.
-                      </p>
-                    </div>
-                    <button
-                      className="secondary"
-                      onClick={() => navigate("minigames")}
-                    >
-                      Explore minigames <ArrowRight size={17} />
-                    </button>
-                  </section>
                   <p className="page-note">
                     A manageable plan. A clear place to stop.
                   </p>
@@ -2812,12 +2798,12 @@ function App({
                   );
                 })()}
               {page === "session" && session && current && (
-                <>
+                <div className={session.mode === "speed" ? "speed-select-session" : undefined}>
                   <div className="session-header">
                     <button
                       className="icon-button"
                       aria-label="Save and leave session"
-                      onClick={() => navigate("home")}
+                      onClick={() => navigate(session.mode === "speed" ? "minigames" : "home")}
                     >
                       <X size={21} />
                     </button>
@@ -2988,11 +2974,11 @@ function App({
                       <button
                         className="primary wide"
                         onClick={() => {
-                          navigate("home");
+                          navigate(session.mode === "speed" ? "minigames" : "home");
                           setP((prev) => ({ ...prev, lastVisit: Date.now() }));
                         }}
                       >
-                        Done for today <Check size={18} />
+                        {session.mode === "speed" ? "Back to minigames" : "Done for today"} <Check size={18} />
                       </button>
                       <button
                         className="quiet"
@@ -3030,7 +3016,7 @@ function App({
                       </div>
                     </div>
                   ) : (
-                    <div className="question-wrap">
+                    <div className="question-wrap" key={current.question_id}>
                       <div className="question-context">
                         <span className="subject-pill">
                           <Atom size={15} />
@@ -3147,6 +3133,7 @@ function App({
                                   </span>
                                   <span>{option.text}</span>
                                   {correct && <CheckCircle2 size={20} />}
+                                  {wrong && <X size={20} />}
                                 </button>
                               );
                             })}
@@ -3659,7 +3646,7 @@ function App({
                       </p>
                     </div>
                   )}
-                </>
+                </div>
               )}
               {page === "session" && !session && (
                 <div className="panel">
@@ -3689,6 +3676,8 @@ function App({
                   onFinish={finishMinigame}
                   onPastMistakes={startReview}
                   onNeedToken={sendToShop}
+                  onSpeedSelect={(subjects) => void start(undefined, true, subjects)}
+                  speedActive={!!(active && session.mode === "speed")}
                 />
               )}{" "}
               {page === "progress" && (
