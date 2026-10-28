@@ -34,6 +34,13 @@ const games: {
   icon: typeof Flame;
 }[] = [
   {
+    id: "tower",
+    name: "Knowledge Tower",
+    description:
+      "Answer, then stack moving platforms for as long as you can.",
+    icon: Trophy,
+  },
+  {
     id: "survival",
     name: "Streak Survival",
     description: "Keep answering until one miss ends the run.",
@@ -50,13 +57,6 @@ const games: {
     name: "Flash Match",
     description: "Pair four terms with their definitions.",
     icon: Layers3,
-  },
-  {
-    id: "tower",
-    name: "Knowledge Tower",
-    description:
-      "Answer, then stack moving platforms for as long as you can.",
-    icon: Trophy,
   },
   {
     id: "memory",
