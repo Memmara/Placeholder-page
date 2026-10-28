@@ -150,7 +150,7 @@ async function serialAll(tasks) {
   return results;
 }
 const PLAN_TOKENS = {
-  free: { capacity: 2, hours: 5, unlimited: false },
+  free: { capacity: 1, hours: 5, unlimited: false },
   plus: { capacity: 8, hours: 2, unlimited: false },
   pro: { capacity: 8, hours: 0, unlimited: true },
   school: { capacity: 8, hours: 0, unlimited: true },
@@ -235,6 +235,15 @@ async function beginPaidSession(db, user) {
       [user],
     );
   return multiplier;
+}
+async function dailyMixAllowance(db, user, today = date()) {
+  const result = await db.query(
+    `SELECT
+      (SELECT count(*)::int FROM study_sessions WHERE user_id=$1 AND mode='daily_mix' AND study_date=$2) AS started,
+      (SELECT count(*)::int FROM ad_reward_intents WHERE user_id=$1 AND reward_kind='daily_mix' AND status='completed' AND (completed_at AT TIME ZONE 'Europe/London')::date=$2::date) AS unlocked`,
+    [user, today],
+  );
+  return result.rows[0];
 }
 async function claim(db, user, kind, ref, code, snapshot) {
   return (
@@ -428,6 +437,7 @@ async function state(user) {
   const monetisation = await transaction((db) =>
     refreshMonetisation(db, user, true),
   );
+  const mixAllowance = await dailyMixAllowance(pool, user);
   const profile = (
     await pool.query("SELECT gender_identity FROM users WHERE id=$1", [user])
   ).rows[0];
@@ -572,6 +582,7 @@ async function state(user) {
       coins: config.economy.base_daily_mix_coins,
       box: "daily_free",
       chestPurchased,
+      extraMixReady: mixAllowance.unlocked >= mixAllowance.started,
     },
     monetisation: {
       plan: monetisation.account_plan,
@@ -808,7 +819,7 @@ async function mutate(user, route, b) {
       await migrateLoadout(db, user);
     if (route === "ad-intent") {
       requireThat(
-        ["token", "xp_boost"].includes(b.rewardKind),
+        ["token", "xp_boost", "daily_mix"].includes(b.rewardKind),
         "Choose a valid ad reward.",
       );
       requireThat(
@@ -841,6 +852,11 @@ async function mutate(user, route, b) {
       requireThat(
         b.rewardKind !== "xp_boost" || !entitlement.xp_boost_pending,
         "Your next-game XP boost is already ready.",
+        409,
+      );
+      requireThat(
+        b.rewardKind !== "daily_mix" || entitlement.account_plan === "free",
+        "Your plan already includes unlimited Daily Mixes.",
         409,
       );
       const recent = Number(
@@ -893,7 +909,9 @@ async function mutate(user, route, b) {
           message:
             intent.reward_kind === "token"
               ? "Token already added."
-              : "Your next-game XP boost is ready.",
+              : intent.reward_kind === "daily_mix"
+                ? "Another Daily Mix is ready."
+                : "Your next-game XP boost is ready.",
         };
       requireThat(
         intent.status === "pending" && new Date(intent.expires_at) > new Date(),
@@ -929,7 +947,7 @@ async function mutate(user, route, b) {
             entitlement.tokenConfig.capacity,
           ],
         );
-      else
+      else if (intent.reward_kind === "xp_boost")
         await db.query(
           "UPDATE user_monetisation SET xp_boost_pending=true,xp_boost_granted_at=now(),updated_at=now() WHERE user_id=$1",
           [user],
@@ -938,7 +956,9 @@ async function mutate(user, route, b) {
         message:
           intent.reward_kind === "token"
             ? "+1 practice token"
-            : "2× XP is ready for your next game",
+            : intent.reward_kind === "daily_mix"
+              ? "Another Daily Mix is ready"
+              : "2× XP is ready for your next game",
       };
     }
     if (route === "start-minigame") {
@@ -973,6 +993,10 @@ async function mutate(user, route, b) {
         };
       const sid = crypto.randomUUID(),
         xpMultiplier = await beginPaidSession(db, user);
+      if (mode === "daily_mix" && (await refreshMonetisation(db, user, true)).account_plan === "free") {
+        const allowance = await dailyMixAllowance(db, user);
+        requireThat(allowance.started === 0 || allowance.unlocked >= allowance.started, "Watch an ad to unlock another Daily Mix.", 409);
+      }
       await db.query(
         "INSERT INTO study_sessions(id,user_id,learning_session_ref,mode,started_at,study_date,xp_multiplier,token_spent) VALUES($1,$2,$3,$4,now(),$5,$6,true)",
         [sid, user, user + ":" + b.sessionRef, mode, date(), xpMultiplier],
@@ -1519,6 +1543,10 @@ async function mutate(user, route, b) {
       if (!play) {
         const sid = crypto.randomUUID(),
           multiplier = await beginPaidSession(db, user);
+        if (mode === "daily_mix" && (await refreshMonetisation(db, user, true)).account_plan === "free") {
+          const allowance = await dailyMixAllowance(db, user);
+          requireThat(allowance.started === 0 || allowance.unlocked >= allowance.started, "Watch an ad to unlock another Daily Mix.", 409);
+        }
         await db.query(
           "INSERT INTO study_sessions(id,user_id,learning_session_ref,mode,started_at,study_date,xp_multiplier,token_spent) VALUES($1,$2,$3,$4,now(),$5,$6,true)",
           [sid, user, user + ":" + b.sessionRef, mode, date(), multiplier],

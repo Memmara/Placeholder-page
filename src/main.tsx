@@ -491,6 +491,8 @@ function App({
   const [inviteOpen, setInviteOpen] = useState(false),
     [tokenPrompt, setTokenPrompt] = useState(false),
     [tokenPromptMessage, setTokenPromptMessage] = useState("");
+  const [mixPrompt, setMixPrompt] = useState(false);
+  const [mixPromptMessage, setMixPromptMessage] = useState("");
   useEffect(() => {
     const dismissed =
       "memmara.invite.dismissed." + user.id + "." + (user.loginCount ?? 0);
@@ -906,11 +908,20 @@ function App({
       setNotice("+1 practice token added.");
     } else setTokenPromptMessage("Ad unavailable, try again later.");
   }
+  async function watchForMix() {
+    setMixPromptMessage("");
+    const result = await rewardedAds.showRewardedAd("daily_mix");
+    if (result.status === "rewarded") {
+      await game.refresh();
+      setMixPrompt(false);
+      await start(undefined, false, true);
+    } else setMixPromptMessage(result.message);
+  }
   function noTokens() {
     const state = game.data?.monetisation;
     return !!state && !state.unlimited && state.tokens <= 0;
   }
-  async function start(topic?: string, speed = false) {
+  async function start(topic?: string, speed = false, mixUnlocked = false) {
     if (!bank) return;
     const same =
       active &&
@@ -928,6 +939,11 @@ function App({
     if (same) {
       setPage("session");
       history.replaceState(null, "", "/daily-mix");
+      return;
+    }
+    if (!topic && !speed && completed && game.data?.monetisation.plan === "free" && !game.data.daily.extraMixReady && !mixUnlocked) {
+      setMixPromptMessage("");
+      setMixPrompt(true);
       return;
     }
     if (noTokens()) {
@@ -953,6 +969,7 @@ function App({
     } catch (error) {
       const message = error instanceof Error ? error.message : "This practice could not start.";
       if (message.toLowerCase().includes("token")) sendToShop();
+      else if (message.includes("another Daily Mix")) setMixPrompt(true);
       else setNotice(message);
       return;
     }
@@ -1514,6 +1531,22 @@ function App({
           </section>
         </div>
       )}
+      {mixPrompt && (
+        <div className="token-prompt-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setMixPrompt(false); }}>
+          <section className="token-prompt" role="dialog" aria-modal="true" aria-labelledby="mix-prompt-title">
+            <button className="icon-button token-prompt-close" aria-label="Close" onClick={() => setMixPrompt(false)}><X size={19}/></button>
+            <span className="token-prompt-icon"><Sparkles size={30}/></span>
+            <p className="eyebrow">EXTRA DAILY MIX</p>
+            <h2 id="mix-prompt-title">Ready for another mix?</h2>
+            <p>Watch an ad to unlock one extra Daily Mix today. Starting it still costs one practice token.</p>
+            {mixPromptMessage && <p className="banner warning" role="alert">{mixPromptMessage}</p>}
+            <div className="token-prompt-actions">
+              <button className="primary" disabled={!!rewardedAds.busy} onClick={() => void watchForMix()}><Sparkles size={17}/>{rewardedAds.busy === "daily_mix" ? "Opening ad…" : "Watch ad and start mix"}</button>
+              <button className="secondary" onClick={() => setMixPrompt(false)}>Maybe later</button>
+            </div>
+          </section>
+        </div>
+      )}
       {rewardQueue.length > 0 && (
         <div className="reward-popup" key={rewardQueue[0]} role="status">
           <Trophy size={23} />
@@ -1755,7 +1788,7 @@ function App({
             >
               {s.theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
             </button>
-            <span className="avatar small">A</span>
+            <button className="avatar small topbar-avatar" aria-label={`Open ${user.displayName}'s profile`} onClick={() => navigate("profile")}>{user.displayName[0]?.toUpperCase()}</button>
           </div>
         </div>
         {!online && (
@@ -2135,7 +2168,9 @@ function App({
                           </h2>
                           <p>
                             {completed
-                              ? "Your next review will be here when you’re ready. No more practice needed today."
+                              ? game.data?.monetisation.plan === "free"
+                                ? "You can do another mix today after a rewarded ad. Each mix still costs a practice token."
+                                : "You can keep practising with another mix. Each mix still costs a practice token."
                               : active && session.isDaily
                                 ? "Your mix is saved. Pick up exactly where you left off."
                                 : "Random practice across your chosen subjects, including two previously tricky specification points when available."}
@@ -2177,21 +2212,10 @@ function App({
                         </div>
                       </div>
                       <div className="mix-bottom">
-                        {completed && !active ? (
-                          <button
-                            className="primary"
-                            onClick={() => navigate("progress")}
-                          >
-                            See your progress <ArrowRight size={18} />
-                          </button>
-                        ) : (
-                          <button className="primary" onClick={() => start()}>
-                            {active && session.isDaily
-                              ? "Continue my mix"
-                              : "Start my mix"}
-                            <ArrowRight size={19} />
-                          </button>
-                        )}
+                        <button className="primary" onClick={() => start()}>
+                          {active && session.isDaily ? "Continue my mix" : completed ? "Start another mix" : "Start my mix"}
+                          <ArrowRight size={19} />
+                        </button>
                         <span className="subject-pill">
                           <Atom size={15} />
                           Your subjects

@@ -89,6 +89,10 @@ export async function seed(){
   const consumerPurchasesApplied=(await db.query("SELECT sha256 FROM public.memmara_schema_migrations WHERE id='011_consumer_purchases'")).rows[0];
   if(consumerPurchasesApplied&&consumerPurchasesApplied.sha256!==consumerPurchasesHash)throw Error('Consumer purchases migration changed after it was applied.');
   if(!consumerPurchasesApplied){await db.query(consumerPurchasesMigration);await db.query("INSERT INTO public.memmara_schema_migrations(id,sha256) VALUES('011_consumer_purchases',$1)",[consumerPurchasesHash]);}
+  const dailyMixMigration=fs.readFileSync(path.join(root,'database/migrations/012-extra-daily-mix.sql'),'utf8'),dailyMixHash=crypto.createHash('sha256').update(dailyMixMigration).digest('hex');
+  const dailyMixApplied=(await db.query("SELECT sha256 FROM public.memmara_schema_migrations WHERE id='012_extra_daily_mix'")).rows[0];
+  if(dailyMixApplied&&dailyMixApplied.sha256!==dailyMixHash)throw Error('Extra Daily Mix migration changed after it was applied.');
+  if(!dailyMixApplied){await db.query(dailyMixMigration);await db.query("INSERT INTO public.memmara_schema_migrations(id,sha256) VALUES('012_extra_daily_mix',$1)",[dailyMixHash]);}
   await db.query("UPDATE subjects SET available=true WHERE id IN ('chemistry','maths','geography')");
   for(const subject of ['biology','chemistry','physics','maths'])await db.query('INSERT INTO subjects(id,name,available) VALUES($1,$2,false) ON CONFLICT DO NOTHING',['alevel_'+subject,'A-Level '+subject[0].toUpperCase()+subject.slice(1)]);
   await db.query("INSERT INTO seasonal_events(id,name,starts_at,ends_at,edition,claim_grace_ends_at,config) VALUES('season_01','Founding Scholars', '2026-10-19','2027-01-11',1,'2027-01-18','{}') ON CONFLICT DO NOTHING");

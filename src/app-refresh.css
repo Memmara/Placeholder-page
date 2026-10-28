@@ -71,6 +71,12 @@
 .topbar-right {
   gap: 12px;
 }
+.topbar-avatar {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+}
 .breadcrumb {
   font-size: 12px;
   letter-spacing: 0.02em;

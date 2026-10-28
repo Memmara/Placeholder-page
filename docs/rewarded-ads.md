@@ -25,12 +25,16 @@ An unavailable, failed, timed-out, cancelled, or early-closed ad leaves the rewa
 
 ## Token regeneration
 
-- Free accounts start with two organic practice tokens.
-- One token regenerates every five hours until the organic balance reaches two.
-- A rewarded ad adds one token and may temporarily raise the balance to three.
-- Starting the first answered question of a new server session spends one token atomically.
-- Going from two tokens to one starts the five-hour clock. A balance of two or three has no refill timer.
-- Premium and school plans retain the same database shape but do not spend practice tokens.
+- Free accounts start with one organic practice token.
+- One token regenerates every five hours when the organic balance is empty.
+- A rewarded ad adds one token and may temporarily raise the balance to two.
+- Starting a new server practice session spends one token atomically.
+- Spending the last organic token starts the five-hour clock. A full organic balance has no refill timer.
+- Plus users can start unlimited Daily Mixes, with one token spent per mix. Pro and school plans have unlimited practice tokens.
+
+## Extra Daily Mix
+
+Free users can start one Daily Mix per day. Each additional mix needs a completed rewarded ad to unlock it and still spends one practice token. The API counts completed Daily Mix ad rewards and started Daily Mix sessions for the Europe/London study date before allowing another session.
 
 ## XP boost
 

@@ -19,6 +19,7 @@ const plans = [
       "No rewarded ads for XP",
       "8 regenerating tokens",
       "One token every 2 hours",
+      "Unlimited Daily Mixes (one token per mix)",
       "AI marking is planned for a future release",
     ],
   },

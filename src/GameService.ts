@@ -86,7 +86,7 @@ export interface GameState {
   ledger: { amount: number; reason: string; created_at: string }[];
   historyImported: boolean;
   stats: { sessions: number };
-  daily: { qualified: boolean; coins: number; chestPurchased: boolean };
+  daily: { qualified: boolean; coins: number; chestPurchased: boolean; extraMixReady: boolean };
   monetisation: MonetisationState;
   progression: { level: string; xp_projection: string };
   levelRewards?: {
@@ -104,7 +104,7 @@ export interface GameState {
 }
 export interface AdIntent {
   id: string;
-  rewardKind: "token" | "xp_boost";
+  rewardKind: "token" | "xp_boost" | "daily_mix";
   provider: "web_google" | "admob" | "development";
   completionToken: string;
   expiresAt: string;
@@ -322,11 +322,14 @@ async function previewAction(
         state.monetisation.tokens + 1,
       );
     if (kind === "xp_boost") state.monetisation.xpBoostPending = true;
+    if (kind === "daily_mix") state.daily.extraMixReady = true;
     return success(
-      kind === "token" ? "+1 preview practice token" : "2× preview XP is ready",
+      kind === "token" ? "+1 preview practice token" : kind === "daily_mix" ? "Another Daily Mix is ready" : "2× preview XP is ready",
     );
   }
   if (route === "start-minigame") {
+    if (body.mode === "daily" && state.monetisation.plan === "free" && state.daily.qualified && !state.daily.extraMixReady)
+      throw Error("Watch an ad to unlock another Daily Mix.");
     if (!state.monetisation.unlimited) {
       if (state.monetisation.tokens <= 0)
         throw Error("You have no practice tokens. Visit the Shop to continue.");
@@ -336,6 +339,7 @@ async function previewAction(
         (state.monetisation.organicTokens ?? state.monetisation.tokens + 1) - 1,
       );
     }
+    if (body.mode === "daily") state.daily.extraMixReady = false;
     return success("Game started · 1 token used");
   }
   if (route === "minigame-answer") {
