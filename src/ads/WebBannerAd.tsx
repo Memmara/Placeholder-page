@@ -11,7 +11,7 @@ export function WebBannerAd({game,active}:{game:GameController;active:boolean}){
  const enabled=import.meta.env.PROD&&active&&free&&!native&&!!client&&!!slot;
  useEffect(()=>{
   if(!enabled)return;
-  const selector='script[data-memmara-adsense]';
+  const selector='script[data-memmara-adsense],script[src^="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]';
   if(!document.querySelector(selector)){
    const script=document.createElement('script');script.async=true;script.crossOrigin='anonymous';script.dataset.memmaraAdsense='true';script.src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client!)}`;document.head.append(script);
   }
