@@ -92,6 +92,7 @@ import { CourseOptions } from "./CourseOptions";
 import { courseContentValid, normaliseCourseContent } from "./courseContent";
 import { ReviewVault } from "./ReviewVault";
 import { Minigames } from "./Minigames";
+import "./daily-mix.css";
 import { AuthGate, AccountSettings, authRequest, type Account } from "./auth";
 import { RewardedAdsCard } from "./ads/RewardedAdsCard";
 import { NativeBannerAd } from "./ads/NativeBannerAd";
@@ -2798,7 +2799,7 @@ function App({
                   );
                 })()}
               {page === "session" && session && current && (
-                <div className={session.mode === "speed" ? "speed-select-session" : undefined}>
+                <div className={session.mode === "speed" ? "speed-select-session" : session.isDaily ? "daily-mix-session" : undefined}>
                   <div className="session-header">
                     <button
                       className="icon-button"
