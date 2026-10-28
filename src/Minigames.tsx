@@ -8,6 +8,7 @@ import {
   Flame,
   Grid2X2,
   Layers3,
+  Puzzle,
   Trophy,
   X,
 } from "lucide-react";
@@ -38,7 +39,7 @@ const games: {
     name: "Knowledge Tower",
     description:
       "Answer, then stack moving platforms for as long as you can.",
-    icon: Trophy,
+    icon: Layers3,
   },
   {
     id: "survival",
@@ -56,7 +57,7 @@ const games: {
     id: "match",
     name: "Flash Match",
     description: "Pair four terms with their definitions.",
-    icon: Layers3,
+    icon: Puzzle,
   },
   {
     id: "memory",
