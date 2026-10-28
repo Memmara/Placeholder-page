@@ -176,7 +176,15 @@ async function loadPreviewState(): Promise<GameState> {
   const saved = localStorage.getItem(previewStateKey);
   if (saved)
     try {
-      return normalisePreviewState(JSON.parse(saved) as GameState);
+      const state = normalisePreviewState(JSON.parse(saved) as GameState);
+      if (state.achievements.some(a => a.subject && a.subject !== "general")) {
+        const response = await fetch("/data/game-preview.json");
+        if (response.ok) {
+          state.achievements = ((await response.json()) as GameState).achievements;
+          savePreviewState(state);
+        }
+      }
+      return state;
     } catch {
       localStorage.removeItem(previewStateKey);
     }

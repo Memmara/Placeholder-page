@@ -1167,7 +1167,7 @@ export function GameHub({
                 {d.earned.filter((e) => e.unlocked_at).length} /{" "}
                 {d.achievements.length} milestones
               </h2>
-              <p>Effort, patience and growing understanding.</p>
+              <p>Your games, your style, your daily rhythm. Every subject counts.</p>
             </div>
             <button className="secondary" onClick={onPractice}>
               Keep growing <ArrowRight size={16} />
@@ -1177,7 +1177,10 @@ export function GameHub({
             {[
               ["all", "All milestones"],
               ["learning", "Learning"],
+              ["minigames", "Minigames"],
+              ["avatar", "Avatar"],
               ["streak", "Streaks"],
+              ["long_term", "Long-term"],
               ["collection", "Collections"],
               ["earned", "Earned"],
             ].map(([id, label]) => (
@@ -1199,13 +1202,14 @@ export function GameHub({
                     d.earned.some(
                       (e) => e.achievement_id === a.id && e.unlocked_at,
                     )) ||
+                  (tab === "minigames" && a.category === "minigames") ||
+                  (tab === "avatar" && a.category === "avatar") ||
+                  (tab === "long_term" && a.category === "long_term") ||
                   (tab === "collection" && a.category.includes("collection")) ||
                   (tab === "streak" &&
-                    /streak|weekly/.test(a.condition.metric)) ||
+                    (/streak|weekly/.test(a.condition.metric) || a.category === "sign_in" || a.category === "consistency")) ||
                   (tab === "learning" &&
-                    !/streak|weekly|collection|complete_sets/.test(
-                      a.condition.metric,
-                    )),
+                    ["learning", "daily_mix"].includes(a.category)),
               )
               .map((a) => {
                 const got = d.earned.find((e) => e.achievement_id === a.id),

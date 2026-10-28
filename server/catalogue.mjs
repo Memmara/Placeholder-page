@@ -4,10 +4,11 @@ import {fileURLToPath} from 'node:url';
 import crypto from 'node:crypto';
 import pg from 'pg';
 import assets from './runtime-assets.mjs';
+import {achievementCatalogue} from './achievement-catalogue.mjs';
 import {economicCatalogue,presentationCatalogue,presentationById,exclusionFor} from './presentation.mjs';
 
 export const root=import.meta.url?path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'):process.cwd();
-export const catalogue=presentationCatalogue,sets=assets.sets,achievements=assets.achievements,levels=assets.levels,boxes=assets.boxes,config=assets.config;
+export const catalogue=presentationCatalogue,sets=assets.sets,achievements=achievementCatalogue(assets.achievements),levels=assets.levels,boxes=assets.boxes,config=assets.config;
 export const byId=new Map(catalogue.map(i=>[i.id,i]));
 const applicationDatabaseUrl=process.env.MEMMARA_DATABASE_URL||process.env.DATABASE_URL_UNPOOLED||process.env.DATABASE_URL;
 const databaseConfig=applicationDatabaseUrl?{connectionString:applicationDatabaseUrl}:JSON.parse(fs.readFileSync(path.join(root,'.local-db/credentials.json'),'utf8'));
@@ -110,8 +111,8 @@ export async function seed(){
     VALUES($1,2,$2,$3,$4,$5,$6) ON CONFLICT(item_id) DO UPDATE SET display_name=excluded.display_name,visual_category=excluded.visual_category,display_slot=excluded.display_slot,exclusion_group=excluded.exclusion_group,metadata=excluded.metadata`,[i.id,visual.name,visual.category,visual.slot,exclusionFor(visual),visual.presentation]);
   }
   for(const a of achievements){
-   await db.query('INSERT INTO unlock_conditions(id,condition_ast,metric_version,description) VALUES($1,$2,1,$3) ON CONFLICT DO NOTHING',['condition_'+a.id,a.condition,a.description]);
-   await db.query('INSERT INTO achievements(id,name,category,subject_id,condition_id,hidden,prestige_points,reward) VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT DO NOTHING',[a.id,a.name,a.category,a.subject??'general','condition_'+a.id,a.hidden,a.reward.prestige_points||10,a.reward]);
+   await db.query('INSERT INTO unlock_conditions(id,condition_ast,metric_version,description) VALUES($1,$2,1,$3) ON CONFLICT(id) DO UPDATE SET condition_ast=excluded.condition_ast,description=excluded.description',['condition_'+a.id,a.condition,a.description]);
+   await db.query('INSERT INTO achievements(id,name,category,subject_id,condition_id,hidden,prestige_points,reward) VALUES($1,$2,$3,$4,$5,$6,$7,$8) ON CONFLICT(id) DO UPDATE SET name=excluded.name,category=excluded.category,subject_id=excluded.subject_id,condition_id=excluded.condition_id,hidden=excluded.hidden,prestige_points=excluded.prestige_points,reward=excluded.reward',[a.id,a.name,a.category,a.subject??'general','condition_'+a.id,a.hidden,a.reward.prestige_points||10,a.reward]);
   }
   // Replace the curve as one transaction. Row-by-row updates can temporarily
   // collide with the unique total_xp value held by another existing level.

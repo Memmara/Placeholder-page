@@ -31,6 +31,7 @@ import { practiceLevel, streakBoost, streakStats } from "../src/engine.ts";
 import { handleAuth, authenticatedUser, rate } from "./auth.mjs";
 import { handleOAuth } from "./oauth.mjs";
 import { handleCommerce, commerceConfigured } from "./commerce.mjs";
+import { bestDailyStreak } from "./achievement-catalogue.mjs";
 
 const production =
   process.env.NODE_ENV === "production" ||
@@ -443,8 +444,14 @@ async function addXp(db, user, amount, kind, ref, session = null) {
       await awardLevel(db, user, l);
   return amount;
 }
-async function state(user) {
-  await transaction((db) => migrateLoadout(db, user));
+async function state(user, checkAchievements = true) {
+  await transaction(async (db) => {
+    await db.query("SELECT id FROM users WHERE id=$1 FOR UPDATE", [user]);
+    await migrateLoadout(db, user);
+    // One visit per London calendar day, including persistent signed-in visits.
+    const firstVisit = await claim(db, user, "achievement_activity", date(), "visit", {});
+    if (checkAchievements || firstVisit) await updateAchievements(db, user);
+  });
   const monetisation = await transaction((db) =>
     refreshMonetisation(db, user, true),
   );
@@ -665,18 +672,34 @@ async function updateAchievements(db, user) {
       [user],
     )
   ).rows;
-  const subjectCount = (
-    await db.query(
-      "SELECT count(DISTINCT e.subject_id)::int AS n FROM study_events e JOIN study_sessions s ON s.id=e.session_id WHERE e.user_id=$1 AND s.verified",
-      [user],
-    )
-  ).rows[0].n;
+  const activity = (await db.query(`
+    SELECT source_ref AS day FROM reward_claims
+    WHERE user_id=$1 AND source_kind='achievement_activity' AND reward_code='visit'
+    UNION SELECT (created_at AT TIME ZONE 'Europe/London')::date::text
+    FROM auth_sessions WHERE user_id=$1`, [user])).rows.map(row=>row.day);
+  const arcade = (await db.query(`SELECT count(*)::int AS runs,
+    count(DISTINCT study_date)::int AS days FROM study_sessions s
+    WHERE user_id=$1 AND (verified_metrics @> '{"minigame":true}'::jsonb
+      OR (mode='speed_select' AND EXISTS(SELECT 1 FROM study_events e WHERE e.user_id=$1 AND e.session_id=s.id)))`, [user])).rows[0];
+  const collectionMetrics = (await db.query(`SELECT
+    (SELECT count(*)::int FROM cosmetic_equipped_items WHERE user_id=$1) AS slots,
+    (SELECT count(*)::int FROM outfits WHERE user_id=$1) AS outfits,
+    (SELECT count(*)::int FROM reward_claims WHERE user_id=$1 AND source_kind='minigame') AS arcade_correct,
+    EXISTS(SELECT 1 FROM reward_claims WHERE user_id=$1 AND source_kind='achievement_activity' AND reward_code='avatar_customised') AS customised`, [user])).rows[0];
   const epicPets = EPIC_PET_COHORT.map((id) => ({ id }));
   const metrics = {
     qualifying_sessions: sessions.length,
     distinct_independent_answers: counts.independent,
     distinct_delayed_success_points: counts.delayed,
-    distinct_studied_subjects: subjectCount,
+    sign_in_days: new Set(activity).size,
+    best_sign_in_streak: bestDailyStreak(activity),
+    best_practice_streak: bestDailyStreak(days),
+    minigame_runs: arcade.runs,
+    minigame_days: arcade.days,
+    minigame_correct_rewards: collectionMetrics.arcade_correct,
+    avatar_customised: collectionMetrics.customised ? 1 : 0,
+    equipped_slots: collectionMetrics.slots,
+    saved_outfits: collectionMetrics.outfits,
     protected_daily_streak: streak.daily,
     unique_daily_mix_dates: days.length,
     qualifying_weeks: [...weeks.values()].filter((n) => n >= 3).length,
@@ -699,97 +722,17 @@ async function updateAchievements(db, user) {
     )
   ).rows[0].n;
   metrics.distinct_recovered_points = recovered;
-  const already = new Set(
-    (
-      await db.query(
-        "SELECT achievement_id FROM user_achievements WHERE user_id=$1 AND unlocked_at IS NOT NULL",
-        [user],
-      )
-    ).rows.map((a) => a.achievement_id),
-  );
+  const previous = new Map((await db.query(
+    "SELECT achievement_id,progress,unlocked_at FROM user_achievements WHERE user_id=$1", [user],
+  )).rows.map(a=>[a.achievement_id,a]));
+  const already = new Set([...previous.values()].filter(a=>a.unlocked_at).map(a=>a.achievement_id));
   const unlocked = [];
+  const updates = [];
   for (const a of achievements) {
     if (already.has(a.id)) continue;
     let value = metrics[a.condition.metric] ?? 0;
-    if (
-      a.condition.metric.startsWith("mastery_coverage_ratio:") &&
-      ["biology", "chemistry", "physics", "maths", "geography"].includes(
-        a.subject,
-      )
-    ) {
-      const written = qmap.size
-        ? questions
-            .filter(
-              (q) =>
-                q.question_type !== "multiple_choice" &&
-                q.question_id.startsWith(
-                  a.subject === "biology"
-                    ? "AQA8461"
-                    : a.subject === "chemistry"
-                      ? "AQA8462"
-                      : a.subject === "maths"
-                        ? "AQA8300"
-                        : a.subject === "geography"
-                          ? "AQA8035"
-                          : "AQA8463",
-                ),
-            )
-            .map((q) => q.question_id)
-        : (
-            await db.query(
-              "SELECT question_id FROM content_questions WHERE subject_id=$1 AND question_type<>'multiple_choice' AND active",
-              [a.subject],
-            )
-          ).rows.map((q) => q.question_id);
-      const points = (
-        await db.query(
-          `SELECT specification_point_ref,count(DISTINCT (occurred_at AT TIME ZONE 'Europe/London')::date)::int AS days FROM study_events WHERE user_id=$1 AND subject_id=$2 AND outcome='correct' AND independent AND delayed AND verified AND question_ref=ANY($3::text[]) GROUP BY specification_point_ref`,
-          [user, a.subject, written],
-        )
-      ).rows;
-      // Geography includes mutually exclusive options: 40 common points + 3 environment + 6 landscapes + 2 resource points.
-      const course =
-        a.subject === "geography"
-          ? 51
-          : qmap.size
-            ? curriculum.filter(
-                (p) =>
-                  p.subject_id ===
-                  (a.subject === "biology"
-                    ? "GCSE-BIOLOGY"
-                    : a.subject === "chemistry"
-                      ? "GCSE-CHEMISTRY"
-                      : a.subject === "maths"
-                        ? "GCSE-MATHS"
-                        : "GCSE-PHYSICS"),
-              ).length
-            : Number(
-                (
-                  await db.query(
-                    "SELECT count(*) FROM content_curriculum WHERE subject_id=$1 AND active",
-                    [a.subject],
-                  )
-                ).rows[0].count,
-              );
-      const studyDays = Number(
-        (
-          await db.query(
-            "SELECT count(DISTINCT (occurred_at AT TIME ZONE 'Europe/London')::date) FROM study_events WHERE user_id=$1 AND subject_id=$2 AND independent AND verified",
-            [user, a.subject],
-          )
-        ).rows[0].count,
-      );
-      value =
-        studyDays >= (a.filters?.min_distinct_days ?? 3)
-          ? points.filter(
-              (p) =>
-                p.days >=
-                (a.filters?.min_independent_delayed_success_days_per_point ??
-                  3),
-            ).length / Math.max(1, course)
-          : 0;
-    }
     const complete = value >= a.condition.target;
+    if (!complete && Number(previous.get(a.id)?.progress) === value) continue;
     let cid = null;
     if (complete) {
       cid = await claim(db, user, "achievement", a.id, "achievement", a.reward);
@@ -822,11 +765,14 @@ async function updateAchievements(db, user) {
         unlocked.push(a.name);
       }
     }
-    await db.query(
-      "INSERT INTO user_achievements(user_id,achievement_id,progress,unlocked_at,reward_claim_id) VALUES($1,$2,$3,$4,$5) ON CONFLICT(user_id,achievement_id) DO UPDATE SET progress=excluded.progress,unlocked_at=COALESCE(user_achievements.unlocked_at,excluded.unlocked_at),reward_claim_id=COALESCE(user_achievements.reward_claim_id,excluded.reward_claim_id)",
-      [user, a.id, value, complete ? new Date() : null, cid],
-    );
+    updates.push({achievement_id:a.id,progress:value,unlocked_at:complete?new Date():null,reward_claim_id:cid});
   }
+  if(updates.length) await db.query(`INSERT INTO user_achievements(user_id,achievement_id,progress,unlocked_at,reward_claim_id)
+    SELECT $1,achievement_id,progress,unlocked_at,reward_claim_id
+    FROM jsonb_to_recordset($2::jsonb) AS x(achievement_id text,progress numeric,unlocked_at timestamptz,reward_claim_id uuid)
+    ON CONFLICT(user_id,achievement_id) DO UPDATE SET progress=excluded.progress,
+    unlocked_at=COALESCE(user_achievements.unlocked_at,excluded.unlocked_at),
+    reward_claim_id=COALESCE(user_achievements.reward_claim_id,excluded.reward_claim_id)`,[user,JSON.stringify(updates)]);
   return unlocked;
 }
 async function mutate(user, route, b) {
@@ -1208,6 +1154,7 @@ async function mutate(user, route, b) {
           !!b.reducedMotion,
         ],
       );
+      await claim(db, user, "achievement_activity", "appearance", "avatar_customised", {});
       return { message: "Avatar saved" };
     }
     if (route === "wishlist") {
@@ -2059,6 +2006,10 @@ export async function handleApiRequest(req, res) {
         "buy",
         "buy-box",
         "open-box",
+        "appearance",
+        "equip",
+        "outfit",
+        "wear-outfit",
       ].includes(route)
     ) {
       const unlocked = await transaction(async (db) => {
@@ -2087,7 +2038,7 @@ export async function handleApiRequest(req, res) {
       res.end(JSON.stringify(result));
       return;
     }
-    res.end(JSON.stringify({ ...result, state: await state(user) }));
+    res.end(JSON.stringify({ ...result, state: await state(user, false) }));
   } catch (e) {
     res.statusCode = e.status ?? 500;
     if (!e.status) console.error("Game API:", e.code ?? e.name, e.message);
