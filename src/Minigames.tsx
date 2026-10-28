@@ -54,7 +54,7 @@ const games: {
     id: "tower",
     name: "Knowledge Tower",
     description:
-      "Answer, then time each moving platform to build a ten-floor tower.",
+      "Answer, then stack moving platforms for as long as you can.",
     icon: Trophy,
   },
   {
@@ -99,6 +99,8 @@ function TowerScene({
   placing: boolean;
   onPlace: () => void;
 }) {
+  const cameraOffset = Math.max(0, blocks.length - 11) * 23;
+  const firstVisibleBlock = Math.max(0, blocks.length - 13);
   return (
     <div
       className={"tower-stage " + (placing ? "is-placing" : "")}
@@ -110,21 +112,26 @@ function TowerScene({
         <i />
       </div>
       <div className="tower-stack">
-        {blocks.map((block, index) => (
-          <span
-            className={
-              "tower-block " +
-              (index === 0 ? "tower-base " : "") +
-              (block.perfect ? "perfect" : "")
-            }
-            key={index}
-            style={{
-              left: `${block.left}%`,
-              width: `${block.width}%`,
-              bottom: `${10 + index * 23}px`,
-            }}
-          />
-        ))}
+        {blocks
+          .slice(firstVisibleBlock)
+          .map((block, visibleIndex) => {
+            const index = firstVisibleBlock + visibleIndex;
+            return (
+              <span
+                className={
+                  "tower-block " +
+                  (index === 0 ? "tower-base " : "") +
+                  (block.perfect ? "perfect" : "")
+                }
+                key={index}
+                style={{
+                  left: block.left + "%",
+                  width: block.width + "%",
+                  bottom: 10 + index * 23 - cameraOffset + "px",
+                }}
+              />
+            );
+          })}
         {placing && (
           <button
             type="button"
@@ -132,7 +139,7 @@ function TowerScene({
             style={{
               left: `${movingLeft}%`,
               width: `${movingWidth}%`,
-              bottom: `${10 + blocks.length * 23}px`,
+              bottom: 10 + blocks.length * 23 - cameraOffset + "px",
             }}
             onClick={onPlace}
             aria-label="Place moving platform"
@@ -274,7 +281,7 @@ export function Minigames({
     if (mode !== "tower" || !towerPlacing || finished) return;
     let frame = 0;
     const range = Math.max(0, 100 - movingWidth),
-      speed = 34 + tower * 3.5;
+      speed = 34 + Math.floor(tower / 10) * 8;
     towerMovementStarted.current = performance.now();
     const move = (now: number) => {
       const distance = ((now - towerMovementStarted.current) / 1000) * speed,
@@ -471,10 +478,6 @@ export function Minigames({
     setTower(nextTower);
     setScore(nextTower);
     setFeedback(perfect ? "Perfect placement!" : "Platform placed.");
-    if (nextTower >= 10) {
-      window.setTimeout(() => complete(nextTower), 450);
-      return;
-    }
     window.setTimeout(() => {
       setRound((value) => value + 1);
       setFeedback("");
@@ -688,7 +691,7 @@ export function Minigames({
                 <Flame size={16} /> {streak} streak
               </span>
             )}
-            {mode === "tower" && <span>{tower}/10 floors</span>}
+            {mode === "tower" && <span>{tower} floors</span>}
           </div>
           {finished ? (
             <div className="minigame-finish">
