@@ -1,6 +1,539 @@
-.subject-tier-grid{display:grid;gap:12px;margin-bottom:20px}.subject-tier-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 14px;border:1px solid var(--line,#344058);border-radius:15px}.subject-tier-row .segmented{margin:0}.subject-tier-row strong{min-width:110px}.review-vault{margin:22px 0}.review-vault>.section-heading{margin-bottom:6px}.vault-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.vault-stats>div{display:flex;align-items:center;gap:8px;padding:14px;border-radius:14px;background:rgba(102,193,206,.08)}.vault-stats strong{font-size:1.35rem}.vault-stats span{font-size:.82rem}.vault-list{display:grid;gap:8px}.vault-list>div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(160,174,202,.15)}.vault-list small{white-space:nowrap}.vault-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}.minigame-controls{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:24px 0}.minigame-controls label{display:flex;align-items:center;gap:10px}.minigame-controls select{max-width:220px}.minigame-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}.minigame-card{display:flex;flex-direction:column;align-items:flex-start;min-height:225px}.minigame-card>svg{color:#70d9d4}.minigame-card h2{margin:14px 0 2px}.minigame-card p{flex:1}.minigame-card button{margin-top:12px}.minigame-play{margin-top:20px;padding:24px}.minigame-hud{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}.minigame-hud span{display:inline-flex;align-items:center;gap:6px}.minigame-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0}.minigame-options button,.match-columns button,.memory-grid button{padding:15px;text-align:left;border-radius:14px;border:1px solid rgba(161,180,213,.28);background:rgba(98,127,168,.09);color:inherit;cursor:pointer}.minigame-options button:hover,.match-columns button:hover,.memory-grid button:hover{border-color:#67d6cf;background:rgba(103,214,207,.13)}.minigame-options button span{display:inline-grid;place-items:center;width:28px;height:28px;margin-right:10px;border-radius:8px;background:rgba(103,214,207,.15)}.minigame-options button:disabled,.match-columns button:disabled,.memory-grid button:disabled{opacity:.55;cursor:default}.minigame-progress{display:flex;gap:5px;margin:12px 0}.minigame-progress>span{width:25px;height:18px;border-radius:4px;background:rgba(148,163,190,.18)}.minigame-progress>span.built{background:#67d6cf}.boss-health{width:100%;height:14px;background:rgba(255,255,255,.1);border-radius:20px;overflow:hidden}.boss-health span{display:block;height:100%;background:linear-gradient(90deg,#e16792,#f4b16e);transition:width .35s}.match-columns{display:grid;grid-template-columns:1fr 1.5fr;gap:12px;margin:18px 0}.match-columns>div{display:grid;gap:9px}.match-columns button.selected{border-color:#70d9d4;background:rgba(103,214,207,.2)}.memory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}.memory-grid button{display:grid;gap:8px;min-height:115px}.memory-grid button span{font-size:.92rem}.minigame-feedback{margin:14px 0 0;font-weight:700;color:#72d8c5}.minigame-finish{text-align:center;padding:30px}.minigame-finish svg{color:#f3ca78}.minigame-finish button{margin:auto}.minigames-home-tile{display:flex;align-items:center;gap:18px;margin:24px 0;padding:22px}.minigames-home-tile .grow{flex:1}.minigames-home-tile h2{margin:3px 0}.minigames-home-tile p{margin:0}@media(max-width:720px){.subject-tier-row,.vault-footer,.minigame-controls{align-items:stretch;flex-direction:column}.vault-stats{grid-template-columns:1fr}.vault-list>div{display:grid}.minigame-options,.match-columns{grid-template-columns:1fr}.minigames-home-tile{flex-wrap:wrap}}
-.level-reward-preview{padding:16px;margin:14px 0;border-radius:16px;background:rgba(112,217,212,.08)}.level-reward-preview h3{margin:0 0 7px}.level-reward-preview p{margin:0 0 12px}.level-reward-items{display:flex;gap:10px;flex-wrap:wrap}.level-reward-items>div{display:grid;gap:3px;width:115px;padding:8px;border:1px solid rgba(170,190,220,.2);border-radius:12px}.level-reward-items canvas{width:100%;height:90px}.level-reward-items small{text-transform:capitalize}
-.milestone-rewards{margin-top:12px;padding:10px;border:1px solid rgba(170,190,220,.18);border-radius:12px}.milestone-rewards summary{display:flex;align-items:center;gap:6px;cursor:pointer}.milestone-gear{display:grid;gap:8px;margin-top:12px}.milestone-gear button{display:flex;align-items:center;gap:10px;width:100%;padding:8px;text-align:left;border:1px solid rgba(170,190,220,.2);border-radius:10px;background:rgba(112,217,212,.07);color:inherit;cursor:pointer}.milestone-gear button>span{display:grid}.milestone-gear canvas{width:64px;height:64px}.milestone-gear small{text-transform:capitalize}
-.reward-popup{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:12px;max-width:min(90vw,480px);padding:14px 18px;border:1px solid rgba(251,215,128,.65);border-radius:18px;background:linear-gradient(135deg,#252844,#38335a);box-shadow:0 20px 50px rgba(0,0,0,.35);color:#fff;animation:reward-enter .55s cubic-bezier(.2,1.4,.3,1) both}.reward-popup>svg{flex:none;color:#f7ce71}.reward-popup strong{flex:1}.reward-popup button{color:#fff}@keyframes reward-enter{from{opacity:0;transform:translate(-50%,-35px) scale(.8)}70%{transform:translate(-50%,5px) scale(1.04)}to{opacity:1;transform:translate(-50%,0) scale(1)}}@media(prefers-reduced-motion:reduce){.reward-popup{animation:none}}
-.vault-details{margin-top:10px;padding:10px 0;border-top:1px solid rgba(160,174,202,.15)}.vault-details summary{cursor:pointer;font-weight:700}.vault-details p{margin:8px 0;font-size:.88rem}
-.minigame-subjects{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;max-width:780px;margin:0;padding:0;border:0}.minigame-subjects legend{width:100%;margin-bottom:7px;font-weight:700}.minigame-subjects label{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px}.minigame-subjects label:has(input:checked){border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,var(--surface))}.minigame-subjects input{accent-color:var(--cyan)}
+.subject-tier-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.subject-tier-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 14px;
+  border: 1px solid var(--line, #344058);
+  border-radius: 15px;
+}
+.subject-tier-row .segmented {
+  margin: 0;
+}
+.subject-tier-row strong {
+  min-width: 110px;
+}
+.review-vault {
+  margin: 22px 0;
+}
+.review-vault > .section-heading {
+  margin-bottom: 6px;
+}
+.vault-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 18px 0;
+}
+.vault-stats > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(102, 193, 206, 0.08);
+}
+.vault-stats strong {
+  font-size: 1.35rem;
+}
+.vault-stats span {
+  font-size: 0.82rem;
+}
+.vault-list {
+  display: grid;
+  gap: 8px;
+}
+.vault-list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(160, 174, 202, 0.15);
+}
+.vault-list small {
+  white-space: nowrap;
+}
+.vault-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+.minigame-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 24px 0;
+}
+.minigame-controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.minigame-controls select {
+  max-width: 220px;
+}
+.minigame-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 16px;
+}
+.minigame-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 225px;
+}
+.minigame-card > svg {
+  color: #70d9d4;
+}
+.minigame-card h2 {
+  margin: 14px 0 2px;
+}
+.minigame-card p {
+  flex: 1;
+}
+.minigame-card button {
+  margin-top: 12px;
+}
+.minigame-play {
+  margin-top: 20px;
+  padding: 24px;
+}
+.minigame-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.minigame-hud span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.minigame-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+.minigame-options button,
+.match-columns button,
+.memory-grid button {
+  padding: 15px;
+  text-align: left;
+  border-radius: 14px;
+  border: 1px solid rgba(161, 180, 213, 0.28);
+  background: rgba(98, 127, 168, 0.09);
+  color: inherit;
+  cursor: pointer;
+}
+.minigame-options button:hover,
+.match-columns button:hover,
+.memory-grid button:hover {
+  border-color: #67d6cf;
+  background: rgba(103, 214, 207, 0.13);
+}
+.minigame-options button span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  border-radius: 8px;
+  background: rgba(103, 214, 207, 0.15);
+}
+.minigame-options button:disabled,
+.match-columns button:disabled,
+.memory-grid button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.minigame-progress {
+  display: flex;
+  gap: 5px;
+  margin: 12px 0;
+}
+.minigame-progress > span {
+  width: 25px;
+  height: 18px;
+  border-radius: 4px;
+  background: rgba(148, 163, 190, 0.18);
+}
+.minigame-progress > span.built {
+  background: #67d6cf;
+}
+.match-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 12px;
+  margin: 18px 0;
+}
+.match-columns > div {
+  display: grid;
+  gap: 9px;
+}
+.match-columns button.selected {
+  border-color: #70d9d4;
+  background: rgba(103, 214, 207, 0.2);
+}
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+.memory-grid button {
+  display: grid;
+  gap: 8px;
+  min-height: 115px;
+}
+.memory-grid button span {
+  font-size: 0.92rem;
+}
+.minigame-feedback {
+  margin: 14px 0 0;
+  font-weight: 700;
+  color: #72d8c5;
+}
+.minigame-finish {
+  text-align: center;
+  padding: 30px;
+}
+.minigame-finish svg {
+  color: #f3ca78;
+}
+.minigame-finish button {
+  margin: auto;
+}
+.minigames-home-tile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 24px 0;
+  padding: 22px;
+}
+.minigames-home-tile .grow {
+  flex: 1;
+}
+.minigames-home-tile h2 {
+  margin: 3px 0;
+}
+.minigames-home-tile p {
+  margin: 0;
+}
+.tower-stage {
+  position: relative;
+  height: 310px;
+  margin: 18px 0 20px;
+  overflow: hidden;
+  border: 1px solid rgba(112, 217, 212, 0.28);
+  border-radius: 22px;
+  background: linear-gradient(180deg, #111a39 0%, #17264b 56%, #233355 100%);
+  box-shadow: inset 0 0 45px rgba(43, 67, 116, 0.4);
+}
+.tower-sky i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dffcff;
+  box-shadow: 0 0 9px #70d9d4;
+  animation: towerTwinkle 1.8s ease-in-out infinite alternate;
+}
+.tower-sky i:nth-child(1) {
+  left: 13%;
+  top: 16%;
+}
+.tower-sky i:nth-child(2) {
+  left: 76%;
+  top: 25%;
+  animation-delay: 0.6s;
+}
+.tower-sky i:nth-child(3) {
+  left: 47%;
+  top: 10%;
+  animation-delay: 1.1s;
+}
+.tower-stack {
+  position: absolute;
+  inset: 0 18px 18px;
+  z-index: 2;
+}
+.tower-block {
+  position: absolute;
+  display: block;
+  height: 19px;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 5px;
+  background: linear-gradient(135deg, #765ee8, #55c7db);
+  box-shadow:
+    0 5px 12px rgba(4, 9, 26, 0.3),
+    inset 0 2px 2px rgba(255, 255, 255, 0.24);
+  transition:
+    left 0.14s ease,
+    width 0.14s ease;
+}
+.tower-block:nth-child(3n + 2) {
+  background: linear-gradient(135deg, #6c79ed, #53d1bc);
+}
+.tower-block:nth-child(3n + 3) {
+  background: linear-gradient(135deg, #9b62df, #6a9eea);
+}
+.tower-block.perfect {
+  background: linear-gradient(135deg, #f3ca78, #67d6cf);
+  box-shadow: 0 0 18px rgba(243, 202, 120, 0.48);
+}
+.tower-base {
+  height: 21px;
+  background: linear-gradient(135deg, #3b557a, #517092);
+  border-color: rgba(195, 230, 255, 0.35);
+}
+.tower-moving {
+  z-index: 4;
+  cursor: pointer;
+  transition: none;
+  animation: towerPulse 0.7s ease-in-out infinite alternate;
+}
+.tower-moving:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+.tower-ground {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 29px;
+  background: linear-gradient(180deg, #32486b, #17233b);
+  border-top: 1px solid rgba(134, 201, 216, 0.25);
+}
+.tower-placement-controls {
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  text-align: center;
+}
+.tower-placement-controls button {
+  min-width: min(100%, 260px);
+}
+.tower-placement-controls p {
+  margin: 0;
+  color: var(--muted, #aab5cc);
+}
+@keyframes towerPulse {
+  from {
+    filter: brightness(1);
+    box-shadow: 0 5px 12px rgba(4, 9, 26, 0.3);
+  }
+  to {
+    filter: brightness(1.2);
+    box-shadow: 0 0 17px rgba(112, 217, 212, 0.55);
+  }
+}
+@keyframes towerTwinkle {
+  from {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+@media (max-width: 720px) {
+  .subject-tier-row,
+  .vault-footer,
+  .minigame-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .vault-stats {
+    grid-template-columns: 1fr;
+  }
+  .vault-list > div {
+    display: grid;
+  }
+  .minigame-options,
+  .match-columns {
+    grid-template-columns: 1fr;
+  }
+  .minigames-home-tile {
+    flex-wrap: wrap;
+  }
+}
+.level-reward-preview {
+  padding: 16px;
+  margin: 14px 0;
+  border-radius: 16px;
+  background: rgba(112, 217, 212, 0.08);
+}
+.level-reward-preview h3 {
+  margin: 0 0 7px;
+}
+.level-reward-preview p {
+  margin: 0 0 12px;
+}
+.level-reward-items {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.level-reward-items > div {
+  display: grid;
+  gap: 3px;
+  width: 115px;
+  padding: 8px;
+  border: 1px solid rgba(170, 190, 220, 0.2);
+  border-radius: 12px;
+}
+.level-reward-items canvas {
+  width: 100%;
+  height: 90px;
+}
+.level-reward-items small {
+  text-transform: capitalize;
+}
+.milestone-rewards {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid rgba(170, 190, 220, 0.18);
+  border-radius: 12px;
+}
+.milestone-rewards summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.milestone-gear {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+.milestone-gear button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid rgba(170, 190, 220, 0.2);
+  border-radius: 10px;
+  background: rgba(112, 217, 212, 0.07);
+  color: inherit;
+  cursor: pointer;
+}
+.milestone-gear button > span {
+  display: grid;
+}
+.milestone-gear canvas {
+  width: 64px;
+  height: 64px;
+}
+.milestone-gear small {
+  text-transform: capitalize;
+}
+.reward-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(90vw, 480px);
+  padding: 14px 18px;
+  border: 1px solid rgba(251, 215, 128, 0.65);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #252844, #38335a);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  animation: reward-enter 0.55s cubic-bezier(0.2, 1.4, 0.3, 1) both;
+}
+.reward-popup > svg {
+  flex: none;
+  color: #f7ce71;
+}
+.reward-popup strong {
+  flex: 1;
+}
+.reward-popup button {
+  color: #fff;
+}
+@keyframes reward-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -35px) scale(0.8);
+  }
+  70% {
+    transform: translate(-50%, 5px) scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reward-popup {
+    animation: none;
+  }
+}
+.vault-details {
+  margin-top: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(160, 174, 202, 0.15);
+}
+.vault-details summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.vault-details p {
+  margin: 8px 0;
+  font-size: 0.88rem;
+}
+.minigame-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  max-width: 780px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.minigame-subjects legend {
+  width: 100%;
+  margin-bottom: 7px;
+  font-weight: 700;
+}
+.minigame-subjects label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.minigame-subjects label:has(input:checked) {
+  border-color: var(--cyan);
+  background: color-mix(in srgb, var(--cyan) 12%, var(--surface));
+}
+.minigame-subjects input {
+  accent-color: var(--cyan);
+}
