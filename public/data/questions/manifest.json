@@ -67,7 +67,7 @@
     },
     "A-LEVEL-PSYCHOLOGY": {
       "url": "/data/questions/a-level-psychology.json",
-      "count": 544
+      "count": 1050
     },
     "A-LEVEL-FURTHER-MATHS": {
       "url": "/data/questions/a-level-further-maths.json",
@@ -75,7 +75,7 @@
     },
     "A-LEVEL-BIOLOGY": {
       "url": "/data/questions/a-level-biology.json",
-      "count": 504
+      "count": 1010
     },
     "A-LEVEL-MATHEMATICS": {
       "url": "/data/questions/a-level-mathematics.json",
@@ -104,6 +104,10 @@
     "A-LEVEL-PHYSICS": {
       "url": "/data/questions/a-level-physics.json",
       "count": 1059
+    },
+    "A-LEVEL-CHEMISTRY": {
+      "url": "/data/questions/a-level-chemistry.json",
+      "count": 504
     }
   }
 }

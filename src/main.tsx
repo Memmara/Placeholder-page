@@ -127,6 +127,7 @@ const COURSES = [
   ["A-LEVEL-FURTHER-MATHS", "Further Maths", "A-Level"],
   ["A-LEVEL-PHYSICS", "Physics", "A-Level"],
   ["A-LEVEL-BIOLOGY", "Biology", "A-Level"],
+  ["A-LEVEL-CHEMISTRY", "Chemistry", "A-Level"],
   ["A-LEVEL-HISTORY", "History", "A-Level"],
   ["A-LEVEL-SOCIOLOGY", "Sociology", "A-Level"],
   ["A-LEVEL-ENGLISH-LITERATURE", "English Literature", "A-Level"],

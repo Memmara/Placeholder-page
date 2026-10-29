@@ -82,6 +82,7 @@ function inferredSubject(id) {
       7182: "alevel_psychology",
       7367: "alevel_further_maths",
       7402: "alevel_biology",
+      7405: "alevel_chemistry",
       7357: "alevel_maths",
       7408: "alevel_physics",
       7042: "alevel_history",

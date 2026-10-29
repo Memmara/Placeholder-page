@@ -40838,6 +40838,1063 @@
         "correct",
         "answer"
       ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ATOMIC",
+      "subtopic_id": "AQA7405-ATOMIC-ALC-7405-ATOMIC-STRUCTURE",
+      "specification_point_id": "ALC-7405-ATOMIC-STRUCTURE",
+      "exam_board": "AQA",
+      "topic": "Atomic",
+      "subtopic": "Atomic Structure",
+      "spec_reference": "ALC-7405-ATOMIC-STRUCTURE",
+      "spec_text": "Apply A-level knowledge and retrieval skills for atomic structure.",
+      "tier": "all",
+      "keywords": [
+        "atom",
+        "electrons",
+        "charge"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-MASS",
+      "subtopic_id": "AQA7405-MASS-ALC-7405-MASS-SPECTROMETRY",
+      "specification_point_id": "ALC-7405-MASS-SPECTROMETRY",
+      "exam_board": "AQA",
+      "topic": "Mass",
+      "subtopic": "Mass Spectrometry",
+      "spec_reference": "ALC-7405-MASS-SPECTROMETRY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for mass spectrometry.",
+      "tier": "all",
+      "keywords": [
+        "mass",
+        "abundance"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ELECTRON",
+      "subtopic_id": "AQA7405-ELECTRON-ALC-7405-ELECTRON-CONFIG",
+      "specification_point_id": "ALC-7405-ELECTRON-CONFIG",
+      "exam_board": "AQA",
+      "topic": "Electron",
+      "subtopic": "Electron Config",
+      "spec_reference": "ALC-7405-ELECTRON-CONFIG",
+      "spec_text": "Apply A-level knowledge and retrieval skills for electron config.",
+      "tier": "all",
+      "keywords": [
+        "five",
+        "orbitals"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-IONISATION",
+      "subtopic_id": "AQA7405-IONISATION-ALC-7405-IONISATION-ENERGY",
+      "specification_point_id": "ALC-7405-IONISATION-ENERGY",
+      "exam_board": "AQA",
+      "topic": "Ionisation",
+      "subtopic": "Ionisation Energy",
+      "spec_reference": "ALC-7405-IONISATION-ENERGY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for ionisation energy.",
+      "tier": "all",
+      "keywords": [
+        "first",
+        "ionisation",
+        "energy",
+        "enthalpy",
+        "change",
+        "when",
+        "mole",
+        "gaseous"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-MOLE",
+      "subtopic_id": "AQA7405-MOLE-ALC-7405-MOLE-CALCS",
+      "specification_point_id": "ALC-7405-MOLE-CALCS",
+      "exam_board": "AQA",
+      "topic": "Mole",
+      "subtopic": "Mole Calcs",
+      "spec_reference": "ALC-7405-MOLE-CALCS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for mole calcs.",
+      "tier": "all",
+      "keywords": [
+        "number"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-FORMULAE",
+      "subtopic_id": "AQA7405-FORMULAE-ALC-7405-FORMULAE-YIELD",
+      "specification_point_id": "ALC-7405-FORMULAE-YIELD",
+      "exam_board": "AQA",
+      "topic": "Formulae",
+      "subtopic": "Formulae Yield",
+      "spec_reference": "ALC-7405-FORMULAE-YIELD",
+      "spec_text": "Apply A-level knowledge and retrieval skills for formulae yield.",
+      "tier": "all",
+      "keywords": [
+        "atom",
+        "economy"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-GAS",
+      "subtopic_id": "AQA7405-GAS-ALC-7405-GAS-VOLUMES",
+      "specification_point_id": "ALC-7405-GAS-VOLUMES",
+      "exam_board": "AQA",
+      "topic": "Gas",
+      "subtopic": "Gas Volumes",
+      "spec_reference": "ALC-7405-GAS-VOLUMES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for gas volumes.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-TITRATIONS",
+      "subtopic_id": "AQA7405-TITRATIONS-ALC-7405-TITRATIONS-SOLUTIONS",
+      "specification_point_id": "ALC-7405-TITRATIONS-SOLUTIONS",
+      "exam_board": "AQA",
+      "topic": "Titrations",
+      "subtopic": "Titrations Solutions",
+      "spec_reference": "ALC-7405-TITRATIONS-SOLUTIONS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for titrations solutions.",
+      "tier": "all",
+      "keywords": [
+        "naoh"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-IONIC",
+      "subtopic_id": "AQA7405-IONIC-ALC-7405-IONIC-METALLIC-BONDING",
+      "specification_point_id": "ALC-7405-IONIC-METALLIC-BONDING",
+      "exam_board": "AQA",
+      "topic": "Ionic",
+      "subtopic": "Ionic Metallic Bonding",
+      "spec_reference": "ALC-7405-IONIC-METALLIC-BONDING",
+      "spec_text": "Apply A-level knowledge and retrieval skills for ionic metallic bonding.",
+      "tier": "all",
+      "keywords": [
+        "ionic",
+        "bonding",
+        "strong",
+        "electrostatic",
+        "attraction",
+        "between",
+        "positive",
+        "negative"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-COVALENT",
+      "subtopic_id": "AQA7405-COVALENT-ALC-7405-COVALENT-SHAPES",
+      "specification_point_id": "ALC-7405-COVALENT-SHAPES",
+      "exam_board": "AQA",
+      "topic": "Covalent",
+      "subtopic": "Covalent Shapes",
+      "spec_reference": "ALC-7405-COVALENT-SHAPES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for covalent shapes.",
+      "tier": "all",
+      "keywords": [
+        "tetrahedral",
+        "bond",
+        "angle"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-POLARITY",
+      "subtopic_id": "AQA7405-POLARITY-ALC-7405-POLARITY-IMF",
+      "specification_point_id": "ALC-7405-POLARITY-IMF",
+      "exam_board": "AQA",
+      "topic": "Polarity",
+      "subtopic": "Polarity Imf",
+      "spec_reference": "ALC-7405-POLARITY-IMF",
+      "spec_text": "Apply A-level knowledge and retrieval skills for polarity imf.",
+      "tier": "all",
+      "keywords": [
+        "intermolecular",
+        "forces",
+        "london",
+        "dispersion",
+        "between",
+        "induced",
+        "dipoles",
+        "permanent"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ENTHALPY",
+      "subtopic_id": "AQA7405-ENTHALPY-ALC-7405-ENTHALPY-CALORIMETRY",
+      "specification_point_id": "ALC-7405-ENTHALPY-CALORIMETRY",
+      "exam_board": "AQA",
+      "topic": "Enthalpy",
+      "subtopic": "Enthalpy Calorimetry",
+      "spec_reference": "ALC-7405-ENTHALPY-CALORIMETRY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for enthalpy calorimetry.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-HESS",
+      "subtopic_id": "AQA7405-HESS-ALC-7405-HESS-LAW",
+      "specification_point_id": "ALC-7405-HESS-LAW",
+      "exam_board": "AQA",
+      "topic": "Hess",
+      "subtopic": "Hess Law",
+      "spec_reference": "ALC-7405-HESS-LAW",
+      "spec_text": "Apply A-level knowledge and retrieval skills for hess law.",
+      "tier": "all",
+      "keywords": [
+        "products",
+        "reactants"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-BOND",
+      "subtopic_id": "AQA7405-BOND-ALC-7405-BOND-ENTHALPIES",
+      "specification_point_id": "ALC-7405-BOND-ENTHALPIES",
+      "exam_board": "AQA",
+      "topic": "Bond",
+      "subtopic": "Bond Enthalpies",
+      "spec_reference": "ALC-7405-BOND-ENTHALPIES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for bond enthalpies.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-COLLISION",
+      "subtopic_id": "AQA7405-COLLISION-ALC-7405-COLLISION-THEORY-RATES",
+      "specification_point_id": "ALC-7405-COLLISION-THEORY-RATES",
+      "exam_board": "AQA",
+      "topic": "Collision",
+      "subtopic": "Collision Theory Rates",
+      "spec_reference": "ALC-7405-COLLISION-THEORY-RATES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for collision theory rates.",
+      "tier": "all",
+      "keywords": [
+        "activation",
+        "energy",
+        "minimum",
+        "that",
+        "reacting",
+        "particles",
+        "need",
+        "when"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-MAXWELL",
+      "subtopic_id": "AQA7405-MAXWELL-ALC-7405-MAXWELL-BOLTZMANN-CATALYSTS",
+      "specification_point_id": "ALC-7405-MAXWELL-BOLTZMANN-CATALYSTS",
+      "exam_board": "AQA",
+      "topic": "Maxwell",
+      "subtopic": "Maxwell Boltzmann Catalysts",
+      "spec_reference": "ALC-7405-MAXWELL-BOLTZMANN-CATALYSTS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for maxwell boltzmann catalysts.",
+      "tier": "all",
+      "keywords": [
+        "curve",
+        "starts",
+        "origin",
+        "because",
+        "molecules",
+        "have",
+        "zero",
+        "energy"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-EQUILIBRIUM",
+      "subtopic_id": "AQA7405-EQUILIBRIUM-ALC-7405-EQUILIBRIUM-LE-CHATELIER",
+      "specification_point_id": "ALC-7405-EQUILIBRIUM-LE-CHATELIER",
+      "exam_board": "AQA",
+      "topic": "Equilibrium",
+      "subtopic": "Equilibrium Le Chatelier",
+      "spec_reference": "ALC-7405-EQUILIBRIUM-LE-CHATELIER",
+      "spec_text": "Apply A-level knowledge and retrieval skills for equilibrium le chatelier.",
+      "tier": "all",
+      "keywords": [
+        "chatelier's",
+        "principle",
+        "states",
+        "that",
+        "change",
+        "made",
+        "conditions",
+        "system"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-OXIDATION",
+      "subtopic_id": "AQA7405-OXIDATION-ALC-7405-OXIDATION-STATES-REDOX",
+      "specification_point_id": "ALC-7405-OXIDATION-STATES-REDOX",
+      "exam_board": "AQA",
+      "topic": "Oxidation",
+      "subtopic": "Oxidation States Redox",
+      "spec_reference": "ALC-7405-OXIDATION-STATES-REDOX",
+      "spec_text": "Apply A-level knowledge and retrieval skills for oxidation states redox.",
+      "tier": "all",
+      "keywords": [
+        "oxidation",
+        "states",
+        "overall",
+        "charge",
+        "state",
+        "vanadium"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-BORN",
+      "subtopic_id": "AQA7405-BORN-ALC-7405-BORN-HABER",
+      "specification_point_id": "ALC-7405-BORN-HABER",
+      "exam_board": "AQA",
+      "topic": "Born",
+      "subtopic": "Born Haber",
+      "spec_reference": "ALC-7405-BORN-HABER",
+      "spec_text": "Apply A-level knowledge and retrieval skills for born haber.",
+      "tier": "all",
+      "keywords": [
+        "lattice",
+        "enthalpy",
+        "formation",
+        "change",
+        "when",
+        "mole",
+        "solid",
+        "ionic"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ENTROPY",
+      "subtopic_id": "AQA7405-ENTROPY-ALC-7405-ENTROPY-FREE-ENERGY",
+      "specification_point_id": "ALC-7405-ENTROPY-FREE-ENERGY",
+      "exam_board": "AQA",
+      "topic": "Entropy",
+      "subtopic": "Entropy Free Energy",
+      "spec_reference": "ALC-7405-ENTROPY-FREE-ENERGY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for entropy free energy.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-RATE",
+      "subtopic_id": "AQA7405-RATE-ALC-7405-RATE-EQUATIONS",
+      "specification_point_id": "ALC-7405-RATE-EQUATIONS",
+      "exam_board": "AQA",
+      "topic": "Rate",
+      "subtopic": "Rate Equations",
+      "spec_reference": "ALC-7405-RATE-EQUATIONS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for rate equations.",
+      "tier": "all",
+      "keywords": [
+        "rate"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-RATE",
+      "subtopic_id": "AQA7405-RATE-ALC-7405-RATE-GRAPHS-MECHANISM",
+      "specification_point_id": "ALC-7405-RATE-GRAPHS-MECHANISM",
+      "exam_board": "AQA",
+      "topic": "Rate",
+      "subtopic": "Rate Graphs Mechanism",
+      "spec_reference": "ALC-7405-RATE-GRAPHS-MECHANISM",
+      "spec_text": "Apply A-level knowledge and retrieval skills for rate graphs mechanism.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ARRHENIUS",
+      "subtopic_id": "AQA7405-ARRHENIUS-ALC-7405-ARRHENIUS",
+      "specification_point_id": "ALC-7405-ARRHENIUS",
+      "exam_board": "AQA",
+      "topic": "Arrhenius",
+      "subtopic": "Arrhenius",
+      "spec_reference": "ALC-7405-ARRHENIUS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for arrhenius.",
+      "tier": "all",
+      "keywords": [
+        "gradient"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-KC",
+      "subtopic_id": "AQA7405-KC-ALC-7405-KC",
+      "specification_point_id": "ALC-7405-KC",
+      "exam_board": "AQA",
+      "topic": "Kc",
+      "subtopic": "Kc",
+      "spec_reference": "ALC-7405-KC",
+      "spec_text": "Apply A-level knowledge and retrieval skills for kc.",
+      "tier": "all",
+      "keywords": [
+        "products",
+        "over",
+        "reactants",
+        "each",
+        "raised",
+        "coefficient"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-KP",
+      "subtopic_id": "AQA7405-KP-ALC-7405-KP",
+      "specification_point_id": "ALC-7405-KP",
+      "exam_board": "AQA",
+      "topic": "Kp",
+      "subtopic": "Kp",
+      "spec_reference": "ALC-7405-KP",
+      "spec_text": "Apply A-level knowledge and retrieval skills for kp.",
+      "tier": "all",
+      "keywords": [
+        "products",
+        "over",
+        "reactants",
+        "each",
+        "power",
+        "coefficient"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ELECTRODE",
+      "subtopic_id": "AQA7405-ELECTRODE-ALC-7405-ELECTRODE-POTENTIALS",
+      "specification_point_id": "ALC-7405-ELECTRODE-POTENTIALS",
+      "exam_board": "AQA",
+      "topic": "Electrode",
+      "subtopic": "Electrode Potentials",
+      "spec_reference": "ALC-7405-ELECTRODE-POTENTIALS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for electrode potentials.",
+      "tier": "all",
+      "keywords": [
+        "positive",
+        "negative"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ELECTROCHEMICAL",
+      "subtopic_id": "AQA7405-ELECTROCHEMICAL-ALC-7405-ELECTROCHEMICAL-CELLS",
+      "specification_point_id": "ALC-7405-ELECTROCHEMICAL-CELLS",
+      "exam_board": "AQA",
+      "topic": "Electrochemical",
+      "subtopic": "Electrochemical Cells",
+      "spec_reference": "ALC-7405-ELECTROCHEMICAL-CELLS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for electrochemical cells.",
+      "tier": "all",
+      "keywords": [
+        "salt",
+        "bridge",
+        "usually",
+        "filter",
+        "paper",
+        "soaked",
+        "potassium",
+        "nitrate"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-PH",
+      "subtopic_id": "AQA7405-PH-ALC-7405-PH-STRONG-ACIDS-KW",
+      "specification_point_id": "ALC-7405-PH-STRONG-ACIDS-KW",
+      "exam_board": "AQA",
+      "topic": "Ph",
+      "subtopic": "Ph Strong Acids Kw",
+      "spec_reference": "ALC-7405-PH-STRONG-ACIDS-KW",
+      "spec_text": "Apply A-level knowledge and retrieval skills for ph strong acids kw.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-WEAK",
+      "subtopic_id": "AQA7405-WEAK-ALC-7405-WEAK-ACIDS-KA",
+      "specification_point_id": "ALC-7405-WEAK-ACIDS-KA",
+      "exam_board": "AQA",
+      "topic": "Weak",
+      "subtopic": "Weak Acids Ka",
+      "spec_reference": "ALC-7405-WEAK-ACIDS-KA",
+      "spec_text": "Apply A-level knowledge and retrieval skills for weak acids ka.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-BUFFERS",
+      "subtopic_id": "AQA7405-BUFFERS-ALC-7405-BUFFERS",
+      "specification_point_id": "ALC-7405-BUFFERS",
+      "exam_board": "AQA",
+      "topic": "Buffers",
+      "subtopic": "Buffers",
+      "spec_reference": "ALC-7405-BUFFERS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for buffers.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-TITRATION",
+      "subtopic_id": "AQA7405-TITRATION-ALC-7405-TITRATION-CURVES-INDICATORS",
+      "specification_point_id": "ALC-7405-TITRATION-CURVES-INDICATORS",
+      "exam_board": "AQA",
+      "topic": "Titration",
+      "subtopic": "Titration Curves Indicators",
+      "spec_reference": "ALC-7405-TITRATION-CURVES-INDICATORS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for titration curves indicators.",
+      "tier": "all",
+      "keywords": [
+        "salt",
+        "does",
+        "hydrolyse"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-PERIODICITY",
+      "subtopic_id": "AQA7405-PERIODICITY-ALC-7405-PERIODICITY",
+      "specification_point_id": "ALC-7405-PERIODICITY",
+      "exam_board": "AQA",
+      "topic": "Periodicity",
+      "subtopic": "Periodicity",
+      "spec_reference": "ALC-7405-PERIODICITY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for periodicity.",
+      "tier": "all",
+      "keywords": [
+        "periodicity",
+        "regular",
+        "recurring",
+        "pattern",
+        "physical",
+        "chemical",
+        "properties",
+        "atomic"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-PERIOD3",
+      "subtopic_id": "AQA7405-PERIOD3-ALC-7405-PERIOD3-OXIDES-REACTIONS",
+      "specification_point_id": "ALC-7405-PERIOD3-OXIDES-REACTIONS",
+      "exam_board": "AQA",
+      "topic": "Period3",
+      "subtopic": "Period3 Oxides Reactions",
+      "spec_reference": "ALC-7405-PERIOD3-OXIDES-REACTIONS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for period3 oxides reactions.",
+      "tier": "all",
+      "keywords": [
+        "sodium",
+        "reacts",
+        "vigorously",
+        "with",
+        "cold",
+        "water",
+        "giving",
+        "hydroxide"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-GROUP2",
+      "subtopic_id": "AQA7405-GROUP2-ALC-7405-GROUP2",
+      "specification_point_id": "ALC-7405-GROUP2",
+      "exam_board": "AQA",
+      "topic": "Group2",
+      "subtopic": "Group2",
+      "spec_reference": "ALC-7405-GROUP2",
+      "spec_text": "Apply A-level knowledge and retrieval skills for group2.",
+      "tier": "all",
+      "keywords": [
+        "group",
+        "metals",
+        "become",
+        "more",
+        "reactive",
+        "down",
+        "they",
+        "lose"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-GROUP7",
+      "subtopic_id": "AQA7405-GROUP7-ALC-7405-GROUP7-HALOGENS",
+      "specification_point_id": "ALC-7405-GROUP7-HALOGENS",
+      "exam_board": "AQA",
+      "topic": "Group7",
+      "subtopic": "Group7 Halogens",
+      "spec_reference": "ALC-7405-GROUP7-HALOGENS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for group7 halogens.",
+      "tier": "all",
+      "keywords": [
+        "boiling",
+        "points",
+        "increase",
+        "from",
+        "fluorine",
+        "iodine",
+        "halogen",
+        "molecules"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-TRANSITION",
+      "subtopic_id": "AQA7405-TRANSITION-ALC-7405-TRANSITION-PROPERTIES",
+      "specification_point_id": "ALC-7405-TRANSITION-PROPERTIES",
+      "exam_board": "AQA",
+      "topic": "Transition",
+      "subtopic": "Transition Properties",
+      "spec_reference": "ALC-7405-TRANSITION-PROPERTIES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for transition properties.",
+      "tier": "all",
+      "keywords": [
+        "transition",
+        "element",
+        "d-block",
+        "that",
+        "form",
+        "more",
+        "stable",
+        "ions"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-COMPLEX",
+      "subtopic_id": "AQA7405-COMPLEX-ALC-7405-COMPLEX-IONS",
+      "specification_point_id": "ALC-7405-COMPLEX-IONS",
+      "exam_board": "AQA",
+      "topic": "Complex",
+      "subtopic": "Complex Ions",
+      "spec_reference": "ALC-7405-COMPLEX-IONS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for complex ions.",
+      "tier": "all",
+      "keywords": [
+        "three",
+        "ligands",
+        "donor",
+        "atoms"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-IONS",
+      "subtopic_id": "AQA7405-IONS-ALC-7405-IONS-IN-SOLUTION",
+      "specification_point_id": "ALC-7405-IONS-IN-SOLUTION",
+      "exam_board": "AQA",
+      "topic": "Ions",
+      "subtopic": "Ions In Solution",
+      "spec_reference": "ALC-7405-IONS-IN-SOLUTION",
+      "spec_text": "Apply A-level knowledge and retrieval skills for ions in solution.",
+      "tier": "all",
+      "keywords": [
+        "hexaaquacopper",
+        "gives",
+        "pale",
+        "blue",
+        "precipitate",
+        "copper",
+        "hydroxide",
+        "with"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-REDOX",
+      "subtopic_id": "AQA7405-REDOX-ALC-7405-REDOX-TITRATIONS-TM",
+      "specification_point_id": "ALC-7405-REDOX-TITRATIONS-TM",
+      "exam_board": "AQA",
+      "topic": "Redox",
+      "subtopic": "Redox Titrations Tm",
+      "spec_reference": "ALC-7405-REDOX-TITRATIONS-TM",
+      "spec_text": "Apply A-level knowledge and retrieval skills for redox titrations tm.",
+      "tier": "all",
+      "keywords": [
+        "half",
+        "this"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-NOMENCLATURE",
+      "subtopic_id": "AQA7405-NOMENCLATURE-ALC-7405-NOMENCLATURE-ISOMERISM",
+      "specification_point_id": "ALC-7405-NOMENCLATURE-ISOMERISM",
+      "exam_board": "AQA",
+      "topic": "Nomenclature",
+      "subtopic": "Nomenclature Isomerism",
+      "spec_reference": "ALC-7405-NOMENCLATURE-ISOMERISM",
+      "spec_text": "Apply A-level knowledge and retrieval skills for nomenclature isomerism.",
+      "tier": "all",
+      "keywords": [
+        "butane",
+        "methylpropane"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ALKANES",
+      "subtopic_id": "AQA7405-ALKANES-ALC-7405-ALKANES-FUELS",
+      "specification_point_id": "ALC-7405-ALKANES-FUELS",
+      "exam_board": "AQA",
+      "topic": "Alkanes",
+      "subtopic": "Alkanes Fuels",
+      "spec_reference": "ALC-7405-ALKANES-FUELS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for alkanes fuels.",
+      "tier": "all",
+      "keywords": [
+        "crude",
+        "vaporised",
+        "enters",
+        "column",
+        "where",
+        "there",
+        "temperature",
+        "gradient"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-HALOGENOALKANES",
+      "subtopic_id": "AQA7405-HALOGENOALKANES-ALC-7405-HALOGENOALKANES",
+      "specification_point_id": "ALC-7405-HALOGENOALKANES",
+      "exam_board": "AQA",
+      "topic": "Halogenoalkanes",
+      "subtopic": "Halogenoalkanes",
+      "spec_reference": "ALC-7405-HALOGENOALKANES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for halogenoalkanes.",
+      "tier": "all",
+      "keywords": [
+        "nucleophile",
+        "species",
+        "that",
+        "donates",
+        "lone",
+        "pair",
+        "electrons",
+        "form"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ALKENES",
+      "subtopic_id": "AQA7405-ALKENES-ALC-7405-ALKENES",
+      "specification_point_id": "ALC-7405-ALKENES",
+      "exam_board": "AQA",
+      "topic": "Alkenes",
+      "subtopic": "Alkenes",
+      "spec_reference": "ALC-7405-ALKENES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for alkenes.",
+      "tier": "all",
+      "keywords": [
+        "double",
+        "bond",
+        "made",
+        "sigma",
+        "formed",
+        "head-on",
+        "overlap",
+        "orbitals"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ALCOHOLS",
+      "subtopic_id": "AQA7405-ALCOHOLS-ALC-7405-ALCOHOLS",
+      "specification_point_id": "ALC-7405-ALCOHOLS",
+      "exam_board": "AQA",
+      "topic": "Alcohols",
+      "subtopic": "Alcohols",
+      "spec_reference": "ALC-7405-ALCOHOLS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for alcohols.",
+      "tier": "all",
+      "keywords": [
+        "primary",
+        "alcohol",
+        "carbon",
+        "bonded",
+        "other",
+        "secondary",
+        "carbons",
+        "tertiary"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ORGANIC",
+      "subtopic_id": "AQA7405-ORGANIC-ALC-7405-ORGANIC-ANALYSIS-IR-MS",
+      "specification_point_id": "ALC-7405-ORGANIC-ANALYSIS-IR-MS",
+      "exam_board": "AQA",
+      "topic": "Organic",
+      "subtopic": "Organic Analysis Ir Ms",
+      "spec_reference": "ALC-7405-ORGANIC-ANALYSIS-IR-MS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for organic analysis ir ms.",
+      "tier": "all",
+      "keywords": [
+        "stretch",
+        "alcohol",
+        "appears",
+        "broad",
+        "absorption",
+        "between",
+        "aldehydes",
+        "ketones"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-OPTICAL",
+      "subtopic_id": "AQA7405-OPTICAL-ALC-7405-OPTICAL-ISOMERISM",
+      "specification_point_id": "ALC-7405-OPTICAL-ISOMERISM",
+      "exam_board": "AQA",
+      "topic": "Optical",
+      "subtopic": "Optical Isomerism",
+      "spec_reference": "ALC-7405-OPTICAL-ISOMERISM",
+      "spec_text": "Apply A-level knowledge and retrieval skills for optical isomerism.",
+      "tier": "all",
+      "keywords": [
+        "where"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ALDEHYDES",
+      "subtopic_id": "AQA7405-ALDEHYDES-ALC-7405-ALDEHYDES-KETONES",
+      "specification_point_id": "ALC-7405-ALDEHYDES-KETONES",
+      "exam_board": "AQA",
+      "topic": "Aldehydes",
+      "subtopic": "Aldehydes Ketones",
+      "spec_reference": "ALC-7405-ALDEHYDES-KETONES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for aldehydes ketones.",
+      "tier": "all",
+      "keywords": [
+        "tollens'",
+        "reagent",
+        "contains",
+        "aldehyde",
+        "reduces",
+        "silver",
+        "ions",
+        "giving"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-CARBOXYLIC",
+      "subtopic_id": "AQA7405-CARBOXYLIC-ALC-7405-CARBOXYLIC-ACIDS-ESTERS",
+      "specification_point_id": "ALC-7405-CARBOXYLIC-ACIDS-ESTERS",
+      "exam_board": "AQA",
+      "topic": "Carboxylic",
+      "subtopic": "Carboxylic Acids Esters",
+      "spec_reference": "ALC-7405-CARBOXYLIC-ACIDS-ESTERS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for carboxylic acids esters.",
+      "tier": "all",
+      "keywords": [
+        "carboxylic",
+        "acid",
+        "reacts",
+        "with",
+        "sodium",
+        "carbonate",
+        "give",
+        "salt"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-ACYL",
+      "subtopic_id": "AQA7405-ACYL-ALC-7405-ACYL-CHLORIDES",
+      "specification_point_id": "ALC-7405-ACYL-CHLORIDES",
+      "exam_board": "AQA",
+      "topic": "Acyl",
+      "subtopic": "Acyl Chlorides",
+      "spec_reference": "ALC-7405-ACYL-CHLORIDES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for acyl chlorides.",
+      "tier": "all",
+      "keywords": [
+        "ethanoyl",
+        "chloride",
+        "reacts",
+        "violently",
+        "with",
+        "cold",
+        "water",
+        "nucleophilic"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-AROMATIC",
+      "subtopic_id": "AQA7405-AROMATIC-ALC-7405-AROMATIC-CHEMISTRY",
+      "specification_point_id": "ALC-7405-AROMATIC-CHEMISTRY",
+      "exam_board": "AQA",
+      "topic": "Aromatic",
+      "subtopic": "Aromatic Chemistry",
+      "spec_reference": "ALC-7405-AROMATIC-CHEMISTRY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for aromatic chemistry.",
+      "tier": "all",
+      "keywords": [
+        "benzene",
+        "planar",
+        "hexagon",
+        "which",
+        "electrons",
+        "delocalised",
+        "ring",
+        "above"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-AMINES",
+      "subtopic_id": "AQA7405-AMINES-ALC-7405-AMINES",
+      "specification_point_id": "ALC-7405-AMINES",
+      "exam_board": "AQA",
+      "topic": "Amines",
+      "subtopic": "Amines",
+      "spec_reference": "ALC-7405-AMINES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for amines.",
+      "tier": "all",
+      "keywords": [
+        "amines",
+        "proton",
+        "acceptors",
+        "because",
+        "lone",
+        "pair",
+        "nitrogen",
+        "atom"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-POLYMERS",
+      "subtopic_id": "AQA7405-POLYMERS-ALC-7405-POLYMERS",
+      "specification_point_id": "ALC-7405-POLYMERS",
+      "exam_board": "AQA",
+      "topic": "Polymers",
+      "subtopic": "Polymers",
+      "spec_reference": "ALC-7405-POLYMERS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for polymers.",
+      "tier": "all",
+      "keywords": [
+        "polyester",
+        "formed",
+        "when",
+        "dicarboxylic",
+        "acid",
+        "reacts",
+        "with",
+        "diol"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-AMINO",
+      "subtopic_id": "AQA7405-AMINO-ALC-7405-AMINO-ACIDS-PROTEINS",
+      "specification_point_id": "ALC-7405-AMINO-ACIDS-PROTEINS",
+      "exam_board": "AQA",
+      "topic": "Amino",
+      "subtopic": "Amino Acids Proteins",
+      "spec_reference": "ALC-7405-AMINO-ACIDS-PROTEINS",
+      "spec_text": "Apply A-level knowledge and retrieval skills for amino acids proteins.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-DNA",
+      "subtopic_id": "AQA7405-DNA-ALC-7405-DNA-ENZYMES",
+      "specification_point_id": "ALC-7405-DNA-ENZYMES",
+      "exam_board": "AQA",
+      "topic": "Dna",
+      "subtopic": "Dna Enzymes",
+      "spec_reference": "ALC-7405-DNA-ENZYMES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for dna enzymes.",
+      "tier": "all",
+      "keywords": [
+        "cisplatin",
+        "binds",
+        "replacing",
+        "chloride",
+        "ligands",
+        "with",
+        "guanine",
+        "nitrogens"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-SYNTHESIS",
+      "subtopic_id": "AQA7405-SYNTHESIS-ALC-7405-SYNTHESIS-ROUTES",
+      "specification_point_id": "ALC-7405-SYNTHESIS-ROUTES",
+      "exam_board": "AQA",
+      "topic": "Synthesis",
+      "subtopic": "Synthesis Routes",
+      "spec_reference": "ALC-7405-SYNTHESIS-ROUTES",
+      "spec_text": "Apply A-level knowledge and retrieval skills for synthesis routes.",
+      "tier": "all",
+      "keywords": [
+        "ethene",
+        "bromoethane",
+        "excess",
+        "ethylamine"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-NMR",
+      "subtopic_id": "AQA7405-NMR-ALC-7405-NMR",
+      "specification_point_id": "ALC-7405-NMR",
+      "exam_board": "AQA",
+      "topic": "Nmr",
+      "subtopic": "Nmr",
+      "spec_reference": "ALC-7405-NMR",
+      "spec_text": "Apply A-level knowledge and retrieval skills for nmr.",
+      "tier": "all",
+      "keywords": [
+        "ring"
+      ]
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "topic_id": "AQA7405-CHROMATOGRAPHY",
+      "subtopic_id": "AQA7405-CHROMATOGRAPHY-ALC-7405-CHROMATOGRAPHY",
+      "specification_point_id": "ALC-7405-CHROMATOGRAPHY",
+      "exam_board": "AQA",
+      "topic": "Chromatography",
+      "subtopic": "Chromatography",
+      "spec_reference": "ALC-7405-CHROMATOGRAPHY",
+      "spec_text": "Apply A-level knowledge and retrieval skills for chromatography.",
+      "tier": "all",
+      "keywords": [
+        "distance",
+        "moved",
+        "spot",
+        "solvent",
+        "front"
+      ]
     }
   ],
   "mapping_notes": [
@@ -41027,6 +42084,13 @@
       "qualification": "A-Level",
       "exam_board": "AQA",
       "specification_code": "7408"
+    },
+    {
+      "subject_id": "A-LEVEL-CHEMISTRY",
+      "name": "Chemistry",
+      "qualification": "A-Level",
+      "exam_board": "AQA",
+      "specification_code": "7405"
     }
   ]
 }
