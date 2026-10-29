@@ -290,10 +290,33 @@
 }
 @media (max-width: 600px) {
   .topbar {
+    height: auto;
+    min-height: 76px;
+    padding: 14px 18px;
+    flex-wrap: wrap;
+    column-gap: 22px;
+    row-gap: 10px;
     border-bottom: 1px solid color-mix(in srgb, var(--cyan) 12%, var(--line));
+  }
+  .topbar .mobile-brand {
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
   .topbar-right {
     gap: 4px;
+  }
+  .topbar .topbar-right {
+    flex: 0 0 auto;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-left: auto;
+  }
+  .topbar .coin-hud {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
   .topbar-right .icon-button {
     width: 39px;
