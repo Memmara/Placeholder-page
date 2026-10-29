@@ -290,37 +290,40 @@
 }
 @media (max-width: 600px) {
   .topbar {
-    height: auto;
-    min-height: 76px;
-    padding: 14px 18px;
-    flex-wrap: wrap;
-    column-gap: 22px;
-    row-gap: 10px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    height: 76px;
+    padding: 0 14px;
+    column-gap: 14px;
     border-bottom: 1px solid color-mix(in srgb, var(--cyan) 12%, var(--line));
   }
   .topbar .mobile-brand {
-    flex: 0 0 auto;
     white-space: nowrap;
+  }
+  .topbar .mobile-brand .brand {
+    font-size: 24px;
+    gap: 5px;
   }
   .topbar-right {
     gap: 4px;
   }
   .topbar .topbar-right {
-    flex: 0 0 auto;
-    max-width: 100%;
-    flex-wrap: wrap;
+    min-width: 0;
+    flex-wrap: nowrap;
     justify-content: flex-end;
-    gap: 8px;
-    margin-left: auto;
+    gap: 6px;
+    margin-left: 0;
   }
   .topbar .coin-hud {
     flex-shrink: 0;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
+    padding-inline: 8px;
+    gap: 5px;
   }
   .topbar-right .icon-button {
-    width: 39px;
-    height: 39px;
+    width: 36px;
+    height: 36px;
   }
   .content:has(> .compact-streak) > .home-grid {
     margin-bottom: 20px;
