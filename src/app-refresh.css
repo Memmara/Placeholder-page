@@ -304,6 +304,10 @@
     font-size: 24px;
     gap: 5px;
   }
+  .topbar .mobile-brand .brand-dot {
+    margin-left: -1px;
+    letter-spacing: 0;
+  }
   .topbar-right {
     gap: 4px;
   }
