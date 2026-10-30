@@ -2,7 +2,9 @@ import {blank,defaultSettings} from './engine';
 import type {Progress} from './models';
 
 // Set VITE_MEMMARA_GUEST_ACCESS=false and rebuild to remove public guest entry.
-export const guestAccessEnabled = import.meta.env.VITE_MEMMARA_GUEST_ACCESS !== 'false';
+// This module is also imported by the server-side marking/commerce graph.
+// Vite defines import.meta.env in the browser bundle; Cloudflare's runtime does not.
+export const guestAccessEnabled = import.meta.env?.VITE_MEMMARA_GUEST_ACCESS !== 'false';
 const flag='memmara.guest.session.v1';
 const progressKey='memmara.guest.progress.v1';
 export function isGuestSession(){
