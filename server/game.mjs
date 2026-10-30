@@ -32,6 +32,7 @@ import { handleAuth, authenticatedUser, rate } from "./auth.mjs";
 import { handleOAuth } from "./oauth.mjs";
 import { handleCommerce, commerceConfigured } from "./commerce.mjs";
 import { bestDailyStreak } from "./achievement-catalogue.mjs";
+import { syncReligiousStudies } from "./content-sync.mjs";
 
 const production =
   process.env.NODE_ENV === "production" ||
@@ -2007,6 +2008,11 @@ export async function handleApiRequest(req, res) {
       );
     }
     const body = JSON.parse(raw || "{}");
+    if (route === "content-sync") {
+      res.setHeader("Cache-Control", "no-store");
+      res.end(JSON.stringify(await syncReligiousStudies(user, body)));
+      return;
+    }
     let result = await mutate(user, route, body);
     // Answer feedback only needs its result and XP. Rebuilding the entire
     // inventory/account state here makes every question wait on many queries.
