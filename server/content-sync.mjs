@@ -17,7 +17,7 @@ async function readJson(path,origin){
  return response.json();
 }
 export async function syncContent(user,body,origin){
- if(hash(user)!==ownerHash)throw fail('Not found.',404);
+ if(crypto.createHash('sha256').update(user).digest('hex')!==ownerHash)throw fail('Not found.',404);
  const key=String(body.subject??''),course=courses[key],offset=Number(body.offset);
  if(!course||!Number.isSafeInteger(offset)||offset<0||offset>=course.count)throw fail('Invalid content import page.');
  const questions=await readJson(`/data/questions/${key}.json`,origin);
