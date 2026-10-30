@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import {pool} from './catalogue.mjs';
 
 const ownerHash='b9b7e80aaf504e7479f8d85b5370485d5d6e2a5786764f6e257ab476b0504608';
+const batchSize=20;
 const courses={
  'gcse-english-language':{subject:'english_language',course:'GCSE-ENGLISH-LANGUAGE',code:'8700',count:987},
  'a-level-biology':{subject:'alevel_biology',course:'A-LEVEL-BIOLOGY',code:'7402',count:1010},
@@ -20,9 +21,10 @@ export async function syncContent(user,body,origin){
  if(crypto.createHash('sha256').update(user).digest('hex')!==ownerHash)throw fail('Not found.',404);
  const key=String(body.subject??''),course=courses[key],offset=Number(body.offset);
  if(!course||!Number.isSafeInteger(offset)||offset<0||offset>=course.count)throw fail('Invalid content import page.');
- const questions=await readJson(`/data/questions/${key}.json`,origin);
- if(!Array.isArray(questions)||questions.length!==course.count||questions.some(q=>!q.question_id?.startsWith(`AQA${course.code}-`)||!q.specification_point_id||!q.self_check))throw fail('Deployed content did not match the expected bank.',503);
- const slice=questions.slice(offset,offset+100),db=await pool.connect();
+ if(offset%batchSize!==0)throw fail('Invalid content import page.');
+ const slice=await readJson(`/data/content-sync/${key}/${offset}.json`,origin);
+ if(!Array.isArray(slice)||slice.length!==Math.min(batchSize,course.count-offset)||slice.some(q=>!q.question_id?.startsWith(`AQA${course.code}-`)||!q.specification_point_id||!q.self_check))throw fail('Deployed content did not match the expected bank.',503);
+ const db=await pool.connect();
  try{
   await db.query('BEGIN');
   if(offset===0){
@@ -35,6 +37,6 @@ export async function syncContent(user,body,origin){
   slice.forEach((question,index)=>{const n=index*6;values.push(`($${n+1},$${n+2},$${n+3},$${n+4},$${n+5},$${n+6})`);params.push(question.question_id,course.subject,question.specification_point_id,question.question_type,question,hash(question));});
   await db.query(`INSERT INTO content_questions(question_id,subject_id,specification_point_id,question_type,payload,content_hash) VALUES ${values.join(',')} ON CONFLICT(question_id) DO UPDATE SET subject_id=excluded.subject_id,specification_point_id=excluded.specification_point_id,question_type=excluded.question_type,payload=excluded.payload,content_hash=excluded.content_hash,active=true,updated_at=now()`,params);
   await db.query('COMMIT');
-  return {subject:key,processed:slice.length,nextOffset:offset+slice.length<questions.length?offset+slice.length:null,total:questions.length};
+  return {subject:key,processed:slice.length,nextOffset:offset+slice.length<course.count?offset+slice.length:null,total:course.count};
  }catch(error){await db.query('ROLLBACK');throw error}finally{db.release()}
 }
