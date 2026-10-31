@@ -18,6 +18,7 @@ const pointsBySubject=new Map(),questionsByPoint=new Map();
 for(const p of curriculum){if(!pointsBySubject.has(p.subject_id))pointsBySubject.set(p.subject_id,[]);pointsBySubject.get(p.subject_id).push(p)}
 for(const q of oldQuestions.filter(q=>!q.question_id.includes('-DEFINITION-'))){if(!questionsByPoint.has(q.specification_point_id))questionsByPoint.set(q.specification_point_id,[]);questionsByPoint.get(q.specification_point_id).push(q)}
 const sourceIds=new Set(),definitions=[],generated=[],unmapped=[];
+const mappedBy={reference:0,referenceAndTerm:0,term:0};
 const clean=value=>value.toLowerCase().replace(/\s+/g,' ').trim();
 const hash=value=>[...value].reduce((n,ch)=>(n*31+ch.charCodeAt(0))|0,0);
 const phrase=(hay,needle)=>new RegExp('(^|[^a-z0-9])'+needle.replace(/[.*+?^$\{\}()|[\]\\]/g,'\\$&')+'([^a-z0-9]|$)','i').test(hay);
@@ -30,12 +31,29 @@ for(const raw of source){
   let score=0;
   const title=p.specification_point_id+' '+p.topic+' '+p.subtopic;
   if(phrase(title,term))score+=12;
+  if(phrase(p.spec_text??'',term))score+=8;
   if(p.keywords?.some(k=>clean(k)===term))score+=6;
   for(const q of questionsByPoint.get(p.specification_point_id)||[]){if(phrase(q.question,term))score+=3;if(phrase(q.answer,term))score+=2;}
   return {point:p,score};
  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
- const top=ranked[0],runnerUp=ranked[1],mapped=top?.score>=8&&(!runnerUp||top.score>=runnerUp.score*1.5)?top.point:null;
- const entry={id:raw.id,subject_id:subject,specification_point_id:mapped?.specification_point_id??null,source_specification_point_id:raw.specification_point_id,term:raw.term,definition:raw.definition,incorrect_definitions:wrong};
+ const syllabusRef=raw.specification_point_id.match(/-(?:GCSE|ALEVEL)-(.+)$/)?.[1];
+ const referenceMatches=(pointsBySubject.get(subject)||[]).filter(p=>p.spec_reference===syllabusRef||(/^\d+(?:\.\d+)+$/.test(syllabusRef??'')&&p.spec_reference?.startsWith(syllabusRef)&&/^[a-z]$/i.test(p.spec_reference.slice(syllabusRef.length))));
+ const qualifier=(raw.term.match(/\(([^)]+)\)/)?.[1]??'').toLowerCase().split(/[^a-z]+/).filter(word=>word.length>3&&!['with','from','about','mechanics'].includes(word));
+ const plausible=point=>{
+  const title=point.specification_point_id+' '+point.topic+' '+point.subtopic,detail=title+' '+(point.spec_text??'');
+  if(qualifier.length&&!qualifier.some(word=>phrase(detail,word)))return false;
+  if(term.split(' ').length===1&&!phrase(detail,term)&&!point.keywords?.some(word=>clean(word)===term))return false;
+  return true;
+ };
+ let mapped=null,mappingMethod=null;
+ if(referenceMatches.length===1){mapped=referenceMatches[0];mappingMethod='reference'}
+ else{
+  const candidates=(referenceMatches.length?ranked.filter(item=>referenceMatches.includes(item.point)):ranked).filter(item=>referenceMatches.length||plausible(item.point));
+  const top=candidates[0],runnerUp=candidates[1];
+  if(top?.score>=8&&(!runnerUp||top.score>=runnerUp.score*1.5)){mapped=top.point;mappingMethod=referenceMatches.length?'referenceAndTerm':'term'}
+ }
+ if(mappingMethod)mappedBy[mappingMethod]++;
+ const entry={id:raw.id,subject_id:subject,specification_point_id:mapped?.specification_point_id??null,source_specification_point_id:raw.specification_point_id,mapping_method:mappingMethod,term:raw.term,definition:raw.definition,incorrect_definitions:wrong};
  definitions.push(entry);
  if(!mapped){unmapped.push({id:raw.id,subject_id:subject,term:raw.term,source_specification_point_id:raw.specification_point_id,candidates:ranked.slice(0,3).map(x=>({specification_point_id:x.point.specification_point_id,subtopic:x.point.subtopic,score:x.score}))});continue}
  const correctIndex=Math.abs(hash(raw.id))%4,letters=['A','B','C','D'];
@@ -62,5 +80,5 @@ const questions=[...oldQuestions.filter(q=>!q.question_id.includes('-DEFINITION-
 const existing=oldDefinitions.filter(d=>!sourceIds.has(d.id));
 fs.writeFileSync(path.join(root,'data/questions-bank.json.gz'),zlib.gzipSync(JSON.stringify(questions)));
 fs.writeFileSync(path.join(root,'public/data/definitions.json'),JSON.stringify([...existing,...definitions]));
-fs.writeFileSync(path.join(root,'data/definition-import-report.json'),JSON.stringify({total:source.length,flashMatchAndMemory:definitions.length,generatedDailyMixMcq:generated.length,needsCurriculumMapping:unmapped.length,unmapped},null,2)+'\n');
-console.log(JSON.stringify({total:source.length,definitions:definitions.length,generatedDailyMixMcq:generated.length,needsCurriculumMapping:unmapped.length},null,2));
+fs.writeFileSync(path.join(root,'data/definition-import-report.json'),JSON.stringify({total:source.length,flashMatchAndMemory:definitions.length,generatedDailyMixMcq:generated.length,mappedBy,needsCurriculumMapping:unmapped.length,unmapped},null,2)+'\n');
+console.log(JSON.stringify({total:source.length,definitions:definitions.length,generatedDailyMixMcq:generated.length,mappedBy,needsCurriculumMapping:unmapped.length},null,2));

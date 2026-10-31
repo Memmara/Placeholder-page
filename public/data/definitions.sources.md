@@ -2,7 +2,7 @@
 
 The 35 original definitions in `definitions.json` are newly written short descriptions, linked to the imported AQA GCSE specification point IDs. A further 1,278 entries from the user-supplied `data/definition-bank-source.json` are available for Flash Match, Memory Grid and Definition Quiz.
 
-The supplied file uses a separate set of specification IDs, including IDs that collide with different Memmara concepts. `scripts/import-definition-bank.mjs` normalises subject IDs and maps only strong term matches to Memmara curriculum points. Those mapped entries produce standard multiple-choice questions for Daily Mix and Speed Select. Unmapped entries remain usable in definition minigames; `data/definition-import-report.json` lists the entries needing curriculum mapping before Daily Mix import. Do not treat the source ID as a verified Memmara specification link.
+The revised supplied file uses subject-prefixed AQA-style references. Memmara's curriculum uses its own point IDs, so `scripts/import-definition-bank.mjs` normalises subject IDs, translates exact curriculum references first, and then accepts strong term matches. Mapped entries produce standard multiple-choice questions for Daily Mix and Speed Select. Unmapped entries remain usable in definition minigames; `data/definition-import-report.json` lists entries needing a reviewed crosswalk before Daily Mix import. Keep the supplied reference as `source_specification_point_id` rather than treating it as a Memmara point ID.
 
 Reference material:
 
