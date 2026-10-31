@@ -149,6 +149,7 @@ const localPreview = () =>
     sessionStorage.getItem("memmara.local-preview") === "1"));
 const previewStateKey = () => isGuestSession() ? 'memmara.guest.game-state.v1' : "memmara.preview-game-state.v3";
 const previewQuestions = new Map<string, Promise<Question[]>>();
+let previewDefinitions: Promise<{ id: string; definition: string }[]> | undefined;
 const previewMinigameRuns = new Set<string>();
 function normalisePreviewState(state: GameState) {
   if(isGuestSession()){
@@ -410,10 +411,15 @@ async function previewAction(
         ? (await previewQuestions.get(url)!).find(
             (entry) => entry.question_id === body.questionId,
           )
-        : undefined,
+        : undefined;
+    if (body.chosenDefinition && !previewDefinitions)
+      previewDefinitions = fetch("/data/definitions.json").then(response => response.json());
+    const definition = body.chosenDefinition
+      ? (await previewDefinitions)?.find(entry => entry.id === body.definitionId)
+      : undefined,
       correct =
         question?.answer_key?.correct_option_ids?.includes(body.optionId) ??
-        body.definitionId === body.chosenTermId;
+        (body.chosenDefinition ? definition?.definition === body.chosenDefinition : body.definitionId === body.chosenTermId);
     if (!previewMinigameRuns.has(body.runRef)) {
       if (!state.monetisation.unlimited) {
         if (state.monetisation.tokens <= 0)

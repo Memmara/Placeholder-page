@@ -32,6 +32,7 @@ import { handleAuth, authenticatedUser, rate } from "./auth.mjs";
 import { handleOAuth } from "./oauth.mjs";
 import { handleCommerce, commerceConfigured } from "./commerce.mjs";
 import { bestDailyStreak } from "./achievement-catalogue.mjs";
+import { syncDefinitions } from "./content-sync.mjs";
 
 const production =
   process.env.NODE_ENV === "production" ||
@@ -1039,6 +1040,14 @@ async function mutate(user, route, b) {
           "Choose an answer from this question.",
           400,
         );
+      else if (typeof b.chosenDefinition === "string")
+        requireThat(
+          definition &&
+            Array.isArray(definition.incorrect_definitions) &&
+            [definition.definition,...definition.incorrect_definitions.map(choice => choice.text)].includes(b.chosenDefinition),
+          "Choose an answer from this definition.",
+          400,
+        );
       else
         requireThat(
           definition &&
@@ -1068,7 +1077,9 @@ async function mutate(user, route, b) {
       }
       const correct = q
         ? q.answer_key.correct_option_ids.includes(b.optionId)
-        : definition.id === b.chosenTermId;
+        : typeof b.chosenDefinition === "string"
+          ? definition.definition === b.chosenDefinition
+          : definition.id === b.chosenTermId;
       const earned = (
         await db.query(
           "SELECT count(*)::int AS count FROM reward_claims WHERE user_id=$1 AND source_kind='minigame' AND created_at::date=$2::date",
@@ -2007,6 +2018,10 @@ export async function handleApiRequest(req, res) {
       );
     }
     const body = JSON.parse(raw || "{}");
+    if (route === "content-sync") {
+      res.end(JSON.stringify(await syncDefinitions(user, body)));
+      return;
+    }
     let result = await mutate(user, route, body);
     // Answer feedback only needs its result and XP. Rebuilding the entire
     // inventory/account state here makes every question wait on many queries.

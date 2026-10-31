@@ -21,13 +21,14 @@ import { MarkingStatus } from "./MarkingStatus";
 import "./minigames.css";
 import {isGuestSession,requestGuestPlay} from './guestAccess';
 
-type Mode = "survival" | "attack" | "match" | "tower" | "memory";
+type Mode = "survival" | "attack" | "match" | "tower" | "memory" | "definitions";
 type Definition = {
   id: string;
   subject_id: string;
-  specification_point_id: string;
+  specification_point_id: string | null;
   term: string;
   definition: string;
+  incorrect_definitions?: { text: string; feedback: string }[];
 };
 type TowerBlock = { left: number; width: number; perfect: boolean };
 
@@ -67,6 +68,12 @@ const games: {
     name: "Memory Grid",
     description: "Remember where each definition appeared.",
     icon: Grid2X2,
+  },
+  {
+    id: "definitions",
+    name: "Definition Quiz",
+    description: "Pick the precise meaning from four close definitions.",
+    icon: BookOpen,
   },
 ];
 
@@ -188,6 +195,8 @@ export function Minigames({
     [matchTimed, setMatchTimed] = useState(false),
     [queue, setQueue] = useState<Question[]>([]),
     [cards, setCards] = useState<Definition[]>([]),
+    [definitionQueue, setDefinitionQueue] = useState<Definition[]>([]),
+    [definitionChoices, setDefinitionChoices] = useState<string[]>([]),
     [round, setRound] = useState(0),
     [score, setScore] = useState(0),
     [streak, setStreak] = useState(0),
@@ -238,11 +247,10 @@ export function Minigames({
   const defPool = definitions.filter(
     (item) =>
       settings.subjects.includes(item.subject_id) &&
-      selectedSubjects.includes(item.subject_id) &&
-      bank.points.some(
-        (point) =>
-          point.specification_point_id === item.specification_point_id,
-      ),
+      selectedSubjects.includes(item.subject_id),
+  );
+  const definitionQuizPool = defPool.filter(
+    (item) => item.incorrect_definitions?.length === 3,
   );
 
   useEffect(() => {
@@ -321,12 +329,17 @@ export function Minigames({
       return;
     }
     const items = useDaily ? dailyOrder(pool) : shuffled(pool),
-      chosen = shuffled(defPool).slice(0, 4);
+      chosen = shuffled(defPool).slice(0, 4),
+      quizItems = shuffled(definitionQuizPool).slice(0, 10);
     if (["match", "memory"].includes(next) && chosen.length < 4) {
       setFeedback("Choose more subjects to unlock four matching cards.");
       return;
     }
-    if (!["match", "memory"].includes(next) && items.length < 5) {
+    if (next === "definitions" && quizItems.length < 5) {
+      setFeedback("Choose subjects with at least five definitions to play.");
+      return;
+    }
+    if (!["match", "memory", "definitions"].includes(next) && items.length < 5) {
       setFeedback(
         "This study plan needs at least five multiple-choice questions for this game.",
       );
@@ -339,6 +352,8 @@ export function Minigames({
     setMatchTimed(useTimer);
     setQueue(items);
     setCards(chosen);
+    setDefinitionQueue(quizItems);
+    setDefinitionChoices(next === "definitions" ? shuffled([quizItems[0].definition,...quizItems[0].incorrect_definitions!.map(item => item.text)]) : []);
     setRound(0);
     setScore(0);
     setStreak(0);
@@ -467,6 +482,43 @@ export function Minigames({
       setFeedback(
         error instanceof Error ? error.message : "Could not save this answer.",
       );
+      setWaiting(false);
+    }
+  }
+
+  async function answerDefinition(chosenDefinition: string) {
+    const item = definitionQueue[round];
+    if (!item || waiting || finished) return;
+    setWaiting(true);
+    const localCorrect = chosenDefinition === item.definition;
+    setSelectedAnswer(chosenDefinition);
+    setAnswerState(localCorrect ? "correct" : "wrong");
+    setFeedback(localCorrect ? "Correct!" : item.incorrect_definitions?.find(choice => choice.text === chosenDefinition)?.feedback ?? "That is not the definition.");
+    try {
+      const correct = await award(
+        { definitionId: item.id, chosenDefinition },
+        item.id,
+      );
+      const nextScore = score + (correct ? 10 : 0);
+      setScore(nextScore);
+      setAnswerState(correct ? "correct" : "wrong");
+      if (round >= Math.min(5, definitionQueue.length) - 1) {
+        window.setTimeout(() => complete(nextScore), 950);
+      } else {
+        window.setTimeout(() => {
+          const next = definitionQueue[round + 1];
+          setRound(value => value + 1);
+          setDefinitionChoices(shuffled([next.definition,...next.incorrect_definitions!.map(choice => choice.text)]));
+          setSelectedAnswer("");
+          setAnswerState(null);
+          setFeedback("");
+          setWaiting(false);
+        }, 950);
+      }
+    } catch (error) {
+      setSelectedAnswer("");
+      setAnswerState(null);
+      setFeedback(error instanceof Error ? error.message : "Could not save this answer.");
       setWaiting(false);
     }
   }
@@ -667,8 +719,7 @@ export function Minigames({
               ))}
             </fieldset>
             <span>
-              {pool.length} multiple-choice questions · {defPool.length}{" "}
-              definitions available
+              {pool.length} multiple-choice questions · {defPool.length} definitions · {definitionQuizPool.length} definition quizzes
             </span>
           </div>
           <div className="minigame-grid">
@@ -841,6 +892,22 @@ export function Minigames({
                     {option.text}
                   </button>
                 ))}
+              </div>
+            </>
+          ) : mode === "definitions" && definitionQueue[round] ? (
+            <>
+              <p className="eyebrow">{label(definitionQueue[round].subject_id)} · Definition {round + 1} of 5</p>
+              <h2>Which definition best describes {definitionQueue[round].term}?</h2>
+              <div className="minigame-options" key={definitionQueue[round].id}>
+                {definitionChoices.map((choice,index) => {
+                  const resultClass = !answerState ? "" : choice === definitionQueue[round].definition ? "is-correct" : choice === selectedAnswer ? "is-wrong" : "is-muted";
+                  return (
+                    <button key={choice} className={resultClass} disabled={waiting} onClick={() => void answerDefinition(choice)}>
+                      <span>{resultClass === "is-correct" ? <Check size={18} /> : resultClass === "is-wrong" ? <X size={18} /> : String.fromCharCode(65 + index)}</span>
+                      {choice}
+                    </button>
+                  );
+                })}
               </div>
             </>
           ) : mode === "match" ? (
