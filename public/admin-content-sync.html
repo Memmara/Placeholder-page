@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Memmara content sync</title><style>body{font:16px system-ui;background:#0b1224;color:#eef4ff;max-width:650px;margin:10vh auto;padding:20px}button{background:#ab96ff;border:0;border-radius:12px;padding:14px 22px;font:inherit;cursor:pointer}pre{white-space:pre-wrap;line-height:1.5}</style><h1>Sync GCSE written content</h1><p>Owner account required.</p><button id="run">Start import</button><pre id="log" role="status"></pre><script>
+const button=document.getElementById('run'),log=document.getElementById('log');
+const subjects=new Set(['GCSE-MATHS','GCSE-GEOGRAPHY','GCSE-HISTORY','GCSE-BUSINESS','GCSE-COMPUTER-SCIENCE','GCSE-PHYSICAL-EDUCATION']);
+const banks=[
+ ['gcse-maths.json',1569,1069],['gcse-geography.json',1548,1020],['gcse-history.json',1744,1231],
+ ['gcse-business.json',1028,509],['gcse-computer-science.json',987,483],['gcse-physical-education.json',834,495]
+];
+async function upload(payload){for(let attempt=0;attempt<4;attempt++){try{const reply=await fetch('/api/game/content-sync',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'same-origin',body:JSON.stringify(payload)});const message=await reply.text();let result;try{result=JSON.parse(message)}catch{throw new Error(`HTTP ${reply.status}`)}if(!reply.ok)throw new Error(result.error??`HTTP ${reply.status}`);return result}catch(error){if(attempt===3)throw error;await new Promise(resolve=>setTimeout(resolve,1500*(attempt+1)))}}}
+button.onclick=async()=>{button.disabled=true;try{
+ const [contentResponse,...bankResponses]=await Promise.all([fetch('/data/curriculum.json?sync=written-six',{cache:'no-store'}),...banks.map(([name])=>fetch('/data/questions/'+name+'?sync=written-six',{cache:'no-store'}))]);
+ if(!contentResponse.ok||bankResponses.some(response=>!response.ok))throw new Error('Published content unavailable.');
+ const curriculum=await contentResponse.json(),loaded=await Promise.all(bankResponses.map(response=>response.json()));
+ loaded.forEach((bank,index)=>{const [,total,written]=banks[index],actual=bank.filter(q=>q.question_type!=='multiple_choice').length;if(bank.length!==total||actual!==written)throw new Error(`Unexpected counts for ${banks[index][0]}: ${bank.length} total, ${actual} written.`);});
+ const points=curriculum.records.map((point,sequence)=>({point,sequence})).filter(({point})=>subjects.has(point.subject_id));
+ const questions=loaded.flatMap(bank=>bank.filter(q=>q.question_type!=='multiple_choice'));
+ if(points.length!==691||questions.length!==4807)throw new Error(`Published counts: ${points.length} points and ${questions.length} written questions.`);
+ let pointOffset=Number(localStorage.getItem('memmara-six-point-offset')||0);
+ while(pointOffset<points.length){const result=await upload({points:points.slice(pointOffset,pointOffset+100)});pointOffset+=result.processed;localStorage.setItem('memmara-six-point-offset',String(pointOffset));log.textContent=`${pointOffset}/691 curriculum points imported`;}
+ let offset=Number(localStorage.getItem('memmara-six-question-offset')||0);
+ while(offset<questions.length){const result=await upload({questions:questions.slice(offset,offset+100)});offset+=result.processed;localStorage.setItem('memmara-six-question-offset',String(offset));log.textContent=`${offset}/4807 written questions imported`;}
+ log.textContent='All 691 curriculum points and 4,807 written questions imported.';
+}catch(error){log.textContent='STOPPED: '+error.message+'\n'+log.textContent}finally{button.disabled=false}};
+</script></html>
