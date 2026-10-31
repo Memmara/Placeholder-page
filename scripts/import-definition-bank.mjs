@@ -62,6 +62,5 @@ const questions=[...oldQuestions.filter(q=>!q.question_id.includes('-DEFINITION-
 const existing=oldDefinitions.filter(d=>!sourceIds.has(d.id));
 fs.writeFileSync(path.join(root,'data/questions-bank.json.gz'),zlib.gzipSync(JSON.stringify(questions)));
 fs.writeFileSync(path.join(root,'public/data/definitions.json'),JSON.stringify([...existing,...definitions]));
-fs.writeFileSync(path.join(root,'public/data/definition-questions.json'),JSON.stringify(generated));
 fs.writeFileSync(path.join(root,'data/definition-import-report.json'),JSON.stringify({total:source.length,flashMatchAndMemory:definitions.length,generatedDailyMixMcq:generated.length,needsCurriculumMapping:unmapped.length,unmapped},null,2)+'\n');
 console.log(JSON.stringify({total:source.length,definitions:definitions.length,generatedDailyMixMcq:generated.length,needsCurriculumMapping:unmapped.length},null,2));
