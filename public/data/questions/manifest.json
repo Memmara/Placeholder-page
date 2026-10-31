@@ -11,15 +11,15 @@
     },
     "GCSE-MATHS": {
       "url": "/data/questions/gcse-maths.json",
-      "count": 1569
+      "count": 1587
     },
     "GCSE-GEOGRAPHY": {
       "url": "/data/questions/gcse-geography.json",
-      "count": 1548
+      "count": 1564
     },
     "GCSE-HISTORY": {
       "url": "/data/questions/gcse-history.json",
-      "count": 1744
+      "count": 1747
     },
     "GCSE-ENGLISH-LANGUAGE": {
       "url": "/data/questions/gcse-english-language.json",
@@ -43,11 +43,11 @@
     },
     "GCSE-BUSINESS": {
       "url": "/data/questions/gcse-business.json",
-      "count": 1028
+      "count": 1065
     },
     "GCSE-COMPUTER-SCIENCE": {
       "url": "/data/questions/gcse-computer-science.json",
-      "count": 987
+      "count": 1020
     },
     "GCSE-DESIGN-TECHNOLOGY": {
       "url": "/data/questions/gcse-design-technology.json",
@@ -55,7 +55,7 @@
     },
     "GCSE-PHYSICAL-EDUCATION": {
       "url": "/data/questions/gcse-physical-education.json",
-      "count": 834
+      "count": 857
     },
     "A-LEVEL-BUSINESS": {
       "url": "/data/questions/a-level-business.json",

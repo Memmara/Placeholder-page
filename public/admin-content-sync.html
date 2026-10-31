@@ -6,7 +6,7 @@ button.onclick=async()=>{button.disabled=true;try{
  if(!definitionsResponse.ok||!questionsResponse.ok||!curriculumResponse.ok)throw Error('Published content unavailable.');
  const definitions=(await definitionsResponse.json()).filter(item=>item.incorrect_definitions?.length===3);
  const questions=await questionsResponse.json(),curriculum=await curriculumResponse.json();
- if(definitions.length!==1278||questions.length!==462)throw Error('Published counts differ: '+definitions.length+' definitions, '+questions.length+' questions.');
+ if(definitions.length!==1278||questions.length!==518)throw Error('Published counts differ: '+definitions.length+' definitions, '+questions.length+' questions.');
  const ids=new Set(questions.map(q=>q.specification_point_id));
  const points=curriculum.records.map((point,sequence)=>({point,sequence})).filter(({point})=>ids.has(point.specification_point_id));
  if(new Set(points.map(({point})=>point.specification_point_id)).size!==ids.size)throw Error('Published questions have missing curriculum points.');

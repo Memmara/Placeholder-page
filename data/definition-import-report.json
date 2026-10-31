@@ -1,8 +1,8 @@
 {
   "total": 1278,
   "flashMatchAndMemory": 1278,
-  "generatedDailyMixMcq": 462,
-  "needsCurriculumMapping": 816,
+  "generatedDailyMixMcq": 518,
+  "needsCurriculumMapping": 760,
   "unmapped": [
     {
       "id": "def-albio-001",
@@ -6532,52 +6532,11 @@
       ]
     },
     {
-      "id": "def-bus-001",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Enterprise",
-      "source_specification_point_id": "BUS-GCSE-C0001",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-SOCIAL-ENTERPRISE",
-          "subtopic": "Social Enterprise",
-          "score": 21
-        },
-        {
-          "specification_point_id": "BUS-8132-ENTERPRISE",
-          "subtopic": "Enterprise",
-          "score": 15
-        }
-      ]
-    },
-    {
       "id": "def-bus-003",
       "subject_id": "GCSE-BUSINESS",
       "term": "Added value",
       "source_specification_point_id": "BUS-GCSE-C0003",
       "candidates": []
-    },
-    {
-      "id": "def-bus-004",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Revenue",
-      "source_specification_point_id": "BUS-GCSE-C0004",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-MARGINS",
-          "subtopic": "Margins",
-          "score": 24
-        },
-        {
-          "specification_point_id": "BUS-8132-REVENUE-COSTS",
-          "subtopic": "Revenue Costs",
-          "score": 23
-        },
-        {
-          "specification_point_id": "BUS-8132-PROFIT",
-          "subtopic": "Profit",
-          "score": 15
-        }
-      ]
     },
     {
       "id": "def-bus-005",
@@ -6586,19 +6545,19 @@
       "source_specification_point_id": "BUS-GCSE-C0005",
       "candidates": [
         {
-          "specification_point_id": "BUS-8132-PROFIT",
-          "subtopic": "Profit",
-          "score": 43
-        },
-        {
           "specification_point_id": "BUS-8132-MARGINS",
           "subtopic": "Margins",
-          "score": 36
+          "score": 83
+        },
+        {
+          "specification_point_id": "BUS-8132-PROFIT",
+          "subtopic": "Profit",
+          "score": 74
         },
         {
           "specification_point_id": "BUS-8132-INCOME-STATEMENT",
           "subtopic": "Income Statement",
-          "score": 22
+          "score": 52
         }
       ]
     },
@@ -6611,139 +6570,40 @@
         {
           "specification_point_id": "BUS-8132-COST-TYPES",
           "subtopic": "Cost Types",
-          "score": 19
+          "score": 34
         },
         {
           "specification_point_id": "BUS-8132-BREAK-EVEN",
           "subtopic": "Break Even",
-          "score": 14
+          "score": 31
         },
         {
           "specification_point_id": "BUS-8132-REVENUE-COSTS",
           "subtopic": "Revenue Costs",
-          "score": 12
+          "score": 26
         }
       ]
     },
     {
-      "id": "def-bus-009",
+      "id": "def-bus-007",
       "subject_id": "GCSE-BUSINESS",
-      "term": "Margin of safety",
-      "source_specification_point_id": "BUS-GCSE-C0009",
+      "term": "Variable costs",
+      "source_specification_point_id": "BUS-GCSE-C0007",
       "candidates": [
         {
-          "specification_point_id": "BUS-8132-BREAK-EVEN",
-          "subtopic": "Break Even",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-bus-012",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Limited liability",
-      "source_specification_point_id": "BUS-GCSE-C0012",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-LIMITED-COMPANY",
-          "subtopic": "Limited Company",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-bus-013",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Unlimited liability",
-      "source_specification_point_id": "BUS-GCSE-C0013",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-SOLE-TRADER",
-          "subtopic": "Sole Trader",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-bus-017",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Primary research",
-      "source_specification_point_id": "BUS-GCSE-C0017",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-MARKET-RESEARCH",
-          "subtopic": "Market Research",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-bus-018",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Secondary research",
-      "source_specification_point_id": "BUS-GCSE-C0018",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-MARKET-RESEARCH",
-          "subtopic": "Market Research",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-bus-019",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Market segmentation",
-      "source_specification_point_id": "BUS-GCSE-C0019",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-SEGMENTATION",
-          "subtopic": "Segmentation",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-bus-020",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Market share",
-      "source_specification_point_id": "BUS-GCSE-C0020",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-AIMS-OBJECTIVES",
-          "subtopic": "Aims Objectives",
-          "score": 6
+          "specification_point_id": "BUS-8132-COST-TYPES",
+          "subtopic": "Cost Types",
+          "score": 23
         },
         {
-          "specification_point_id": "BUS-8132-PRICE",
-          "subtopic": "Price",
+          "specification_point_id": "BUS-8132-REVENUE-COSTS",
+          "subtopic": "Revenue Costs",
+          "score": 19
+        },
+        {
+          "specification_point_id": "BUS-8132-BUSINESS-MATHS",
+          "subtopic": "Business Maths",
           "score": 2
-        }
-      ]
-    },
-    {
-      "id": "def-bus-023",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Price skimming",
-      "source_specification_point_id": "BUS-GCSE-C0023",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-PRICE",
-          "subtopic": "Price",
-          "score": 5
-        }
-      ]
-    },
-    {
-      "id": "def-bus-024",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Penetration pricing",
-      "source_specification_point_id": "BUS-GCSE-C0024",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-PRICE",
-          "subtopic": "Price",
-          "score": 6
         }
       ]
     },
@@ -6754,28 +6614,21 @@
       "source_specification_point_id": "BUS-GCSE-C0025",
       "candidates": [
         {
-          "specification_point_id": "BUS-8132-CASH-FLOW-FORECAST",
-          "subtopic": "Cash Flow Forecast",
-          "score": 36
-        },
-        {
           "specification_point_id": "BUS-8132-CASH-FLOW",
           "subtopic": "Cash Flow",
-          "score": 27
+          "score": 43
+        },
+        {
+          "specification_point_id": "BUS-8132-CASH-FLOW-FORECAST",
+          "subtopic": "Cash Flow Forecast",
+          "score": 38
         },
         {
           "specification_point_id": "BUS-8132-BUSINESS-PLAN",
           "subtopic": "Business Plan",
-          "score": 2
+          "score": 7
         }
       ]
-    },
-    {
-      "id": "def-bus-026",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Cash-flow forecast",
-      "source_specification_point_id": "BUS-GCSE-C0026",
-      "candidates": []
     },
     {
       "id": "def-bus-027",
@@ -6783,55 +6636,6 @@
       "term": "Liquidity",
       "source_specification_point_id": "BUS-GCSE-C0027",
       "candidates": []
-    },
-    {
-      "id": "def-bus-029",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Retained profit",
-      "source_specification_point_id": "BUS-GCSE-C0029",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-PROFIT",
-          "subtopic": "Profit",
-          "score": 3
-        },
-        {
-          "specification_point_id": "BUS-8132-LONG-TERM-FINANCE",
-          "subtopic": "Long Term Finance",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-bus-031",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Net profit",
-      "source_specification_point_id": "BUS-GCSE-C0031",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-MARGINS",
-          "subtopic": "Margins",
-          "score": 14
-        },
-        {
-          "specification_point_id": "BUS-8132-INCOME-STATEMENT",
-          "subtopic": "Income Statement",
-          "score": 12
-        }
-      ]
-    },
-    {
-      "id": "def-bus-032",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Economies of scale",
-      "source_specification_point_id": "BUS-GCSE-C0032",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-GROWTH",
-          "subtopic": "Growth",
-          "score": 3
-        }
-      ]
     },
     {
       "id": "def-bus-033",
@@ -6842,64 +6646,17 @@
         {
           "specification_point_id": "BUS-8132-TRAINING",
           "subtopic": "Training",
-          "score": 2
+          "score": 4
         },
         {
           "specification_point_id": "BUS-8132-NON-FINANCIAL-MOTIVATION",
           "subtopic": "Non Financial Motivation",
+          "score": 4
+        },
+        {
+          "specification_point_id": "BUS-8132-LOCATION",
+          "subtopic": "Location",
           "score": 2
-        }
-      ]
-    },
-    {
-      "id": "def-bus-034",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Quality assurance",
-      "source_specification_point_id": "BUS-GCSE-C0034",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-QUALITY",
-          "subtopic": "Quality",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-bus-036",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Batch production",
-      "source_specification_point_id": "BUS-GCSE-C0036",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-PRODUCTION-METHODS",
-          "subtopic": "Production Methods",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-bus-038",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Delegation",
-      "source_specification_point_id": "BUS-GCSE-C0038",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-ORG-STRUCTURES",
-          "subtopic": "Org Structures",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-bus-039",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Span of control",
-      "source_specification_point_id": "BUS-GCSE-C0039",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-ORG-STRUCTURES",
-          "subtopic": "Org Structures",
-          "score": 6
         }
       ]
     },
@@ -6912,30 +6669,17 @@
         {
           "specification_point_id": "BUS-8132-NON-FINANCIAL-MOTIVATION",
           "subtopic": "Non Financial Motivation",
-          "score": 15
+          "score": 18
         },
         {
           "specification_point_id": "BUS-8132-FINANCIAL-MOTIVATION",
           "subtopic": "Financial Motivation",
-          "score": 12
-        }
-      ]
-    },
-    {
-      "id": "def-bus-044",
-      "subject_id": "GCSE-BUSINESS",
-      "term": "Interest rate",
-      "source_specification_point_id": "BUS-GCSE-C0044",
-      "candidates": [
-        {
-          "specification_point_id": "BUS-8132-ECONOMIC-CLIMATE",
-          "subtopic": "Economic Climate",
-          "score": 3
+          "score": 17
         },
         {
-          "specification_point_id": "BUS-8132-ARR",
-          "subtopic": "Arr",
-          "score": 3
+          "specification_point_id": "BUS-8132-ORG-STRUCTURES",
+          "subtopic": "Org Structures",
+          "score": 2
         }
       ]
     },
@@ -7558,32 +7302,6 @@
       ]
     },
     {
-      "id": "def-cs-003",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Decomposition",
-      "source_specification_point_id": "CS-GCSE-C0003",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-ALGO-THINKING",
-          "subtopic": "Algo Thinking",
-          "score": 5
-        }
-      ]
-    },
-    {
-      "id": "def-cs-005",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Constant",
-      "source_specification_point_id": "CS-GCSE-C0005",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-VARIABLES-OPERATORS",
-          "subtopic": "Variables Operators",
-          "score": 6
-        }
-      ]
-    },
-    {
       "id": "def-cs-009",
       "subject_id": "GCSE-COMPUTER-SCIENCE",
       "term": "Subroutine",
@@ -7592,51 +7310,12 @@
         {
           "specification_point_id": "CS-8525-PARAMETERS-SCOPE",
           "subtopic": "Parameters Scope",
-          "score": 18
+          "score": 29
         },
         {
           "specification_point_id": "CS-8525-SUBROUTINES",
           "subtopic": "Subroutines",
-          "score": 13
-        }
-      ]
-    },
-    {
-      "id": "def-cs-010",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Parameter",
-      "source_specification_point_id": "CS-GCSE-C0010",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-PARAMETERS-SCOPE",
-          "subtopic": "Parameters Scope",
-          "score": 5
-        }
-      ]
-    },
-    {
-      "id": "def-cs-011",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Local variable",
-      "source_specification_point_id": "CS-GCSE-C0011",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-PARAMETERS-SCOPE",
-          "subtopic": "Parameters Scope",
-          "score": 5
-        }
-      ]
-    },
-    {
-      "id": "def-cs-012",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Global variable",
-      "source_specification_point_id": "CS-GCSE-C0012",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-PARAMETERS-SCOPE",
-          "subtopic": "Parameters Scope",
-          "score": 6
+          "score": 21
         }
       ]
     },
@@ -7649,7 +7328,7 @@
         {
           "specification_point_id": "CS-8525-TESTING",
           "subtopic": "Testing",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -7659,55 +7338,6 @@
       "term": "Logical error",
       "source_specification_point_id": "CS-GCSE-C0014",
       "candidates": []
-    },
-    {
-      "id": "def-cs-015",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Compiler",
-      "source_specification_point_id": "CS-GCSE-C0015",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-PROG-LANGUAGES",
-          "subtopic": "Prog Languages",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-cs-019",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Bit",
-      "source_specification_point_id": "CS-GCSE-C0019",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-BINARY-ARITHMETIC",
-          "subtopic": "Binary Arithmetic",
-          "score": 24
-        },
-        {
-          "specification_point_id": "CS-8525-SOUND-FILE-SIZE",
-          "subtopic": "Sound File Size",
-          "score": 24
-        },
-        {
-          "specification_point_id": "CS-8525-SOUND",
-          "subtopic": "Sound",
-          "score": 8
-        }
-      ]
-    },
-    {
-      "id": "def-cs-020",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Byte",
-      "source_specification_point_id": "CS-GCSE-C0020",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-DATA-UNITS",
-          "subtopic": "Data Units",
-          "score": 2
-        }
-      ]
     },
     {
       "id": "def-cs-023",
@@ -7725,32 +7355,6 @@
         {
           "specification_point_id": "CS-8525-SOUND",
           "subtopic": "Sound",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-cs-027",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Lossy compression",
-      "source_specification_point_id": "CS-GCSE-C0027",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-COMPRESSION",
-          "subtopic": "Compression",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-cs-028",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Lossless compression",
-      "source_specification_point_id": "CS-GCSE-C0028",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-COMPRESSION",
-          "subtopic": "Compression",
           "score": 6
         }
       ]
@@ -7764,17 +7368,40 @@
         {
           "specification_point_id": "CS-8525-CPU-PERFORMANCE",
           "subtopic": "Cpu Performance",
-          "score": 30
+          "score": 40
         },
         {
           "specification_point_id": "CS-8525-CPU-COMPONENTS",
           "subtopic": "Cpu Components",
-          "score": 25
+          "score": 31
         },
         {
           "specification_point_id": "CS-8525-FETCH-EXECUTE",
           "subtopic": "Fetch Execute",
-          "score": 8
+          "score": 14
+        }
+      ]
+    },
+    {
+      "id": "def-cs-034",
+      "subject_id": "GCSE-COMPUTER-SCIENCE",
+      "term": "Network",
+      "source_specification_point_id": "CS-GCSE-C0034",
+      "candidates": [
+        {
+          "specification_point_id": "CS-8525-NETWORK-TYPES",
+          "subtopic": "Network Types",
+          "score": 71
+        },
+        {
+          "specification_point_id": "CS-8525-NETWORK-HARDWARE",
+          "subtopic": "Network Hardware",
+          "score": 48
+        },
+        {
+          "specification_point_id": "CS-8525-TOPOLOGY",
+          "subtopic": "Topology",
+          "score": 33
         }
       ]
     },
@@ -7785,14 +7412,14 @@
       "source_specification_point_id": "CS-GCSE-C0035",
       "candidates": [
         {
-          "specification_point_id": "CS-8525-NETWORK-HARDWARE",
-          "subtopic": "Network Hardware",
-          "score": 11
-        },
-        {
           "specification_point_id": "CS-8525-NETWORK-TYPES",
           "subtopic": "Network Types",
-          "score": 8
+          "score": 16
+        },
+        {
+          "specification_point_id": "CS-8525-NETWORK-HARDWARE",
+          "subtopic": "Network Hardware",
+          "score": 13
         },
         {
           "specification_point_id": "CS-8525-WIRED-WIRELESS",
@@ -7810,38 +7437,12 @@
         {
           "specification_point_id": "CS-8525-PREVENTION",
           "subtopic": "Prevention",
-          "score": 5
+          "score": 8
         },
         {
           "specification_point_id": "CS-8525-WIRED-WIRELESS",
           "subtopic": "Wired Wireless",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-cs-038",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Malware",
-      "source_specification_point_id": "CS-GCSE-C0038",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-THREATS",
-          "subtopic": "Threats",
-          "score": 5
-        }
-      ]
-    },
-    {
-      "id": "def-cs-039",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Phishing",
-      "source_specification_point_id": "CS-GCSE-C0039",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-THREATS",
-          "subtopic": "Threats",
-          "score": 5
+          "score": 6
         }
       ]
     },
@@ -7854,25 +7455,7 @@
         {
           "specification_point_id": "CS-8525-THREATS",
           "subtopic": "Threats",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-cs-041",
-      "subject_id": "GCSE-COMPUTER-SCIENCE",
-      "term": "Boolean",
-      "source_specification_point_id": "CS-GCSE-C0041",
-      "candidates": [
-        {
-          "specification_point_id": "CS-8525-DATA-TYPES",
-          "subtopic": "Data Types",
-          "score": 5
-        },
-        {
-          "specification_point_id": "CS-8525-RECORDS-FILES",
-          "subtopic": "Records Files",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -8844,40 +8427,17 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-COASTS-PROCESSES",
           "subtopic": "Coasts Processes",
-          "score": 8
+          "score": 16
         },
         {
-          "specification_point_id": "GEO-GCSE-3.1.3.2a",
-          "subtopic": "Coasts",
-          "score": 6
+          "specification_point_id": "GEOG-8035-PHYS-COASTS-EROSION",
+          "subtopic": "Coasts Erosion",
+          "score": 15
         },
         {
           "specification_point_id": "GEOG-8035-PHYS-GLACIAL-PROCESSES",
           "subtopic": "Glacial Processes",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-geo-003",
-      "subject_id": "GCSE-GEOGRAPHY",
-      "term": "Deposition",
-      "source_specification_point_id": "GEO-GCSE-C0003",
-      "candidates": [
-        {
-          "specification_point_id": "GEO-GCSE-3.1.3.2b",
-          "subtopic": "Coasts",
-          "score": 6
-        },
-        {
-          "specification_point_id": "GEO-GCSE-3.1.3.3b",
-          "subtopic": "Rivers",
-          "score": 6
-        },
-        {
-          "specification_point_id": "GEO-GCSE-3.1.3.4b",
-          "subtopic": "Glacial landscapes",
-          "score": 6
+          "score": 9
         }
       ]
     },
@@ -8895,29 +8455,6 @@
       ]
     },
     {
-      "id": "def-geo-006",
-      "subject_id": "GCSE-GEOGRAPHY",
-      "term": "Abrasion",
-      "source_specification_point_id": "GEO-GCSE-C0006",
-      "candidates": [
-        {
-          "specification_point_id": "GEOG-8035-PHYS-GLACIAL-PROCESSES",
-          "subtopic": "Glacial Processes",
-          "score": 8
-        },
-        {
-          "specification_point_id": "GEOG-8035-PHYS-RIVERS-LANDFORMS",
-          "subtopic": "Rivers Landforms",
-          "score": 6
-        },
-        {
-          "specification_point_id": "GEOG-8035-PHYS-COASTS-EROSION",
-          "subtopic": "Coasts Erosion",
-          "score": 2
-        }
-      ]
-    },
-    {
       "id": "def-geo-007",
       "subject_id": "GCSE-GEOGRAPHY",
       "term": "Attrition",
@@ -8926,17 +8463,17 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-COASTS-EROSION",
           "subtopic": "Coasts Erosion",
-          "score": 2
+          "score": 5
         },
         {
           "specification_point_id": "GEOG-8035-PHYS-RIVERS-PROCESSES",
           "subtopic": "Rivers Processes",
-          "score": 2
+          "score": 4
         },
         {
           "specification_point_id": "GEOG-8035-SKILLS-FIELDWORK-PHYSICAL",
           "subtopic": "Fieldwork Physical",
-          "score": 2
+          "score": 4
         }
       ]
     },
@@ -8945,7 +8482,18 @@
       "subject_id": "GCSE-GEOGRAPHY",
       "term": "Drainage basin",
       "source_specification_point_id": "GEO-GCSE-C0008",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "GEOG-8035-PHYS-RIVERS-FLOODING",
+          "subtopic": "Rivers Flooding",
+          "score": 3
+        },
+        {
+          "specification_point_id": "GEOG-8035-PHYS-RIVERS-PROCESSES",
+          "subtopic": "Rivers Processes",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-geo-009",
@@ -8956,7 +8504,7 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-RIVERS-PROCESSES",
           "subtopic": "Rivers Processes",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -8972,7 +8520,13 @@
       "subject_id": "GCSE-GEOGRAPHY",
       "term": "Interception",
       "source_specification_point_id": "GEO-GCSE-C0011",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "GEOG-8035-PHYS-RIVERS-FLOODING",
+          "subtopic": "Rivers Flooding",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-geo-015",
@@ -8980,32 +8534,6 @@
       "term": "Tectonic plate",
       "source_specification_point_id": "GEO-GCSE-C0015",
       "candidates": []
-    },
-    {
-      "id": "def-geo-016",
-      "subject_id": "GCSE-GEOGRAPHY",
-      "term": "Epicentre",
-      "source_specification_point_id": "GEO-GCSE-C0016",
-      "candidates": [
-        {
-          "specification_point_id": "GEOG-8035-PHYS-HAZARDS-EARTHQUAKES",
-          "subtopic": "Hazards Earthquakes",
-          "score": 6
-        }
-      ]
-    },
-    {
-      "id": "def-geo-017",
-      "subject_id": "GCSE-GEOGRAPHY",
-      "term": "Focus",
-      "source_specification_point_id": "GEO-GCSE-C0017",
-      "candidates": [
-        {
-          "specification_point_id": "GEOG-8035-PHYS-HAZARDS-EARTHQUAKES",
-          "subtopic": "Hazards Earthquakes",
-          "score": 3
-        }
-      ]
     },
     {
       "id": "def-geo-018",
@@ -9021,19 +8549,19 @@
       "source_specification_point_id": "GEO-GCSE-C0019",
       "candidates": [
         {
-          "specification_point_id": "GEO-GCSE-3.1.1.4a",
-          "subtopic": "Climate change",
-          "score": 12
-        },
-        {
-          "specification_point_id": "GEO-GCSE-3.1.1.4b",
-          "subtopic": "Climate change",
-          "score": 12
+          "specification_point_id": "GEOG-8035-PHYS-HAZARDS-CLIMATE-MANAGEMENT",
+          "subtopic": "Hazards Climate Management",
+          "score": 23
         },
         {
           "specification_point_id": "GEOG-8035-PHYS-HAZARDS-CLIMATE",
           "subtopic": "Hazards Climate",
-          "score": 9
+          "score": 21
+        },
+        {
+          "specification_point_id": "GEO-GCSE-3.1.1.4a",
+          "subtopic": "Climate change",
+          "score": 12
         }
       ]
     },
@@ -9046,30 +8574,7 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-HAZARDS-CLIMATE",
           "subtopic": "Hazards Climate",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-geo-022",
-      "subject_id": "GCSE-GEOGRAPHY",
-      "term": "Adaptation (climate change)",
-      "source_specification_point_id": "GEO-GCSE-C0022",
-      "candidates": [
-        {
-          "specification_point_id": "GEO-GCSE-3.1.1.4b",
-          "subtopic": "Climate change",
           "score": 6
-        },
-        {
-          "specification_point_id": "GEOG-8035-PHYS-HAZARDS-CLIMATE-MANAGEMENT",
-          "subtopic": "Hazards Climate Management",
-          "score": 6
-        },
-        {
-          "specification_point_id": "GEOG-8035-PHYS-ECOSYSTEMS-RAINFOREST",
-          "subtopic": "Ecosystems Rainforest",
-          "score": 3
         }
       ]
     },
@@ -9082,7 +8587,7 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-ECOSYSTEMS-BASICS",
           "subtopic": "Ecosystems Basics",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -9091,7 +8596,18 @@
       "subject_id": "GCSE-GEOGRAPHY",
       "term": "Nutrient cycle",
       "source_specification_point_id": "GEO-GCSE-C0024",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "GEOG-8035-PHYS-ECOSYSTEMS-RAINFOREST",
+          "subtopic": "Ecosystems Rainforest",
+          "score": 3
+        },
+        {
+          "specification_point_id": "GEOG-8035-PHYS-ECOSYSTEMS-BASICS",
+          "subtopic": "Ecosystems Basics",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-geo-027",
@@ -9100,19 +8616,19 @@
       "source_specification_point_id": "GEO-GCSE-C0027",
       "candidates": [
         {
+          "specification_point_id": "GEOG-8035-HUM-URBAN-GROWTH",
+          "subtopic": "Urban Growth",
+          "score": 8
+        },
+        {
           "specification_point_id": "GEO-GCSE-3.2.1a",
           "subtopic": "Urban issues",
           "score": 6
         },
         {
-          "specification_point_id": "GEOG-8035-HUM-URBAN-GROWTH",
-          "subtopic": "Urban Growth",
-          "score": 3
-        },
-        {
           "specification_point_id": "GEOG-8035-HUM-UK-RURAL-GLOBAL",
           "subtopic": "Uk Rural Global",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -9125,7 +8641,7 @@
         {
           "specification_point_id": "GEOG-8035-HUM-URBAN-GROWTH",
           "subtopic": "Urban Growth",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -9145,17 +8661,17 @@
         {
           "specification_point_id": "GEOG-8035-HUM-DEVELOPMENT-CAUSES",
           "subtopic": "Development Causes",
-          "score": 33
+          "score": 57
         },
         {
           "specification_point_id": "GEOG-8035-HUM-DEVELOPMENT-HDI",
           "subtopic": "Development Hdi",
-          "score": 26
+          "score": 42
         },
         {
           "specification_point_id": "GEOG-8035-HUM-DEVELOPMENT-STRATEGIES",
           "subtopic": "Development Strategies",
-          "score": 21
+          "score": 30
         }
       ]
     },
@@ -9182,7 +8698,7 @@
         {
           "specification_point_id": "GEOG-8035-SKILLS-FIELDWORK-HUMAN",
           "subtopic": "Fieldwork Human",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -9191,7 +8707,13 @@
       "subject_id": "GCSE-GEOGRAPHY",
       "term": "Secondary data",
       "source_specification_point_id": "GEO-GCSE-C0036",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "GEOG-8035-SKILLS-FIELDWORK-HUMAN",
+          "subtopic": "Fieldwork Human",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-geo-037",
@@ -9202,12 +8724,12 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-COASTS-MANAGEMENT",
           "subtopic": "Coasts Management",
-          "score": 3
+          "score": 6
         },
         {
           "specification_point_id": "GEOG-8035-PHYS-RIVERS-MANAGEMENT",
           "subtopic": "Rivers Management",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -9220,12 +8742,12 @@
         {
           "specification_point_id": "GEOG-8035-PHYS-COASTS-MANAGEMENT",
           "subtopic": "Coasts Management",
-          "score": 3
+          "score": 8
         },
         {
           "specification_point_id": "GEOG-8035-PHYS-RIVERS-MANAGEMENT",
           "subtopic": "Rivers Management",
-          "score": 3
+          "score": 6
         }
       ]
     },
@@ -9238,12 +8760,17 @@
         {
           "specification_point_id": "GEOG-8035-HUM-DEVELOPMENT-HDI",
           "subtopic": "Development Hdi",
-          "score": 4
+          "score": 6
         },
         {
           "specification_point_id": "GEOG-8035-HUM-NIGERIA",
           "subtopic": "Nigeria",
-          "score": 3
+          "score": 6
+        },
+        {
+          "specification_point_id": "GEOG-8035-HUM-DEVELOPMENT-CAUSES",
+          "subtopic": "Development Causes",
+          "score": 2
         }
       ]
     },
@@ -9262,24 +8789,17 @@
       "candidates": []
     },
     {
-      "id": "def-hist-003",
-      "subject_id": "GCSE-HISTORY",
-      "term": "Provenance",
-      "source_specification_point_id": "HIST-GCSE-C0003",
-      "candidates": [
-        {
-          "specification_point_id": "HIST-8145-GERMANY-SOURCES",
-          "subtopic": "Sources",
-          "score": 3
-        }
-      ]
-    },
-    {
       "id": "def-hist-005",
       "subject_id": "GCSE-HISTORY",
       "term": "Censorship",
       "source_specification_point_id": "HIST-GCSE-C0005",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "HIST-8145-GERMANY-WEIMAR-CULTURE",
+          "subtopic": "Weimar Culture",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-hist-006",
@@ -9318,19 +8838,19 @@
       "source_specification_point_id": "HIST-GCSE-C0008",
       "candidates": [
         {
+          "specification_point_id": "HIST-8145-GERMANY-CHRONOLOGY",
+          "subtopic": "Chronology",
+          "score": 17
+        },
+        {
+          "specification_point_id": "HIST-8145-GERMANY-KAISER-REICH",
+          "subtopic": "Kaiser Reich",
+          "score": 17
+        },
+        {
           "specification_point_id": "HIST-8145-GERMANY-HYPERINFLATION",
           "subtopic": "Hyperinflation",
           "score": 15
-        },
-        {
-          "specification_point_id": "HIST-8145-GERMANY-CHRONOLOGY",
-          "subtopic": "Chronology",
-          "score": 15
-        },
-        {
-          "specification_point_id": "HIS-GCSE-C0010",
-          "subtopic": "Part 1",
-          "score": 12
         }
       ]
     },
@@ -9376,14 +8896,36 @@
       "subject_id": "GCSE-HISTORY",
       "term": "Nationalism",
       "source_specification_point_id": "HIST-GCSE-C0012",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "HIST-8145-GERMANY-HITLER-APPEAL",
+          "subtopic": "Hitler Appeal",
+          "score": 2
+        },
+        {
+          "specification_point_id": "HIST-8145-GERMANY-CHURCH",
+          "subtopic": "Church",
+          "score": 2
+        },
+        {
+          "specification_point_id": "HIST-8145-CONFLICT-MOROCCO-BOSNIA",
+          "subtopic": "Morocco Bosnia",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-hist-013",
       "subject_id": "GCSE-HISTORY",
       "term": "Militarism",
       "source_specification_point_id": "HIST-GCSE-C0013",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "HIST-8145-CONFLICT-ARMS-RACE",
+          "subtopic": "Arms Race",
+          "score": 5
+        }
+      ]
     },
     {
       "id": "def-hist-014",
@@ -9413,19 +8955,19 @@
       "source_specification_point_id": "HIST-GCSE-C0017",
       "candidates": [
         {
-          "specification_point_id": "HIST-8145-GERMANY-STRESEMANN",
-          "subtopic": "Stresemann",
-          "score": 7
-        },
-        {
           "specification_point_id": "HIST-8145-GERMANY-VERSAILLES",
           "subtopic": "Versailles",
-          "score": 5
+          "score": 12
+        },
+        {
+          "specification_point_id": "HIST-8145-GERMANY-STRESEMANN",
+          "subtopic": "Stresemann",
+          "score": 11
         },
         {
           "specification_point_id": "HIST-8145-GERMANY-HYPERINFLATION",
           "subtopic": "Hyperinflation",
-          "score": 2
+          "score": 4
         }
       ]
     },
@@ -9445,12 +8987,12 @@
         {
           "specification_point_id": "HIST-8145-GERMANY-ECONOMY",
           "subtopic": "Economy",
-          "score": 4
+          "score": 6
         },
         {
           "specification_point_id": "HIST-8145-GERMANY-WOMEN",
           "subtopic": "Women",
-          "score": 2
+          "score": 4
         }
       ]
     },
@@ -9515,7 +9057,13 @@
       "subject_id": "GCSE-HISTORY",
       "term": "Civil rights",
       "source_specification_point_id": "HIST-GCSE-C0028",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "HIST-8145-GERMANY-ENABLING",
+          "subtopic": "Enabling",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-hist-029",
@@ -9543,35 +9091,44 @@
       "subject_id": "GCSE-MATHS",
       "term": "Prime number",
       "source_specification_point_id": "MATHS-GCSE-C0001",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-002",
-      "subject_id": "GCSE-MATHS",
-      "term": "Factor",
-      "source_specification_point_id": "MATHS-GCSE-C0002",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-003",
-      "subject_id": "GCSE-MATHS",
-      "term": "Multiple",
-      "source_specification_point_id": "MATHS-GCSE-C0003",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-NUM-PRIME-FACTORISATION",
+          "subtopic": "Prime Factorisation",
+          "score": 6
+        }
+      ]
     },
     {
       "id": "def-maths-004",
       "subject_id": "GCSE-MATHS",
       "term": "Highest common factor (HCF)",
       "source_specification_point_id": "MATHS-GCSE-C0004",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-NUM-HCF-LCM",
+          "subtopic": "HCF LCM",
+          "score": 3
+        },
+        {
+          "specification_point_id": "MATHS-NUM-PRIME-FACTORISATION",
+          "subtopic": "Prime Factorisation",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-005",
       "subject_id": "GCSE-MATHS",
       "term": "Lowest common multiple (LCM)",
       "source_specification_point_id": "MATHS-GCSE-C0005",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-NUM-PRIME-FACTORISATION",
+          "subtopic": "Prime Factorisation",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-007",
@@ -9601,19 +9158,19 @@
       "source_specification_point_id": "MATHS-GCSE-C0010",
       "candidates": [
         {
-          "specification_point_id": "MATH-GCSE-N11",
-          "subtopic": "Fractions in ratio problems",
-          "score": 18
+          "specification_point_id": "MATHS-RAT-RATIO-FRACTIONS",
+          "subtopic": "Ratio Fractions",
+          "score": 33
         },
         {
-          "specification_point_id": "MATH-GCSE-R4",
-          "subtopic": "Ratio notation",
-          "score": 18
+          "specification_point_id": "MATHS-RAT-SIMPLIFY-RATIO",
+          "subtopic": "Simplify Ratio",
+          "score": 30
         },
         {
-          "specification_point_id": "MATH-GCSE-R5",
-          "subtopic": "Dividing in a ratio",
-          "score": 18
+          "specification_point_id": "MATHS-RAT-SHARE-RATIO",
+          "subtopic": "Share Ratio",
+          "score": 24
         }
       ]
     },
@@ -9641,13 +9198,6 @@
       ]
     },
     {
-      "id": "def-maths-012",
-      "subject_id": "GCSE-MATHS",
-      "term": "Direct proportion",
-      "source_specification_point_id": "MATHS-GCSE-C0012",
-      "candidates": []
-    },
-    {
       "id": "def-maths-013",
       "subject_id": "GCSE-MATHS",
       "term": "Inverse proportion",
@@ -9662,28 +9212,19 @@
           "specification_point_id": "MATH-GCSE-R13",
           "subtopic": "Direct and inverse proportion equations",
           "score": 12
+        },
+        {
+          "specification_point_id": "MATHS-RAT-INVERSE-PROPORTION",
+          "subtopic": "Inverse Proportion",
+          "score": 12
         }
       ]
-    },
-    {
-      "id": "def-maths-015",
-      "subject_id": "GCSE-MATHS",
-      "term": "Expression",
-      "source_specification_point_id": "MATHS-GCSE-C0015",
-      "candidates": []
     },
     {
       "id": "def-maths-017",
       "subject_id": "GCSE-MATHS",
       "term": "Identity",
       "source_specification_point_id": "MATHS-GCSE-C0017",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-018",
-      "subject_id": "GCSE-MATHS",
-      "term": "Formula",
-      "source_specification_point_id": "MATHS-GCSE-C0018",
       "candidates": []
     },
     {
@@ -9698,14 +9239,18 @@
       "subject_id": "GCSE-MATHS",
       "term": "y-intercept",
       "source_specification_point_id": "MATHS-GCSE-C0022",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-023",
-      "subject_id": "GCSE-MATHS",
-      "term": "Root (of an equation)",
-      "source_specification_point_id": "MATHS-GCSE-C0023",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-ALG-QUADRATIC-GRAPHS",
+          "subtopic": "Quadratic Graphs",
+          "score": 12
+        },
+        {
+          "specification_point_id": "MATHS-ALG-STRAIGHT-LINE-EQUATION",
+          "subtopic": "Straight Line Equation",
+          "score": 9
+        }
+      ]
     },
     {
       "id": "def-maths-024",
@@ -9726,28 +9271,44 @@
       "subject_id": "GCSE-MATHS",
       "term": "Parallel lines",
       "source_specification_point_id": "MATHS-GCSE-C0026",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-GEO-ANGLES-LINES",
+          "subtopic": "Angles Lines",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-027",
       "subject_id": "GCSE-MATHS",
       "term": "Congruent shapes",
       "source_specification_point_id": "MATHS-GCSE-C0027",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-GEO-CONGRUENCE",
+          "subtopic": "Congruence",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-maths-028",
       "subject_id": "GCSE-MATHS",
       "term": "Similar shapes",
       "source_specification_point_id": "MATHS-GCSE-C0028",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-029",
-      "subject_id": "GCSE-MATHS",
-      "term": "Circumference",
-      "source_specification_point_id": "MATHS-GCSE-C0029",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-GEO-SIMILAR-AREA-VOLUME",
+          "subtopic": "Similar Area Volume",
+          "score": 6
+        },
+        {
+          "specification_point_id": "MATHS-GEO-CONGRUENCE",
+          "subtopic": "Congruence",
+          "score": 5
+        }
+      ]
     },
     {
       "id": "def-maths-030",
@@ -9761,7 +9322,18 @@
       "subject_id": "GCSE-MATHS",
       "term": "Tangent (to a circle)",
       "source_specification_point_id": "MATHS-GCSE-C0031",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-GEO-CIRCLE-THEOREMS",
+          "subtopic": "Circle Theorems",
+          "score": 3
+        },
+        {
+          "specification_point_id": "MATHS-ALG-SIMULTANEOUS-QUADRATIC",
+          "subtopic": "Simultaneous Quadratic",
+          "score": 2
+        }
+      ]
     },
     {
       "id": "def-maths-032",
@@ -9770,19 +9342,19 @@
       "source_specification_point_id": "MATHS-GCSE-C0032",
       "candidates": [
         {
-          "specification_point_id": "MATH-GCSE-P1",
-          "subtopic": "Probability experiments and frequency trees",
-          "score": 18
+          "specification_point_id": "MATHS-PROB-BASIC",
+          "subtopic": "Basic",
+          "score": 27
         },
         {
-          "specification_point_id": "MATH-GCSE-P3",
-          "subtopic": "Theoretical probability and the 0–1 scale",
-          "score": 18
+          "specification_point_id": "MATHS-PROB-TREE-INDEPENDENT",
+          "subtopic": "Tree Independent",
+          "score": 24
         },
         {
-          "specification_point_id": "MATH-GCSE-P5",
-          "subtopic": "Sample size and empirical probability",
-          "score": 18
+          "specification_point_id": "MATHS-PROB-TREE-DEPENDENT",
+          "subtopic": "Tree Dependent",
+          "score": 24
         }
       ]
     },
@@ -9805,14 +9377,46 @@
       "subject_id": "GCSE-MATHS",
       "term": "Mean",
       "source_specification_point_id": "MATHS-GCSE-C0035",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-FREQ-TABLE-MEAN",
+          "subtopic": "Freq Table Mean",
+          "score": 15
+        },
+        {
+          "specification_point_id": "MATHS-STAT-GROUPED-MEAN",
+          "subtopic": "Grouped Mean",
+          "score": 15
+        },
+        {
+          "specification_point_id": "MATHS-STAT-AVERAGES",
+          "subtopic": "Averages",
+          "score": 12
+        }
+      ]
     },
     {
       "id": "def-maths-036",
       "subject_id": "GCSE-MATHS",
       "term": "Median",
       "source_specification_point_id": "MATHS-GCSE-C0036",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-FREQ-TABLE-MEAN",
+          "subtopic": "Freq Table Mean",
+          "score": 9
+        },
+        {
+          "specification_point_id": "MATHS-STAT-GROUPED-MEAN",
+          "subtopic": "Grouped Mean",
+          "score": 9
+        },
+        {
+          "specification_point_id": "MATHS-STAT-CUMULATIVE-FREQ",
+          "subtopic": "Cumulative Freq",
+          "score": 9
+        }
+      ]
     },
     {
       "id": "def-maths-037",
@@ -9826,14 +9430,41 @@
       "subject_id": "GCSE-MATHS",
       "term": "Range",
       "source_specification_point_id": "MATHS-GCSE-C0038",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-BOXPLOTS",
+          "subtopic": "Boxplots",
+          "score": 12
+        },
+        {
+          "specification_point_id": "MATHS-STAT-AVERAGES",
+          "subtopic": "Averages",
+          "score": 9
+        },
+        {
+          "specification_point_id": "MATHS-STAT-FREQ-TABLE-MEAN",
+          "subtopic": "Freq Table Mean",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-039",
       "subject_id": "GCSE-MATHS",
       "term": "Interquartile range",
       "source_specification_point_id": "MATHS-GCSE-C0039",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-CUMULATIVE-FREQ",
+          "subtopic": "Cumulative Freq",
+          "score": 3
+        },
+        {
+          "specification_point_id": "MATHS-STAT-BOXPLOTS",
+          "subtopic": "Boxplots",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-040",
@@ -9847,28 +9478,49 @@
       "subject_id": "GCSE-MATHS",
       "term": "Outlier",
       "source_specification_point_id": "MATHS-GCSE-C0041",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-BOXPLOTS",
+          "subtopic": "Boxplots",
+          "score": 3
+        }
+      ]
+    },
+    {
+      "id": "def-maths-042",
+      "subject_id": "GCSE-MATHS",
+      "term": "Vector (maths)",
+      "source_specification_point_id": "MATHS-GCSE-C0042",
+      "candidates": [
+        {
+          "specification_point_id": "MATH-GCSE-G25",
+          "subtopic": "Vector arithmetic and geometric arguments",
+          "score": 18
+        },
+        {
+          "specification_point_id": "MATHS-GEO-TRANSLATION",
+          "subtopic": "Translation",
+          "score": 18
+        },
+        {
+          "specification_point_id": "MATHS-GEO-VECTORS",
+          "subtopic": "Vectors",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-044",
       "subject_id": "GCSE-MATHS",
       "term": "Reciprocal",
       "source_specification_point_id": "MATHS-GCSE-C0044",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-046",
-      "subject_id": "GCSE-MATHS",
-      "term": "Bearing",
-      "source_specification_point_id": "MATHS-GCSE-C0046",
-      "candidates": []
-    },
-    {
-      "id": "def-maths-047",
-      "subject_id": "GCSE-MATHS",
-      "term": "Hypotenuse",
-      "source_specification_point_id": "MATHS-GCSE-C0047",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-NUM-FRACTIONS-MULTDIV",
+          "subtopic": "Fractions Multdiv",
+          "score": 6
+        }
+      ]
     },
     {
       "id": "def-maths-048",
@@ -9878,11 +9530,40 @@
       "candidates": []
     },
     {
+      "id": "def-maths-049",
+      "subject_id": "GCSE-MATHS",
+      "term": "Simultaneous equations",
+      "source_specification_point_id": "MATHS-GCSE-C0049",
+      "candidates": [
+        {
+          "specification_point_id": "MATH-GCSE-A19",
+          "subtopic": "Simultaneous equations",
+          "score": 12
+        },
+        {
+          "specification_point_id": "MATHS-ALG-SIMULTANEOUS-LINEAR",
+          "subtopic": "Simultaneous Linear",
+          "score": 12
+        },
+        {
+          "specification_point_id": "MATHS-ALG-SIMULTANEOUS-QUADRATIC",
+          "subtopic": "Simultaneous Quadratic",
+          "score": 3
+        }
+      ]
+    },
+    {
       "id": "def-maths-050",
       "subject_id": "GCSE-MATHS",
       "term": "Turning point",
       "source_specification_point_id": "MATHS-GCSE-C0050",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-ALG-QUADRATIC-GRAPHS",
+          "subtopic": "Quadratic Graphs",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-051",
@@ -9899,6 +9580,52 @@
       "candidates": []
     },
     {
+      "id": "def-maths-053",
+      "subject_id": "GCSE-MATHS",
+      "term": "Factorise",
+      "source_specification_point_id": "MATHS-GCSE-C0053",
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-ALG-FACTORISE-COMMON",
+          "subtopic": "Factorise Common",
+          "score": 24
+        },
+        {
+          "specification_point_id": "MATHS-ALG-FACTORISE-QUADRATIC",
+          "subtopic": "Factorise Quadratic",
+          "score": 24
+        },
+        {
+          "specification_point_id": "MATH-GCSE-A4",
+          "subtopic": "Simplify, expand, factorise",
+          "score": 18
+        }
+      ]
+    },
+    {
+      "id": "def-maths-054",
+      "subject_id": "GCSE-MATHS",
+      "term": "Expand",
+      "source_specification_point_id": "MATHS-GCSE-C0054",
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-ALG-EXPAND-DOUBLE",
+          "subtopic": "Expand Double",
+          "score": 27
+        },
+        {
+          "specification_point_id": "MATHS-ALG-EXPAND-SINGLE",
+          "subtopic": "Expand Single",
+          "score": 24
+        },
+        {
+          "specification_point_id": "MATH-GCSE-A4",
+          "subtopic": "Simplify, expand, factorise",
+          "score": 18
+        }
+      ]
+    },
+    {
       "id": "def-maths-055",
       "subject_id": "GCSE-MATHS",
       "term": "Completing the square",
@@ -9906,11 +9633,27 @@
       "candidates": []
     },
     {
-      "id": "def-maths-057",
+      "id": "def-maths-058",
       "subject_id": "GCSE-MATHS",
-      "term": "Relative frequency",
-      "source_specification_point_id": "MATHS-GCSE-C0057",
-      "candidates": []
+      "term": "Cumulative frequency",
+      "source_specification_point_id": "MATHS-GCSE-C0058",
+      "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-CUMULATIVE-FREQ",
+          "subtopic": "Cumulative Freq",
+          "score": 15
+        },
+        {
+          "specification_point_id": "MATH-GCSE-S3",
+          "subtopic": "Histograms and cumulative frequency",
+          "score": 12
+        },
+        {
+          "specification_point_id": "MATHS-STAT-CHARTS-INTERPRET",
+          "subtopic": "Charts Interpret",
+          "score": 3
+        }
+      ]
     },
     {
       "id": "def-maths-059",
@@ -9918,6 +9661,11 @@
       "term": "Sample",
       "source_specification_point_id": "MATHS-GCSE-C0059",
       "candidates": [
+        {
+          "specification_point_id": "MATHS-STAT-SAMPLING",
+          "subtopic": "Sampling",
+          "score": 21
+        },
         {
           "specification_point_id": "MATH-GCSE-P5",
           "subtopic": "Sample size and empirical probability",
@@ -9944,41 +9692,21 @@
       "source_specification_point_id": "PE-GCSE-C0003",
       "candidates": [
         {
-          "specification_point_id": "PE-8582-CARDIOVASCULAR",
-          "subtopic": "Cardiovascular",
-          "score": 9
-        },
-        {
           "specification_point_id": "PE-8582-PRINCIPLES-OF-TRAINING",
           "subtopic": "Principles Of Training",
-          "score": 9
+          "score": 33
         },
         {
-          "specification_point_id": "PE-8582-EXERCISE-SHORT-TERM",
-          "subtopic": "Exercise Short Term",
-          "score": 8
-        }
-      ]
-    },
-    {
-      "id": "def-pe-004",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Aerobic exercise",
-      "source_specification_point_id": "PE-GCSE-C0004",
-      "candidates": [
+          "specification_point_id": "PE-8582-CARDIOVASCULAR",
+          "subtopic": "Cardiovascular",
+          "score": 24
+        },
         {
-          "specification_point_id": "PE-8582-AEROBIC-ANAEROBIC",
-          "subtopic": "Aerobic Anaerobic",
-          "score": 3
+          "specification_point_id": "PE-8582-EXERCISE-LONG-TERM",
+          "subtopic": "Exercise Long Term",
+          "score": 23
         }
       ]
-    },
-    {
-      "id": "def-pe-005",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Anaerobic exercise",
-      "source_specification_point_id": "PE-GCSE-C0005",
-      "candidates": []
     },
     {
       "id": "def-pe-006",
@@ -9996,38 +9724,25 @@
         {
           "specification_point_id": "PE-8582-RESPIRATORY",
           "subtopic": "Respiratory",
-          "score": 2
+          "score": 7
         }
       ]
     },
     {
-      "id": "def-pe-010",
+      "id": "def-pe-009",
       "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Antagonist",
-      "source_specification_point_id": "PE-GCSE-C0010",
+      "term": "Agonist",
+      "source_specification_point_id": "PE-GCSE-C0009",
       "candidates": [
+        {
+          "specification_point_id": "PE-8582-MUSCLE-CONTRACTION",
+          "subtopic": "Muscle Contraction",
+          "score": 14
+        },
         {
           "specification_point_id": "PE-8582-MUSCLES",
           "subtopic": "Muscles",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-pe-011",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Tendon",
-      "source_specification_point_id": "PE-GCSE-C0011",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-BONES-JOINTS",
-          "subtopic": "Bones Joints",
-          "score": 3
-        },
-        {
-          "specification_point_id": "PE-8582-INJURIES",
-          "subtopic": "Injuries",
-          "score": 2
+          "score": 12
         }
       ]
     },
@@ -10038,27 +9753,14 @@
       "source_specification_point_id": "PE-GCSE-C0012",
       "candidates": [
         {
-          "specification_point_id": "PE-8582-INJURIES",
-          "subtopic": "Injuries",
-          "score": 4
+          "specification_point_id": "PE-8582-BONES-JOINTS",
+          "subtopic": "Bones Joints",
+          "score": 8
         },
         {
-          "specification_point_id": "PE-8582-BONES-JOINTS",
-          "subtopic": "Bones Joints",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-pe-013",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Cartilage",
-      "source_specification_point_id": "PE-GCSE-C0013",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-BONES-JOINTS",
-          "subtopic": "Bones Joints",
-          "score": 3
+          "specification_point_id": "PE-8582-INJURIES",
+          "subtopic": "Injuries",
+          "score": 6
         }
       ]
     },
@@ -10074,7 +9776,13 @@
       "subject_id": "GCSE-PHYSICAL-EDUCATION",
       "term": "Isometric contraction",
       "source_specification_point_id": "PE-GCSE-C0015",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "PE-8582-MUSCLE-CONTRACTION",
+          "subtopic": "Muscle Contraction",
+          "score": 5
+        }
+      ]
     },
     {
       "id": "def-pe-016",
@@ -10085,17 +9793,17 @@
         {
           "specification_point_id": "PE-8582-HEALTH-WELLBEING",
           "subtopic": "Health Wellbeing",
-          "score": 26
+          "score": 48
         },
         {
           "specification_point_id": "PE-8582-SEDENTARY-LIFESTYLE",
           "subtopic": "Sedentary Lifestyle",
-          "score": 23
+          "score": 33
         },
         {
           "specification_point_id": "PE-8582-HEALTH-FITNESS-COMPONENTS",
           "subtopic": "Health Fitness Components",
-          "score": 18
+          "score": 21
         }
       ]
     },
@@ -10106,19 +9814,19 @@
       "source_specification_point_id": "PE-GCSE-C0017",
       "candidates": [
         {
+          "specification_point_id": "PE-8582-FITNESS-TESTS",
+          "subtopic": "Fitness Tests",
+          "score": 63
+        },
+        {
           "specification_point_id": "PE-8582-HEALTH-FITNESS-COMPONENTS",
           "subtopic": "Health Fitness Components",
-          "score": 40
+          "score": 55
         },
         {
           "specification_point_id": "PE-8582-SKILL-FITNESS-COMPONENTS",
           "subtopic": "Skill Fitness Components",
-          "score": 32
-        },
-        {
-          "specification_point_id": "PE-8582-FITNESS-TESTS",
-          "subtopic": "Fitness Tests",
-          "score": 23
+          "score": 35
         }
       ]
     },
@@ -10131,102 +9839,17 @@
         {
           "specification_point_id": "PE-8582-FITNESS-TESTS",
           "subtopic": "Fitness Tests",
-          "score": 5
+          "score": 17
         },
         {
           "specification_point_id": "PE-8582-HEALTH-FITNESS-COMPONENTS",
           "subtopic": "Health Fitness Components",
-          "score": 4
+          "score": 16
         },
         {
           "specification_point_id": "PE-8582-SKILL-FITNESS-COMPONENTS",
           "subtopic": "Skill Fitness Components",
           "score": 2
-        }
-      ]
-    },
-    {
-      "id": "def-pe-019",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Muscular strength",
-      "source_specification_point_id": "PE-GCSE-C0019",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-HEALTH-FITNESS-COMPONENTS",
-          "subtopic": "Health Fitness Components",
-          "score": 4
-        },
-        {
-          "specification_point_id": "PE-8582-FITNESS-TESTS",
-          "subtopic": "Fitness Tests",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-pe-020",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Muscular endurance",
-      "source_specification_point_id": "PE-GCSE-C0020",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-HEALTH-FITNESS-COMPONENTS",
-          "subtopic": "Health Fitness Components",
-          "score": 4
-        },
-        {
-          "specification_point_id": "PE-8582-TRAINING-METHODS",
-          "subtopic": "Training Methods",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-pe-021",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Flexibility",
-      "source_specification_point_id": "PE-GCSE-C0021",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-HEALTH-FITNESS-COMPONENTS",
-          "subtopic": "Health Fitness Components",
-          "score": 5
-        },
-        {
-          "specification_point_id": "PE-8582-FITNESS-TESTS",
-          "subtopic": "Fitness Tests",
-          "score": 5
-        }
-      ]
-    },
-    {
-      "id": "def-pe-024",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Coordination",
-      "source_specification_point_id": "PE-GCSE-C0024",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-SKILL-FITNESS-COMPONENTS",
-          "subtopic": "Skill Fitness Components",
-          "score": 4
-        }
-      ]
-    },
-    {
-      "id": "def-pe-025",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Reaction time",
-      "source_specification_point_id": "PE-GCSE-C0025",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-SKILL-FITNESS-COMPONENTS",
-          "subtopic": "Skill Fitness Components",
-          "score": 4
-        },
-        {
-          "specification_point_id": "PE-8582-FITNESS-TESTS",
-          "subtopic": "Fitness Tests",
-          "score": 3
         }
       ]
     },
@@ -10235,62 +9858,11 @@
       "subject_id": "GCSE-PHYSICAL-EDUCATION",
       "term": "Progressive overload",
       "source_specification_point_id": "PE-GCSE-C0026",
-      "candidates": []
-    },
-    {
-      "id": "def-pe-027",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Specificity",
-      "source_specification_point_id": "PE-GCSE-C0027",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-PRINCIPLES-OF-TRAINING",
-          "subtopic": "Principles Of Training",
-          "score": 4
-        }
-      ]
-    },
-    {
-      "id": "def-pe-028",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Reversibility",
-      "source_specification_point_id": "PE-GCSE-C0028",
       "candidates": [
         {
           "specification_point_id": "PE-8582-PRINCIPLES-OF-TRAINING",
           "subtopic": "Principles Of Training",
           "score": 3
-        },
-        {
-          "specification_point_id": "PE-8582-TRAINING-SEASONS",
-          "subtopic": "Training Seasons",
-          "score": 2
-        }
-      ]
-    },
-    {
-      "id": "def-pe-029",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Continuous training",
-      "source_specification_point_id": "PE-GCSE-C0029",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-TRAINING-METHODS",
-          "subtopic": "Training Methods",
-          "score": 3
-        }
-      ]
-    },
-    {
-      "id": "def-pe-030",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Interval training",
-      "source_specification_point_id": "PE-GCSE-C0030",
-      "candidates": [
-        {
-          "specification_point_id": "PE-8582-TRAINING-METHODS",
-          "subtopic": "Training Methods",
-          "score": 5
         }
       ]
     },
@@ -10306,18 +9878,11 @@
       "subject_id": "GCSE-PHYSICAL-EDUCATION",
       "term": "Vasoconstriction",
       "source_specification_point_id": "PE-GCSE-C0035",
-      "candidates": []
-    },
-    {
-      "id": "def-pe-036",
-      "subject_id": "GCSE-PHYSICAL-EDUCATION",
-      "term": "Vasodilation",
-      "source_specification_point_id": "PE-GCSE-C0036",
       "candidates": [
         {
           "specification_point_id": "PE-8582-BLOOD-VESSELS",
           "subtopic": "Blood Vessels",
-          "score": 3
+          "score": 7
         }
       ]
     },
@@ -10326,14 +9891,26 @@
       "subject_id": "GCSE-PHYSICAL-EDUCATION",
       "term": "Concentric contraction",
       "source_specification_point_id": "PE-GCSE-C0037",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "PE-8582-MUSCLE-CONTRACTION",
+          "subtopic": "Muscle Contraction",
+          "score": 5
+        }
+      ]
     },
     {
       "id": "def-pe-038",
       "subject_id": "GCSE-PHYSICAL-EDUCATION",
       "term": "Eccentric contraction",
       "source_specification_point_id": "PE-GCSE-C0038",
-      "candidates": []
+      "candidates": [
+        {
+          "specification_point_id": "PE-8582-MUSCLE-CONTRACTION",
+          "subtopic": "Muscle Contraction",
+          "score": 7
+        }
+      ]
     },
     {
       "id": "def-phys-001",
