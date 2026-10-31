@@ -78,6 +78,7 @@ import { markWithRules } from "./marking";
 import { MarkingStatus } from "./MarkingStatus";
 import "./styles.css";
 import "./app-refresh.css";
+import "./profile.css";
 import { Brand } from "./Brand";
 import { PublicLanding } from "./PublicLanding";
 import { GuestWelcome } from './GuestWelcome';
@@ -3824,7 +3825,7 @@ function App({
                 </>
               )}
               {page === "profile" && (
-                <>
+                <div className="profile-page">
                   <button
                     className="text-button"
                     onClick={() => navigate("home")}
@@ -3832,41 +3833,34 @@ function App({
                     <ArrowLeft size={17} />
                     Back to home
                   </button>
-                  <Intro
-                    eyebrow="YOUR SPACE, YOUR PACE"
-                    title="Make it work for you."
-                  >
-                    {isGuestSession() ? 'Your guest learning history is saved only in this browser.' : 'Your learning history and rewards are linked to your account.'}
-                  </Intro>
-                  <div className="panel settings-panel">
-                    <h2>Your learning plan</h2>
+                  <header className="profile-hero">
+                    <div className="profile-monogram" aria-hidden="true">{user.displayName[0]?.toUpperCase() || "M"}</div>
+                    <div className="profile-identity">
+                      <p className="eyebrow">YOUR PROFILE</p>
+                      <h1>{user.displayName}</h1>
+                      <p>{isGuestSession() ? "Your learning space, saved on this device." : "A little learning. A space that’s yours."}</p>
+                      <div className="profile-meta"><span><BookOpen size={14} />AQA {s.qualification}</span><span><Clock3 size={14} />{s.goal} min a day</span></div>
+                    </div>
+                    <button className="secondary" onClick={() => navigate("avatar")}><Shirt size={17} />Edit avatar</button>
+                  </header>
+                  <div className="profile-layout">
+                  <div className="profile-primary">
+                  <section className="panel settings-panel profile-plan">
+                    <div className="profile-section-heading"><span className="profile-section-icon"><BookOpen size={20} /></span><div><h2>Your learning plan</h2><p>Make room for what matters to you.</p></div></div>
                     <div className="settings-row">
                       <div>
                         <strong>
-                          AQA {s.qualification} {planSubjects}
+                          {planSubjects}
                         </strong>
                         <small>
                           Year{" "}
                           {s.yearGroup ??
                             (s.qualification === "GCSE" ? 10 : 12)}{" "}
                           ·{" "}
-                          {s.subjects
-                            .map(
-                              (id) =>
-                                courseName(id) +
-                                (id.startsWith("GCSE-")
-                                  ? " " +
-                                    (tierFor(s, id) === "higher"
-                                      ? "Higher"
-                                      : "Foundation")
-                                  : ""),
-                            )
-                            .join(" · ")}{" "}
-                          ·{" "}
                           {s.studyMode === "automatic"
                             ? "automatic specification-point plan"
                             : new Set(s.studied).size + " studied topics"}{" "}
-                          · about {s.goal} minutes a day
+
                         </small>
                       </div>
                       <button
@@ -3886,12 +3880,16 @@ function App({
                         Edit plan
                       </button>
                     </div>
+                    <div className="profile-subjects">{s.subjects.map(id => <span key={id}>{courseName(id)}{id.startsWith("GCSE-") && <small>{tierFor(s,id) === "higher" ? "Higher" : "Foundation"}</small>}</span>)}</div>
                     {active && (
                       <p className="fine">
                         You can edit your plan now. Your unfinished session will
                         be saved to resume later.
                       </p>
                     )}
+                  </section>
+                  <section className="panel settings-panel profile-preferences">
+                    <div className="profile-section-heading"><span className="profile-section-icon"><Sun size={20} /></span><div><h2>Preferences</h2><p>A space that feels comfortable.</p></div></div>
                     <div className="settings-row">
                       <div>
                         <strong>Appearance</strong>
@@ -3933,6 +3931,7 @@ function App({
                         }
                       />
                     </label>
+                    <details className="profile-help"><summary>Reminders and marking</summary>
                     <div className="settings-row">
                       <div>
                         <strong>Reminders</strong>
@@ -3956,9 +3955,10 @@ function App({
                       </div>
                       <span className="pill">Rules v1</span>
                     </div>
-                  </div>
-                  <div className="panel">
-                    <h2>How you earn XP</h2>
+                    </details>
+                  </section>
+                  <details className="panel profile-help">
+                    <summary><Trophy size={18} />How you earn XP</summary>
                     <p>
                       +5 participation XP per question. +5 performance XP for an
                       unaided correct answer, or +2 for a partially correct
@@ -3972,9 +3972,9 @@ function App({
                       answer do not earn performance XP. Uncertain answers keep
                       their participation XP.
                     </p>
-                  </div>
-                  <div className="panel demo-panel">
-                    <h2>Explore the prototype</h2>
+                  </details>
+                  <details className="panel demo-panel profile-help">
+                    <summary><Layers3 size={18} />Progress tools</summary>
                     <p className="muted">
                       These controls change the demo presentation, not your
                       learning history.
@@ -4008,14 +4008,18 @@ function App({
                       AI marking and notifications need backend connections. The
                       review schedule remains a transparent prototype.
                     </p>
+                  </details>
                   </div>
+                  <div className="profile-account">
                   <AccountSettings
                     user={user}
                     onUser={onUser}
                     onLogout={onLogout}
                     onAvatar={() => navigate("avatar")}
                   />
-                </>
+                  </div>
+                  </div>
+                </div>
               )}
             </>
           )}
