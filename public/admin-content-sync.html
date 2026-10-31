@@ -17,7 +17,7 @@ button.onclick=async()=>{button.disabled=true;try{
  let pointOffset=Number(localStorage.getItem('memmara-six-point-offset')||0);
  while(pointOffset<points.length){const result=await upload({points:points.slice(pointOffset,pointOffset+100)});pointOffset+=result.processed;localStorage.setItem('memmara-six-point-offset',String(pointOffset));log.textContent=`${pointOffset}/691 curriculum points imported`;}
  let offset=Number(localStorage.getItem('memmara-six-question-offset')||0);
- while(offset<questions.length){const result=await upload({questions:questions.slice(offset,offset+20)});offset+=result.processed;localStorage.setItem('memmara-six-question-offset',String(offset));log.textContent=`${offset}/2987 written questions imported`;}
+ while(offset<questions.length){const result=await upload({questions:questions.slice(offset,offset+100)});offset+=result.processed;localStorage.setItem('memmara-six-question-offset',String(offset));log.textContent=`${offset}/2987 written questions imported`;}
  log.textContent='All 691 curriculum points and 2,987 new written questions imported.';
 }catch(error){log.textContent='STOPPED: '+error.message+'\n'+log.textContent}finally{button.disabled=false}};
 </script></html>
