@@ -41895,6 +41895,2246 @@
         "solvent",
         "front"
       ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-NEGATIVES",
+      "specification_point_id": "MATHS-NUM-NEGATIVES",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Negatives",
+      "spec_reference": "MATHS-NUM-NEGATIVES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for negatives.",
+      "tier": "all",
+      "keywords": [
+        "start",
+        "move",
+        "subtracting",
+        "negative",
+        "same",
+        "adding",
+        "positive"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-ROUNDING",
+      "specification_point_id": "MATHS-NUM-ROUNDING",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Rounding",
+      "spec_reference": "MATHS-NUM-ROUNDING",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for rounding.",
+      "tier": "all",
+      "keywords": [
+        "last",
+        "digits",
+        "rounds",
+        "nearest",
+        "keep",
+        "first",
+        "three",
+        "next"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-BIDMAS",
+      "specification_point_id": "MATHS-NUM-BIDMAS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "BIDMAS",
+      "spec_reference": "MATHS-NUM-BIDMAS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for bidmas.",
+      "tier": "all",
+      "keywords": [
+        "brackets",
+        "first",
+        "divide",
+        "subtract",
+        "both",
+        "multiplications",
+        "multiply",
+        "then"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-PRIMES-FACTORS",
+      "specification_point_id": "MATHS-NUM-PRIMES-FACTORS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Primes Factors",
+      "spec_reference": "MATHS-NUM-PRIMES-FACTORS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for primes factors.",
+      "tier": "all",
+      "keywords": [
+        "factors",
+        "which"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-HCF-LCM",
+      "specification_point_id": "MATHS-NUM-HCF-LCM",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "HCF LCM",
+      "spec_reference": "MATHS-NUM-HCF-LCM",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for hcf lcm.",
+      "tier": "all",
+      "keywords": [
+        "take",
+        "each",
+        "prime",
+        "common",
+        "both",
+        "numbers",
+        "lowest",
+        "power"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-PRIME-FACTORISATION",
+      "specification_point_id": "MATHS-NUM-PRIME-FACTORISATION",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Prime Factorisation",
+      "spec_reference": "MATHS-NUM-PRIME-FACTORISATION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for prime factorisation.",
+      "tier": "all",
+      "keywords": [
+        "which",
+        "also",
+        "written",
+        "prime",
+        "number",
+        "exactly",
+        "factors",
+        "itself"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-FRACTIONS-ADDSUB",
+      "specification_point_id": "MATHS-NUM-FRACTIONS-ADDSUB",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Fractions Addsub",
+      "spec_reference": "MATHS-NUM-FRACTIONS-ADDSUB",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for fractions addsub.",
+      "tier": "all",
+      "keywords": [
+        "common",
+        "denominator",
+        "lowest"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-FRACTIONS-MULTDIV",
+      "specification_point_id": "MATHS-NUM-FRACTIONS-MULTDIV",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Fractions Multdiv",
+      "spec_reference": "MATHS-NUM-FRACTIONS-MULTDIV",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for fractions multdiv.",
+      "tier": "all",
+      "keywords": [
+        "multiply",
+        "reciprocal",
+        "numerators",
+        "denominators",
+        "then",
+        "simplify"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-MIXED-NUMBERS",
+      "specification_point_id": "MATHS-NUM-MIXED-NUMBERS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Mixed Numbers",
+      "spec_reference": "MATHS-NUM-MIXED-NUMBERS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for mixed numbers.",
+      "tier": "all",
+      "keywords": [
+        "convert",
+        "improper",
+        "fractions"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-FRACTION-OF-AMOUNT",
+      "specification_point_id": "MATHS-NUM-FRACTION-OF-AMOUNT",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Fraction Of Amount",
+      "spec_reference": "MATHS-NUM-FRACTION-OF-AMOUNT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for fraction of amount.",
+      "tier": "all",
+      "keywords": [
+        "girls",
+        "boys",
+        "then"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-FDP-CONVERSION",
+      "specification_point_id": "MATHS-NUM-FDP-CONVERSION",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Fdp Conversion",
+      "spec_reference": "MATHS-NUM-FDP-CONVERSION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for fdp conversion.",
+      "tier": "all",
+      "keywords": [
+        "gives",
+        "percent",
+        "means",
+        "divide"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-RECURRING-DECIMALS",
+      "specification_point_id": "MATHS-NUM-RECURRING-DECIMALS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Recurring Decimals",
+      "spec_reference": "MATHS-NUM-RECURRING-DECIMALS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for recurring decimals.",
+      "tier": "higher",
+      "keywords": [
+        "then"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-INDEX-LAWS",
+      "specification_point_id": "MATHS-NUM-INDEX-LAWS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Index Laws",
+      "spec_reference": "MATHS-NUM-INDEX-LAWS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for index laws.",
+      "tier": "all",
+      "keywords": [
+        "when",
+        "multiplying",
+        "indices",
+        "dividing",
+        "subtract",
+        "apply",
+        "power",
+        "both"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-NEG-FRAC-INDICES",
+      "specification_point_id": "MATHS-NUM-NEG-FRAC-INDICES",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Neg Frac Indices",
+      "spec_reference": "MATHS-NUM-NEG-FRAC-INDICES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for neg frac indices.",
+      "tier": "all",
+      "keywords": [
+        "flip",
+        "fraction",
+        "negative",
+        "power",
+        "then",
+        "take",
+        "square",
+        "root"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-ROOTS-POWERS",
+      "specification_point_id": "MATHS-NUM-ROOTS-POWERS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Roots Powers",
+      "spec_reference": "MATHS-NUM-ROOTS-POWERS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for roots powers.",
+      "tier": "all",
+      "keywords": [
+        "total",
+        "between",
+        "them",
+        "cube",
+        "root"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-STANDARD-FORM-CONVERT",
+      "specification_point_id": "MATHS-NUM-STANDARD-FORM-CONVERT",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Standard Form Convert",
+      "spec_reference": "MATHS-NUM-STANDARD-FORM-CONVERT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for standard form convert.",
+      "tier": "all",
+      "keywords": [
+        "move",
+        "decimal",
+        "point",
+        "places",
+        "right"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-STANDARD-FORM-CALC",
+      "specification_point_id": "MATHS-NUM-STANDARD-FORM-CALC",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Standard Form Calc",
+      "spec_reference": "MATHS-NUM-STANDARD-FORM-CALC",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for standard form calc.",
+      "tier": "higher",
+      "keywords": [
+        "write",
+        "both",
+        "with",
+        "same",
+        "power",
+        "answer"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-SURDS-SIMPLIFY",
+      "specification_point_id": "MATHS-NUM-SURDS-SIMPLIFY",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Surds Simplify",
+      "spec_reference": "MATHS-NUM-SURDS-SIMPLIFY",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for surds simplify.",
+      "tier": "all",
+      "keywords": [
+        "difference",
+        "squares"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-SURDS-RATIONALISE",
+      "specification_point_id": "MATHS-NUM-SURDS-RATIONALISE",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Surds Rationalise",
+      "spec_reference": "MATHS-NUM-SURDS-RATIONALISE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for surds rationalise.",
+      "tier": "higher",
+      "keywords": [
+        "multiply",
+        "denominator",
+        "becomes",
+        "answer",
+        "bottom"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-ESTIMATION",
+      "specification_point_id": "MATHS-NUM-ESTIMATION",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Estimation",
+      "spec_reference": "MATHS-NUM-ESTIMATION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for estimation.",
+      "tier": "all",
+      "keywords": [
+        "round",
+        "each",
+        "number"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-BOUNDS",
+      "specification_point_id": "MATHS-NUM-BOUNDS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Bounds",
+      "spec_reference": "MATHS-NUM-BOUNDS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for bounds.",
+      "tier": "all",
+      "keywords": [
+        "upper",
+        "bounds",
+        "area",
+        "density",
+        "mass",
+        "volume",
+        "bound",
+        "unit"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T01",
+      "subtopic_id": "AQA8300-EXT-MATHS-NUM-ERROR-INTERVALS",
+      "specification_point_id": "MATHS-NUM-ERROR-INTERVALS",
+      "exam_board": "AQA",
+      "topic": "Number",
+      "subtopic": "Error Intervals",
+      "spec_reference": "MATHS-NUM-ERROR-INTERVALS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for error intervals.",
+      "tier": "all",
+      "keywords": [
+        "half",
+        "interval",
+        "truncating",
+        "means",
+        "digits",
+        "least",
+        "less",
+        "than"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-SUBSTITUTION",
+      "specification_point_id": "MATHS-ALG-SUBSTITUTION",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Substitution",
+      "spec_reference": "MATHS-ALG-SUBSTITUTION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for substitution.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-SIMPLIFY",
+      "specification_point_id": "MATHS-ALG-SIMPLIFY",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Simplify",
+      "spec_reference": "MATHS-ALG-SIMPLIFY",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for simplify.",
+      "tier": "all",
+      "keywords": [
+        "collect",
+        "like",
+        "terms",
+        "multiply",
+        "coefficients",
+        "indices",
+        "answer"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-EXPAND-SINGLE",
+      "specification_point_id": "MATHS-ALG-EXPAND-SINGLE",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Expand Single",
+      "spec_reference": "MATHS-ALG-EXPAND-SINGLE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for expand single.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-EXPAND-DOUBLE",
+      "specification_point_id": "MATHS-ALG-EXPAND-DOUBLE",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Expand Double",
+      "spec_reference": "MATHS-ALG-EXPAND-DOUBLE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for expand double.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-FACTORISE-COMMON",
+      "specification_point_id": "MATHS-ALG-FACTORISE-COMMON",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Factorise Common",
+      "spec_reference": "MATHS-ALG-FACTORISE-COMMON",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for factorise common.",
+      "tier": "all",
+      "keywords": [
+        "both",
+        "terms",
+        "have",
+        "common",
+        "factor"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-FACTORISE-QUADRATIC",
+      "specification_point_id": "MATHS-ALG-FACTORISE-QUADRATIC",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Factorise Quadratic",
+      "spec_reference": "MATHS-ALG-FACTORISE-QUADRATIC",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for factorise quadratic.",
+      "tier": "all",
+      "keywords": [
+        "numbers",
+        "multiplying",
+        "adding",
+        "find",
+        "that",
+        "multiply",
+        "expanding",
+        "gives"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-DIFF-SQUARES",
+      "specification_point_id": "MATHS-ALG-DIFF-SQUARES",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Diff Squares",
+      "spec_reference": "MATHS-ALG-DIFF-SQUARES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for diff squares.",
+      "tier": "all",
+      "keywords": [
+        "factorisation",
+        "difference",
+        "squares",
+        "take",
+        "common",
+        "factor"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-LINEAR-EQUATIONS",
+      "specification_point_id": "MATHS-ALG-LINEAR-EQUATIONS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Linear Equations",
+      "spec_reference": "MATHS-ALG-LINEAR-EQUATIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for linear equations.",
+      "tier": "all",
+      "keywords": [
+        "subtract",
+        "divide",
+        "multiply"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-EQUATIONS-BRACKETS",
+      "specification_point_id": "MATHS-ALG-EQUATIONS-BRACKETS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Equations Brackets",
+      "spec_reference": "MATHS-ALG-EQUATIONS-BRACKETS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for equations brackets.",
+      "tier": "all",
+      "keywords": [
+        "expand",
+        "subtract",
+        "divide",
+        "collect"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-FORM-EQUATIONS",
+      "specification_point_id": "MATHS-ALG-FORM-EQUATIONS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Form Equations",
+      "spec_reference": "MATHS-ALG-FORM-EQUATIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for form equations.",
+      "tier": "all",
+      "keywords": [
+        "numbers",
+        "then",
+        "perimeter",
+        "giving"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-REARRANGE",
+      "specification_point_id": "MATHS-ALG-REARRANGE",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Rearrange",
+      "spec_reference": "MATHS-ALG-REARRANGE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for rearrange.",
+      "tier": "all",
+      "keywords": [
+        "subtract",
+        "divide",
+        "multiply"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-INEQUALITIES",
+      "specification_point_id": "MATHS-ALG-INEQUALITIES",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Inequalities",
+      "spec_reference": "MATHS-ALG-INEQUALITIES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for inequalities.",
+      "tier": "all",
+      "keywords": [
+        "subtract",
+        "divide",
+        "from",
+        "parts",
+        "reverse",
+        "inequality",
+        "sign"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-NTH-TERM-LINEAR",
+      "specification_point_id": "MATHS-ALG-NTH-TERM-LINEAR",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Nth Term Linear",
+      "spec_reference": "MATHS-ALG-NTH-TERM-LINEAR",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for nth term linear.",
+      "tier": "all",
+      "keywords": [
+        "substitute",
+        "common",
+        "difference",
+        "term",
+        "starts",
+        "first",
+        "constant",
+        "sequence"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-NTH-TERM-QUADRATIC",
+      "specification_point_id": "MATHS-ALG-NTH-TERM-QUADRATIC",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Nth Term Quadratic",
+      "spec_reference": "MATHS-ALG-NTH-TERM-QUADRATIC",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for nth term quadratic.",
+      "tier": "higher",
+      "keywords": [
+        "second",
+        "difference",
+        "coefficient",
+        "subtracting",
+        "leaves",
+        "linear",
+        "sequence",
+        "with"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-SEQUENCES-OTHER",
+      "specification_point_id": "MATHS-ALG-SEQUENCES-OTHER",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Sequences Other",
+      "spec_reference": "MATHS-ALG-SEQUENCES-OTHER",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for sequences other.",
+      "tier": "all",
+      "keywords": [
+        "last",
+        "terms",
+        "each",
+        "term",
+        "multiplied",
+        "next",
+        "substitute",
+        "into"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-GRADIENT",
+      "specification_point_id": "MATHS-ALG-GRADIENT",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Gradient",
+      "spec_reference": "MATHS-ALG-GRADIENT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for gradient.",
+      "tier": "all",
+      "keywords": [
+        "rewrite",
+        "gradient",
+        "coefficient",
+        "which",
+        "divide"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-STRAIGHT-LINE-EQUATION",
+      "specification_point_id": "MATHS-ALG-STRAIGHT-LINE-EQUATION",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Straight Line Equation",
+      "spec_reference": "MATHS-ALG-STRAIGHT-LINE-EQUATION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for straight line equation.",
+      "tier": "all",
+      "keywords": [
+        "gradient",
+        "substitute",
+        "find",
+        "equation",
+        "divide",
+        "y-intercept"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-PARALLEL-PERP",
+      "specification_point_id": "MATHS-ALG-PARALLEL-PERP",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Parallel Perp",
+      "spec_reference": "MATHS-ALG-PARALLEL-PERP",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for parallel perp.",
+      "tier": "all",
+      "keywords": [
+        "perpendicular",
+        "gradients",
+        "multiply",
+        "parallel",
+        "lines",
+        "have",
+        "gradient",
+        "substituting"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-QUADRATIC-GRAPHS",
+      "specification_point_id": "MATHS-ALG-QUADRATIC-GRAPHS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Quadratic Graphs",
+      "spec_reference": "MATHS-ALG-QUADRATIC-GRAPHS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for quadratic graphs.",
+      "tier": "all",
+      "keywords": [
+        "substitute",
+        "y-intercept",
+        "bracket",
+        "zero",
+        "when",
+        "then",
+        "turning",
+        "point"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-QUADRATICS-SOLVE-FACTORISING",
+      "specification_point_id": "MATHS-ALG-QUADRATICS-SOLVE-FACTORISING",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Quadratics Solve Factorising",
+      "spec_reference": "MATHS-ALG-QUADRATICS-SOLVE-FACTORISING",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for quadratics solve factorising.",
+      "tier": "all",
+      "keywords": [
+        "rearrange",
+        "find",
+        "numbers",
+        "that",
+        "multiply",
+        "giving",
+        "gives"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-QUADRATIC-FORMULA",
+      "specification_point_id": "MATHS-ALG-QUADRATIC-FORMULA",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Quadratic Formula",
+      "spec_reference": "MATHS-ALG-QUADRATIC-FORMULA",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for quadratic formula.",
+      "tier": "higher",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-COMPLETING-SQUARE",
+      "specification_point_id": "MATHS-ALG-COMPLETING-SQUARE",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Completing Square",
+      "spec_reference": "MATHS-ALG-COMPLETING-SQUARE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for completing square.",
+      "tier": "higher",
+      "keywords": [
+        "half",
+        "adjust",
+        "constant"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-SIMULTANEOUS-LINEAR",
+      "specification_point_id": "MATHS-ALG-SIMULTANEOUS-LINEAR",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Simultaneous Linear",
+      "spec_reference": "MATHS-ALG-SIMULTANEOUS-LINEAR",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for simultaneous linear.",
+      "tier": "all",
+      "keywords": [
+        "solving",
+        "gives"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-SIMULTANEOUS-QUADRATIC",
+      "specification_point_id": "MATHS-ALG-SIMULTANEOUS-QUADRATIC",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Simultaneous Quadratic",
+      "spec_reference": "MATHS-ALG-SIMULTANEOUS-QUADRATIC",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for simultaneous quadratic.",
+      "tier": "all",
+      "keywords": [
+        "make",
+        "variable",
+        "subject",
+        "linear",
+        "equation",
+        "substitute",
+        "into",
+        "quadratic"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-ALGEBRAIC-FRACTIONS",
+      "specification_point_id": "MATHS-ALG-ALGEBRAIC-FRACTIONS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Algebraic Fractions",
+      "spec_reference": "MATHS-ALG-ALGEBRAIC-FRACTIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for algebraic fractions.",
+      "tier": "higher",
+      "keywords": [
+        "factorise",
+        "common",
+        "denominator",
+        "answer"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-FUNCTIONS",
+      "specification_point_id": "MATHS-ALG-FUNCTIONS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Functions",
+      "spec_reference": "MATHS-ALG-FUNCTIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for functions.",
+      "tier": "all",
+      "keywords": [
+        "then"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-PROOF",
+      "specification_point_id": "MATHS-ALG-PROOF",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Proof",
+      "spec_reference": "MATHS-ALG-PROOF",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for proof.",
+      "tier": "higher",
+      "keywords": [
+        "which",
+        "because",
+        "even",
+        "multiple",
+        "always"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-GRAPH-TRANSFORMATIONS",
+      "specification_point_id": "MATHS-ALG-GRAPH-TRANSFORMATIONS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Graph Transformations",
+      "spec_reference": "MATHS-ALG-GRAPH-TRANSFORMATIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for graph transformations.",
+      "tier": "all",
+      "keywords": [
+        "translation",
+        "units",
+        "left",
+        "reflection",
+        "x-axis",
+        "y-axis",
+        "stretch",
+        "parallel"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-REAL-LIFE-GRAPHS",
+      "specification_point_id": "MATHS-ALG-REAL-LIFE-GRAPHS",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Real Life Graphs",
+      "spec_reference": "MATHS-ALG-REAL-LIFE-GRAPHS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for real life graphs.",
+      "tier": "all",
+      "keywords": [
+        "speed",
+        "gradient",
+        "minute",
+        "rate"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T02",
+      "subtopic_id": "AQA8300-EXT-MATHS-ALG-AREA-UNDER-GRAPH",
+      "specification_point_id": "MATHS-ALG-AREA-UNDER-GRAPH",
+      "exam_board": "AQA",
+      "topic": "Algebra",
+      "subtopic": "Area Under Graph",
+      "spec_reference": "MATHS-ALG-AREA-UNDER-GRAPH",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for area under graph.",
+      "tier": "all",
+      "keywords": [
+        "area",
+        "triangle",
+        "trapezium"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-SIMPLIFY-RATIO",
+      "specification_point_id": "MATHS-RAT-SIMPLIFY-RATIO",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Simplify Ratio",
+      "spec_reference": "MATHS-RAT-SIMPLIFY-RATIO",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for simplify ratio.",
+      "tier": "all",
+      "keywords": [
+        "divide",
+        "both",
+        "parts",
+        "ratio",
+        "each",
+        "part",
+        "write",
+        "with"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-SHARE-RATIO",
+      "specification_point_id": "MATHS-RAT-SHARE-RATIO",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Share Ratio",
+      "spec_reference": "MATHS-RAT-SHARE-RATIO",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for share ratio.",
+      "tier": "all",
+      "keywords": [
+        "parts",
+        "part",
+        "larger",
+        "share",
+        "difference",
+        "amount",
+        "smallest",
+        "total"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-RATIO-FRACTIONS",
+      "specification_point_id": "MATHS-RAT-RATIO-FRACTIONS",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Ratio Fractions",
+      "spec_reference": "MATHS-RAT-RATIO-FRACTIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for ratio fractions.",
+      "tier": "all",
+      "keywords": [
+        "green",
+        "ratio",
+        "total",
+        "parts",
+        "girls",
+        "these",
+        "fraction",
+        "boys"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-BEST-BUY",
+      "specification_point_id": "MATHS-RAT-BEST-BUY",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Best Buy",
+      "spec_reference": "MATHS-RAT-BEST-BUY",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for best buy.",
+      "tier": "all",
+      "keywords": [
+        "cost",
+        "notebook",
+        "costs",
+        "notebooks"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-PERCENT-OF-AMOUNT",
+      "specification_point_id": "MATHS-RAT-PERCENT-OF-AMOUNT",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Percent Of Amount",
+      "spec_reference": "MATHS-RAT-PERCENT-OF-AMOUNT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for percent of amount.",
+      "tier": "all",
+      "keywords": [
+        "reduction",
+        "sale",
+        "price"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-PERCENT-CHANGE",
+      "specification_point_id": "MATHS-RAT-PERCENT-CHANGE",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Percent Change",
+      "spec_reference": "MATHS-RAT-PERCENT-CHANGE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for percent change.",
+      "tier": "all",
+      "keywords": [
+        "increase",
+        "decrease",
+        "final",
+        "price",
+        "lower",
+        "than",
+        "original",
+        "change"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-REVERSE-PERCENT",
+      "specification_point_id": "MATHS-RAT-REVERSE-PERCENT",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Reverse Percent",
+      "spec_reference": "MATHS-RAT-REVERSE-PERCENT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for reverse percent.",
+      "tier": "all",
+      "keywords": [
+        "weight",
+        "original",
+        "sale",
+        "price"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-COMPOUND-INTEREST",
+      "specification_point_id": "MATHS-RAT-COMPOUND-INTEREST",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Compound Interest",
+      "spec_reference": "MATHS-RAT-COMPOUND-INTEREST",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for compound interest.",
+      "tier": "all",
+      "keywords": [
+        "value",
+        "after",
+        "years",
+        "interest",
+        "multiplier",
+        "increase"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-SIMPLE-INTEREST",
+      "specification_point_id": "MATHS-RAT-SIMPLE-INTEREST",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Simple Interest",
+      "spec_reference": "MATHS-RAT-SIMPLE-INTEREST",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for simple interest.",
+      "tier": "all",
+      "keywords": [
+        "interest",
+        "year",
+        "over",
+        "years",
+        "total",
+        "rate"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-SPEED-DISTANCE-TIME",
+      "specification_point_id": "MATHS-RAT-SPEED-DISTANCE-TIME",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Speed Distance Time",
+      "spec_reference": "MATHS-RAT-SPEED-DISTANCE-TIME",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for speed distance time.",
+      "tier": "all",
+      "keywords": [
+        "total",
+        "distance",
+        "time",
+        "hours",
+        "average",
+        "speed",
+        "minutes"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-DENSITY",
+      "specification_point_id": "MATHS-RAT-DENSITY",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Density",
+      "spec_reference": "MATHS-RAT-DENSITY",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for density.",
+      "tier": "all",
+      "keywords": [
+        "mass",
+        "density",
+        "volume"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-DIRECT-PROPORTION",
+      "specification_point_id": "MATHS-RAT-DIRECT-PROPORTION",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Direct Proportion",
+      "spec_reference": "MATHS-RAT-DIRECT-PROPORTION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for direct proportion.",
+      "tier": "all",
+      "keywords": [
+        "pencil",
+        "costs",
+        "pencils",
+        "cost",
+        "flour",
+        "person",
+        "people",
+        "when"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-INVERSE-PROPORTION",
+      "specification_point_id": "MATHS-RAT-INVERSE-PROPORTION",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Inverse Proportion",
+      "spec_reference": "MATHS-RAT-INVERSE-PROPORTION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for inverse proportion.",
+      "tier": "all",
+      "keywords": [
+        "when",
+        "days",
+        "total",
+        "work",
+        "worker-days",
+        "with",
+        "workers"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-UNIT-CONVERSION",
+      "specification_point_id": "MATHS-RAT-UNIT-CONVERSION",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Unit Conversion",
+      "spec_reference": "MATHS-RAT-UNIT-CONVERSION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for unit conversion.",
+      "tier": "all",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-SCALE",
+      "specification_point_id": "MATHS-RAT-SCALE",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Scale",
+      "spec_reference": "MATHS-RAT-SCALE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for scale.",
+      "tier": "all",
+      "keywords": [
+        "represents",
+        "scale",
+        "model",
+        "width"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-GROWTH-DECAY",
+      "specification_point_id": "MATHS-RAT-GROWTH-DECAY",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Growth Decay",
+      "spec_reference": "MATHS-RAT-GROWTH-DECAY",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for growth decay.",
+      "tier": "higher",
+      "keywords": [
+        "cells",
+        "multiplier",
+        "mass",
+        "each",
+        "year",
+        "after",
+        "years",
+        "population"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T03",
+      "subtopic_id": "AQA8300-EXT-MATHS-RAT-ALGEBRAIC-PROPORTION",
+      "specification_point_id": "MATHS-RAT-ALGEBRAIC-PROPORTION",
+      "exam_board": "AQA",
+      "topic": "Ratio, proportion and rates of change",
+      "subtopic": "Algebraic Proportion",
+      "spec_reference": "MATHS-RAT-ALGEBRAIC-PROPORTION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for algebraic proportion.",
+      "tier": "higher",
+      "keywords": [
+        "doubling",
+        "radius",
+        "multiplies",
+        "cost",
+        "when"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-ANGLES-LINES",
+      "specification_point_id": "MATHS-GEO-ANGLES-LINES",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Angles Lines",
+      "spec_reference": "MATHS-GEO-ANGLES-LINES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for angles lines.",
+      "tier": "all",
+      "keywords": [
+        "vertically",
+        "opposite",
+        "angles",
+        "equal",
+        "angle",
+        "straight",
+        "line",
+        "co-interior"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-ANGLES-TRIANGLES-QUADS",
+      "specification_point_id": "MATHS-GEO-ANGLES-TRIANGLES-QUADS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Angles Triangles Quads",
+      "spec_reference": "MATHS-GEO-ANGLES-TRIANGLES-QUADS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for angles triangles quads.",
+      "tier": "all",
+      "keywords": [
+        "angles",
+        "triangle",
+        "exterior",
+        "angle",
+        "equals",
+        "opposite",
+        "interior",
+        "equal"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-ANGLES-POLYGONS",
+      "specification_point_id": "MATHS-GEO-ANGLES-POLYGONS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Angles Polygons",
+      "spec_reference": "MATHS-GEO-ANGLES-POLYGONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for angles polygons.",
+      "tier": "all",
+      "keywords": [
+        "exterior",
+        "angles",
+        "number",
+        "sides",
+        "interior",
+        "angle"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-CIRCLE-THEOREMS",
+      "specification_point_id": "MATHS-GEO-CIRCLE-THEOREMS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Circle Theorems",
+      "spec_reference": "MATHS-GEO-CIRCLE-THEOREMS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for circle theorems.",
+      "tier": "all",
+      "keywords": [
+        "opposite",
+        "angles",
+        "cyclic",
+        "quadrilateral",
+        "tangents",
+        "from",
+        "point",
+        "equal"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-BEARINGS",
+      "specification_point_id": "MATHS-GEO-BEARINGS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Bearings",
+      "spec_reference": "MATHS-GEO-BEARINGS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for bearings.",
+      "tier": "all",
+      "keywords": [
+        "back",
+        "bearing",
+        "differs",
+        "from"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-AREA-2D",
+      "specification_point_id": "MATHS-GEO-AREA-2D",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Area 2D",
+      "spec_reference": "MATHS-GEO-AREA-2D",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for area 2d.",
+      "tier": "all",
+      "keywords": [
+        "area",
+        "base",
+        "perpendicular",
+        "height"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-CIRCLE-AREA-CIRC",
+      "specification_point_id": "MATHS-GEO-CIRCLE-AREA-CIRC",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Circle Area Circ",
+      "spec_reference": "MATHS-GEO-CIRCLE-AREA-CIRC",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for circle area circ.",
+      "tier": "all",
+      "keywords": [
+        "circumference",
+        "radius",
+        "area"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-ARC-SECTOR",
+      "specification_point_id": "MATHS-GEO-ARC-SECTOR",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Arc Sector",
+      "spec_reference": "MATHS-GEO-ARC-SECTOR",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for arc sector.",
+      "tier": "all",
+      "keywords": [
+        "perimeter",
+        "radii",
+        "length",
+        "area"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-VOLUME-PRISM",
+      "specification_point_id": "MATHS-GEO-VOLUME-PRISM",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Volume Prism",
+      "spec_reference": "MATHS-GEO-VOLUME-PRISM",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for volume prism.",
+      "tier": "all",
+      "keywords": [
+        "volume",
+        "area",
+        "cross-section"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-VOLUME-CONE-SPHERE",
+      "specification_point_id": "MATHS-GEO-VOLUME-CONE-SPHERE",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Volume Cone Sphere",
+      "spec_reference": "MATHS-GEO-VOLUME-CONE-SPHERE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for volume cone sphere.",
+      "tier": "higher",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-SURFACE-AREA",
+      "specification_point_id": "MATHS-GEO-SURFACE-AREA",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Surface Area",
+      "spec_reference": "MATHS-GEO-SURFACE-AREA",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for surface area.",
+      "tier": "all",
+      "keywords": [
+        "base",
+        "each",
+        "triangle"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-PYTHAGORAS",
+      "specification_point_id": "MATHS-GEO-PYTHAGORAS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Pythagoras",
+      "spec_reference": "MATHS-GEO-PYTHAGORAS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for pythagoras.",
+      "tier": "all",
+      "keywords": [
+        "pythagoras"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-TRIG-RATIOS",
+      "specification_point_id": "MATHS-GEO-TRIG-RATIOS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Trig Ratios",
+      "spec_reference": "MATHS-GEO-TRIG-RATIOS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for trig ratios.",
+      "tier": "all",
+      "keywords": [
+        "opposite",
+        "hypotenuse",
+        "means",
+        "sine",
+        "adjacent"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-TRIG-ANGLES",
+      "specification_point_id": "MATHS-GEO-TRIG-ANGLES",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Trig Angles",
+      "spec_reference": "MATHS-GEO-TRIG-ANGLES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for trig angles.",
+      "tier": "all",
+      "keywords": [
+        "wall",
+        "height",
+        "opposite",
+        "angle",
+        "distance",
+        "from",
+        "adjacent"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-EXACT-TRIG",
+      "specification_point_id": "MATHS-GEO-EXACT-TRIG",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Exact Trig",
+      "spec_reference": "MATHS-GEO-EXACT-TRIG",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for exact trig.",
+      "tier": "all",
+      "keywords": [
+        "from",
+        "exact",
+        "trigonometric",
+        "values",
+        "table"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-SINE-COSINE-RULE",
+      "specification_point_id": "MATHS-GEO-SINE-COSINE-RULE",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Sine Cosine Rule",
+      "spec_reference": "MATHS-GEO-SINE-COSINE-RULE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for sine cosine rule.",
+      "tier": "higher",
+      "keywords": []
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-AREA-SINE",
+      "specification_point_id": "MATHS-GEO-AREA-SINE",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Area Sine",
+      "spec_reference": "MATHS-GEO-AREA-SINE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for area sine.",
+      "tier": "higher",
+      "keywords": [
+        "each",
+        "angle",
+        "area"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-3D-TRIG",
+      "specification_point_id": "MATHS-GEO-3D-TRIG",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "3D Trig",
+      "spec_reference": "MATHS-GEO-3D-TRIG",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for 3d trig.",
+      "tier": "higher",
+      "keywords": [
+        "base",
+        "diagonal",
+        "half",
+        "edge"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-SIMILARITY",
+      "specification_point_id": "MATHS-GEO-SIMILARITY",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Similarity",
+      "spec_reference": "MATHS-GEO-SIMILARITY",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for similarity.",
+      "tier": "all",
+      "keywords": [
+        "scale",
+        "factor",
+        "height",
+        "tree",
+        "that"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-SIMILAR-AREA-VOLUME",
+      "specification_point_id": "MATHS-GEO-SIMILAR-AREA-VOLUME",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Similar Area Volume",
+      "spec_reference": "MATHS-GEO-SIMILAR-AREA-VOLUME",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for similar area volume.",
+      "tier": "higher",
+      "keywords": [
+        "length",
+        "ratio",
+        "area",
+        "scale",
+        "factor",
+        "volume",
+        "larger"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-CONGRUENCE",
+      "specification_point_id": "MATHS-GEO-CONGRUENCE",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Congruence",
+      "spec_reference": "MATHS-GEO-CONGRUENCE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for congruence.",
+      "tier": "all",
+      "keywords": [
+        "congruent",
+        "shapes",
+        "identical",
+        "with",
+        "same",
+        "shape",
+        "size",
+        "triangles"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-REFLECTION",
+      "specification_point_id": "MATHS-GEO-REFLECTION",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Reflection",
+      "spec_reference": "MATHS-GEO-REFLECTION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for reflection.",
+      "tier": "all",
+      "keywords": [
+        "reflecting",
+        "swaps",
+        "coordinates",
+        "x-axis",
+        "changes",
+        "sign",
+        "y-coordinate",
+        "distance"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-ROTATION",
+      "specification_point_id": "MATHS-GEO-ROTATION",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Rotation",
+      "spec_reference": "MATHS-GEO-ROTATION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for rotation.",
+      "tier": "all",
+      "keywords": [
+        "rotation",
+        "changes",
+        "sign",
+        "both",
+        "coordinates",
+        "clockwise",
+        "about",
+        "origin"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-TRANSLATION",
+      "specification_point_id": "MATHS-GEO-TRANSLATION",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Translation",
+      "spec_reference": "MATHS-GEO-TRANSLATION",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for translation.",
+      "tier": "all",
+      "keywords": [
+        "vector"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-ENLARGEMENT",
+      "specification_point_id": "MATHS-GEO-ENLARGEMENT",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Enlargement",
+      "spec_reference": "MATHS-GEO-ENLARGEMENT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for enlargement.",
+      "tier": "all",
+      "keywords": [
+        "enlarged",
+        "sides",
+        "perimeter",
+        "multiply",
+        "each",
+        "coordinate"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-VECTORS",
+      "specification_point_id": "MATHS-GEO-VECTORS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Vectors",
+      "spec_reference": "MATHS-GEO-VECTORS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for vectors.",
+      "tier": "all",
+      "keywords": [
+        "magnitude",
+        "components",
+        "multiply",
+        "each",
+        "component"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-CONSTRUCTIONS-LOCI",
+      "specification_point_id": "MATHS-GEO-CONSTRUCTIONS-LOCI",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Constructions Loci",
+      "spec_reference": "MATHS-GEO-CONSTRUCTIONS-LOCI",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for constructions loci.",
+      "tier": "all",
+      "keywords": [
+        "locus",
+        "points",
+        "that",
+        "satisfy",
+        "rule",
+        "condition",
+        "circle",
+        "with"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T04",
+      "subtopic_id": "AQA8300-EXT-MATHS-GEO-PLANS-ELEVATIONS",
+      "specification_point_id": "MATHS-GEO-PLANS-ELEVATIONS",
+      "exam_board": "AQA",
+      "topic": "Geometry and measures",
+      "subtopic": "Plans Elevations",
+      "spec_reference": "MATHS-GEO-PLANS-ELEVATIONS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for plans elevations.",
+      "tier": "all",
+      "keywords": [
+        "plan",
+        "view",
+        "shape",
+        "when",
+        "looking",
+        "from",
+        "above",
+        "front"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-BASIC",
+      "specification_point_id": "MATHS-PROB-BASIC",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Basic",
+      "spec_reference": "MATHS-PROB-BASIC",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for basic.",
+      "tier": "all",
+      "keywords": [
+        "rain",
+        "probabilities",
+        "probability",
+        "number",
+        "counters",
+        "total",
+        "blue"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-RELATIVE-FREQ",
+      "specification_point_id": "MATHS-PROB-RELATIVE-FREQ",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Relative Freq",
+      "spec_reference": "MATHS-PROB-RELATIVE-FREQ",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for relative freq.",
+      "tier": "all",
+      "keywords": [
+        "relative",
+        "frequency",
+        "chose",
+        "coffee",
+        "expected",
+        "number"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-SAMPLE-SPACE",
+      "specification_point_id": "MATHS-PROB-SAMPLE-SPACE",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Sample Space",
+      "spec_reference": "MATHS-PROB-SAMPLE-SPACE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for sample space.",
+      "tier": "all",
+      "keywords": [
+        "outcomes",
+        "exactly",
+        "head",
+        "occurs",
+        "number",
+        "meals",
+        "pairs",
+        "giving"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-TREE-INDEPENDENT",
+      "specification_point_id": "MATHS-PROB-TREE-INDEPENDENT",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Tree Independent",
+      "spec_reference": "MATHS-PROB-TREE-INDEPENDENT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for tree independent.",
+      "tier": "all",
+      "keywords": [
+        "least",
+        "head",
+        "heads",
+        "both",
+        "late",
+        "neither"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-TREE-DEPENDENT",
+      "specification_point_id": "MATHS-PROB-TREE-DEPENDENT",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Tree Dependent",
+      "spec_reference": "MATHS-PROB-TREE-DEPENDENT",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for tree dependent.",
+      "tier": "all",
+      "keywords": [
+        "both",
+        "least",
+        "blue",
+        "first",
+        "with",
+        "removed",
+        "second"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-VENN",
+      "specification_point_id": "MATHS-PROB-VENN",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Venn",
+      "spec_reference": "MATHS-PROB-VENN",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for venn.",
+      "tier": "all",
+      "keywords": [
+        "given",
+        "possible",
+        "outcomes",
+        "items",
+        "least",
+        "language",
+        "neither",
+        "french"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-CONDITIONAL",
+      "specification_point_id": "MATHS-PROB-CONDITIONAL",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Conditional",
+      "spec_reference": "MATHS-PROB-CONDITIONAL",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for conditional.",
+      "tier": "higher",
+      "keywords": [
+        "total",
+        "with",
+        "glasses",
+        "male",
+        "independent",
+        "events",
+        "knowing",
+        "does"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T05",
+      "subtopic_id": "AQA8300-EXT-MATHS-PROB-EXPECTED",
+      "specification_point_id": "MATHS-PROB-EXPECTED",
+      "exam_board": "AQA",
+      "topic": "Probability",
+      "subtopic": "Expected",
+      "spec_reference": "MATHS-PROB-EXPECTED",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for expected.",
+      "tier": "all",
+      "keywords": [
+        "expected",
+        "number",
+        "both"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-AVERAGES",
+      "specification_point_id": "MATHS-STAT-AVERAGES",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Averages",
+      "spec_reference": "MATHS-STAT-AVERAGES",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for averages.",
+      "tier": "all",
+      "keywords": [
+        "range",
+        "largest",
+        "smallest",
+        "mean",
+        "total",
+        "number",
+        "values",
+        "order"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-FREQ-TABLE-MEAN",
+      "specification_point_id": "MATHS-STAT-FREQ-TABLE-MEAN",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Freq Table Mean",
+      "spec_reference": "MATHS-STAT-FREQ-TABLE-MEAN",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for freq table mean.",
+      "tier": "all",
+      "keywords": [
+        "total",
+        "frequency",
+        "median",
+        "value",
+        "cumulative",
+        "frequencies",
+        "show",
+        "this"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-GROUPED-MEAN",
+      "specification_point_id": "MATHS-STAT-GROUPED-MEAN",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Grouped Mean",
+      "spec_reference": "MATHS-STAT-GROUPED-MEAN",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for grouped mean.",
+      "tier": "all",
+      "keywords": [
+        "there",
+        "values",
+        "median",
+        "position",
+        "cumulative",
+        "frequency",
+        "first",
+        "reaches"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-CUMULATIVE-FREQ",
+      "specification_point_id": "MATHS-STAT-CUMULATIVE-FREQ",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Cumulative Freq",
+      "spec_reference": "MATHS-STAT-CUMULATIVE-FREQ",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for cumulative freq.",
+      "tier": "all",
+      "keywords": [
+        "median",
+        "middle",
+        "value",
+        "upper",
+        "quartile",
+        "lower",
+        "subtract",
+        "cumulative"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-BOXPLOTS",
+      "specification_point_id": "MATHS-STAT-BOXPLOTS",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Boxplots",
+      "spec_reference": "MATHS-STAT-BOXPLOTS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for boxplots.",
+      "tier": "all",
+      "keywords": [
+        "upper",
+        "quartile",
+        "lower",
+        "limit",
+        "range",
+        "maximum",
+        "minimum",
+        "percentile"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-HISTOGRAMS",
+      "specification_point_id": "MATHS-STAT-HISTOGRAMS",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Histograms",
+      "spec_reference": "MATHS-STAT-HISTOGRAMS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for histograms.",
+      "tier": "higher",
+      "keywords": [
+        "first",
+        "class",
+        "second",
+        "difference",
+        "frequency",
+        "density",
+        "width"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-SCATTER",
+      "specification_point_id": "MATHS-STAT-SCATTER",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Scatter",
+      "spec_reference": "MATHS-STAT-SCATTER",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for scatter.",
+      "tier": "all",
+      "keywords": [
+        "substitute",
+        "into",
+        "equation"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-PIE-CHARTS",
+      "specification_point_id": "MATHS-STAT-PIE-CHARTS",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Pie Charts",
+      "spec_reference": "MATHS-STAT-PIE-CHARTS",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for pie charts.",
+      "tier": "all",
+      "keywords": [
+        "angle",
+        "person",
+        "fraction",
+        "chart"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-SAMPLING",
+      "specification_point_id": "MATHS-STAT-SAMPLING",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Sampling",
+      "spec_reference": "MATHS-STAT-SAMPLING",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for sampling.",
+      "tier": "all",
+      "keywords": [
+        "sales",
+        "employees",
+        "sample"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-CAPTURE-RECAPTURE",
+      "specification_point_id": "MATHS-STAT-CAPTURE-RECAPTURE",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Capture Recapture",
+      "spec_reference": "MATHS-STAT-CAPTURE-RECAPTURE",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for capture recapture.",
+      "tier": "all",
+      "keywords": [
+        "tagged",
+        "proportion",
+        "second",
+        "sample",
+        "this",
+        "equals"
+      ]
+    },
+    {
+      "subject_id": "GCSE-MATHS",
+      "topic_id": "AQA8300-T06",
+      "subtopic_id": "AQA8300-EXT-MATHS-STAT-CHARTS-INTERPRET",
+      "specification_point_id": "MATHS-STAT-CHARTS-INTERPRET",
+      "exam_board": "AQA",
+      "topic": "Statistics",
+      "subtopic": "Charts Interpret",
+      "spec_reference": "MATHS-STAT-CHARTS-INTERPRET",
+      "spec_text": "Apply GCSE Mathematics knowledge and retrieval skills for charts interpret.",
+      "tier": "all",
+      "keywords": [
+        "divide",
+        "frequency",
+        "total",
+        "then",
+        "multiply",
+        "degrees",
+        "height",
+        "each"
+      ]
     }
   ],
   "mapping_notes": [
